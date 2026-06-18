@@ -1,11 +1,11 @@
 ---
-title: "Mini PC für Homelab 2026: Die 5 besten Modelle im Vergleich"
+title: "Mini PC fürs Homelab nach Budget: Von 50€ bis 650€ – welcher passt zu dir?"
 date: 2026-06-18
 draft: false
 image: "featured.jpg"
 cover:
   image: "featured.jpg"
-  alt: "Mini PC Vergleich 2026 – Die 5 besten Modelle fürs Homelab"
+  alt: "Mini PC Kaufberatung 2026 nach Preis – HP, Lenovo, GMKtec, Minisforum"
   relative: true
 tags:
   - hardware
@@ -16,163 +16,169 @@ categories:
   - Hardware
 ---
 
-**Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten**
+**Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten**
 
-Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und sogar erste KI-Experimente. Doch welches Modell lohnt sich 2026 wirklich?
+Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und erste KI-Experimente. Doch welches Modell lohnt sich wirklich für dein Budget?
 
-In diesem Vergleich stelle ich dir die 5 besten Mini-PCs für dein Homelab vor – vom günstigen Einsteigermodell bis zur leistungsstarken Pro-Variante.
+Statt einer generischen Rangliste zeige ich dir hier die besten Mini-PCs **nach Preisklasse** – vom 50-Euro-Gebrauchtkauf bis zur 650-Euro-Proxmox-Maschine.
 
 <!--more-->
 
-## Auf einen Blick: Unsere Top 3
+## Auf einen Blick
 
-| Platz | Modell | Preis | Ideal für |
-|-------|--------|-------|-----------|
-| 🥇 | Minisforum MS-01 | ca. 650 € | **Proxmox-Allrounder** – viele Kerne, 10GbE |
-| 🥈 | MINIS FORUM AI X1-255 | ca. 550 € | **KI & Next-Gen** – NPU, AMD Ryzen AI |
-| 🥉 | Intel NUC 13 Pro | ca. 450 € | **Zuverlässiger Klassiker** – solide Allround-Leistung |
+| Budget | Modell | Zustand | Ideal für |
+|--------|--------|---------|-----------|
+| **Bis 100 €** | HP ProDesk 400 G3 Mini | Gebraucht | **Homelab-Einstieg** – Proxmox, Pi-hole, Docker |
+| **100–200 €** | Lenovo ThinkCentre M720q Tiny | Gebraucht | **Erweiterbares Homelab** – PCIe-Slot für NICs |
+| **200–300 €** | GMKtec G3 Pro | Neu | **Neugerät mit Garantie** – Office, Docker, Medien |
+| **Über 300 €** | Minisforum MS-01 | Neu | **Proxmox-Spitzenklasse** – 10GbE, viele Kerne |
 
-## Die 5 besten Mini-PCs für dein Homelab
+---
 
-### 1. Minisforum MS-01 – Der Proxmox-König
+## Bis 100 €: HP ProDesk 400 G3 Mini – Der perfekte Homelab-Einstieg
 
-Der Minisforum MS-01 ist 2026 der unangefochtene Testsieger für Homelab-Betreiber, die maximale Leistung im kompakten Format suchen.
+{{< figure src="/images/products/hp-prodesk-400-g3.jpg" alt="HP ProDesk 400 G3 Mini" width="400" >}}
+
+Der HP ProDesk 400 G3 Mini ist der absolute Budget-König fürs Homelab. Gebraucht bekommst du ihn bereits ab **50–100 €** – und er ist dabei vollkommen ausreichend für die ersten Schritte im Homelab.
+
+- **CPU:** Intel Core i5-6500T / i5-7500T (4 Kerne)
+- **RAM:** Bis zu 32 GB DDR4
+- **Storage:** 1× M.2 NVMe + 1× SATA
+- **Netzwerk:** 1× 1GbE
+- **Preis gebraucht:** 50–100 €
+- **Stromverbrauch:** ca. 15–20 W im Betrieb
+
+**👍 Vorteile:** Extrem günstig. Riesiges Angebot auf dem Gebrauchtmarkt. Sehr stromsparend. Leise und gut aufrüstbar.
+
+**👎 Nachteile:** Nur 4 Kerne. Kein 10GbE. Maximal 32 GB RAM. Gebrauchtkauf ohne Herstellergarantie.
+
+**Ideal für:** Proxmox mit 2–3 VMs, Pi-hole, Docker und leichte NAS-Aufgaben. Perfekt als **erster Homelab-Server** zum Ausprobieren ohne großes Risiko.
+
+🔍 [HP ProDesk 400 G3 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=makmatas-homelab-21)
+
+---
+
+## 100–200 €: Lenovo ThinkCentre M720q Tiny – Der Erweiterbare
+
+{{< figure src="/images/products/lenovo-m720q-tiny.jpg" alt="Lenovo ThinkCentre M720q Tiny" width="400" >}}
+
+Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, die mehr wollen: **Er verfügt über einen PCIe-Slot.** Das bedeutet, du kannst eine 10GbE-Netzwerkkarte, eine SATA-Erweiterungskarte oder sogar eine kompakte GPU einbauen – eine Möglichkeit, die kaum ein anderer Mini-PC dieser Preisklasse bietet.
+
+- **CPU:** Intel Core i5-8500T (6 Kerne) oder i7-8700T (6 Kerne / 12 Threads)
+- **RAM:** Bis zu 32 GB DDR4
+- **Storage:** 1× M.2 NVMe + **PCIe-Slot für Erweiterungen**
+- **Netzwerk:** 1× 1GbE (über PCIe auf 10GbE erweiterbar)
+- **Preis gebraucht:** 100–200 €
+- **Besonderheit:** **PCIe x8-Slot** – in dieser Geräteklasse äußerst selten
+
+**👍 Vorteile:** PCIe-Erweiterbarkeit (10GbE, GPU, SATA). 6 Kerne beim i5-8500T. Sehr kompaktes Design. Große und aktive Lenovo-Community.
+
+**👎 Nachteile:** Nur 1GbE onboard. Gebrauchtkauf. Unter Last etwas lauter als der HP ProDesk.
+
+**Ideal für:** Homelab mit **10GbE-Ambitionen** (NIC via PCIe-Slot), Proxmox-Cluster und fortgeschrittene Docker-Setups.
+
+🔍 [Lenovo ThinkCentre M720q bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=makmatas-homelab-21)
+
+---
+
+## 200–300 €: GMKtec G3 Pro – Neugerät mit Garantie
+
+{{< figure src="/images/products/gmktec-g3-pro.jpg" alt="GMKtec G3 Pro Mini PC" width="400" >}}
+
+Der GMKtec G3 Pro ist die beste Wahl, wenn du ein **Neugerät mit Garantie** möchtest und nicht auf dem Gebrauchtmarkt suchen willst. Mit einem Intel Core i3 der 10. Generation und 16 GB RAM ist er ein solider Allrounder für den Homelab-Alltag.
+
+- **CPU:** Intel Core i3-10110U (2 Kerne / 4 Threads, bis 4,1 GHz)
+- **RAM:** 16 GB DDR4
+- **Storage:** 512 GB M.2 NVMe
+- **Netzwerk:** **1× 2,5GbE** + Wi-Fi 6
+- **Preis neu:** ca. 230–280 €
+- **Besonderheit:** 2× HDMI, 3× USB 3.2, Windows 11 Pro vorinstalliert
+
+**👍 Vorteile:** Neugerät mit Herstellergarantie. 2,5GbE – schnelleres Netzwerk als bei den Gebrauchtmodellen. Kompakt und leise. Windows 11 Pro inklusive.
+
+**👎 Nachteile:** Nur 2 Kerne (i3). Kein PCIe-Erweiterungsslot. RAM bei einigen Varianten verlötet – vor dem Kauf prüfen.
+
+**Ideal für:** **Docker-Server**, Office-Homelab, Mediencenter und Home Assistant. Optimal für alle, die Neuware und Garantie priorisieren.
+
+👉 [GMKtec G3 Pro jetzt bei Amazon ansehen](https://www.amazon.de/dp/B0F9FS819H/?tag=makmatas-homelab-21)
+
+---
+
+## Über 300 €: Minisforum MS-01 – Der Proxmox-König
+
+{{< figure src="/images/products/minisforum-ms01.jpg" alt="Minisforum MS-01 Mini Workstation" width="400" >}}
+
+Der Minisforum MS-01 ist 2026 der unangefochtene Spitzenreiter für Homelab-Betreiber, die maximale Leistung im kompakten Format suchen. Mit **10GbE onboard** und einem Intel Core i9-Prozessor ist er eine vollwertige Workstation im Mini-Format.
 
 - **CPU:** Intel Core i9-13900H (14 Kerne / 20 Threads)
 - **RAM:** Bis zu 64 GB DDR5
 - **Storage:** 2× M.2 NVMe + 1× SATA
-- **Netzwerk:** **2× 10GbE SFP+** + 2× 2,5GbE – in dieser Preisklasse äußerst selten
-- **Besonderheit:** Zwei PCIe-Slots für flexible Erweiterungen
+- **Netzwerk:** **2× 10GbE SFP+** + 2× 2,5GbE
+- **Preis neu:** ca. 600–700 €
+- **Besonderheit:** Zwei PCIe-Slots + USB4
 
-**Vorteile:** 10GbE bereits eingebaut – kein teures Switch-Upgrade nötig. Zahlreiche CPU-Kerne für anspruchsvolle Proxmox-VMs. Kompaktes und robustes Gehäuse.
+**👍 Vorteile:** 10GbE onboard – kein teures Switch-Upgrade erforderlich. Viele Kerne für anspruchsvolle Proxmox-VMs. Zukunftssicher dank DDR5 und PCIe 4.0.
 
-**Nachteile:** Vergleichsweise hoher Preis. Wird unter Volllast spürbar warm.
+**👎 Nachteile:** Hoher Anschaffungspreis. Wird unter Volllast spürbar warm.
 
-👉 [Minisforum MS-01 bei Amazon ansehen](https://www.amazon.de/dp/B0D45JQCN7/?tag=makmatas-homelab-21)
+**Ideal für:** **Anspruchsvolle Proxmox-Umgebungen**, viele parallele VMs, KI-Experimente und 10GbE-Cluster-Setups.
 
----
-
-### 2. MINIS FORUM AI X1-255 – Der KI-Spezialist mit NPU
-
-Der MINIS FORUM AI X1-255 setzt neue Maßstäbe im Homelab-Segment: Mit einem AMD Ryzen AI 9 365 Prozessor und integrierter NPU (Neural Processing Unit) ist er speziell für KI-Workloads optimiert und richtet sich an alle, die ihr Homelab zukunftssicher aufstellen wollen.
-
-- **CPU:** AMD Ryzen AI 9 365 (10 Kerne / 20 Threads)
-- **NPU:** 50 TOPS – dedizierte KI-Beschleunigung für Ollama & Co.
-- **RAM:** Bis zu 64 GB DDR5
-- **GPU:** AMD Radeon 880M (deutlich leistungsstärker als beim Vorgänger)
-- **Storage:** 1 TB M.2 NVMe
-- **Netzwerk:** 2× 2,5GbE + Wi-Fi 7
-
-**Vorteile:** Integrierte NPU beschleunigt KI-Modelle spürbar. Hervorragende GPU-Leistung für Bildgenerierung. Modernste Anschlüsse mit Wi-Fi 7 und USB4.
-
-**Nachteile:** Noch relativ neu am Markt – Erfahrungsberichte aus der Community sind begrenzt. Preis im oberen Mittelfeld.
-
-👉 [MINIS FORUM AI X1-255 bei Amazon ansehen](https://www.amazon.de/MINIS-FORUM-AI-X1-255-Mini-PC/dp/B0F89XMDC5/?tag=makmatas-homelab-21)
+👉 [Minisforum MS-01 jetzt bei Amazon ansehen](https://www.amazon.de/dp/B0D45JQCN7/?tag=makmatas-homelab-21)
 
 ---
 
-### 3. Intel NUC 13 Pro – Der bewährte Klassiker
+## Preis-Leistungs-Vergleich aller Modelle
 
-Der Intel NUC 13 Pro – heute von ASUS weitergeführt – ist der zuverlässige Allrounder für Homelab-Einsteiger und fortgeschrittene Nutzer gleichermaßen.
-
-- **CPU:** Intel Core i7-1360P (12 Kerne)
-- **RAM:** Bis zu 64 GB DDR4
-- **Storage:** 2× M.2 NVMe
-- **Netzwerk:** 1× 2,5GbE + Thunderbolt 4
-
-**Vorteile:** Ausgereifte Plattform mit großer Community. Thunderbolt 4 für schnelle externe Erweiterungen. Kompaktestes Format in dieser Liste.
-
-**Nachteile:** Nur 2,5GbE – kein 10GbE. DDR4 statt DDR5. ASUS-Support mitunter schlechter als zu Intels eigener Zeit.
-
-👉 [Intel NUC 13 Pro bei Amazon ansehen](https://www.amazon.de/dp/B0C1YKGGWY/?tag=makmatas-homelab-21)
+| Modell | Preis | CPU | RAM max. | Netzwerk | Besonderheit |
+|--------|-------|-----|----------|----------|--------------|
+| HP ProDesk 400 G3 | **~80 €** | i5-7500T (4C) | 32 GB | 1GbE | Günstigster Einstieg |
+| Lenovo M720q Tiny | **~150 €** | i5-8500T (6C) | 32 GB | 1GbE + PCIe | **PCIe-Slot** |
+| GMKtec G3 Pro | **~260 €** | i3-10110U (2C/4T) | 16 GB | **2,5GbE** | Neugerät + Garantie |
+| Minisforum MS-01 | **~650 €** | i9-13900H (14C/20T) | **64 GB** | **2× 10GbE** | Absolute Spitzenklasse |
 
 ---
 
-### 4. Beelink SER5 Pro – Der Budget-Allrounder mit AMD-Power
+## Lohnt sich ein gebrauchter Mini-PC fürs Homelab?
 
-Der Beelink SER5 Pro mit AMD Ryzen 7 5850U ist die preiswerte Alternative für alle, die ein zuverlässiges Homelab aufbauen möchten, ohne tief in die Tasche greifen zu müssen.
+**Ja, absolut!** Gerade für den Einstieg sind gebrauchte Business-Mini-PCs von HP, Lenovo und Dell die beste Wahl:
 
-- **CPU:** AMD Ryzen 7 5850U (8 Kerne / 16 Threads) – 15 W TDP
-- **RAM:** Bis zu 32 GB DDR4
-- **GPU:** AMD Radeon Graphics (Vega 8)
-- **Storage:** 500 GB M.2 NVMe
-- **Netzwerk:** 1× 1GbE
+- **Preis:** Bis zu 80–90 % günstiger als Neugeräte
+- **Verfügbarkeit:** Riesiges Angebot durch Unternehmens-Ausmusterungen
+- **Haltbarkeit:** Business-Geräte sind für den 24/7-Dauerbetrieb ausgelegt
+- **Stromverbrauch:** Meist unter 25 W – ideal für den dauerhaften Betrieb
 
-**Vorteile:** Hervorragendes Preis-Leistungs-Verhältnis. Extrem stromsparend (15 W TDP). Leise Lüfter – ideal für den 24/7-Betrieb. Solide AMD-Leistung für Docker und leichte VMs.
+### Worauf du beim Gebrauchtkauf achten solltest
 
-**Nachteile:** Kein 10GbE, nur 1GbE. Maximal 32 GB RAM. Die integrierte Grafik ist schwächer als bei neueren Modellen – für KI-Inferenz nur bedingt geeignet.
-
-👉 [Beelink SER5 Pro bei Amazon ansehen](https://www.amazon.de/Beelink-Ryzen-Computer-PCIe3-0-Display/dp/B0CRNLGS1C/?tag=makmatas-homelab-21)
-
----
-
-### 5. HP ProDesk 400 G4 Mini – Der günstige Einstieg
-
-Der HP ProDesk 400 G4 Mini (gebraucht) ist die absolute Geheimwaffe für das Budget-Homelab – und genau das Modell, auf dem dieser Blog läuft.
-
-- **CPU:** Intel Core i5-8500T (6 Kerne) – 35 W TDP
-- **RAM:** Bis zu 32 GB DDR4
-- **Storage:** 1× M.2 NVMe + 1× SATA
-- **Netzwerk:** 1× 1GbE
-- **Preis gebraucht:** ca. 80–150 €
-
-**Vorteile:** Extrem günstig in der Anschaffung. Sehr stromsparend (~15–25 W im Betrieb). Solide und langlebige Verarbeitung. Großes Angebot auf dem Gebrauchtmarkt.
-
-**Nachteile:** Nur 6 Kerne. Kein 10GbE. Maximal 32 GB RAM. Gebrauchtkauf birgt immer ein gewisses Restrisiko.
-
-👉 [HP ProDesk 400 G4 bei Amazon ansehen](https://www.amazon.de/dp/B0FPCDJJ72/?tag=makmatas-homelab-21)
+- SSD und RAM sind meistens nachrüstbar – lieber ein günstiges Basismodell kaufen und selbst aufrüsten
+- Auf die CPU-Generation achten: Ab Intel der 6. / 7. Generation (Skylake / Kaby Lake) ist die Leistung für Proxmox ausreichend
+- Bevorzugt bei gewerblichen Händlern kaufen – diese bieten häufig 12 Monate Gewährleistung
 
 ---
 
-## Mini-PC vs. gebrauchter Server – Was ist besser fürs Homelab?
+## Mini-PC für KI-Modelle – Was ist in welcher Preisklasse möglich?
 
-| Kriterium | Mini-PC | Gebrauchter Server (z. B. Dell R730) |
-|-----------|---------|--------------------------------------|
-| Stromverbrauch | **15–40 W** | 100–300 W |
-| Lautstärke | **Leise** | Laut (Serverlüfter) |
-| Platzbedarf | **Sehr kompakt** | Rack-Schrank erforderlich |
-| Rechenleistung | Mittel | **Sehr hoch** |
-| Preis | 100–700 € | 200–500 € |
-| Ideal für | **24/7-Dauerbetrieb** | Leistungsintensives Homelab |
+Lokale KI-Modelle sind 2026 auch im Homelab längst angekommen:
 
-**Meine Empfehlung:** Für die meisten Homelabs ist ein Mini-PC absolut ausreichend. Ein gebrauchter Server lohnt sich erst dann, wenn du viele virtuelle Maschinen gleichzeitig betreiben oder KI-Modelle trainieren möchtest.
+| Budget | KI-Nutzung |
+|--------|------------|
+| **Bis 100 €** | Ollama auf CPU, kleine Modelle (1–3B Parameter) |
+| **100–200 €** | Ollama + Open WebUI, 7B-Modelle (langsam) |
+| **200–300 €** | 7B-Modelle stabil nutzbar, Bildgenerierung kaum möglich |
+| **Über 300 €** | 7B+-Modelle, NPU-Beschleunigung, GPU via PCIe (M720q) |
 
-## Mini-PC für KI-Modelle – Was leistet ein Homelab-Mini-PC?
+---
 
-Lokale KI-Modelle im Homelab sind 2026 ein echter Trend. Allerdings ist nicht jeder Mini-PC dafür gleich gut geeignet:
+## Fazit: Welcher Mini-PC passt zu deinem Budget?
 
-- **Ollama & Open WebUI:** Laufen problemlos auf jedem Mini-PC mit 16+ GB RAM
-- **Größere Modelle (7B+ Parameter):** Benötigen 16–32 GB RAM sowie eine leistungsstarke CPU
-- **Bildgenerierung:** Erfordert eine leistungsstarke GPU – hier punkten Modelle mit Radeon 880M (AI X1-255) oder NPU-Beschleunigung
-- **KI-NPU-Nutzung:** Der MINIS FORUM AI X1-255 kann mit seiner 50-TOPS-NPU KI-Modelle direkt beschleunigen – zukunftssicher für kommende KI-Anwendungen
-- **KI-Training auf Mini-PCs:** Nicht empfehlenswert – hierfür ist eine dedizierte GPU erforderlich
+| Dein Budget | Unsere Empfehlung |
+|-------------|-------------------|
+| **50–100 €** | 👉 **HP ProDesk 400 G3 Mini** – günstiger Homelab-Einstieg ohne Risiko |
+| **100–200 €** | 👉 **Lenovo ThinkCentre M720q Tiny** – erweiterbar per PCIe-Slot |
+| **200–300 €** | 👉 **GMKtec G3 Pro** – Neugerät mit Garantie und 2,5GbE |
+| **300–650 €** | 👉 **Minisforum MS-01** – 10GbE, 14 Kerne, absolute High-End-Lösung |
 
-## Häufige Fragen zum Mini-PC für das Homelab (FAQ)
+**Meine persönliche Empfehlung:** Der **Lenovo M720q Tiny** ist der interessanteste Allrounder in dieser Liste – vor allem wegen des PCIe-Slots, der ihn klar von allen anderen Modellen abhebt. Wer 10GbE ins Homelab bringen möchte, findet hier die günstigste Einstiegsmöglichkeit. Und der **HP ProDesk für rund 80 €** ist ideal, um ohne großen Einsatz einfach loszulegen.
 
-### Welcher Mini-PC eignet sich am besten für Proxmox?
-
-Der **Minisforum MS-01** – dank seiner vielen CPU-Kerne und des integrierten 10GbE-Netzwerks ist er die erste Wahl für Proxmox-Umgebungen.
-
-### Kann ich mit einem 100-Euro-Mini-PC ein Homelab betreiben?
-
-Ja! Ein HP ProDesk 400 G4 mit 16 GB RAM und einer 500-GB-SSD reicht problemlos für Proxmox, 3–4 virtuelle Maschinen, Docker und Pi-hole aus. Genau so laufen dieser Blog und mein gesamtes Homelab!
-
-### Welcher Mini-PC ist am besten für KI-Modelle geeignet?
-
-Der **MINIS FORUM AI X1-255** mit seiner dedizierten NPU (50 TOPS) ist 2026 die beste Wahl für KI-Workloads im Homelab. Wer bereits einen leistungsstarken Mini-PC besitzt, kann mit Ollama auch auf der CPU erste Schritte unternehmen.
-
-### Wie viel Strom kostet ein Mini-PC-Homelab pro Jahr?
-
-Bei einem Durchschnittsverbrauch von 25 W und einem Strompreis von 30 ct/kWh fallen Kosten von rund **65 € pro Jahr** an.
-
-### Brauche ich 10GbE für mein Homelab?
-
-Nur dann, wenn du regelmäßig große Dateien überträgst – etwa ISOs, VM-Backups oder KI-Modelle. Für die meisten Anwendungsfälle ist 1GbE oder 2,5GbE völlig ausreichend.
-
-## Fazit: Welcher Mini-PC ist der beste für dein Homelab?
-
-Der **Minisforum MS-01** ist 2026 der beste Mini-PC fürs Homelab – vorausgesetzt, das Budget lässt es zu. Wer Wert auf modernste KI-Fähigkeiten legt, sollte zum **MINIS FORUM AI X1-255** mit integrierter NPU greifen. Als zuverlässigen Allrounder empfehle ich den **Intel NUC 13 Pro**. Und wer günstig einsteigen möchte, ist mit einem gebrauchten **HP ProDesk 400 G4** für unter 150 € oder dem **Beelink SER5 Pro** bestens bedient.
-
-**Jetzt bist du dran:** Welchen Mini-PC nutzt du in deinem Homelab? Schreib es in die Kommentare – ich freue mich auf den Austausch! Und wenn du noch unentschlossen bist: Klick dich durch die Amazon-Links und vergleiche die aktuellen Preise direkt.
+**Jetzt bist du dran:** Welches Budget planst du für dein Homelab ein? Schreib es in die Kommentare – ich freue mich auf den Austausch!
 
 *Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Für dich ändert sich der Preis dadurch nicht.*

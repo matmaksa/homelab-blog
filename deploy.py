@@ -19,12 +19,21 @@ if new_files:
             continue
 
         slug = os.path.basename(os.path.dirname(fp))
-        img_path = os.path.join(BLOG_DIR, "static", "images", slug + ".jpg")
+        article_dir = os.path.dirname(fp)
+        featured = os.path.join(article_dir, "featured.jpg")
+        static_img = os.path.join(BLOG_DIR, "static", "images", slug + ".jpg")
 
         gen = os.path.join(BLOG_DIR, "generate_image.py")
-        if os.path.exists(gen) and not os.path.exists(img_path):
-            prompt = "Blog image: " + slug.replace("-", " ") + ". Modern tech, clean, no text."
-            subprocess.run(["python3", gen, prompt, img_path], capture_output=True, text=True)
+        if os.path.exists(gen):
+            if not os.path.exists(featured):
+                prompt = "Blog image for: " + slug.replace("-", " ") + ". Modern tech, clean product photography style."
+                result = subprocess.run(["python3", gen, prompt, featured], capture_output=True, text=True, timeout=120)
+                if result.returncode == 0:
+                    print(f"  Image -> featured.jpg ({slug})")
+                else:
+                    # Fallback: try static path
+                    if not os.path.exists(static_img):
+                        subprocess.run(["python3", gen, prompt, static_img], capture_output=True, text=True, timeout=120)
 
         rev = os.path.join(BLOG_DIR, "claude_review.py")
         if os.path.exists(rev):
