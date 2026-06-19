@@ -2,11 +2,7 @@
 title: "Mini PC fürs Homelab nach Budget: Von 50€ bis 650€ – welcher passt zu dir?"
 date: 2026-06-18
 draft: false
-image: "featured.jpg"
-cover:
-  image: "featured.jpg"
-  alt: "Mini PC Kaufberatung 2026 nach Preis – HP, Lenovo, GMKtec, Minisforum"
-  relative: true
+# cover image entfernt (KI-Bild zeigte falsche Modelle)
 tags:
   - hardware
   - mini-pc
@@ -37,7 +33,7 @@ Statt einer generischen Rangliste zeige ich dir hier die besten Mini-PCs **nach 
 
 ## Bis 100 €: HP ProDesk 400 G3 Mini – Der perfekte Homelab-Einstieg
 
-{{< figure src="/images/products/hp-prodesk-400-g3.jpg" alt="HP ProDesk 400 G3 Mini" width="400" >}}
+{{< figure src="/homelab-blog/images/products/hp-prodesk-400-g3.jpg" alt="HP ProDesk 400 G3 Mini" width="400" >}}
 
 Der HP ProDesk 400 G3 Mini ist der absolute Budget-König fürs Homelab. Gebraucht bekommst du ihn bereits ab **50–100 €** – und er ist dabei vollkommen ausreichend für die ersten Schritte im Homelab.
 
@@ -60,7 +56,7 @@ Der HP ProDesk 400 G3 Mini ist der absolute Budget-König fürs Homelab. Gebrauc
 
 ## 100–200 €: Lenovo ThinkCentre M720q Tiny – Der Erweiterbare
 
-{{< figure src="/images/products/lenovo-m720q-tiny.jpg" alt="Lenovo ThinkCentre M720q Tiny" width="400" >}}
+{{< figure src="/homelab-blog/images/products/lenovo-m720q-tiny.jpg" alt="Lenovo ThinkCentre M720q Tiny" width="400" >}}
 
 Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, die mehr wollen: **Er verfügt über einen PCIe-Slot.** Das bedeutet, du kannst eine 10GbE-Netzwerkkarte, eine SATA-Erweiterungskarte oder sogar eine kompakte GPU einbauen – eine Möglichkeit, die kaum ein anderer Mini-PC dieser Preisklasse bietet.
 
@@ -83,7 +79,7 @@ Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, di
 
 ## 200–300 €: GMKtec G3 Pro – Neugerät mit Garantie
 
-{{< figure src="/images/products/gmktec-g3-pro.jpg" alt="GMKtec G3 Pro Mini PC" width="400" >}}
+{{< figure src="/homelab-blog/images/products/gmktec-g3-pro.jpg" alt="GMKtec G3 Pro Mini PC" width="400" >}}
 
 Der GMKtec G3 Pro ist die beste Wahl, wenn du ein **Neugerät mit Garantie** möchtest und nicht auf dem Gebrauchtmarkt suchen willst. Mit einem Intel Core i3 der 10. Generation und 16 GB RAM ist er ein solider Allrounder für den Homelab-Alltag.
 
@@ -106,7 +102,7 @@ Der GMKtec G3 Pro ist die beste Wahl, wenn du ein **Neugerät mit Garantie** mö
 
 ## Über 300 €: Minisforum MS-01 – Der Proxmox-König
 
-{{< figure src="/images/products/minisforum-ms01.jpg" alt="Minisforum MS-01 Mini Workstation" width="400" >}}
+{{< figure src="/homelab-blog/images/products/minisforum-ms01.jpg" alt="Minisforum MS-01 Mini Workstation" width="400" >}}
 
 Der Minisforum MS-01 ist 2026 der unangefochtene Spitzenreiter für Homelab-Betreiber, die maximale Leistung im kompakten Format suchen. Mit **10GbE onboard** und einem Intel Core i9-Prozessor ist er eine vollwertige Workstation im Mini-Format.
 
