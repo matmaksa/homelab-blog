@@ -1,0 +1,326 @@
+# Geräte-Datenbank für Homelab-Blog Faktencheck
+# Kanonische Specs – von ChatGPT 5.5 empfohlen
+# Quellen: Intel ARK, Lenovo PSREF, Dell Tech Specs, HP QuickSpecs, Hersteller-Datenblätter
+# Letztes Update: Juni 2026
+
+devices:
+  # === HP ProDesk Serie ===
+  hp_prodesk_400_g3:
+    brand: "HP"
+    model: "ProDesk 400 G3 Mini"
+    form_factor: "1L Mini PC"
+    cpu_options:
+      - "Intel Core i5-6500T (4C/4T, 2.5-3.1 GHz, 35W TDP)"
+      - "Intel Core i5-7500T (4C/4T, 2.7-3.3 GHz, 35W TDP)"
+      - "Intel Core i3-6100T (2C/4T, 3.2 GHz, 35W TDP)"
+      - "Intel Pentium G4400T (2C/2T, 2.9 GHz, 35W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "32 GB"
+    ram_max_unofficial: "32 GB (kein XMP-Profil nötig)"
+    storage:
+      - "1× M.2 2280 NVMe/SATA"
+      - "1× 2.5\" SATA (je nach Konfiguration)"
+    network: "1× Intel I219-LM Gigabit Ethernet"
+    pcie_slots: "Keine (kein PCIe-Riser-Support)"
+    video_outputs: ["1× DisplayPort 1.2", "1× VGA (optional HDMI)"]
+    usb_ports: "4× USB 3.0 + 2× USB 2.0"
+    idle_power_watts: 8-12
+    load_power_watts: 25-35
+    noise_level: "Sehr leise (< 20 dB im Leerlauf)"
+    price_range_german: "50-100 € (gebraucht)"
+    ideal_for: "Homelab-Einstieg, 2-3 VMs, Docker, Pi-hole"
+    pros:
+      - "Extrem günstig auf dem Gebrauchtmarkt"
+      - "Sehr weit verbreitet (Unternehmens-Ausmusterungen)"
+      - "Geringer Stromverbrauch"
+      - "Leise im Betrieb"
+    cons:
+      - "Nur 4 Kerne"
+      - "Kein PCIe-Slot oder 2,5GbE"
+      - "Max 32 GB RAM"
+    amazon_link: "https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=makmatas-homelab-21"
+    sources:
+      - "Intel ARK: i5-6500T"
+      - "HP QuickSpecs: ProDesk 400 G3"
+
+  hp_prodesk_600_g4:
+    brand: "HP"
+    model: "ProDesk 600 G4 Mini"
+    form_factor: "1L Mini PC"
+    cpu_options:
+      - "Intel Core i5-8500T (6C/6T, 2.1-3.5 GHz, 35W TDP)"
+      - "Intel Core i5-8600T (6C/6T, 2.3-3.7 GHz, 35W TDP)"
+      - "Intel Core i7-8700T (6C/12T, 2.4-4.0 GHz, 35W TDP)"
+      - "Intel Core i3-8100T (4C/4T, 3.1 GHz, 35W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "32 GB"
+    ram_max_unofficial: "64 GB (getestet)"
+    storage:
+      - "1× M.2 2280 NVMe/SATA"
+      - "1× 2.5\" SATA"
+    network: "1× Intel I219-LM Gigabit Ethernet"
+    pcie_slots: "Keine"
+    video_outputs: ["2× DisplayPort 1.2"]
+    usb_ports: "4× USB 3.1 Gen1 + 2× USB 2.0"
+    idle_power_watts: 8-14
+    load_power_watts: 30-45
+    price_range_german: "100-180 € (gebraucht)"
+    ideal_for: "Mehrere VMs, Docker-Cluster, 6 Kerne für Proxmox"
+    pros:
+      - "6 Kerne (i5/i7) – spürbar mehr Leistung als G3"
+      - "Immer noch sehr günstig gebraucht"
+      - "Zwei DisplayPorts für Multi-Monitor-Setups"
+    cons:
+      - "Max 32 GB offiziell"
+      - "Kein PCIe-Slot"
+      - "Kein 2,5GbE"
+    amazon_link: "https://www.amazon.de/s?k=HP+ProDesk+600+G4+Mini&tag=makmatas-homelab-21"
+    sources:
+      - "HP QuickSpecs: ProDesk 600 G4"
+
+  # === Dell Optiplex Serie ===
+  dell_optiplex_3070_micro:
+    brand: "Dell"
+    model: "OptiPlex 3070 Micro"
+    form_factor: "1L Micro PC"
+    cpu_with_igpu:
+      - "Intel Core i5-9500T (6C/6T, 2.2-3.7 GHz, 35W TDP)"
+      - "Intel Core i3-9100T (4C/4T, 3.1-3.7 GHz, 35W TDP)"
+      - "Intel Pentium G5400T (2C/4T, 3.1 GHz, 35W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "32 GB"
+    ram_max_unofficial: "64 GB"
+    storage:
+      - "1× M.2 2230/2280 NVMe"
+      - "1× 2.5\" SATA"
+    network: "1× Intel I219-LM Gigabit Ethernet"
+    pcie_slots: "Keine"
+    video_outputs: ["2× DisplayPort 1.4"]
+    usb_ports: "3× USB 3.1 Gen1 + 1× USB 3.1 Gen1 Type-C + 1× USB 2.0"
+    idle_power_watts: 6-12
+    load_power_watts: 25-40
+    price_range_german: "100-180 € (gebraucht)"
+    ideal_for: "Allround-Homelab, sparsamer Betrieb als HP"
+    pros:
+      - "Sehr stromsparend (oft unter 10W im Leerlauf)"
+      - "USB-C Anschluss (selten bei 1L-PCs)"
+      - "Große Dell-Community"
+    cons:
+      - "M.2 nur bis 2230 (kürzere SSDs, teurer)"
+      - "Weniger Aufrüstmöglichkeiten als Lenovo"
+    amazon_link: "https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=makmatas-homelab-21"
+    sources:
+      - "Dell Tech Specs: OptiPlex 3070 Micro"
+
+  dell_optiplex_7070_micro:
+    brand: "Dell"
+    model: "OptiPlex 7070 Micro"
+    form_factor: "1L Micro PC"
+    cpu_options:
+      - "Intel Core i7-9700T (8C/8T, 2.0-4.3 GHz, 35W TDP)"
+      - "Intel Core i5-9500T (6C/6T, 2.2-3.7 GHz, 35W TDP)"
+      - "Intel Core i3-9100T (4C/4T, 3.1-3.7 GHz, 35W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "64 GB"
+    ram_max_unofficial: "64 GB"
+    storage:
+      - "1× M.2 2230/2280 NVMe"
+      - "1× 2.5\" SATA"
+    network: "1× Intel I219-LM Gigabit Ethernet + optional Wi-Fi 6"
+    pcie_slots: "Keine"
+    video_outputs: ["2× DisplayPort 1.4"]
+    usb_ports: "3× USB 3.1 Gen1 + 1× USB 3.1 Gen1 Type-C + 1× USB 2.0"
+    idle_power_watts: 7-14
+    load_power_watts: 30-50
+    price_range_german: "150-250 € (gebraucht)"
+    ideal_for: "Leistungsstarkes Homelab, bis zu 8 Kerne"
+    pros:
+      - "i7-9700T mit 8 Kernen → viele VMs möglich"
+      - "Offiziell 64 GB RAM"
+    cons:
+      - "Kein PCIe-Slot"
+      - "Teurer als vergleichbare HP/Lenovo Modelle"
+    amazon_link: "https://www.amazon.de/s?k=Dell+OptiPlex+7070+Micro&tag=makmatas-homelab-21"
+    sources:
+      - "Dell Tech Specs: OptiPlex 7070 Micro"
+
+  # === Lenovo ThinkCentre Tiny Serie ===
+  lenovo_m720q_tiny:
+    brand: "Lenovo"
+    model: "ThinkCentre M720q Tiny"
+    form_factor: "1L Tiny PC"
+    cpu_options:
+      - "Intel Core i5-8500T (6C/6T, 2.1-3.5 GHz, 35W TDP)"
+      - "Intel Core i7-8700T (6C/12T, 2.4-4.0 GHz, 35W TDP)"
+      - "Intel Core i3-8100T (4C/4T, 3.1 GHz, 35W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "32 GB"
+    ram_max_unofficial: "64 GB (getestet mit 2× 32 GB)"
+    storage:
+      - "1× M.2 2280 NVMe"
+      - "1× 2.5\" SATA (adapter required)"
+    network: "1× Intel I219-V Gigabit Ethernet"
+    pcie_slots: "1× PCIe x8 Slot (für Riser-Karte: 10GbE NIC, SATA-Controller, GPU)"
+    video_outputs: ["1× DisplayPort 1.2", "1× HDMI 1.4"]
+    usb_ports: "4× USB 3.1 Gen1 + 2× USB 2.0"
+    idle_power_watts: 6-12
+    load_power_watts: 30-45
+    price_range_german: "90-200 € (gebraucht)"
+    ideal_for: "Erweiterbares Homelab mit 10GbE-Ambitionen, PCIe-Nutzung"
+    pros:
+      - "Einziger 1L-PC dieser Klasse mit PCIe-Slot"
+      - "6 Kerne (i5-8500T)"
+      - "Große Lenovo-Community, viele Modding-Tutorials"
+      - "PCIe-Riser-Mod für SATA/10GbE möglich"
+    cons:
+      - "Nur 1GbE onboard"
+      - "Lüfter wird unter Last hörbar"
+      - "Gebrauchtkauf – kein Garantie"
+    amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=makmatas-homelab-21"
+    sources:
+      - "Lenovo PSREF: M720q Tiny"
+      - "Intel ARK: i5-8500T"
+
+  lenovo_m920q_tiny:
+    brand: "Lenovo"
+    model: "ThinkCentre M920q Tiny"
+    form_factor: "1L Tiny PC"
+    cpu_options:
+      - "Intel Core i7-8700T (6C/12T, 2.4-4.0 GHz, 35W TDP)"
+      - "Intel Core i5-8500T (6C/6T, 2.1-3.5 GHz, 35W TDP)"
+      - "Intel Core i3-8100T (4C/4T, 3.1 GHz, 35W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "32 GB"
+    ram_max_unofficial: "64 GB"
+    storage:
+      - "1× M.2 2280 NVMe"
+      - "1× 2.5\" SATA (adapter required)"
+      - "Optional: 2× M.2 (mit PCIe-Riser)"
+    network: "1× Intel I219-V Gigabit Ethernet + optional Wi-Fi"
+    pcie_slots: "1× PCIe x8 Slot (Riser-kompatibel)"
+    video_outputs: ["2× DisplayPort 1.2", "1× HDMI 1.4 (abhängig von Konfiguration)"]
+    usb_ports: "6× USB 3.1 Gen1"
+    idle_power_watts: 6-12
+    load_power_watts: 30-45
+    price_range_german: "150-280 € (gebraucht)"
+    ideal_for: "Fortgeschrittenes Homelab, 2× M.2, PCIe-Mods"
+    pros:
+      - "Bessere Anschlussvielfalt als M720q"
+      - "i7-8700T mit 12 Threads verfügbar"
+      - "PCIe-Slot für Erweiterungen"
+    cons:
+      - "Teurer als M720q auf dem Gebrauchtmarkt"
+      - "Seltenere Verfügbarkeit"
+    amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M920q+Tiny&tag=makmatas-homelab-21"
+    sources:
+      - "Lenovo PSREF: M920q Tiny"
+
+  # === Fujitsu Futro Serie (Ultra-Budget) ===
+  fujitsu_futro_s740:
+    brand: "Fujitsu"
+    model: "Futro S740"
+    form_factor: "Thin Client (sehr kompakt)"
+    cpu_options:
+      - "Intel Celeron J4105 (4C/4T, 1.5-2.5 GHz, 10W TDP)"
+      - "Intel Celeron J4125 (4C/4T, 2.0-2.7 GHz, 10W TDP)"
+    ram_type: "DDR4 SODIMM"
+    ram_slots: 2
+    ram_max_official: "16 GB"
+    ram_max_unofficial: "32 GB"
+    storage:
+      - "1× M.2 2280 SATA/NVMe"
+      - "1× mSATA"
+    network: "1× Realtek Gigabit Ethernet + 1× optional (je nach Konfiguration)"
+    pcie_slots: "Keine"
+    video_outputs: ["2× DisplayPort"]
+    usb_ports: "4× USB 3.0"
+    idle_power_watts: 4-8
+    load_power_watts: 12-18
+    noise_level: "Passiv oder extrem leise"
+    price_range_german: "20-60 € (gebraucht)"
+    ideal_for: "Ultra-Budget-Server, Home Assistant, Pi-hole, leichte Dienste"
+    pros:
+      - "Billigster Homelab-Server überhaupt (ab 20€)"
+      - "Extrem stromsparend (oft < 6W)"
+      - "Lüfterlos oder sehr leise"
+    cons:
+      - "Nur Celeron CPU (schwach für VMs)"
+      - "Max 16-32 GB RAM"
+      - "Realtek NIC (kein Intel – potenzielle Proxmox-Probleme)"
+    amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S740&tag=makmatas-homelab-21"
+    sources:
+      - "Fujitsu Datasheet: Futro S740"
+      - "Intel ARK: Celeron J4125"
+
+  # === GMKtec (Neugeräte) ===
+  gmktec_g3_pro:
+    brand: "GMKtec"
+    model: "G3 Pro"
+    form_factor: "Mini PC (Neugerät)"
+    cpu: "Intel Core i3-10110U (2C/4T, 2.1-4.1 GHz, 15W TDP)"
+    ram: "16 GB DDR4 (verlötet bei einigen Varianten – vor Kauf prüfen!)"
+    ram_max: "16-32 GB (je nach Variante)"
+    storage: "512 GB M.2 NVMe"
+    network: "1× 2.5GbE Realtek RTL8125BG + Wi-Fi 6"
+    pcie_slots: "Keine"
+    video_outputs: ["2× HDMI 2.0"]
+    usb_ports: "3× USB 3.2 Gen1"
+    idle_power_watts: 6-10
+    load_power_watts: 20-30
+    price_range_german: "200-280 € (neu)"
+    ideal_for: "Neugerät mit Garantie, Docker-Server, Mediencenter"
+    pros:
+      - "Neugerät mit Herstellergarantie"
+      - "2.5GbE onboard (schneller als gebrauchte 1L-PCs)"
+      - "Windows 11 Pro inklusive"
+    cons:
+      - "Nur 2 Kerne / 4 Threads"
+      - "RAM teilweise verlötet"
+      - "Kein PCIe-Slot"
+    amazon_link: "https://www.amazon.de/dp/B0F9FS819H/?tag=makmatas-homelab-21"
+    sources:
+      - "Intel ARK: i3-10110U"
+      - "GMKtec Produktseite"
+
+  # === Minisforum ===
+  minisforum_ms01:
+    brand: "Minisforum"
+    model: "MS-01"
+    form_factor: "Mini Workstation"
+    cpu: "Intel Core i9-13900H (14C/20T: 6P+8E, bis 5.4 GHz, 45W TDP)"
+    ram_type: "DDR5 SODIMM"
+    ram_slots: 2
+    ram_max_official: "96 GB"
+    ram_max_unofficial: "96 GB"
+    storage:
+      - "2× M.2 2280 NVMe (PCIe 4.0)"
+      - "1× 2.5\" SATA"
+    network:
+      - "2× 10GbE SFP+ (Intel X710)"
+      - "2× 2.5GbE (Intel I226-V)"
+    pcie_slots: "2× M.2 Key-M (für SSDs) + USB4 (40 Gbps)"
+    video_outputs: ["1× HDMI 2.0", "1× DisplayPort 1.4", "USB4 (DisplayPort Alt Mode)"]
+    usb_ports: "3× USB 3.2 Gen2 + 1× USB 3.2 Gen2 Type-C + USB4"
+    idle_power_watts: 15-25
+    load_power_watts: 65-90
+    price_range_german: "550-700 € (neu)"
+    ideal_for: "High-End Proxmox, 10GbE-Cluster, viele VMs, KI-Experimente"
+    pros:
+      - "2× 10GbE SFP+ onboard"
+      - "14 Kerne / 20 Threads"
+      - "DDR5 + PCIe 4.0"
+      - "Zukunftssicher"
+    cons:
+      - "Hoher Preis"
+      - "Wird unter Last warm"
+      - "Overkill für einfaches Homelab"
+    amazon_link: "https://www.amazon.de/dp/B0D45JQCN7/?tag=makmatas-homelab-21"
+    sources:
+      - "Intel ARK: i9-13900H"
+      - "Minisforum MS-01 Spec Sheet"

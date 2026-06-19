@@ -1,10 +1,34 @@
 #!/usr/bin/env python3
 """
-Claude Sonnet 4.6 Review Pipeline
-Liest einen generierten SEO-Artikel, schickt ihn an Claude zur Verbesserung,
-überschreibt die Datei mit der verbesserten Version.
+Claude Sonnet 4.6 Review Pipeline + Geräte-Datenbank Faktencheck
+Liest einen generierten SEO-Artikel, prüft mit YAML-Datenbank,
+schickt an Claude zur Verbesserung, überschreibt die Datei.
 """
-import json, urllib.request, urllib.error, sys, os, re
+import json, urllib.request, urllib.error, sys, os, re, yaml
+
+DEVICES_DB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "devices.yaml")
+
+def load_device_database():
+    """Load the canonical device specs from YAML."""
+    if not os.path.exists(DEVICES_DB):
+        print("⚠️  devices.yaml not found – skipping DB fact-check")
+        return None
+    with open(DEVICES_DB) as f:
+        data = yaml.safe_load(f)
+    return data.get("devices", {})
+
+def format_db_for_prompt(devices):
+    """Format device database compactly for the Claude prompt."""
+    lines = []
+    for key, dev in devices.items():
+        lines.append(f"\n### {dev.get('brand','?')} {dev.get('model','?')}")
+        lines.append(f"  CPU: {dev.get('cpu_options', dev.get('cpu','?'))}")
+        lines.append(f"  RAM: {dev.get('ram_type','?')}, max {dev.get('ram_max_official','?')} official ({dev.get('ram_max_unofficial','?')})")
+        lines.append(f"  Storage: {dev.get('storage','?')}")
+        lines.append(f"  Netzwerk: {dev.get('network','?')}")
+        lines.append(f"  PCIe: {dev.get('pcie_slots','Keine')}")
+        lines.append(f"  Preis: {dev.get('price_range_german','?')}")
+    return "\n".join(lines)
 
 def get_anthropic_key():
     """Extract Anthropic API key from Hermes config."""
@@ -21,20 +45,28 @@ def review_article(content):
         print("ERROR: Could not find Anthropic API key")
         sys.exit(1)
 
+    # Load device database
+    devices = load_device_database()
+    db_text = ""
+    if devices:
+        db_text = "\n\n### KANONISCHE GERÄTE-DATENBANK (Quelle der Wahrheit für Faktenchecks)\n" + format_db_for_prompt(devices)
+        db_text += "\n\nPrüfe JEDE Hardware-Aussage im Artikel gegen diese Datenbank. Weiche NICHT von diesen Specs ab."
+
     print(f"📤 Sending article to Claude Sonnet 4.6...")
 
     payload = {
         "model": "claude-sonnet-4-6",
         "max_tokens": 8192,
-        "system": """Du bist ein KRITISCHER deutschsprachiger Technik-Redakteur und Faktenprüfer.
-Deine Aufgabe ist es, den folgenden Blog-Artikel über Homelab-Hardware GRÜNDLICH zu reviewen und zu verbessern.
+        "system": f"""Du bist ein KRITISCHER deutschsprachiger Technik-Redakteur und Faktenprüfer.
+Deine Aufgabe ist es, den folgenden Blog-Artikel über Homelab-Hardware GRÜNDLICH zu reviewen und zu verbessern.{db_text}
 
 PFLICHT-CHECKLISTE (jeden Punkt prüfen!):
-1. FAKTEN-CHECK: Sind alle Hardware-Spezifikationen korrekt?
-   - CPU-Kerne/Threads stimmen? (z.B. i5-6500T = 4 Kerne, i3-10110U = 2 Kerne/4 Threads)
-   - RAM-Typ (DDR3/DDR4/DDR5) und Limits korrekt?
-   - Netzwerk-Spezifikationen (1GbE/2,5GbE/10GbE) korrekt?
-   - Keine falschen Proxmox-Versionsnummern oder Kernel-Angaben
+1. FAKTEN-CHECK mit Datenbank: Stimmen ALLE Hardware-Spezifikationen?
+   - CPU-Modell, Kerne/Threads, Takt (z.B. i5-8500T = 6C/6T, KEIN Hyperthreading!)
+   - RAM-Typ (DDR3/DDR4/DDR5) und Limits (offiziell UND inoffiziell)
+   - Netzwerk-Spezifikationen exakt (1GbE/2,5GbE/10GbE)
+   - Storage-Konfiguration (wie viele Slots, welcher Formfaktor)
+   - Keine falschen oder geratenen Werte
 
 2. WIDERSPRÜCHE: Gibt es im Artikel innere Widersprüche?
    - Wenn "2 Kerne minimum" gesagt wird, aber eine CPU 4 Kerne hat → korrigieren

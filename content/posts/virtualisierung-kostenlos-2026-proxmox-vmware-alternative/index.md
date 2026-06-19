@@ -203,4 +203,12 @@ Wenn du dein Homelab mit Proxmox starten möchtest, empfehle ich dir als Einstie
 
 Die VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative. Starte noch heute – dein zukünftiges Ich wird es dir danken, wenn du 500 € im Jahr sparst und gleichzeitig mehr Flexibilität hast.
 
+
+
+---
+
+## Weiterführende Artikel
+
+- 🔗 [Mini PC fürs Homelab nach Budget: Von 50€ bis 650€ – welcher passt zu dir?](/homelab-blog/posts/mini-pc-homelab-2025-vergleich/) — *(Thema: hardware,mini-pc)*
+
 *Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.*
