@@ -19,7 +19,9 @@ categories:
 
 **Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten**
 
-Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.
+Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole (ein Werbeblocker fürs ganze Heimnetz), Jellyfin (ein Medienserver für Filme und Serien), Nextcloud (eine private Cloud für deine Fotos und Dokumente) und vielleicht noch ein Game-Server für dich und deine Freunde.
+
+Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.
 
 **Virtualisierung** löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.
 
@@ -43,7 +45,7 @@ Dieser Artikel richtet sich an **Homelab-Einsteiger ohne Vorkenntnisse**, die ei
 
 ## Was ist Virtualisierung? (Einfach erklärt)
 
-Stell dir vor, dein Computer ist ein **Mehrfamilienhaus** mit einem einzigen großen Raum. Virtualisierung baut **Zwischenwände ein** – plötzlich können mehrere Familien (VMs oder Container) gleichzeitig im selben Haus wohnen, ohne sich gegenseitig zu stören. Jede Familie hat ihren eigenen Bereich, ihr eigenes Inventar und kann unabhängig ein- und ausziehen.
+Stell dir vor, dein Computer ist ein **Mehrfamilienhaus** mit einem einzigen großen Raum. Virtualisierung baut **Zwischenwände ein** – plötzlich können mehrere Familien (das sind deine Dienste) gleichzeitig im selben Haus wohnen, ohne sich gegenseitig zu stören. Jede Familie hat ihren eigenen Bereich, ihr eigenes Inventar und kann unabhängig ein- und ausziehen.
 
 Es gibt zwei Bauarten für diese "Zwischenwände":
 
@@ -52,58 +54,44 @@ Es gibt zwei Bauarten für diese "Zwischenwände":
 | **Typ 1 (Bare Metal)** | Läuft direkt auf der Hardware – wie ein Vermieter, der im Erdgeschoss wohnt | Proxmox VE, VMware ESXi |
 | **Typ 2 (Gehostet)** | Läuft als Programm in Windows oder Linux – wie ein Untermieter | VirtualBox, VMware Workstation |
 
-Proxmox VE ist ein **Typ-1-Hypervisor**: Er sitzt direkt auf der Hardware und verteilt die Ressourcen (CPU, RAM, Festplatte) effizient auf alle virtuellen Maschinen.
+Proxmox VE ist ein **Typ-1-Hypervisor** – eine Spezial-Software, die direkt auf dem Rechner sitzt und die Ressourcen (Rechenleistung, Arbeitsspeicher, Festplatte) gerecht an alle virtuellen Maschinen verteilt.
 
 ### Was bringt dir das konkret?
 
-- **Isolation:** Ein abgestürzter Dienst reißt die anderen nicht mit – dein Medienserver läuft weiter, auch wenn Pi-hole gerade neu startet
-- **Snapshots:** Bevor du eine riskante Änderung machst, knipst du einen Schnappschuss. Läuft was schief? Ein Klick und alles ist wie vorher
+- **Isolation:** Ein abgestürzter Dienst reißt die anderen nicht mit – dein Medienserver läuft weiter, auch wenn der Werbeblocker gerade neu startet
+- **Snapshots (Schnappschüsse):** Bevor du eine riskante Änderung machst, knipst du einen Schnappschuss. Läuft was schief? Ein Klick und alles ist wie vorher
 - **Kosteneffizienz:** Ein Server ersetzt fünf – weniger Strom, weniger Platz, weniger Lärm
-- **Flexibilität:** Du kannst verschiedene Betriebssysteme parallel fahren – Linux für Docker, Windows für bestimmte Anwendungen
+- **Flexibilität:** Linux für Docker, Windows für bestimmte Anwendungen – alles auf einem Rechner
 
 ---
 
 ## Proxmox VE – Die kostenlose Lösung für dein Homelab
 
-Proxmox Virtual Environment (VE) ist eine **komplett kostenlose Virtualisierungsplattform** auf Debian-Basis. Sie vereint zwei Technologien unter einer Weboberfläche:
+Proxmox Virtual Environment (VE) ist eine **komplett kostenlose Virtualisierungsplattform**. Sie vereint zwei Technologien unter einer übersichtlichen Weboberfläche – also einer Benutzeroberfläche, die du ganz normal im Browser bedienst:
 
 ### KVM-VMs (der "Gästeraum mit eigenem Eingang")
 
-Virtuelle Maschinen mit eigenem BIOS, eigener CPU und eigenem RAM. Ideal, wenn du Windows Server, Ubuntu, Rocky Linux und FreeBSD **gleichzeitig** auf einem Rechner betreiben willst.
+Virtuelle Maschinen mit eigenem BIOS (Startprogramm), eigener CPU und eigenem Arbeitsspeicher. Ideal, wenn du verschiedene Betriebssysteme **gleichzeitig** auf einem Rechner betreiben willst – zum Beispiel Windows, Ubuntu und FreeBSD nebeneinander.
 
 ### LXC-Container (die "WG mit geteilter Küche")
 
-Container teilen sich den Linux-Kernel des Hosts – das spart enorm Ressourcen. Ein LXC-Container mit Ubuntu braucht nur **~100 MB RAM** statt 2 GB für eine vollständige VM. Das ist der Unterschied zwischen einer möblierten Wohnung (LXC) und einem kompletten Hausbau (KVM).
+Container teilen sich den Linux-Kernel (den Betriebssystemkern) des Hosts – das spart enorm Ressourcen. Ein LXC-Container mit Ubuntu braucht nur **~100 MB RAM** statt 2 GB für eine vollständige VM. Das ist der Unterschied zwischen einer möblierten Wohnung (LXC) und einem kompletten Hausbau (KVM).
 
-**Perfekt für:** Docker-Hosts, Pi-hole, n8n, Home Assistant – alles, was schlank laufen soll.
-
-### Die wichtigsten Funktionen auf einen Blick
-
-| Funktion | Beschreibung |
-|----------|-------------|
-| **Web-UI** | Verwaltung über den Browser – keine Linux-Kenntnisse nötig |
-| **Snapshots** | Zustand der VM einfrieren und bei Bedarf zurückrollen |
-| **Backup** | Komplettes VM-Backup mit einem Klick (VZDump) |
-| **Cluster** | Mehrere Rechner als einen großen Server verwalten |
-| **Live-Migration** | VM umziehen, während sie läuft – keine Ausfallzeit |
-| **REST API** | Automatisierung per Skript – für Fortgeschrittene |
-
-> 👉 [Proxmox VE bei Amazon suchen (Bücher & Hardware)](https://www.amazon.de/s?k=Proxmox+VE+Virtualisierung&tag=makmatas-homelab-21)
+**Perfekt für:** Docker (eine Plattform für Kleinst-Anwendungen), Pi-hole (Werbeblocker), n8n (Automatisierungs-Tool), Home Assistant (Smart-Home-Zentrale) – alles, was schlank laufen soll.
 
 ---
 
 ## Proxmox vs. VMware ESXi – Der Vergleich 2026
 
-Seit Broadcom VMware übernommen hat, ist Schluss mit der kostenlosen ESXi-Version. Wer VMware weiternutzen will, zahlt **mindestens ~500 € pro Jahr** (vSphere Foundation) – und das ohne Storage-Funktionen wie ZFS oder Ceph.
+Seit Broadcom VMware übernommen hat (November 2023) gibt es keine kostenlose Version mehr. Wer VMware weiternutzen will, zahlt **mindestens ~500 € pro Jahr**.
 
 | Kriterium | Proxmox VE | VMware vSphere (Broadcom) |
 |-----------|-----------|--------------------------|
-| **Preis** | **0 €** – komplett kostenlos | **Ab ~500 €/Jahr** – nur mit Support-Lizenz |
-| **Container** | LXC inkludiert | Nicht vorhanden (nur VMs) |
-| **ZFS / Snapshots** | Ja, integriert | Nur mit Zusatzkosten |
-| **Ceph Storage** | Integriert (Hochverfügbarkeit) | vSAN ab **~2.000 €/Jahr** |
-| **Community** | Aktiv, deutschsprachig | Stark geschrumpft seit Broadcom |
-| **Updates** | Kostenlos (Community-Repo) | Nur mit gültigem Support-Vertrag |
+| **Preis** | **0 €** – komplett kostenlos | **Ab ~500 €/Jahr** |
+| **Container** | LXC inkludiert (schlanke Virt. ohne Voll-OS) | Nicht vorhanden (nur VMs) |
+| **Datenhaltung (ZFS)** | Ja, integriert (effiziente Snapshots) | Nur mit Zusatzkosten |
+| **Verteilter Speicher** | Ceph integriert (für Cluster-Betrieb) | vSAN ab **~2.000 €/Jahr** |
+| **Updates** | Kostenlos (Community-Version) | Nur mit gültigem Support-Vertrag |
 
 **Die Botschaft:** Proxmox bietet mehr Funktionen als der alte ESXi Free – und das völlig kostenlos.
 
@@ -111,18 +99,18 @@ Seit Broadcom VMware übernommen hat, ist Schluss mit der kostenlosen ESXi-Versi
 
 ## Wie viel Hardware brauchst du für Proxmox?
 
-Proxmox läuft auch auf älteren Rechnern. Anders als VMware (das eine strikte Hardware-Kompatibilitätsliste hat) unterstützt Proxmox praktisch jeden x86_64-Prozessor.
+Proxmox läuft auch auf älteren Rechnern und unterstützt praktisch jeden handelsüblichen Prozessor (x86_64 – das ist der Standard bei Intel und AMD). Anders als VMware musst du keine teure Spezial-Hardware kaufen.
 
 ### Minimal-Ausstattung
 
 | Komponente | Minimal | Empfohlen |
 |-----------|---------|-----------|
-| **CPU** | 4 Kerne (z. B. Intel Core i5-6500, 4C/4T) | 8+ Kerne (Intel i7/i9 oder AMD Ryzen) |
-| **RAM** | 8 GB | 32–64 GB |
-| **Storage** | 256 GB SSD | 1 TB NVMe + HDD für Backups |
-| **Netzwerk** | 1 GbE | 2,5 GbE oder 10 GbE |
+| **CPU (Prozessor)** | 4 Kerne (z. B. Intel Core i5-6500) | 8+ Kerne (Intel i7/i9 oder AMD Ryzen) |
+| **RAM (Arbeitsspeicher)** | 8 GB | 32–64 GB |
+| **Festplatte (Storage)** | 256 GB SSD | 1 TB NVMe + HDD für Backups |
+| **Netzwerk** | 1 Gigabit-Anschluss | 2,5 oder 10 Gigabit |
 
-> **Tipp:** Proxmox VE 9.2 (basierend auf Debian 13.5 „Trixie“) bringt den modernen Linux-Kernel 7.0, QEMU 11.0, LXC 7.0 sowie ZFS 2.4 – die neueste Version mit Dynamic Load Balancer, erweitertem SDN, HA-Arm/Disarm und verwaltbaren CPU-Profilen.
+> **Tipp zur aktuellen Version:** Proxmox VE 9.2 basiert auf Debian 13.5 und bringt den aktuellen Linux-Kernel 7.0 sowie aktuelle Versionen von QEMU (für VMs), LXC (für Container) und ZFS (für die Datenhaltung). Wichtige Neuerungen sind ein automatischer Lastausgleich zwischen mehreren Servern, erweiterte Netzwerkfunktionen und ein übersichtlicheres Web-Interface für Mobilgeräte.
 
 ---
 
@@ -132,17 +120,16 @@ Proxmox läuft auch auf älteren Rechnern. Anders als VMware (das eine strikte H
 
 Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
-- **CPU:** Intel J4125 (S7010, 4 Kerne) oder Intel J4105 (S740, 4 Kerne) – **beide lüfterlos**
-- **RAM:** 8 GB DDR4 offiziell, 16 GB getestet – ein einzelner RAM-Slot (SODIMM)
-- **Storage:** 64 GB M.2 SATA – SSD austauschbar, aber M.2 SATA only (kein NVMe)
-- **Netzwerk:** 1× GbE
-- **Upgrade-Fähigkeit:** ❌ Nur ein RAM-Slot, M.2 SATA only (kein NVMe), kein zweiter SSD-Slot
-- **KI-Potenzial:** ❌ Für Ollama nicht geeignet – CPU zu schwach, RAM zu knapp
-- **Stromverbrauch Idle:** ca. 6–8 Watt – günstiger im Dauerbetrieb als jede Glühbirne
+- **Prozessor (CPU):** Intel J4125 (S7010, 4 Kerne) oder Intel J4105 (S740, 4 Kerne) – **beide lüfterlos** (kein Lüftergeräusch)
+- **Arbeitsspeicher (RAM):** 8 GB offiziell, 16 GB getestet – ein einzelner Steckplatz
+- **Festplatte:** 64 GB M.2 SATA – austauschbar, aber **nur für SATA-SSDs** (kein NVMe, siehe SSD-Warnung unten)
+- **Netzwerk:** 1 Gigabit-Anschluss (GbE)
+- **Erweiterbarkeit:** ❌ Nur ein RAM-Steckplatz, kein zweiter SSD-Slot, kein PCIe-Slot für Zusatzkarten
+- **KI-Tauglichkeit:** ❌ Für lokale KI-Modelle (Ollama) nicht geeignet – Prozessor zu schwach, RAM zu knapp
+- **Stromverbrauch (Leerlauf):** ca. 6–8 Watt – günstiger als jede Glühbirne
 - **USB-C?** Nein
-- **Praxis-Tipp:** Läuft bei mir seit Monaten als OPNSense-Firewall und AdGuard-DNS – absolut lautlos
 
-**Ideal für:** Erste Proxmox-Experimente, Pi-hole, AdGuard, DNS/DHCP, Backup-Ziel (PBS), leichte Dienste
+**Ideal für:** Erste Proxmox-Experimente, Pi-hole (Werbeblocker), AdGuard (DNS-Filter), Netzwerk-Monitoring
 
 👉 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21)
 
@@ -150,16 +137,18 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
 ### 💰 100–150 € – HP ProDesk 400 G3/G4 oder Dell Optiplex 3060/3070 Micro
 
-- **CPU:** Intel Core i5 der 7.–9. Generation (4–6 Kerne) – mit Lüfter
-- **RAM:** Bis zu 32 GB DDR4 – zwei RAM-Slots (SODIMM), **nicht verlötet**
-- **Storage:** 1× M.2 NVMe + 1× 2,5-Zoll-SATA – zwei Plätze, gut erweiterbar
-- **Netzwerk:** 1× GbE
-- **Upgrade-Fähigkeit:** ✅ RAM auf 32 GB erweiterbar, zweiter SSD-Slot vorhanden. Kein PCIe-Slot.
-- **KI-Potenzial:** ⚠️ Basis möglich. Phi-3-mini (3,8B) läuft mit über 10 Tokens/s auf der CPU – flüssig nutzbar. Llama-3-8B wird langsamer (~4-5 Tokens/s). 16+ GB RAM empfohlen.
-- **Stromverbrauch Idle:** ca. 12–18 Watt
-- **USB-C?** Nein. Nur USB 3.0 (Typ A).
+- **Prozessor (CPU):** Intel Core i5 der 7.–9. Generation (4–6 Kerne)
+- **Arbeitsspeicher (RAM):** Bis zu 32 GB DDR4 – **zwei Steckplätze, nicht fest verlötet**
+- **Festplatte:** 1× M.2 NVMe + 1× 2,5-Zoll-SATA – zwei Plätze, gut erweiterbar
+- **Netzwerk:** 1 Gigabit-Anschluss
+- **Erweiterbarkeit:** ✅ RAM nachrüstbar, zweiter SSD-Platz vorhanden. Kein PCIe-Slot im Innern.
+- **KI-Tauglichkeit:** ⚠️ Basis möglich. Phi-3-mini (ein kleines KI-Modell) läuft mit über 10 Tokens/s auf der CPU – flüssig für Texte. Größere Modelle (Llama-3-8B) werden langsamer. 16+ GB RAM empfohlen.
+- **Stromverbrauch (Leerlauf):** ca. 12–18 Watt
+- **USB-C?** Nein (nur USB-A, der rechteckige Standard-Anschluss)
 
-**Ideal für:** Vollwertigen Proxmox-Host für viele Container und 3–5 VMs, Home Assistant, Jellyfin, Nextcloud
+**Ideal für:** Einen vollwertigen Proxmox-Host für viele Container und 3–5 virtuelle Maschinen, Home Assistant (Smart Home), Jellyfin (Medienserver)
+
+**Wichtiger Hinweis zur SSD-Kompatibilität:** Dieses Gerät unterstützt **NVMe-SSDs** (den schnellen Standard mit bis zu 6.000 MB/s). Der günstigere Fujitsu Futro weiter oben unterstützt **nur SATA-SSDs** (langsamer, ~560 MB/s, aber für Proxmox völlig ausreichend). Wenn du beide Komponenten kaufst, achte darauf, dass die SSD zum PC passt!
 
 - 🔍 [HP ProDesk 400 G4 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=makmatas-homelab-21)
 - 🔍 [Dell Optiplex 3070 Micro bei Amazon suchen](https://www.amazon.de/s?k=Dell+Optiplex+3070+Micro&tag=makmatas-homelab-21)
@@ -168,16 +157,16 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
 ### 💰 150–200 € – Lenovo M720q Tiny
 
-- **CPU:** Intel Core i5-8500T oder i7-8700T (6 Kerne) – mit Lüfter
-- **RAM:** Bis zu 32 GB DDR4 – zwei RAM-Slots (SODIMM)
-- **Storage:** 1× M.2 NVMe + 1× 2,5-Zoll-SATA
-- **Netzwerk:** 1× GbE
-- **Upgrade-Fähigkeit:** ✅ RAM erweiterbar, zweiter SSD-Slot vorhanden. **Plus:** PCIe-Slot (Riser-Karte) für 10GbE oder GPU – das hat kein anderer 1L-PC in dieser Preisklasse.
-- **KI-Potenzial:** ✅ Phi-3-mini läuft mit über 10 Tokens/s. Mit 32 GB RAM auch Llama-3-8B nutzbar. Reine CPU-Inferenz, keine GPU nötig.
-- **Stromverbrauch Idle:** ca. 12–20 Watt
-- **USB-C?** **Ja** – einmal USB-C (DisplayPort-alt). Der einzige 1L-PC in dieser Liga mit USB-C.
+- **Prozessor (CPU):** Intel Core i5-8500T oder i7-8700T (6 Kerne)
+- **Arbeitsspeicher (RAM):** Bis zu 32 GB DDR4 – zwei Steckplätze
+- **Festplatte:** 1× M.2 NVMe + 1× 2,5-Zoll-SATA
+- **Netzwerk:** 1 Gigabit-Anschluss
+- **Erweiterbarkeit:** ✅ RAM und SSD nachrüstbar. **Pluspunkt:** Ein PCIe-Slot im Innern – damit kannst du eine 10-Gigabit-Netzwerkkarte oder eine kleine Grafikkarte einbauen. Das hat kein anderer Mini-PC in dieser Preisklasse.
+- **KI-Tauglichkeit:** ✅ Phi-3-mini läuft mit über 10 Tokens/s. Mit 32 GB RAM auch Llama-3-8B nutzbar.
+- **Stromverbrauch (Leerlauf):** ca. 12–20 Watt
+- **USB-C?** **Ja** – einmal USB-C. Das ist selten in dieser Klasse.
 
-**Ideal für:** KI-Spielereien (Ollama, Open WebUI), Cluster-Node mit PCIe-Erweiterung, Home Assistant + Nextcloud + KI alles in einem
+**Ideal für:** KI-Spielereien (Ollama für lokale KI-Modelle), Cluster-Node mit PCIe-Erweiterung, Home Assistant + Nextcloud + KI alles in einem
 
 - 🔍 [Lenovo M720q Tiny bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=makmatas-homelab-21)
 
@@ -185,70 +174,87 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
 ### 💰 > 200 € – Minisforum MS-01 (neu)
 
-- **CPU:** Intel Core i9-13900H (14 Kerne: 6P+8E, 20 Threads) – High-End-Prozessor
-- **RAM:** Bis zu 96 GB DDR5 – zwei SO-DIMM-Slots
-- **Storage:** 3× M.2 NVMe – extrem erweiterbar
-- **Netzwerk:** 2× 10GbE (SFP+) + 2× 2,5 GbE
-- **Upgrade-Fähigkeit:** ✅ Drei NVMe-Slots, zwei DDR5-Slots. Kein PCIe-Slot intern.
-- **KI-Potenzial:** ✅ Ja, geeignet für lokale KI-Modelle dank 14 Kernen und DDR5. Mit 64+ GB RAM sind auch größere Modelle möglich.
-- **Stromverbrauch Idle:** Keine exakten Daten vorhanden.
-- **USB-C?** Ja
+- **Prozessor (CPU):** Intel Core i9-13900H (14 Kerne) – ein sehr leistungsstarker Prozessor
+- **Arbeitsspeicher (RAM):** Bis zu 96 GB DDR5 – der neueste, schnelle RAM-Standard
+- **Festplatte:** 3× M.2 NVMe – extrem erweiterbar
+- **Netzwerk:** 2× 10 Gigabit (SFP+) + 2× 2,5 Gigabit
+- **Erweiterbarkeit:** ✅ Drei NVMe-Slots, zwei DDR5-Slots
+- **KI-Tauglichkeit:** ✅ Ja, mit 64+ GB RAM sind auch größere KI-Modelle möglich
+- **Stromverbrauch (Leerlauf):** Keine exakten Daten vorhanden
 
-**Ideal für:** Leistungshungrige VMs, Ceph-Cluster, KI-Workloads, 10GbE-Netzwerk – wenn das Budget es hergibt.
+**Ideal für:** Leistungshungrige Anwendungen, Cluster mit schnellem Netzwerk, KI-Workloads – wenn das Budget es hergibt.
 
 👉 [Preis bei Geizhals prüfen](https://geizhals.de/minisforum-ms-01-a3260346.html)
 
 ---
 
-## 💾 Günstige SSD-Empfehlung
+## 💾 Günstige SSD-Empfehlung (Achtung Kompatibilität!)
 
-High-End-SSDs wie die Samsung 990 Pro (150+ €) lohnen sich im Homelab selten. Dein ZFS-Root-Pool wird auch mit einer günstigen NVMe flott:
+High-End-SSDs wie die Samsung 990 Pro (150+ €) lohnen sich im Homelab selten. Allerdings: **Nicht jede SSD passt in jeden PC.** Bitte beachten:
 
-| Modell | Preis (ca.) | Typ | Besonderheit |
-|--------|------------|-----|-------------|
-| [Kingston NV3 1 TB](https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de) | ~139 € | NVMe PCIe 4.0 | Solide Allround-SSD, 6.000 MB/s lesend |
-| [WD Blue SA510 1 TB](https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de) | ~135 € | SATA (M.2) | Günstiger, aber SATA-Limit (560 MB/s) – fürs Boot-Laufwerk völlig ausreichend |
+- **Fujitsu Futro S7010/S740** unterstützt **nur M.2 SATA** (langsamerer Standard, ~560 MB/s). Hier ist die **WD Blue SA510** (SATA) die richtige Wahl.
+- **HP ProDesk, Dell Optiplex und Lenovo M720q** unterstützen **NVMe** (schneller Standard, bis 6.000 MB/s). Hier passt die **Kingston NV3**.
+
+| Modell | Preis (ca.) | Typ | Passt zu |
+|--------|------------|-----|----------|
+| [Kingston NV3 1 TB](https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de) | ~139 € | NVMe PCIe 4.0 (sehr schnell) | HP, Dell, Lenovo ab 100€ |
+| [WD Blue SA510 1 TB](https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de) | ~135 € | SATA (M.2, langsamer) | Fujitsu Futro (passt auch in HP/Dell) |
 
 ---
 
-## Proxmox einrichten – Die ersten Schritte (auch für Einsteiger)
+## Proxmox einrichten – Schritt für Schritt (auch für absolute Einsteiger)
 
-Die Installation ist erstaunlich einfach – eine der großen Stärken von Proxmox:
+Die Installation von Proxmox ist überraschend einfach – eine der großen Stärken der Plattform. Hier der genaue Ablauf:
 
-1. **ISO herunterladen** von [proxmox.com](https://www.proxmox.com/downloads) (kostenlos, keine Registrierung nötig)
-2. **Auf USB-Stick schreiben** – mit [Rufus](https://rufus.ie/de/) (Windows) oder Balena Etcher (Mac/Linux)
-3. **Vom USB-Stick booten** – den Rechner starten, F2/F12 drücken, USB als Boot-Laufwerk auswählen
-4. **Installations-Assistent folgen** – dauert etwa 5 Minuten, nur: Festplatte auswählen, Passwort setzen, IP-Adresse eingeben
-5. **Web-UI aufrufen:** `https://deine-ip:8006` im Browser – fertig!
+### Was du brauchst
+- Den Mini-PC (deine zukünftige Proxmox-Maschine)
+- Einen zweiten Computer (Laptop oder PC), von dem aus du die Installation machst
+- Einen USB-Stick (mindestens 4 GB)
+- Einen Monitor und eine Tastatur (nur für die Installation, danach nicht mehr nötig)
 
-> **Keine Linux-Kenntnisse nötig?** Für die Grundnutzung: ja. Das Web-UI ist übersichtlich und selbsterklärend. Erst wenn du ZFS-Tuning, Ceph-Cluster oder Kommandozeilen-Backups machen willst, helfen Linux-Grundlagen.
+### Die 5 Schritte
+
+1. **ISO herunterladen** – Gehe auf [proxmox.com](https://www.proxmox.com/downloads) und lade die Installations-Datei (ISO) herunter. Das ist kostenlos, keine Registrierung nötig.
+
+2. **Auf USB-Stick schreiben** – Mit [Rufus](https://rufus.ie/de/) (Windows) oder Balena Etcher (Mac/Linux) wird die ISO-Datei auf den USB-Stick übertragen. Der Stick wird dabei komplett gelöscht, also vorher leeren, wenn noch Daten drauf sind.
+
+3. **Vom USB-Stick booten** – Stecke den USB-Stick in den Mini-PC, schließe Monitor und Tastatur an, schalte den PC ein. Drücke direkt nach dem Einschalten mehrfach F2, F10 oder F12 (je nach Hersteller) und wähle im Boot-Menü den USB-Stick aus.
+
+4. **Installations-Assistent folgen** – Nach dem Booten erscheint ein Text-Bildschirm. Folgende Angaben werden abgefragt:
+   - **Festplatte auswählen:** Hier die SSD des Mini-PCs auswählen (Vorsicht: alle Daten werden gelöscht)
+   - **Passwort vergeben:** Ein sicheres Passwort für den Administrator-Zugang
+   - **IP-Adresse eingeben:** Proxmox braucht eine feste IP-Adresse im Heimnetz. Ein Beispiel: Wenn dein Router die Adresse 192.168.1.1 hat, kannst du 192.168.1.100 eintragen. Wichtig: Eine Nummer zwischen 192.168.1.2 und 192.168.1.254, die noch kein anderes Gerät im Haus hat. Die "Subnetzmaske" ist meist 255.255.255.0 und das "Gateway" ist die Adresse deines Routers (meist 192.168.1.1).
+
+5. **Fertig – die Weboberfläche aufrufen** – Nach der Installation (dauert ca. 5 Minuten) kannst du Monitor und Tastatur vom Mini-PC abstecken. Der PC kommt in den Keller, Schrank oder unters Bett – solange er Strom und Netzwerkkabel hat, läuft er. Ab jetzt steuerst du alles über **deinen normalen Laptop oder PC**: Öffne den Browser und gib ein: `https://192.168.1.100:8006` (die IP, die du in Schritt 4 eingetragen hast, plus :8006). Es erscheint eine Sicherheitswarnung (weil das Zertifikat selbst erstellt ist) – klicke auf "Trotzdem fortfahren". Jetzt siehst du das Proxmox-Dashboard: Herzlichen Glückwunsch, dein Homelab läuft!
 
 ---
 
 ## Das solltest du vor dem Kauf wissen
 
-Bevor du Hardware kaufst, hier ein paar **praktische Fallstricke** aus meiner Erfahrung:
+Bevor du Hardware kaufst, hier ein paar praktische Fallstricke aus meiner Erfahrung:
 
-- **RAM richtig planen:** Proxmox selbst braucht kaum RAM (~2 GB). Ein LXC-Container benötigt je nach Anwendung 0,5–4 GB (Pi-hole: ~0,5 GB, Nextcloud: ~2–4 GB). Eine VM startet bei mindestens 4 GB. Mit 32 GB bist du für die meisten Homelabs gut aufgestellt – 16 GB reichen für den Anfang.
-- **Eine SSD reicht:** ZFS mag zwei SSDs im Mirror, aber fürs Homelab tut es auch eine. Mach regelmäßige Backups auf eine externe HDD oder einen zweiten Rechner.
-- **Netzwerk nicht vergessen:** Ein GbE-Anschluss reicht für die ersten Schritte. Erst wenn du mehrere VMs gleichzeitig stark belastest (z. B. Jellyfin + Nextcloud + Game-Server), wird 2,5 GbE interessant.
-- **Gebraucht ist oft besser als neu:** Business-1L-PCs (HP, Dell, Lenovo) sind für den 24/7-Dauerbetrieb ausgelegt. Ein gebrauchtes Modell für 100–150 € läuft meist jahrelang problemlos.
+- **RAM richtig planen:** Proxmox selbst braucht kaum Arbeitsspeicher (~2 GB). Ein LXC-Container (schlanke Virtualisierung) benötigt je nach Anwendung 0,5–4 GB (Pi-hole: ~0,5 GB, Nextcloud: ~2–4 GB). Eine vollständige VM startet bei mindestens 4 GB. Mit **32 GB** bist du für die meisten Homelabs gut aufgestellt.
+- **Eine SSD reicht:** Zwei SSDs im Verbund sind sicherer, aber fürs Homelab tut es auch eine. Wichtiger sind regelmäßige Backups auf eine externe Festplatte.
+- **Netzwerk nicht vergessen:** Ein einfacher Gigabit-Anschluss reicht für die ersten Schritte völlig. Erst wenn du mehrere Dienste gleichzeitig stark belastest (z. B. Medienserver + Cloud + Game-Server), wird ein schnellerer Anschluss interessant.
+- **Gebraucht ist oft besser als neu:** Business-Mini-PCs (HP, Dell, Lenovo) sind für den Dauerbetrieb (24/7) ausgelegt. Ein gebrauchtes Modell für 100–150 € läuft meist jahrelang problemlos und hat vor ein paar Jahren noch das Zehnfache gekostet.
 
 ---
 
 ## Drei Tools, die dein Homelab auf das nächste Level bringen
 
-### 1. Proxmox Backup Server (PBS) – Kostenlose Backups
+### 1. Proxmox Backup Server (PBS) – Sicherungen leicht gemacht
 
-Sicherungen deiner VMs und Container – dedupliziert, verschlüsselt, mit Bandbreiten-Limit. Ideal als zweiter LXC-Container auf demselben Host oder einem günstigen Futro.
+Automatische, platzsparende Backups deiner VMs und Container. Ideal als zweite virtuelle Maschine auf demselben Host oder auf einem günstigen Zweit-Rechner.
 
-### 2. Home Assistant via LXC
+### 2. Ollama + Open WebUI für lokale KI
 
-Home Assistant in einem LXC-Container braucht nur ~2 GB RAM und lässt sich in 10 Minuten einrichten. Perfekt für Smart-Home-Steuerung (Licht, Heizung, Kameras).
+Ab 32 GB RAM kannst du kleine KI-Modelle direkt auf deinem Proxmox-Host laufen lassen – ohne Internet, ohne Abo, ohne dass deine Daten nach extern gehen. **Phi-3-mini** (ein kompaktes Sprachmodell von Microsoft) läuft mit über 10 Tokens/s auf der CPU – völlig flüssig für Chat und Textaufgaben.
 
-### 3. Ollama + Open WebUI für lokale KI
+**Wichtig für Einsteiger:** Die Einrichtung über "Docker in einem LXC-Container" erfordert ein paar Terminal-Befehle (das blaue Fenster mit weißer Schrift). Das ist nicht schwer, aber anders als die Proxmox-Installation selbst nicht rein mit Mausklicks erledigt. Es gibt gute Schritt-für-Schritt-Anleitungen dafür – such einfach nach "Ollama Proxmox LXC installieren".
 
-Ab 32 GB RAM kannst du kleine KI-Modelle direkt auf deinem Proxmox-Host laufen lassen. **Phi-3-mini (3,8B Parameter)** läuft mit über 10 Tokens/s auf CPU-only – völlig flüssig für Chat und Textaufgaben. **Llama-3-8B** schafft ~4–5 Tokens/s – langsamer, aber für gelegentliche Nutzung okay. Einrichtung per LXC-Container mit Docker, in 15 Minuten erledigt.
+### 3. Home Assistant via LXC – Smart Home Zentrale
+
+Licht, Heizung, Kameras – alles von einer Oberfläche aus steuern. Home Assistant in einem LXC-Container braucht nur ~2 GB RAM und ist in 10 Minuten eingerichtet.
 
 ---
 
@@ -256,15 +262,15 @@ Ab 32 GB RAM kannst du kleine KI-Modelle direkt auf deinem Proxmox-Host laufen l
 
 ### Ist Proxmox VE wirklich komplett kostenlos?
 
-Ja. Proxmox VE ist Open Source (GPLv2). Du kannst es unbegrenzt nutzen, ohne zu bezahlen. Es gibt ein Enterprise-Repository (kostenpflichtig), aber das **Community-Repository reicht fürs Homelab völlig aus** – Updates und Sicherheits-Patches inklusive.
+Ja. Proxmox ist Open Source – der Quellcode ist öffentlich einsehbar und darf von jedem kostenlos genutzt werden. Es gibt zwar ein kostenpflichtiges Enterprise-Repository mit getesteten Updates, aber die **kostenlose Community-Version reicht fürs Homelab völlig aus** (Sicherheitsupdates inklusive).
 
 ### Kann ich meine bestehenden VMware-VMs zu Proxmox migrieren?
 
-Ja. Du hast drei Wege: Export aus VMware als OVF/OVA und Import in Proxmox, Konvertierung per `qemu-img convert` oder das automatisierte `virt-v2v`-Tool. Die meisten Betriebssysteme laufen ohne Anpassungen.
+Ja. Du hast drei Wege: Export aus VMware als OVF/OVA und Import in Proxmox, Konvertierung mit dem Tool `qemu-img convert` oder das automatisierte `virt-v2v`-Tool. Die meisten Betriebssysteme (Windows, Linux, FreeBSD) laufen ohne Anpassungen.
 
 ### Brauche ich Linux-Kenntnisse für Proxmox?
 
-Für die ersten Schritte: nein. Die Weboberfläche erlaubt die vollständige Verwaltung per Mausklick. Für Fortgeschrittenes (ZFS-Tuning, Cluster, Kommandozeile) helfen Grundkenntnisse, aber die lernst du mit der Zeit von selbst.
+Für die **grundlegende Nutzung**: nein. Die Weboberfläche erlaubt die Verwaltung per Mausklick – VMs anlegen, starten, stoppen, Snapshots erstellen. Für **fortgeschrittene Themen wie die KI-Einrichtung (Ollama) oder Cluster-Verwaltung** sind ein paar Terminal-Befehle nötig. Aber diese speziellen Dinge lernst du gezielt dann, wenn du sie brauchst – du musst nicht vorher Linux-Profi sein.
 
 ---
 
@@ -272,10 +278,10 @@ Für die ersten Schritte: nein. Die Weboberfläche erlaubt die vollständige Ver
 
 | Budget | Empfehlung | Ideal für |
 |--------|-----------|-----------|
-| **1–50 €** | Fujitsu Futro S740/S7010 (gebraucht) | Erste Schritte, Pi-hole, DNS, Monitoring |
-| **100–150 €** | HP ProDesk 400 G4 oder Dell Optiplex 3070 (gebraucht) | Vollwertiger Homelab-Host, Home Assistant, Jellyfin, Nextcloud – läuft auch mit vielen Containern |
-| **150–200 €** | Lenovo M720q Tiny (gebraucht) | KI-Spielereien per CPU, Cluster-Node mit PCIe, maximale Erweiterbarkeit |
-| **> 200 €** | Minisforum MS-01 (neu) | 10GbE, Ceph-Cluster, KI-Workloads, wenn Geld keine Rolle spielt |
+| **1–50 €** | Fujitsu Futro S740/S7010 (gebraucht) | Erste Experimente, Werbeblocker, Netzwerk-Dienste |
+| **100–150 €** | HP ProDesk 400 G4 oder Dell Optiplex 3070 (gebraucht) | Den "richtigen" Homelab-Server für viele Dienste |
+| **150–200 €** | Lenovo M720q Tiny (gebraucht) | KI-Spielereien, maximale Erweiterbarkeit, Cluster |
+| **> 200 €** | Minisforum MS-01 (neu) | High-End: 10 Gigabit, große KI-Modelle, Profi-Homelab |
 
 Die VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative – und mit gebrauchter Business-Hardware kommst du günstiger weg als mit jedem Fertig-NAS oder Mini-PC aus dem Laden.
 

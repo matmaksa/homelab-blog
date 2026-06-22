@@ -19,7 +19,8 @@
       <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
       <guid>https://makmatas.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.&lt;/p&gt;
+&lt;p&gt;Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole (ein Werbeblocker fürs ganze Heimnetz), Jellyfin (ein Medienserver für Filme und Serien), Nextcloud (eine private Cloud für deine Fotos und Dokumente) und vielleicht noch ein Game-Server für dich und deine Freunde.&lt;/p&gt;
+&lt;p&gt;Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Virtualisierung&lt;/strong&gt; löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.&lt;/p&gt;
 &lt;p&gt;Dieser Artikel richtet sich an &lt;strong&gt;Homelab-Einsteiger ohne Vorkenntnisse&lt;/strong&gt;, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.&lt;/p&gt;</description>
     </item>
