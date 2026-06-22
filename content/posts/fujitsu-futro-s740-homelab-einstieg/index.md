@@ -36,7 +36,7 @@ In diesem Artikel zeige ich dir, was der kleine Thin Client kann, welche Use-Cas
 | **80–120 €** | Futro S740 + 16 GB RAM + 256 GB NVMe | Mehrere Docker-Container, NAS light |
 | **120–250 €** | Alternativen: HP ProDesk 400 G3 oder Lenovo M720q | VMs mit Proxmox, PCIe-Erweiterungen |
 
-> **💡 Einsteiger-Tipp:** Der Futro S740 wird meist ohne RAM und ohne Festplatte verkauft. Achte beim Kauf darauf, ob Netzteil und DisplayPort-Kabel dabei sind.
+> **💡 Einsteiger-Tipp:** Der Futro S740 wird meist ohne RAM und ohne Festplatte verkauft. Achte beim Kauf darauf, ob Netzteil dabei ist. **Ganz wichtig: Der Futro hat KEIN HDMI – nur DisplayPort!** Du brauchst zwingend einen **DisplayPort-auf-HDMI-Adapter (ca. 5 €)** für die Ersteinrichtung am Monitor. Ohne Adapter siehst du nichts.
 
 ## Was ist der Fujitsu Futro S740?
 
@@ -79,6 +79,7 @@ Für **20–60 Euro** bekommst du das Basismodell. Meist fehlen RAM und Festplat
 
 **Was du brauchst:**
 - ✅ Netzteil (meist Fujitsu Original-12V-Netzteil, oft dabei)
+- ✅ **DisplayPort-auf-HDMI-Adapter (ca. 5 €)** – der Futro hat **kein HDMI**, nur DisplayPort. Ohne Adapter bekommst du keinen Monitor angeschlossen!
 - ❌ DDR4 SODIMM RAM (brauchst 4–16 GB, ab ~8€ gebraucht)
 - ❌ SSD (M.2 NVMe oder 2,5-Zoll-SATA, ab ~15€)
 
@@ -231,10 +232,26 @@ Nein, der Celeron J4105/J4125 wird von Microsoft nicht für Windows 11 unterstü
 Ja, der Futro S740 hat drei Storage-Optionen: (1) einen **M.2-2280-Slot** für NVMe-SSDs (empfohlen fürs Betriebssystem), (2) einen **mSATA-Slot** für zusätzliche SSDs, und (3) einen **internen 2,5-Zoll-SATA-Bay** für klassische SATA-SSDs. Die 120-GB-SATA-SSD aus der 50–80-€-Budgetstufe kommt in den 2,5-Zoll-Bay. Wer schnelleren Speicher will, nutzt den M.2-Slot für eine NVMe-SSD.
 
 ### Kann ich den Arbeitsspeicher aufrüsten?
+
 Ja, der Futro hat zwei DDR4 SODIMM-Slots. Offiziell unterstützt Fujitsu 16 GB, in der Community wurden aber auch 32 GB (2× 16 GB) erfolgreich getestet.
+
+**Wichtiger Hinweis zur RAM-Kompatibilität:** Der Futro ist wählerisch bei 16-GB-Riegeln. Nicht jeder 16-GB-DDR4-SODIMM funktioniert – es muss ein **Dual-Rank**-Riegel sein (das steht im Datenblatt). Single-Rank-Riegel mit 16GB werden oft nicht erkannt. **Mein Tipp:** Kauf gebrauchte 8-GB-Riegel (2 Stück für 16 GB), die sind günstiger und laufen garantiert. Oder such gezielt nach "16GB DDR4 SODIMM Dual Rank" für den Futro.
 
 ### Wie laut ist der Futro S740?
 Sehr leise. Viele Versionen sind passiv gekühlt (völlig lautlos), andere haben einen kleinen Lüfter, der im Leerlauf kaum hörbar ist (< 20 dB).
+
+### Muss ich das BIOS updaten oder Einstellungen ändern?
+
+In den meisten Fällen: **nein.** Der Futro startet direkt von SSD oder USB-Stick, sobald du ihn einschaltest. Nur in zwei Fällen musst du ins BIOS (beim Start F2 drücken):
+
+1. **Wenn der USB-Stick nicht bootet:** Gehe ins BIOS → "Boot" → "Boot Priority" und stelle USB an die erste Stelle. Das war's.
+2. **Wenn eine neue SSD nicht erkannt wird:** Gehe ins BIOS → "Advanced" → "SATA Configuration" und stelle den Modus von "RAID" auf "AHCI". Das ist der einzige Schalter, den du umlegen musst.
+
+**Keine Angst:** Das BIOS des Futro sieht aus wie ein blauer Bildschirm aus den 90ern, aber du kannst außer diesen beiden Einstellungen nichts kaputt machen. Wenn du dich verirrst: Einfach "Exit → Load Default Settings" wählen und ohne Speichern beenden.
+
+### Gibt es Bastel-Möglichkeiten für später? (NVMe-Adapter)
+
+Erfahrene Bastler bauen die interne WLAN-Karte aus und nutzen den Steckplatz mit einem Adapter für eine zweite NVMe-SSD. **[NUR FÜR BASTLER]** – als Anfänger solltest du das sein lassen. Der normale M.2-Slot und der 2,5-Zoll-Bay reichen für jeden Homelab völlig aus. Wenn du später mehr Speicher brauchst, kauf lieber eine größere SSD oder hänge eine externe USB-Festplatte an.
 
 ### Ist der Futro S740 für Proxmox geeignet?
 Ja, aber beschränkt auf 1–3 LXCs oder 1–2 leichte VMs. Für einen reinen Proxmox-Einstieg reicht es völlig, aber für einen Mehrzweck-Cluster ist ein gebrauchter HP ProDesk mit i5-8500T die bessere Wahl.
@@ -259,6 +276,23 @@ Gebraucht bei Amazon Warehouse Deals, eBay Kleinanzeigen oder Refurbished-Händl
 - Mehrere Docker-Container mit rechenintensiven Workloads (z. B. KI-Inferenz, Transkodierung)
 
 **Meine persönliche Empfehlung:** Starte mit einem Futro S740 oder S7010 für 30–50 € und einer kleinen SSD. Betreibe Home Assistant + Pi-hole + einen n8n-Workflow-Automaten darauf. Sobald du mehr brauchst, holst du dir einen HP ProDesk 400 G4 (mit i5-8500T ebenfalls sehr günstig) als zweiten Cluster-Node. Zwei Mini-PCs im Cluster sind besser und günstiger als ein großer Server.
+
+---
+
+## 🛒 Idiotensichere Einkaufsliste für den Futro S740
+
+Damit du am Ende genau weißt, was du bestellen musst:
+
+| Was | Wofür? | Tipp |
+|-----|--------|------|
+| 🔍 [Fujitsu Futro S740 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S740&tag=makmatas-homelab-21) | Das Gerät selbst | Achte auf "Netzteil dabei" im Angebot |
+| 🔍 [DisplayPort-auf-HDMI-Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) | Monitor-Anschluss | **Pflicht!** Der Futro hat kein HDMI – ca. 5 € |
+| 🔍 [DDR4 SODIMM 8 GB](https://www.amazon.de/s?k=DDR4+SODIMM+8GB&tag=makmatas-homelab-21) | Arbeitsspeicher | Lieber 2× 8 GB (16 GB) kaufen – Dual-Rank-Probleme vermeiden |
+| 🔍 [WD Blue SA510 1 TB (SATA M.2)](https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de) | SSD fürs Betriebssystem | **SATA-Version**, nicht NVMe! Oder günstiger: kleine 120 GB SATA-SSD für den Start |
+
+**Gesamtkosten (mit 8 GB RAM + 120 GB SSD): ca. 50–75 €** – der günstigste Homelab-Einstieg überhaupt.
+
+*Hinweis: RAM und SSD sind auf dem Gebrauchtmarkt oft viel günstiger. Frag bei eBay Kleinanzeigen oder schau bei Refurbed-Händlern.*
 
 | Budget | Meine Empfehlung |
 |--------|-----------------|
