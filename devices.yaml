@@ -225,32 +225,31 @@ devices:
   fujitsu_futro_s7010:
     brand: "Fujitsu"
     model: "Futro S7010"
-    form_factor: "Thin Client (sehr kompakt)"
+    form_factor: "Thin Client (ultra-kompakt)"
     cpu: "Intel Celeron J4125 (4C/4T, 2.0-2.7 GHz, 10W TDP)"
-    ram_type: "DDR4 SODIMM"
+    ram_type: "DDR4 SO-DIMM, 2400 MHz"
     ram_slots: 1
     ram_max_official: "8 GB"
-    ram_max_unofficial: "16 GB (getestet)"
-    storage:
-      - "1× M.2 2280 SATA/NVMe"
+    ram_config: "4 GB oder 8 GB (1 Modul)"
+    storage: "1× M.2 2280 SATA SSD (TLC, bis 128 GB, 220 TBW)"
     network: "1× Realtek Gigabit Ethernet"
     pcie_slots: "Keine"
-    video_outputs: ["1× DisplayPort", "1× VGA"]
-    usb_ports: "4× USB 3.0 + 2× USB 2.0"
-    idle_power_watts: 4-7
-    load_power_watts: 10-15
+    video_outputs: ["1× DisplayPort 1.2 (4K)", "1× VGA (über Adapter)"]
+    usb_ports: "4× USB 3.0 + 2× USB 2.0 + 1× USB 3.1 Gen1 Typ-C"
+    cooling: "Aktiv (Lüfter)"
     noise_level: "Sehr leise"
     price_range_german: "30-50 € (gebraucht)"
-    ideal_for: "Ultra-Budget-Server, Pi-hole, Home Assistant, Docker (leicht)"
+    ideal_for: "Ultra-Budget-Server, Pi-hole, Home Assistant, leichte Docker-Dienste"
     pros:
       - "Günstigster Homelab-Server überhaupt (ab 30€)"
-      - "Intel J4125 mit 4 Kernen – besser als erwartet"
+      - "Intel J4125 mit 4 Kernen – erstaunlich brauchbar"
       - "Extrem stromsparend (4-7W idle)"
-      - "Leise im Betrieb"
+      - "USB-C Anschluss"
     cons:
-      - "Nur 1 RAM-Slot (max 8GB offiziell)"
-      - "Realtek NIC (kein Intel – potenzielle Proxmox-Probleme)"
-      - "Nur M.2 SATA/NVMe (kein separater SATA-Port)"
+      - "Nur 1 RAM-Slot (max 8 GB offiziell)"
+      - "M.2 SATA only (kein NVMe)"
+      - "Realtek NIC (kein Intel – Proxmox-Probleme möglich)"
+      - "Aktive Kühlung (Lüfter, aber leise)"
     amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21"
     sources:
       - "Intel ARK: Celeron J4125"
@@ -259,30 +258,31 @@ devices:
   fujitsu_futro_s740:
     brand: "Fujitsu"
     model: "Futro S740"
-    form_factor: "Thin Client (sehr kompakt)"
+    form_factor: "Thin Client (ultra-kompakt, lüfterlos)"
     cpu: "Intel Celeron J4105 (4C/4T, 1.5-2.5 GHz, 10W TDP)"
-    ram_type: "DDR4 SODIMM"
+    ram_type: "DDR4 SO-DIMM, 2400 MHz"
     ram_slots: 1
     ram_max_official: "8 GB"
-    ram_max_unofficial: "16 GB (getestet)"
-    storage:
-      - "1× M.2 2280 SATA/NVMe"
-    network: "1× Realtek Gigabit Ethernet"
+    ram_config: "4 GB oder 8 GB (1 Modul)"
+    storage: "1× M.2 2280 SATA SSD (MLC, bis 128 GB)"
+    network: "1× Realtek Gigabit Ethernet + PoE (Power over Ethernet) optional"
     pcie_slots: "Keine"
-    video_outputs: ["2× DisplayPort"]
-    usb_ports: "4× USB 3.0"
-    idle_power_watts: 4-7
-    load_power_watts: 10-15
-    noise_level: "Sehr leise"
+    video_outputs: ["2× DisplayPort 1.2 (4K)"]
+    usb_ports: "4× USB 3.0 + 1× USB 3.1 Gen1 Typ-C"
+    cooling: "Passiv (lüfterlos)"
+    noise_level: "Absolut lautlos"
     price_range_german: "30-60 € (gebraucht)"
-    ideal_for: "Ultra-Budget, dünner Client, Home Assistant"
+    ideal_for: "Ultra-Budget, Home Assistant, lautloser Betrieb, PoE-Betrieb"
     pros:
+      - "Lüfterlos – absolut lautlos"
       - "Sehr günstig"
-      - "Extrem stromsparend"
-      - "2× DisplayPort"
+      - "PoE-Option (kein separates Netzteil nötig)"
+      - "USB-C Anschluss"
+      - "2× DisplayPort für Dual-Monitor"
     cons:
-      - "Nur 1 RAM-Slot"
-      - "J4105 etwas langsamer als J4125"
+      - "Nur 1 RAM-Slot (max 8 GB)"
+      - "J4105 etwas langsamer als J4125 (S7010)"
+      - "M.2 SATA only (kein NVMe)"
       - "Realtek NIC"
     amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S740&tag=makmatas-homelab-21"
     sources:
