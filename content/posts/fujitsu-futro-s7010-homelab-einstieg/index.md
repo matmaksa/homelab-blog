@@ -75,8 +75,8 @@ Der Fujitsu Futro S7010 ist ein **Thin Client** – ein kleiner, stromsparender 
 | **Arbeitsspeicher (RAM)** | 1 Steckplatz DDR4 SODIMM, offiziell max. 8 GB, 16 GB getestet |
 | **Festplatte** | 1× M.2 2280 – **nur SATA** (kein NVMe!) |
 | **Netzwerk** | 1× Realtek Gigabit Ethernet |
-| **Video** | 1× DisplayPort |
-| **USB** | 4× USB 3.0 + 2× USB 2.0 |
+| **Video** | 2× DisplayPort (DP1.2a) |
+| **USB** | 2× USB 3.1 Gen1 (front) + 4× USB 2.0 (rear) |
 | **Stromverbrauch** | 4–8 Watt Leerlauf, 10–14 Watt unter Last |
 | **Lautstärke** | **Lüfterlos** – absolut lautlos |
 | **Preis** | **30–50 € gebraucht** |
