@@ -46,7 +46,7 @@ Bevor es zu den Modellen geht, kurz die drei Dinge, die Einsteiger am meisten ve
 Die kurze Antwort: **Der alte i5 (8. Gen) ist meist stärker** – trotz des größeren Modellnamens. Ein i5-8500T (6 Kerne) aus 2018 hat rund **50 % mehr Rechenleistung** als ein aktueller Intel N95 (4 Kerne) aus 2023. Dafür verbraucht der N95 deutlich weniger Strom (~10 W vs. ~15-25 W im Leerlauf). **Faustregel:** Für viele gleichzeitige Dienste (Proxmox mit 5+ Containern) nimm den i5. Für einen einzelnen 24/7-Dauerläufer (Pi-hole, Home Assistant) reicht der N95/N100 völlig.
 
 ### "Was ist ein Barebone? Muss ich löten?"
-Ein Barebone ist ein PC, bei dem **Arbeitsspeicher (RAM) und Festplatte (SSD) fehlen** – quasi ein Auto ohne Räder. Du musst nicht löten, sondern nur **zwei Teile einclipsen** (wie Lego): Die SSD wird in einen Schlitz gesteckt und festgeschraubt, der RAM wird in einen Steckplatz gedrückt, bis er einrastet. Das sind 5 Minuten Arbeit, kein Spezialwerkzeug nötig. **Kosten extra:** 16 GB RAM + 256 GB SSD = ca. 50–70 € zusätzlich.
+Ein Barebone ist ein PC, bei dem **Arbeitsspeicher (RAM) und Festplatte (SSD) fehlen** – quasi ein Auto ohne Räder. Du musst nicht löten, sondern nur **zwei Teile einclipsen** (wie Lego): Die SSD wird in einen Schlitz gesteckt und festgeschraubt, der RAM wird in einen Steckplatz gedrückt, bis er einrastet. Das sind 5 Minuten Arbeit, kein Spezialwerkzeug nötig. **Kosten extra:** 32 GB DDR4 RAM (gebraucht) + 500 GB NVMe SSD = ca. 150–200 € zusätzlich. Achtung: Aktuell (2026) sind RAM-Preise stark gestiegen – ein neues 32-GB-Kit kostet schnell 200+ €. Auf dem Gebrauchtmarkt oder bei Refurbished-Händlern findest du oft günstigere Angebote.
 
 ### "Brauche ich für 2,5 GbE ein neues Netzwerk?"
 **Nein.** Ein 2,5-Gigabit-Anschluss funktioniert auch an deiner normalen FRITZ!Box mit 1 Gigabit – er passt sich automatisch an die langsamere Geschwindigkeit an. Der Vorteil von 2,5 GbE zeigt sich erst, wenn du **mehrere Geräte gleichzeitig stark belastest** (z. B. Medienserver + Cloud + Backup parallel). Für die ersten Schritte reicht 1 GbE völlig.
@@ -244,6 +244,6 @@ Die Mini-PCs haben oft nur Platz für 1–2 SSDs intern. Wenn du größere Daten
 | **150–200 €** | 👉 **Lenovo M720q Tiny** – PCIe macht den Unterschied |
 | **200–300 €** | 👉 **GMKtec G3S** – Neugerät mit Garantie (aber CPU-seitig schwächer als gebrauchte i5) |
 
-**Meine persönliche Empfehlung für Einsteiger:** Hol dir einen **HP ProDesk 400 G4** gebraucht für ~90 €. Dazu 16–32 GB RAM (aufrüstbar, zwei Steckplätze) und eine günstige 500 GB NVMe-SSD. Der Rechner hat 6 Kerne, läuft leise und stromsparend – und du kannst später bei Bedarf die zweite SSD nachrüsten.
+**Meine persönliche Empfehlung für Einsteiger:** Hol dir einen **HP ProDesk 400 G4** gebraucht für ~90 €. Dazu nachrüstbar: 16–32 GB RAM (gebraucht oft günstiger) und eine 500 GB NVMe-SSD. Der Rechner hat 6 Kerne, läuft leise und stromsparend – und du kannst später bei Bedarf die zweite SSD nachrüsten.
 
 *Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Für dich ändert sich der Preis dadurch nicht.*
