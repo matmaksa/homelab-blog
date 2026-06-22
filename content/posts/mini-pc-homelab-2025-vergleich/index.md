@@ -50,9 +50,10 @@ Die CPU ist ein **Intel Celeron J4125** (4 Kerne / 4 Threads, 2,0–2,7 GHz). Da
 - **Storage:** 64 GB M.2 SATA (aufrüstbar)
 - **Netzwerk:** 1× Realtek Gigabit Ethernet
 - **Stromverbrauch:** ca. 4–7 W im Leerlauf – **kaum messbar**
+- **Kühlung:** Passiv (lüfterlos) – absolut lautlos
 - **Abmessungen:** Winzig – passt in jede Tasche
 
-**👍 Vorteile:** Extrem günstig (ab 30 €). Sehr stromsparend. 4 Kerne (besser als erwartet). Kompakte Bauweise. Leise.
+**👍 Vorteile:** Extrem günstig (ab 30 €). Lüfterlos – absolut lautlos. Sehr stromsparend. 4 Kerne – erstaunlich brauchbar. Kompakte Bauweise. 16 GB RAM möglich (getestet).
 
 **👎 Nachteile:** Nur 1 RAM-Slot (max. 8 GB offiziell). Realtek-NIC (kein Intel – kann bei Proxmox Probleme machen). Kein separater SATA-Port.
 
@@ -98,12 +99,10 @@ Der **HP ProDesk 600 G4 Mini** ist die leistungsstärkere Business-Linie mit neu
 
 ### Dell OptiPlex 3060 Micro
 
-Der **Dell OptiPlex 3060 Micro** ist die direkte Konkurrenz zum HP ProDesk. Identisches Preisniveau, ähnliche Specs – der entscheidende Vorteil: **USB-C-Anschluss**, den HP in dieser Generation nicht bietet.
-
+Der **Dell OptiPlex 3060 Micro** ist die direkte Konkurrenz zum HP ProDesk. Identisches Preisniveau, ähnliche Specs.
 - **CPU:** i5-8500T (6C/6T, kein Hyperthreading) oder i3-8100T (4C/4T)
 - **RAM:** Bis 32 GB DDR4 SODIMM
 - **Netzwerk:** 1× Intel I219-LM Gigabit Ethernet
-- **Besonderheit:** 1× USB 3.1 Type-C
 - **Preis:** 80–150 € gebraucht
 
 ### Dell OptiPlex 3070 Micro
@@ -118,7 +117,7 @@ Der **Dell OptiPlex 3070 Micro** bringt die 9. Intel-Generation (i5-9500T mit bi
 
 🔍 [Dell OptiPlex 3060/3070 bei Amazon suchen](https://www.amazon.de/s?k=Dell+OptiPlex+Micro&tag=makmatas-homelab-21)
 
-**Meine Meinung zur Kategorie 50–150 €:** Egal ob HP oder Dell – nimm das Modell, das du gerade günstiger siehst. Ein ProDesk 600 G4 mit i5-8500T für 110 € ist genauso gut wie ein OptiPlex 3060 für 100 €. Der Dell hat USB-C, der HP hat manchmal bessere Verfügbarkeit. Kauf nach Angebotslage.
+**Meine Meinung zur Kategorie 50–150 €:** Egal ob HP oder Dell – nimm das Modell, das du gerade günstiger siehst. Ein ProDesk 600 G4 mit i5-8500T für 110 € ist genauso gut wie ein OptiPlex 3060 für 100 €. Kauf nach Angebotslage.
 
 ---
 
@@ -132,12 +131,13 @@ Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, di
 - **RAM:** Bis zu 32 GB DDR4 SODIMM offiziell (64 GB inoffiziell getestet)
 - **Storage:** 1× M.2 2280 NVMe + 1× 2,5" SATA (Adapter erforderlich)
 - **Netzwerk:** 1× Intel I219-V Gigabit Ethernet (über PCIe-Riser auf 10GbE erweiterbar)
+- **Anschlüsse:** 1× USB 3.1 Typ-C + 4× USB 3.1 + 2× USB 2.0
 - **Besonderheit:** **PCIe x8-Slot (Riser-kompatibel)** – in dieser Geräteklasse äußerst selten
 - **Preis gebraucht:** 90–200 €
 
-**👍 Vorteile:** PCIe-Erweiterbarkeit (10GbE, GPU, SATA). 6 Kerne beim i5-8500T. Sehr kompaktes Design. Große und aktive Lenovo-Community.
+**👍 Vorteile:** PCIe-Erweiterbarkeit (10GbE, GPU, SATA). USB-C Anschluss. 6 Kerne beim i5-8500T. Sehr kompaktes Design. Große und aktive Lenovo-Community.
 
-**👎 Nachteile:** Nur 1 GbE onboard. Gebrauchtkauf. Unter Last etwas lauter als HP/Dell.
+**👎 Nachteile:** Nur 1 GbE onboard. Gebrauchtkauf.
 
 **Ideal für:** Homelab mit **10GbE-Ambitionen** (NIC via PCIe-Slot), Proxmox-Cluster, fortgeschrittene Docker-Setups.
 
@@ -175,9 +175,9 @@ Der GMKtec G3S ist die beste Wahl, wenn du ein **Neugerät mit Garantie** möcht
 | Fujitsu Futro S7010 | **~40 €** | J4125 (4C/4T) | 8 GB DDR4 | 1 GbE | Günstigster Einstieg |
 | HP ProDesk 400 G3 | **~80 €** | i5-7500T (4C/4T) | 32 GB DDR4 | 1 GbE (Intel) | Riesiges Angebot |
 | HP ProDesk 600 G4 | **~120 €** | i5-8500T (6C/6T) | 32 GB DDR4 | 1 GbE (Intel) | 6 Kerne, 64 GB inoffiziell |
-| Dell OptiPlex 3060 | **~120 €** | i5-8500T (6C/6T) | 32 GB DDR4 | 1 GbE (Intel) | USB-C |
+| Dell OptiPlex 3060 | **~120 €** | i5-8500T (6C/6T) | 32 GB DDR4 | 1 GbE (Intel) | – |
 | Dell OptiPlex 3070 | **~150 €** | i5-9500T (6C/6T) | 32 GB DDR4 | 1 GbE (Intel) | 9. Gen Intel |
-| Lenovo M720q Tiny | **~150 €** | i5-8500T (6C/6T) | 32 GB DDR4 | 1 GbE (Intel) | **PCIe x8-Slot** |
+| Lenovo M720q Tiny | **~150 €** | i5-8500T (6C/6T) | 32 GB DDR4 | 1 GbE (Intel) | **PCIe x8-Slot + USB-C** |
 | GMKtec G3S | **~220 €** | Intel N95 (4C/4T) | 16 GB DDR4 | 1 GbE | Neugerät + Garantie |
 
 ---

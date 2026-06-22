@@ -99,7 +99,8 @@ devices:
     network: "1× Intel I219-LM Gigabit Ethernet"
     pcie_slots: "Keine"
     video_outputs: ["2× DisplayPort 1.4"]
-    usb_ports: "3× USB 3.1 Gen1 + 1× USB 3.1 Gen1 Type-C + 1× USB 2.0"
+    usb_ports: "4× USB 3.1 Gen1 + 1× USB 2.0"
+    # KEIN USB-C – nur Standard-USB-A
     idle_power_watts: 6-12
     load_power_watts: 25-40
     price_range_german: "100-180 € (gebraucht)"
@@ -133,7 +134,8 @@ devices:
     network: "1× Intel I219-LM Gigabit Ethernet + optional Wi-Fi 6"
     pcie_slots: "Keine"
     video_outputs: ["2× DisplayPort 1.4"]
-    usb_ports: "3× USB 3.1 Gen1 + 1× USB 3.1 Gen1 Type-C + 1× USB 2.0"
+    usb_ports: "4× USB 3.1 Gen1 + 1× USB 2.0"
+    # KEIN USB-C – nur Standard-USB-A
     idle_power_watts: 7-14
     load_power_watts: 30-50
     price_range_german: "150-250 € (gebraucht)"
@@ -167,7 +169,7 @@ devices:
     network: "1× Intel I219-V Gigabit Ethernet"
     pcie_slots: "1× PCIe x8 Slot (für Riser-Karte: 10GbE NIC, SATA-Controller, GPU)"
     video_outputs: ["1× DisplayPort 1.2", "1× HDMI 1.4"]
-    usb_ports: "4× USB 3.1 Gen1 + 2× USB 2.0"
+    usb_ports: "4× USB 3.1 Gen1 + 1× USB 3.1 Gen1 Typ-C + 2× USB 2.0"
     idle_power_watts: 6-12
     load_power_watts: 30-45
     price_range_german: "90-200 € (gebraucht)"
@@ -177,9 +179,9 @@ devices:
       - "6 Kerne (i5-8500T)"
       - "Große Lenovo-Community, viele Modding-Tutorials"
       - "PCIe-Riser-Mod für SATA/10GbE möglich"
+      - "USB-C Anschluss"
     cons:
       - "Nur 1GbE onboard"
-      - "Lüfter wird unter Last hörbar"
       - "Gebrauchtkauf – kein Garantie"
     amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=makmatas-homelab-21"
     sources:
@@ -235,21 +237,22 @@ devices:
     network: "1× Realtek Gigabit Ethernet"
     pcie_slots: "Keine"
     video_outputs: ["1× DisplayPort 1.2 (4K)", "1× VGA (über Adapter)"]
-    usb_ports: "4× USB 3.0 + 2× USB 2.0 + 1× USB 3.1 Gen1 Typ-C"
-    cooling: "Aktiv (Lüfter)"
-    noise_level: "Sehr leise"
+    usb_ports: "4× USB 3.0 + 2× USB 2.0"
+    cooling: "Passiv (lüfterlos)"
+    noise_level: "Lautlos"
+    ram_max_unofficial: "16 GB (getestet)"
     price_range_german: "30-50 € (gebraucht)"
     ideal_for: "Ultra-Budget-Server, Pi-hole, Home Assistant, leichte Docker-Dienste"
     pros:
       - "Günstigster Homelab-Server überhaupt (ab 30€)"
       - "Intel J4125 mit 4 Kernen – erstaunlich brauchbar"
       - "Extrem stromsparend (4-7W idle)"
-      - "USB-C Anschluss"
+      - "Lüfterlos – absolut lautlos"
+      - "16 GB RAM möglich (inoffiziell getestet)"
     cons:
       - "Nur 1 RAM-Slot (max 8 GB offiziell)"
       - "M.2 SATA only (kein NVMe)"
       - "Realtek NIC (kein Intel – Proxmox-Probleme möglich)"
-      - "Aktive Kühlung (Lüfter, aber leise)"
     amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21"
     sources:
       - "Intel ARK: Celeron J4125"
@@ -268,7 +271,7 @@ devices:
     network: "1× Realtek Gigabit Ethernet + PoE (Power over Ethernet) optional"
     pcie_slots: "Keine"
     video_outputs: ["2× DisplayPort 1.2 (4K)"]
-    usb_ports: "4× USB 3.0 + 1× USB 3.1 Gen1 Typ-C"
+    usb_ports: "4× USB 3.0"
     cooling: "Passiv (lüfterlos)"
     noise_level: "Absolut lautlos"
     price_range_german: "30-60 € (gebraucht)"
@@ -277,7 +280,6 @@ devices:
       - "Lüfterlos – absolut lautlos"
       - "Sehr günstig"
       - "PoE-Option (kein separates Netzteil nötig)"
-      - "USB-C Anschluss"
       - "2× DisplayPort für Dual-Monitor"
     cons:
       - "Nur 1 RAM-Slot (max 8 GB)"
