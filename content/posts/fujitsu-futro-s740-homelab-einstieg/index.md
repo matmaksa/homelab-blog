@@ -127,7 +127,7 @@ Damit sind folgende Szenarien realistisch:
 - **Home Assistant + Zigbee2MQTT + InfluxDB + Grafana**
 - **Leichter NAS-Server** über Samba (für kleine Dateien, Backups)
 - **AdGuard Home + Unbound** als DNS-Resolver
-- **Proxmox VE** mit 1–2 LXCs (mehr dazu unten)
+- **Proxmox VE** mit 1–2 Containern (mehr dazu unten)
 
 ### Ab 120 €: Lieber einen HP ProDesk oder Lenovo Tiny kaufen?
 
@@ -136,7 +136,7 @@ Ab etwa 120 Euro Gesamtbudget solltest du über Alternativen nachdenken. Ein **H
 | Gerät | Vorteil gegenüber Futro |
 |-------|------------------------|
 | **HP ProDesk 400 G3** | i5-6500T (4 Kerne, stärker als Celeron), Intel NIC |
-| **Lenovo M720q Tiny** | i5-8500T (6 Kerne!), **PCIe-Slot** für 10GbE oder SATA-Erweiterung |
+| **Lenovo M720q Tiny** | i5-8500T (6 Kerne!), **PCIe-Slot** für 10-Gigabit-Netzwerk oder SATA-Erweiterung |
 | **Dell OptiPlex 3070 Micro** | i5-9500T (6 Kerne), USB-C, extrem stromsparend |
 
 Der Futro bleibt die Nummer 1, wenn:
@@ -150,19 +150,19 @@ Der Futro bleibt die Nummer 1, wenn:
 
 ## Proxmox auf dem Futro S740 – geht das?
 
-Ja, **Proxmox VE** läuft auf dem Futro S740, aber mit Einschränkungen:
+Ja, **Proxmox VE** (die Virtualisierungs-Software) läuft auf dem Futro S740, aber du darfst keine Wunder erwarten:
 
 **✅ Was funktioniert:**
-- 1–3 leichte LXC-Container (z. B. Pi-hole, Home Assistant, Unbound)
-- 1 leichte VM (z. B. Ubuntu Server mit 1 GB RAM)
-- Snapshots, Backups via Proxmox Backup Server
+- 1–3 schlanke Container (das sind abgespeckte virtuelle Computer, die sich den Linux-Kernel teilen) – z. B. Pi-hole, Home Assistant
+- 1 leichte virtuelle Maschine (ein kompletter virtueller Computer mit eigenem Betriebssystem) – z. B. Ubuntu Server mit 1 GB RAM
+- Snapshots (Schnappschüsse) und Backups
 
 **⚠️ Was du beachten musst:**
-- **Realtek NIC:** Der integrierte Realtek-Chip (RTL8111G) wird von Proxmox standardmäßig erkannt, aber einige Nutzer berichten von sporadischen Verbindungsabbrüchen. **Fix:** `ethtool -K vmbr0 gro on lro on` oder ein Intel-basiertes USB-Ethernet-Adapter (~15€) als Alternative.
-- **CEPH oder ZFS sind zu heavy:** Der Celeron hat zu wenig Leistung für CEPH oder dedupliziertes ZFS. Verwende ext4 oder einfaches LVM-Thin.
-- **Max 2 VMs realistisch:** Bei mehr als 2 VMs wird der Celeron zum Flaschenhals.
+- **Netzwerk-Chip:** Der integrierte Netzwerk-Chip (Realtek) wird von Proxmox erkannt, kann aber manchmal die Verbindung verlieren. **Einfache Lösung:** Kauf einen USB-Netzwerk-Adapter mit Intel-Chip für ~15 € – dann läuft es stabil.
+- **Keine komplexen Speicher-Funktionen:** Der Celeron-Prozessor ist zu schwach für aufwendige Speicher-Verbünde oder Platten-Schnappschüsse. Wähl bei der Proxmox-Installation einfach die Standard-Einstellungen ("ext4") – das reicht völlig.
+- **Maximal 2 virtuelle Maschinen:** Bei mehreren Maschinen gleichzeitig wird der Prozessor zum Flaschenhals. Container sind sparsamer.
 
-**Meine Empfehlung:** Nutze den Futro als **dedizierten Home-Assistant-Host** unter Proxmox, oder betreibe ihn **ohne Proxmox** als reinen Docker-Host mit Ubuntu Server LTS. Das spart Overhead und läuft butterweich.
+**Meine Empfehlung:** Nutze den Futro als **reinen Home-Assistant-Host** unter Proxmox, oder besser: **ganz ohne Proxmox** als einfachen Docker-Host mit Ubuntu Server. Das spart Rechenleistung und läuft butterweich.
 
 ## Die besten Use-Cases für den Futro S740
 
@@ -172,7 +172,7 @@ Der Futro S740 ist **der ideale Home Assistant Server**. Mit 8–16 GB RAM und e
 
 **Vorteile gegenüber Raspberry Pi 5:**
 - Keine SD-Karten-Probleme (SATA-SSD statt MicroSD)
-- x86-Architektur (keine ARM-Inkompatibilitäten)
+- **x86-Architektur** (Standard-PC-Technik, kein Spezial-Format wie beim Raspberry Pi) – alle Linux-Programme laufen problemlos
 - Mehr RAM möglich (16 GB vs 8 GB beim Pi 5)
 - Robusteres Gehäuse, kein Hitzestau
 
@@ -262,7 +262,7 @@ In den meisten Fällen: **nein.** Der Futro startet direkt von SSD oder USB-Stic
 Erfahrene Bastler bauen die interne WLAN-Karte aus und nutzen den Steckplatz mit einem Adapter für eine zweite NVMe-SSD. **[NUR FÜR BASTLER]** – als Anfänger solltest du das sein lassen. Der normale M.2-Slot und der 2,5-Zoll-Bay reichen für jeden Homelab völlig aus. Wenn du später mehr Speicher brauchst, kauf lieber eine größere SSD oder hänge eine externe USB-Festplatte an.
 
 ### Ist der Futro S740 für Proxmox geeignet?
-Ja, aber beschränkt auf 1–3 LXCs oder 1–2 leichte VMs. Für einen reinen Proxmox-Einstieg reicht es völlig, aber für einen Mehrzweck-Cluster ist ein gebrauchter HP ProDesk mit i5-8500T die bessere Wahl.
+Ja, aber beschränkt auf 1–3 Container oder 1–2 leichte virtuelle Maschinen. Für einen reinen Proxmox-Einstieg reicht es völlig, aber für einen Mehrzweck-Cluster ist ein gebrauchter HP ProDesk mit i5-8500T die bessere Wahl.
 
 ### Wo kaufe ich den Futro S740 am besten?
 Gebraucht bei Amazon Warehouse Deals, eBay Kleinanzeigen oder Refurbished-Händlern. Achte auf den Zustand "Generalüberholt" oder "Geprüft funktionsfähig" – und ob Netzteil und DisplayPort-Kabel dabei sind.
