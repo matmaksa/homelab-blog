@@ -8,8 +8,9 @@
 <title>Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab | Homelab Guide</title>
 <meta name="keywords" content="proxmox, virtualisierung, vmware-alternative, homelab, open-source">
 <meta name="description" content="Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten
-Die Virtualisierungslandschaft hat sich 2026 grundlegend verändert. Seit Broadcom VMware übernommen und die kostenlose ESXi-Lizenz abgeschafft hat, suchen Tausende Homelab-Betreiber und kleine Unternehmen nach einer leistungsstarken, kostenlosen Alternative. Proxmox Virtual Environment (VE) hat sich dabei als klarer Gewinner herausgestellt – und das völlig zu Recht.
-Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was macht Proxmox zur besseren Wahl als VMware? Dieser Artikel gibt dir eine vollständige und ehrliche Antwort.">
+Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.
+Virtualisierung löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.
+Dieser Artikel richtet sich an Homelab-Einsteiger ohne Vorkenntnisse, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.">
 <meta name="author" content="">
 <link rel="canonical" href="https://makmatas.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/">
 <link crossorigin="anonymous" href="/homelab-blog/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css" integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as="style">
@@ -72,8 +73,9 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
   <meta property="og:site_name" content="Homelab Guide">
   <meta property="og:title" content="Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab">
   <meta property="og:description" content="Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten
-Die Virtualisierungslandschaft hat sich 2026 grundlegend verändert. Seit Broadcom VMware übernommen und die kostenlose ESXi-Lizenz abgeschafft hat, suchen Tausende Homelab-Betreiber und kleine Unternehmen nach einer leistungsstarken, kostenlosen Alternative. Proxmox Virtual Environment (VE) hat sich dabei als klarer Gewinner herausgestellt – und das völlig zu Recht.
-Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was macht Proxmox zur besseren Wahl als VMware? Dieser Artikel gibt dir eine vollständige und ehrliche Antwort.">
+Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.
+Virtualisierung löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.
+Dieser Artikel richtet sich an Homelab-Einsteiger ohne Vorkenntnisse, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.">
   <meta property="og:locale" content="de_de">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -89,8 +91,9 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
 <meta name="twitter:image" content="https://makmatas.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/featured.jpg">
   <meta name="twitter:title" content="Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab">
   <meta name="twitter:description" content="Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten
-Die Virtualisierungslandschaft hat sich 2026 grundlegend verändert. Seit Broadcom VMware übernommen und die kostenlose ESXi-Lizenz abgeschafft hat, suchen Tausende Homelab-Betreiber und kleine Unternehmen nach einer leistungsstarken, kostenlosen Alternative. Proxmox Virtual Environment (VE) hat sich dabei als klarer Gewinner herausgestellt – und das völlig zu Recht.
-Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was macht Proxmox zur besseren Wahl als VMware? Dieser Artikel gibt dir eine vollständige und ehrliche Antwort.">
+Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.
+Virtualisierung löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.
+Dieser Artikel richtet sich an Homelab-Einsteiger ohne Vorkenntnisse, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.">
 
 
 <script type="application/ld+json">
@@ -119,12 +122,12 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
   "@type": "BlogPosting",
   "headline": "Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab",
   "name": "Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab",
-  "description": "Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten\nDie Virtualisierungslandschaft hat sich 2026 grundlegend verändert. Seit Broadcom VMware übernommen und die kostenlose ESXi-Lizenz abgeschafft hat, suchen Tausende Homelab-Betreiber und kleine Unternehmen nach einer leistungsstarken, kostenlosen Alternative. Proxmox Virtual Environment (VE) hat sich dabei als klarer Gewinner herausgestellt – und das völlig zu Recht.\nDoch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was macht Proxmox zur besseren Wahl als VMware? Dieser Artikel gibt dir eine vollständige und ehrliche Antwort.\n",
+  "description": "Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten\nStell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.\nVirtualisierung löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.\nDieser Artikel richtet sich an Homelab-Einsteiger ohne Vorkenntnisse, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.\n",
   "keywords": [
     "proxmox", "virtualisierung", "vmware-alternative", "homelab", "open-source"
   ],
-  "articleBody": "Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten\nDie Virtualisierungslandschaft hat sich 2026 grundlegend verändert. Seit Broadcom VMware übernommen und die kostenlose ESXi-Lizenz abgeschafft hat, suchen Tausende Homelab-Betreiber und kleine Unternehmen nach einer leistungsstarken, kostenlosen Alternative. Proxmox Virtual Environment (VE) hat sich dabei als klarer Gewinner herausgestellt – und das völlig zu Recht.\nDoch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was macht Proxmox zur besseren Wahl als VMware? Dieser Artikel gibt dir eine vollständige und ehrliche Antwort.\nWas ist Virtualisierung? Eine kurze Einführung Virtualisierung erlaubt es, auf einem einzigen physischen Server mehrere virtuelle Server (VMs) oder Container gleichzeitig zu betreiben. Statt fünf separater Rechner für Pi-hole, Nextcloud, Jellyfin, eine Entwicklungsumgebung und einen Spiele-Server zu kaufen, reicht ein einziger leistungsstarker Mini-PC oder Server.\nMan unterscheidet zwei Arten von Hypervisoren:\nHypervisor-Typ Beschreibung Beispiele Typ 1 (Bare Metal) Läuft direkt auf der Hardware, kein Betriebssystem darunter Proxmox VE, VMware ESXi, Microsoft Hyper-V Typ 2 (Gehostet) Läuft auf einem bestehenden Betriebssystem VirtualBox, VMware Workstation, QEMU/KVM Proxmox VE ist ein Typ-1-Hypervisor: Er läuft direkt auf der Hardware, nutzt Ressourcen maximal effizient und bietet native Hardware-Virtualisierung.\nIm Homelab bringt Virtualisierung große Vorteile:\nIsolation: Ein abgestürzter Dienst reißt andere nicht mit. Snapshots: Vor experimentellen Änderungen einen Schnappschuss erstellen und bei Bedarf zurücksetzen. Kosteneffizienz: Ein Server ersetzt fünf – weniger Strom, weniger Platz, weniger Lärm. Flexibilität: Verschiedene Betriebssysteme parallel betreiben – Linux für Docker, Windows für bestimmte Anwendungen. Lernplattform: Proxmox-Cluster, Ceph-Storage, Docker im LXC – alles im geschützten Rahmen. Proxmox VE – Die Open-Source-Lösung fürs Homelab Proxmox Virtual Environment ist eine komplett kostenlose, auf Debian basierende Virtualisierungsplattform. Sie vereint zwei Virtualisierungstechnologien unter einer gemeinsamen Weboberfläche:\nKVM-VMs (vollständige Virtualisierung) Klassische virtuelle Maschinen mit eigenem BIOS/UEFI, eigener CPU, eigenem RAM und virtuellem Netzwerk. Ideal, wenn du verschiedene Betriebssysteme parallel betreiben möchtest – Windows Server, Ubuntu, Rocky Linux, OpenMediaVault und FreeBSD nebeneinander.\nLXC-Container (leichtgewichtige Virtualisierung) Container teilen sich den Host-Kernel und benötigen kein vollständiges Betriebssystem – das macht sie extrem ressourcensparend. Ein LXC-Container mit Ubuntu 24.04 belegt nur rund 100 MB RAM statt 2 GB für eine vollständige VM. Perfekt für Docker-Hosts, Pi-hole, n8n oder einen Spiele-Server.\nDie wichtigsten Proxmox-Funktionen auf einen Blick Funktion Beschreibung Web-UI Vollständige Verwaltung über den Browser – keine Kommandozeile nötig ZFS Integriertes Dateisystem mit Snapshots, Kompression und Deduplizierung Backup Integriertes VZDump-Backup (voll, inkrementell, differentiell) Cluster Mehrere Nodes zentral verwalten, bis zu 32 Nodes Ceph Verteilter Speicher – Hochverfügbarkeit ohne teure Storage-Hardware Firewall Integrierte Firewall auf zwei Ebenen (Cluster + Node) REST API Vollständige Automatisierung via API, Terraform, Ansible Live-Migration Laufende VMs ohne Ausfallzeit zwischen Nodes verschieben 👉 Proxmox VE bei Amazon suchen (Bücher \u0026 Hardware)\nProxmox vs. VMware ESXi – Der Vergleich 2026 Mit der Übernahme von VMware durch Broadcom im November 2023 hat sich die Preis- und Lizenzstruktur radikal verändert. Das einst kostenlose VMware ESXi Free wurde eingestellt. Stattdessen gibt es nur noch kostenpflichtige Bundles:\nKriterium Proxmox VE VMware vSphere (Broadcom) Preis 0 € – komplett kostenlos Ab ~500 €/Jahr (vSphere Foundation) Lizenz-Modell Open Source (GPLv2) – keine Einschränkungen Pro-Socket-Lizenz, Mindestabnahme 16 Kerne VM-Speicher Unbegrenzt Begrenzt pro Lizenz-Stufe API Vollständige REST API (frei) REST API (nur mit kostenpflichtiger Lizenz) Backup Integriert (VZDump, PBS) Zusatzkosten (Veeam oder VMware Data Recovery) Container LXC inkludiert Nur VMs – kein Container-Support ZFS Native ZFS-Integration Kein ZFS, nur VMFS Ceph Storage Integriert (keine Extrakosten) vSAN – ab ~2.000 €/Jahr Live-Migration Ja Ja (nur mit Lizenz) Web-UI Ja (modern, HTML5) Ja (vSphere Client, HTML5) Cluster (HA) Ja, bis 32 Nodes Ja (nur mit kostenpflichtiger Lizenz) Community Aktiv, deutschsprachig Stark geschrumpft seit Broadcom Updates Kostenlos (Enterprise-Repo frei für Non-Commercial) Nur mit gültigem Support-Vertrag Die Botschaft ist klar: Proxmox bietet mehr Funktionen als der ehemalige ESXi Free – und das völlig kostenlos. Hinzu kommen ZFS, LXC-Container und Ceph, die VMware nur gegen Aufpreis (vSAN, Tanzu) anbietet.\nWie viel Hardware brauchst du für Proxmox? Proxmox läuft selbst auf älterer Hardware hervorragend. Anders als VMware ESXi mit seiner strikten Hardware Compatibility List (HCL) unterstützt Proxmox nahezu jeden x86_64-Prozessor.\nMinimal-Ausstattung Komponente Minimal Empfohlen CPU 4 Kerne (z. B. Intel Core i5-6500) 8+ Kerne (Intel i7/i9 oder AMD Ryzen) RAM 8 GB 32–64 GB Storage 256 GB SSD 1 TB NVMe + HDD für Backup Netzwerk 1 GbE 2,5 GbE oder 10 GbE Gute Hardware für dein Proxmox-Homelab:\n👉 HP ProDesk 400 G4/G5 Mini oder Dell Optiplex 3060/3070 Micro – Die gebrauchten 1-Liter-PCs ab rund 70–100 € sind die heimlichen Helden im Homelab. Intel Core i5 der 8./9. Generation, bis zu 32 GB RAM möglich, geringer Stromverbrauch und leise – ideal für den 24/7-Betrieb.\n👉 Fujitsu Futro S740 oder S7010 (gebraucht) – Ultragünstiger Einstieg ab rund 40–60 € gebraucht. Lüfterlos, sehr leise, ideal für erste Proxmox-Experimente oder als dedizierten Backup- bzw. Monitoring-Node.\n👉 Günstige NVMe-SSD für den ZFS-Root-Pool – teure High-End-SSDs lohnen sich im Homelab selten. Empfehlenswert:\nKingston NV3 NVMe PCIe 4.0 (1 TB, ~139 €) Western Digital WD Blue SA510 (1 TB, ~135 €) Proxmox einrichten – Die ersten Schritte Die Installation von Proxmox VE ist erstaunlich einfach – das ist eine der Stärken der Plattform:\nISO herunterladen von proxmox.com Auf USB-Stick schreiben (Rufus, Balena Etcher oder dd) Booten und dem Installations-Assistenten folgen – dauert etwa 5 Minuten Web-UI aufrufen: https://deine-ip:8006 LXC-Template herunterladen und erste Container starten Nach der Installation findest du im Web-UI eine übersichtliche Oberfläche:\nDatacenter-Ansicht: Alle Nodes, Storage-Pools und Cluster-Optionen Node-Ansicht: Detaillierte Hardware-Informationen eines Hosts VM/CT-Ansicht: Konsole, Monitoring und Einstellungen pro Maschine Tipp: Proxmox VE 9.2 (basierend auf Debian 13.5 „Trixie“) bringt den modernen Linux-Kernel 7.0, QEMU 11.0, LXC 7.0 sowie ZFS 2.4 – die neueste Version mit Dynamic Load Balancer, erweitertem SDN, HA-Arm/Disarm und verwaltbaren CPU-Profilen.\nDrei Tools, die dein Proxmox-Homelab auf das nächste Level bringen 1. Proxmox Backup Server (PBS) – Kostenlose Backups ohne Lizenzstress Broadcom hat VMware Data Recovery eingestellt. Der Proxmox Backup Server ist die kostenlose Alternative: deduplizierte, verschlüsselte Backups mit Bandbreiten-Begrenzung. Ideal für wichtige VM-Daten.\n2. Terraform + Proxmox Provider Infrastruktur als Code für dein Homelab. Definiere VMs, Netzwerke und Storage in YAML-Dateien und erstelle sie per terraform apply. Perfekt, wenn du Proxmox als Lernplattform für DevOps-Techniken nutzt.\n3. Docker in LXC vs. Docker in VM Ein klassischer Streitpunkt: Soll Docker in einem LXC-Container oder in einer vollständigen VM laufen?\nKriterium Docker in LXC Docker in VM RAM-Verbrauch ~100 MB Basis ~1–2 GB Basis Performance Nativ (fast kein Overhead) Winziger Overhead Isolation Weniger strikt Volle Isolation Kernel-Module Teilweise eingeschränkt Volle Kontrolle Empfehlung Für die meisten Heim-Anwendungen Für produktive/geschäftliche Nutzung Häufig gestellte Fragen (FAQ) Ist Proxmox VE wirklich komplett kostenlos? Ja. Proxmox VE ist Open Source (GPLv2). Du kannst es unbegrenzt nutzen, ohne eine Lizenz zu kaufen. Es gibt zwar ein kostenpflichtiges Enterprise-Repository, doch das Community-Repository reicht für den Homelab-Einsatz völlig aus – Updates und Sicherheits-Patches inklusive.\nKann ich meine bestehenden VMware-VMs zu Proxmox migrieren? Ja, auf mehreren Wegen:\nOVF/OVA-Export aus VMware → Import in Proxmox QEMU-Konvertierung via qemu-img convert virt-v2v-Tool für die automatisierte Konvertierung Praktisch alle gängigen Betriebssysteme laufen unter Proxmox ohne Anpassungen.\nBrauche ich Linux-Kenntnisse für Proxmox? Für die grundlegende Nutzung: nein. Die Weboberfläche erlaubt die vollständige Verwaltung per Mausklick. Bei fortgeschrittenen Themen (ZFS-Tuning, Ceph, CLI-Administration) helfen Grundkenntnisse der Linux-Befehlszeile.\nWie sicher ist Proxmox im Homelab? Sehr sicher. Proxmox erhält regelmäßige Sicherheits-Updates, bietet eine integrierte Firewall (auf Basis von iptables/nftables), unterstützt Let’s Encrypt für SSL-Zertifikate und erlaubt die Zwei-Faktor-Authentifizierung. Bei Nutzung des Community-Repos werden Updates sogar schneller ausgerollt als im Enterprise-Repo.\nWas ist mit Docker-, Snap- oder App-Containern? Brauche ich die zusätzlich? Proxmox-LXC-Container sind systemnahe Container (System-Container). Für Docker-Container (Anwendungs-Container) empfehle ich, einen einzelnen LXC-Container oder eine VM mit Docker zu installieren. Die Kombination Proxmox + LXC + Docker ist extrem leistungsfähig und skaliert vom Mini-PC bis zum Cluster.\nFazit: Warum Proxmox 2026 die Nr. 1 für dein Homelab ist Proxmox VE hat sich in den letzten Jahren zur führenden Virtualisierungsplattform für Homelabs, kleine und mittlere Unternehmen (KMU) und Bildungseinrichtungen entwickelt. Die Gründe liegen auf der Hand:\n✅ Komplett kostenlos – keine Lizenzkosten, keine versteckten Gebühren ✅ Mehr Funktionen, als VMware ESXi Free je hatte – ZFS, LXC, Ceph, integriertes Backup ✅ Einfache Migration – bestehende VMware-VMs lassen sich übernehmen ✅ Breite Hardware-Kompatibilität – läuft auf alter und neuer Hardware ✅ Aktive deutsche Community – Hilfe auf Deutsch in Foren, Reddit und Discord ✅ Zukunftssicher – Open Source bedeutet keine Abhängigkeit von einem Konzern\nWenn du dein Homelab mit Proxmox starten möchtest, empfehle ich dir für den Einstieg:\n👉 Empfohlener Proxmox-Host: HP ProDesk 400 G4/G5 Mini oder Dell Optiplex 3060/3070 Micro – gebraucht ab rund 70–100 €, leise, stromsparend 👉 Budget-Host: Fujitsu Futro S740 oder S7010 – gebraucht ab rund 40–60 €, lüfterlos 👉 Günstiger Einstieg gebraucht: HP ProDesk 400 G4 bei Amazon suchen – ab rund 70 € 👉 Günstige NVMe-SSD: Kingston NV3 1 TB (~139 €) oder WD Blue SA510 1 TB (~135 €) Die VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative. Starte noch heute – dein zukünftiges Ich wird es dir danken, wenn du 500 € im Jahr sparst und gleichzeitig mehr Flexibilität gewinnst.\nWeiterführende Artikel 🔗 Mini PC fürs Homelab nach Budget: Von 50€ bis 650€ – welcher passt zu dir? — (Thema: hardware,mini-pc) Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.\n",
-  "wordCount" : "1517",
+  "articleBody": "Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten\nStell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.\nVirtualisierung löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.\nDieser Artikel richtet sich an Homelab-Einsteiger ohne Vorkenntnisse, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.\n🥇 Kurzempfehlung: Welcher Weg passt zu dir? Kategorie Empfehlung 🥇 Beste Preis-Leistung Proxmox VE auf gebrauchtem HP ProDesk 400 G4 (~90 €) 💰 Günstigster Einstieg Proxmox VE auf Fujitsu Futro S7010 (~40 €) 🚀 Beste Wahl für lokale KI Proxmox auf Lenovo M720q (~120 €) + 32 GB RAM 🏠 Beste Wahl für Home Assistant Proxmox LXC-Container (2 GB RAM reichen) 🔧 Beste Wahl für Proxmox Cluster 2× Dell Optiplex 3070 Micro (~100 €/Stück) Was ist Virtualisierung? (Einfach erklärt) Stell dir vor, dein Computer ist ein Mehrfamilienhaus mit einem einzigen großen Raum. Virtualisierung baut Zwischenwände ein – plötzlich können mehrere Familien (VMs oder Container) gleichzeitig im selben Haus wohnen, ohne sich gegenseitig zu stören. Jede Familie hat ihren eigenen Bereich, ihr eigenes Inventar und kann unabhängig ein- und ausziehen.\nEs gibt zwei Bauarten für diese “Zwischenwände”:\nTyp Beschreibung Beispiel Typ 1 (Bare Metal) Läuft direkt auf der Hardware – wie ein Vermieter, der im Erdgeschoss wohnt Proxmox VE, VMware ESXi Typ 2 (Gehostet) Läuft als Programm in Windows oder Linux – wie ein Untermieter VirtualBox, VMware Workstation Proxmox VE ist ein Typ-1-Hypervisor: Er sitzt direkt auf der Hardware und verteilt die Ressourcen (CPU, RAM, Festplatte) effizient auf alle virtuellen Maschinen.\nWas bringt dir das konkret? Isolation: Ein abgestürzter Dienst reißt die anderen nicht mit – dein Medienserver läuft weiter, auch wenn Pi-hole gerade neu startet Snapshots: Bevor du eine riskante Änderung machst, knipst du einen Schnappschuss. Läuft was schief? Ein Klick und alles ist wie vorher Kosteneffizienz: Ein Server ersetzt fünf – weniger Strom, weniger Platz, weniger Lärm Flexibilität: Du kannst verschiedene Betriebssysteme parallel fahren – Linux für Docker, Windows für bestimmte Anwendungen Proxmox VE – Die kostenlose Lösung für dein Homelab Proxmox Virtual Environment (VE) ist eine komplett kostenlose Virtualisierungsplattform auf Debian-Basis. Sie vereint zwei Technologien unter einer Weboberfläche:\nKVM-VMs (der “Gästeraum mit eigenem Eingang”) Virtuelle Maschinen mit eigenem BIOS, eigener CPU und eigenem RAM. Ideal, wenn du Windows Server, Ubuntu, Rocky Linux und FreeBSD gleichzeitig auf einem Rechner betreiben willst.\nLXC-Container (die “WG mit geteilter Küche”) Container teilen sich den Linux-Kernel des Hosts – das spart enorm Ressourcen. Ein LXC-Container mit Ubuntu braucht nur ~100 MB RAM statt 2 GB für eine vollständige VM. Das ist der Unterschied zwischen einer möblierten Wohnung (LXC) und einem kompletten Hausbau (KVM).\nPerfekt für: Docker-Hosts, Pi-hole, n8n, Home Assistant – alles, was schlank laufen soll.\nDie wichtigsten Funktionen auf einen Blick Funktion Beschreibung Web-UI Verwaltung über den Browser – keine Linux-Kenntnisse nötig Snapshots Zustand der VM einfrieren und bei Bedarf zurückrollen Backup Komplettes VM-Backup mit einem Klick (VZDump) Cluster Mehrere Rechner als einen großen Server verwalten Live-Migration VM umziehen, während sie läuft – keine Ausfallzeit REST API Automatisierung per Skript – für Fortgeschrittene 👉 Proxmox VE bei Amazon suchen (Bücher \u0026 Hardware)\nProxmox vs. VMware ESXi – Der Vergleich 2026 Seit Broadcom VMware übernommen hat, ist Schluss mit der kostenlosen ESXi-Version. Wer VMware weiternutzen will, zahlt mindestens ~500 € pro Jahr (vSphere Foundation) – und das ohne Storage-Funktionen wie ZFS oder Ceph.\nKriterium Proxmox VE VMware vSphere (Broadcom) Preis 0 € – komplett kostenlos Ab ~500 €/Jahr – nur mit Support-Lizenz Container LXC inkludiert Nicht vorhanden (nur VMs) ZFS / Snapshots Ja, integriert Nur mit Zusatzkosten Ceph Storage Integriert (Hochverfügbarkeit) vSAN ab ~2.000 €/Jahr Community Aktiv, deutschsprachig Stark geschrumpft seit Broadcom Updates Kostenlos (Community-Repo) Nur mit gültigem Support-Vertrag Die Botschaft: Proxmox bietet mehr Funktionen als der alte ESXi Free – und das völlig kostenlos.\nWie viel Hardware brauchst du für Proxmox? Proxmox läuft auch auf älteren Rechnern. Anders als VMware (das eine strikte Hardware-Kompatibilitätsliste hat) unterstützt Proxmox praktisch jeden x86_64-Prozessor.\nMinimal-Ausstattung (Tabellen-Struktur) Komponente Minimal Empfohlen CPU 4 Kerne (z. B. Intel Core i5-6500, 4C/4T) 8+ Kerne (Intel i7/i9 oder AMD Ryzen) RAM 8 GB 32–64 GB Storage 256 GB SSD 1 TB NVMe + HDD für Backups Netzwerk 1 GbE 2,5 GbE oder 10 GbE Tipp: Proxmox VE 9.2 (basierend auf Debian 13.5 „Trixie“) bringt den modernen Linux-Kernel 7.0, QEMU 11.0, LXC 7.0 sowie ZFS 2.4 – die neueste Version mit Dynamic Load Balancer, erweitertem SDN, HA-Arm/Disarm und verwaltbaren CPU-Profilen.\nGute Hardware für dein Proxmox-Homelab – nach Budget 💰 Bis 50 € – Fujitsu Futro S7010 CPU: Intel J4125 (4 Kerne, 4 Threads) – lüfterlos, 10 Watt Leerlauf RAM: 8 GB offiziell, 16 GB getestet – ein RAM-Slot, DDR4-SODIMM Storage: 64 GB M.2 SATA – kein zweiter Slot, Upgrade auf größere SSD nötig Netzwerk: 1× GbE Upgrade-Fähigkeit: ❌ RAM verlötet? Nein – aber nur ein Slot. SSD austauschbar, aber M.2 SATA only. KI-Potenzial: ❌ Kein lokales KI-Modell möglich (4 Kerne, 8–16 GB RAM). Für Ollama nicht geeignet. Betriebssystem-Empfehlung: Proxmox VE mit LXC-Containern (Pi-hole, AdGuard, einfacher Webserver) Stromverbrauch Idle: ca. 6–8 Watt – damit günstiger im Dauerbetrieb als jede Glühbirne Praxis-Tipp: Läuft bei mir seit Monaten als OPNSense-Firewall und AdGuard-DNS – absolut lautlos, kein Lüftergeräusch Ideal für: Erste Proxmox-Experimente, DNS/DHCP, Monitoring, Backup-Ziel (PBS)\n👉 Fujitsu Futro S7010 bei Amazon suchen\n💰 50–100 € – HP ProDesk 400 G4 Mini / Dell Optiplex 3060 Micro CPU: Intel Core i5-8500T (6 Kerne, 6 Threads) – mit Lüfter, ~15 Watt Leerlauf RAM: 32 GB DDR4 möglich – zwei RAM-Slots (kein verlöteter RAM) Storage: 1× M.2 NVMe + 1× 2,5-Zoll-SATA – zweiter Platz vorhanden Netzwerk: 1× GbE Upgrade-Fähigkeit: ✅ RAM auf 32 GB erweiterbar. Platz für zweite SSD (2,5 Zoll). Kein PCIe-Slot. KI-Potenzial: ⚠️ Basis möglich. Llama-3-8B via CPU (ohne GPU) läuft langsam (~2-3 Tokens/s). Für Phi-3-mini (3,8B) reicht es flüssig mit 16+ GB RAM. Betriebssystem-Empfehlung: Proxmox VE + Docker-LXC + Home Assistant VM + Jellyfin Stromverbrauch Idle: ca. 12–18 Watt – je nach verbauter SSD und RAM-Bestückung USB-C? Nein. Nur USB 3.0 (Typ A). Kein DisplayPort über USB-C. Ideal für: Vollwertigen Proxmox-Host für 3–5 VMs/Container, Home Assistant, Medienserver\n🔍 HP ProDesk 400 G4 Mini bei Amazon suchen 🔍 Dell Optiplex 3060 Micro bei Amazon suchen 💰 100–150 € – Dell Optiplex 3070 Micro / Lenovo M720q Tiny CPU: Intel Core i5-9500T (6 Kerne, 6 Threads) – mit Lüfter RAM: Bis zu 32 GB DDR4 – zwei RAM-Slots (SODIMM) Storage: 1× M.2 NVMe + 1× 2,5-Zoll-SATA Netzwerk: 1× GbE Upgrade-Fähigkeit: ✅ RAM erweiterbar, zweiter SSD-Slot vorhanden. Lenovo M720q: zusätzlicher PCIe-Slot (Riser-Karte) für 10GbE oder GPU KI-Potenzial: ✅ Phi-3-mini und Llama-3-8B via CPU nutzbar (4-5 Tokens/s). 32 GB RAM empfohlen. Reine CPU-Inferenz ohne dedizierte GPU. Betriebssystem-Empfehlung: Proxmox VE mit Ollama-LXC + Open WebUI + Home Assistant + Nextcloud USB-C? Dell Optiplex 3070: Nein. Lenovo M720q: Ja – einmal USB-C (DisplayPort-alt) Stromverbrauch Idle: ca. 12–20 Watt Ideal für: Den ersten “richtigen” Homelab-Server mit KI-Spielerei. Lenovo M720q für Cluster-Bau mit PCIe-Anbindung.\n🔍 Dell Optiplex 3070 Micro bei Amazon suchen 🔍 Lenovo M720q Tiny bei Amazon suchen 💰 150–300 € – Lenovo M720q / GMKtec G3S (neu) Lenovo M720q (gebraucht, ~90–150 €)\nWie oben, aber mit PCIe-Slot – du kannst eine 10GbE-Karte oder eine kleine GPU einbauen Upgrade-Fähigkeit: ✅ Einziger 1L-PC mit PCIe-Slot. RAM + Dual-Storage + GPU/10GbE = maximale Flexibilität GMKtec G3S (neu, ~200–230 €)\nCPU: Intel N95 Alder Lake (4 Kerne, 4 Threads, 2023) – lüfterlos? Nein, mit Lüfter, ~10–15 Watt Leerlauf RAM: 16 GB DDR4 verlötet – nicht erweiterbar ⚠️ Storage: 1× M.2 NVMe – kein zweiter Slot Upgrade-Fähigkeit: ❌ RAM verlötet, nur ein SSD-Slot. Kaufentscheidung: direkt mit genug RAM kaufen KI-Potenzial: ❌ 16 GB RAM für KI zu knapp, CPU zu schwach für flüssige Modelle Betriebssystem-Empfehlung: Proxmox VE für leichte Dienste (Pi-hole, AdGuard, kleiner Webserver) Ideal für: Wer Neugerät mit Garantie will (GMKtec) oder maximale Erweiterbarkeit braucht (Lenovo).\n🔍 Lenovo M720q Tiny bei Amazon suchen 🔍 GMKtec G3S bei Amazon suchen 💾 Günstige SSD-Empfehlung High-End-SSDs wie die Samsung 990 Pro (150+ €) lohnen sich im Homelab selten. Dein ZFS-Root-Pool wird auch mit einer günstigen NVMe flott:\nModell Preis (ca.) Typ Besonderheit Kingston NV3 1 TB ~139 € NVMe PCIe 4.0 Solide Allround-SSD, 6.000 MB/s lesend WD Blue SA510 1 TB ~135 € SATA (M.2) Günstiger, aber SATA-Limit (560 MB/s) – fürs Boot-Laufwerk völlig ausreichend Proxmox einrichten – Die ersten Schritte (auch für Einsteiger) Die Installation ist erstaunlich einfach – eine der großen Stärken von Proxmox:\nISO herunterladen von proxmox.com (kostenlos, keine Registrierung nötig) Auf USB-Stick schreiben – mit Rufus (Windows) oder Balena Etcher (Mac/Linux) Vom USB-Stick booten – den Rechner starten, F2/F12 drücken, USB als Boot-Laufwerk auswählen Installations-Assistent folgen – dauert etwa 5 Minuten, nur: Festplatte auswählen, Passwort setzen, IP-Adresse eingeben Web-UI aufrufen: https://deine-ip:8006 im Browser – fertig! Keine Linux-Kenntnisse nötig? Für die Grundnutzung: ja. Das Web-UI ist übersichtlich und selbsterklärend. Erst wenn du ZFS-Tuning, Ceph-Cluster oder Kommandozeilen-Backups machen willst, helfen Linux-Grundlagen.\nDas solltest du vor dem Kauf wissen Bevor du Hardware kaufst, hier ein paar praktische Fallstricke aus meiner Erfahrung:\nRAM nicht unterschätzen: Proxmox selbst braucht kaum RAM (~2 GB), aber jede VM will ihren eigenen Speicher. Faustregel: 8 GB Basis + 2 GB pro LXC + 4 GB pro VM. 32 GB sind ein guter Startwert. Eine SSD reicht: ZFS mag zwei SSDs im Mirror, aber fürs Homelab tut es auch eine. Mach regelmäßige Backups auf eine externe HDD oder einen zweiten Rechner. Netzwerk nicht vergessen: Ein GbE-Anschluss reicht für die ersten Schritte. Erst wenn du mehrere VMs gleichzeitig stark belastest (z. B. Jellyfin + Nextcloud + Game-Server), wird 2,5 GbE interessant. Gebraucht ist oft besser als neu: Für 100–150 € bekommst du einen Business-1L-PC, der vor 5 Jahren noch 1.000 € gekostet hat. Die Dinger sind für 24/7-Betrieb ausgelegt und laufen Jahre ohne Probleme. Drei Tools, die dein Homelab auf das nächste Level bringen 1. Proxmox Backup Server (PBS) – Kostenlose Backups Sicherungen deiner VMs und Container – dedupliziert, verschlüsselt, mit Bandbreiten-Limit. Ideal als zweiter LXC-Container auf demselben Host oder einem günstigen Futro.\n2. Home Assistant via LXC Home Assistant in einem LXC-Container braucht nur ~2 GB RAM und lässt sich in 10 Minuten einrichten. Perfekt für Smart-Home-Steuerung (Licht, Heizung, Kameras) direkt auf deinem Proxmox-Host.\n3. Ollama + Open WebUI für lokale KI Ab 32 GB RAM kannst du kleine KI-Modelle wie Phi-3-mini (3,8B Parameter) oder Llama-3-8B direkt auf deinem Proxmox-Host laufen lassen. Einrichtung per LXC-Container mit Docker – in 15 Minuten erledigt. Die Modelle laufen rein über die CPU (keine GPU nötig), aber erwarte ~2–5 Tokens pro Sekunde, nicht ChatGPT-Tempo.\nHäufig gestellte Fragen Ist Proxmox VE wirklich komplett kostenlos? Ja. Proxmox VE ist Open Source (GPLv2). Du kannst es unbegrenzt nutzen, ohne zu bezahlen. Es gibt ein Enterprise-Repository (kostenpflichtig), aber das Community-Repository reicht fürs Homelab völlig aus – Updates und Sicherheits-Patches inklusive.\nKann ich meine bestehenden VMware-VMs zu Proxmox migrieren? Ja. Du hast drei Wege: Export aus VMware als OVF/OVA und Import in Proxmox, Konvertierung per qemu-img convert oder das automatisierte virt-v2v-Tool. Die meisten Betriebssysteme laufen ohne Anpassungen.\nBrauche ich Linux-Kenntnisse für Proxmox? Für die ersten Schritte: nein. Die Weboberfläche erlaubt die vollständige Verwaltung per Mausklick. Für Fortgeschrittenes (ZFS-Tuning, Cluster, Kommandozeile) helfen Grundkenntnisse, aber die lernst du mit der Zeit von selbst.\nFazit: Welcher Weg ist der richtige für dich? Budget Empfehlung Kosten (ca.) Ideal für Bis 50 € Fujitsu Futro S7010 + 16 GB RAM ~50 € Erste Schritte, Pi-hole, DNS, Monitoring ~100 € HP ProDesk 400 G4 oder Dell Optiplex 3060 ~90–120 € Vollwertiger Homelab-Host, Home Assistant, Jellyfin ~150 € Lenovo M720q + PCIe-Erweiterung ~130–180 € KI-Spielereien, 10GbE, Cluster-Node ~250 € Lenovo M720q + 32 GB RAM + SSD ~200–250 € KI + Home Assistant + Nextcloud + Backup alles in einem Meine klare Empfehlung für Einsteiger: Hol dir einen HP ProDesk 400 G4 Mini gebraucht für ~90 €, pack 16–32 GB RAM rein, eine günstige 500 GB NVMe und installiere Proxmox. Damit hast du für unter 150 € Gesamtkosten eine Plattform, die dich die nächsten Jahre begleitet.\nDie VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative – und mit gebrauchter Business-Hardware kommst du günstiger weg als mit jedem Fertig-NAS oder Mini-PC aus dem Laden.\nAls Amazon-Partner verdiene ich an qualifizierten Verkäufen.\n",
+  "wordCount" : "2085",
   "inLanguage": "de",
   "image":"https://makmatas.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/featured.jpg","datePublished": "2026-06-17T00:00:00Z",
   "dateModified": "2026-06-17T00:00:00Z",
@@ -216,7 +219,7 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
     </h1>
     <div class="post-meta">
 
-<span title='2026-06-17 00:00:00 +0000 UTC'>17. Juni 2026</span>&nbsp;·&nbsp;<span>8 Minuten</span>&nbsp;|&nbsp;<span>
+<span title='2026-06-17 00:00:00 +0000 UTC'>17. Juni 2026</span>&nbsp;·&nbsp;<span>10 Minuten</span>&nbsp;|&nbsp;<span>
         <a href="https://github.com/makmatas/homelab-blog/content" rel="noopener noreferrer edit" target="_blank">Bearbeiten</a>
     </span>
 
@@ -237,16 +240,22 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
 
     <div class="inner"><ul>
             <li>
-                <a href="#was-ist-virtualisierung-eine-kurze-einf%c3%bchrung" aria-label="Was ist Virtualisierung? Eine kurze Einführung">Was ist Virtualisierung? Eine kurze Einführung</a></li>
+                <a href="#-kurzempfehlung-welcher-weg-passt-zu-dir" aria-label="🥇 Kurzempfehlung: Welcher Weg passt zu dir?">🥇 Kurzempfehlung: Welcher Weg passt zu dir?</a></li>
             <li>
-                <a href="#proxmox-ve--die-open-source-l%c3%b6sung-f%c3%bcrs-homelab" aria-label="Proxmox VE – Die Open-Source-Lösung fürs Homelab">Proxmox VE – Die Open-Source-Lösung fürs Homelab</a><ul>
+                <a href="#was-ist-virtualisierung-einfach-erkl%c3%a4rt" aria-label="Was ist Virtualisierung? (Einfach erklärt)">Was ist Virtualisierung? (Einfach erklärt)</a><ul>
                     
             <li>
-                <a href="#kvm-vms-vollst%c3%a4ndige-virtualisierung" aria-label="KVM-VMs (vollständige Virtualisierung)">KVM-VMs (vollständige Virtualisierung)</a></li>
+                <a href="#was-bringt-dir-das-konkret" aria-label="Was bringt dir das konkret?">Was bringt dir das konkret?</a></li></ul>
+            </li>
             <li>
-                <a href="#lxc-container-leichtgewichtige-virtualisierung" aria-label="LXC-Container (leichtgewichtige Virtualisierung)">LXC-Container (leichtgewichtige Virtualisierung)</a></li>
+                <a href="#proxmox-ve--die-kostenlose-l%c3%b6sung-f%c3%bcr-dein-homelab" aria-label="Proxmox VE – Die kostenlose Lösung für dein Homelab">Proxmox VE – Die kostenlose Lösung für dein Homelab</a><ul>
+                    
             <li>
-                <a href="#die-wichtigsten-proxmox-funktionen-auf-einen-blick" aria-label="Die wichtigsten Proxmox-Funktionen auf einen Blick">Die wichtigsten Proxmox-Funktionen auf einen Blick</a></li></ul>
+                <a href="#kvm-vms-der-g%c3%a4steraum-mit-eigenem-eingang" aria-label="KVM-VMs (der &ldquo;Gästeraum mit eigenem Eingang&rdquo;)">KVM-VMs (der &ldquo;Gästeraum mit eigenem Eingang&rdquo;)</a></li>
+            <li>
+                <a href="#lxc-container-die-wg-mit-geteilter-k%c3%bcche" aria-label="LXC-Container (die &ldquo;WG mit geteilter Küche&rdquo;)">LXC-Container (die &ldquo;WG mit geteilter Küche&rdquo;)</a></li>
+            <li>
+                <a href="#die-wichtigsten-funktionen-auf-einen-blick" aria-label="Die wichtigsten Funktionen auf einen Blick">Die wichtigsten Funktionen auf einen Blick</a></li></ul>
             </li>
             <li>
                 <a href="#proxmox-vs-vmware-esxi--der-vergleich-2026" aria-label="Proxmox vs. VMware ESXi – Der Vergleich 2026">Proxmox vs. VMware ESXi – Der Vergleich 2026</a></li>
@@ -254,86 +263,131 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
                 <a href="#wie-viel-hardware-brauchst-du-f%c3%bcr-proxmox" aria-label="Wie viel Hardware brauchst du für Proxmox?">Wie viel Hardware brauchst du für Proxmox?</a><ul>
                     
             <li>
-                <a href="#minimal-ausstattung" aria-label="Minimal-Ausstattung">Minimal-Ausstattung</a></li></ul>
+                <a href="#minimal-ausstattung-tabellen-struktur" aria-label="Minimal-Ausstattung (Tabellen-Struktur)">Minimal-Ausstattung (Tabellen-Struktur)</a></li></ul>
             </li>
             <li>
-                <a href="#proxmox-einrichten--die-ersten-schritte" aria-label="Proxmox einrichten – Die ersten Schritte">Proxmox einrichten – Die ersten Schritte</a></li>
-            <li>
-                <a href="#drei-tools-die-dein-proxmox-homelab-auf-das-n%c3%a4chste-level-bringen" aria-label="Drei Tools, die dein Proxmox-Homelab auf das nächste Level bringen">Drei Tools, die dein Proxmox-Homelab auf das nächste Level bringen</a><ul>
+                <a href="#gute-hardware-f%c3%bcr-dein-proxmox-homelab--nach-budget" aria-label="Gute Hardware für dein Proxmox-Homelab – nach Budget">Gute Hardware für dein Proxmox-Homelab – nach Budget</a><ul>
                     
             <li>
-                <a href="#1-proxmox-backup-server-pbs--kostenlose-backups-ohne-lizenzstress" aria-label="1. Proxmox Backup Server (PBS) – Kostenlose Backups ohne Lizenzstress">1. Proxmox Backup Server (PBS) – Kostenlose Backups ohne Lizenzstress</a></li>
+                <a href="#-bis-50---fujitsu-futro-s7010" aria-label="💰 Bis 50 € – Fujitsu Futro S7010">💰 Bis 50 € – Fujitsu Futro S7010</a></li>
             <li>
-                <a href="#2-terraform--proxmox-provider" aria-label="2. Terraform &#43; Proxmox Provider">2. Terraform + Proxmox Provider</a></li>
+                <a href="#-50100---hp-prodesk-400-g4-mini--dell-optiplex-3060-micro" aria-label="💰 50–100 € – HP ProDesk 400 G4 Mini / Dell Optiplex 3060 Micro">💰 50–100 € – HP ProDesk 400 G4 Mini / Dell Optiplex 3060 Micro</a></li>
             <li>
-                <a href="#3-docker-in-lxc-vs-docker-in-vm" aria-label="3. Docker in LXC vs. Docker in VM">3. Docker in LXC vs. Docker in VM</a></li></ul>
+                <a href="#-100150---dell-optiplex-3070-micro--lenovo-m720q-tiny" aria-label="💰 100–150 € – Dell Optiplex 3070 Micro / Lenovo M720q Tiny">💰 100–150 € – Dell Optiplex 3070 Micro / Lenovo M720q Tiny</a></li>
+            <li>
+                <a href="#-150300---lenovo-m720q--gmktec-g3s-neu" aria-label="💰 150–300 € – Lenovo M720q / GMKtec G3S (neu)">💰 150–300 € – Lenovo M720q / GMKtec G3S (neu)</a></li></ul>
             </li>
             <li>
-                <a href="#h%c3%a4ufig-gestellte-fragen-faq" aria-label="Häufig gestellte Fragen (FAQ)">Häufig gestellte Fragen (FAQ)</a><ul>
+                <a href="#-g%c3%bcnstige-ssd-empfehlung" aria-label="💾 Günstige SSD-Empfehlung">💾 Günstige SSD-Empfehlung</a></li>
+            <li>
+                <a href="#proxmox-einrichten--die-ersten-schritte-auch-f%c3%bcr-einsteiger" aria-label="Proxmox einrichten – Die ersten Schritte (auch für Einsteiger)">Proxmox einrichten – Die ersten Schritte (auch für Einsteiger)</a></li>
+            <li>
+                <a href="#das-solltest-du-vor-dem-kauf-wissen" aria-label="Das solltest du vor dem Kauf wissen">Das solltest du vor dem Kauf wissen</a></li>
+            <li>
+                <a href="#drei-tools-die-dein-homelab-auf-das-n%c3%a4chste-level-bringen" aria-label="Drei Tools, die dein Homelab auf das nächste Level bringen">Drei Tools, die dein Homelab auf das nächste Level bringen</a><ul>
+                    
+            <li>
+                <a href="#1-proxmox-backup-server-pbs--kostenlose-backups" aria-label="1. Proxmox Backup Server (PBS) – Kostenlose Backups">1. Proxmox Backup Server (PBS) – Kostenlose Backups</a></li>
+            <li>
+                <a href="#2-home-assistant-via-lxc" aria-label="2. Home Assistant via LXC">2. Home Assistant via LXC</a></li>
+            <li>
+                <a href="#3-ollama--open-webui-f%c3%bcr-lokale-ki" aria-label="3. Ollama &#43; Open WebUI für lokale KI">3. Ollama + Open WebUI für lokale KI</a></li></ul>
+            </li>
+            <li>
+                <a href="#h%c3%a4ufig-gestellte-fragen" aria-label="Häufig gestellte Fragen">Häufig gestellte Fragen</a><ul>
                     
             <li>
                 <a href="#ist-proxmox-ve-wirklich-komplett-kostenlos" aria-label="Ist Proxmox VE wirklich komplett kostenlos?">Ist Proxmox VE wirklich komplett kostenlos?</a></li>
             <li>
                 <a href="#kann-ich-meine-bestehenden-vmware-vms-zu-proxmox-migrieren" aria-label="Kann ich meine bestehenden VMware-VMs zu Proxmox migrieren?">Kann ich meine bestehenden VMware-VMs zu Proxmox migrieren?</a></li>
             <li>
-                <a href="#brauche-ich-linux-kenntnisse-f%c3%bcr-proxmox" aria-label="Brauche ich Linux-Kenntnisse für Proxmox?">Brauche ich Linux-Kenntnisse für Proxmox?</a></li>
-            <li>
-                <a href="#wie-sicher-ist-proxmox-im-homelab" aria-label="Wie sicher ist Proxmox im Homelab?">Wie sicher ist Proxmox im Homelab?</a></li>
-            <li>
-                <a href="#was-ist-mit-docker--snap--oder-app-containern-brauche-ich-die-zus%c3%a4tzlich" aria-label="Was ist mit Docker-, Snap- oder App-Containern? Brauche ich die zusätzlich?">Was ist mit Docker-, Snap- oder App-Containern? Brauche ich die zusätzlich?</a></li></ul>
+                <a href="#brauche-ich-linux-kenntnisse-f%c3%bcr-proxmox" aria-label="Brauche ich Linux-Kenntnisse für Proxmox?">Brauche ich Linux-Kenntnisse für Proxmox?</a></li></ul>
             </li>
             <li>
-                <a href="#fazit-warum-proxmox-2026-die-nr-1-f%c3%bcr-dein-homelab-ist" aria-label="Fazit: Warum Proxmox 2026 die Nr. 1 für dein Homelab ist">Fazit: Warum Proxmox 2026 die Nr. 1 für dein Homelab ist</a></li>
-            <li>
-                <a href="#weiterf%c3%bchrende-artikel" aria-label="Weiterführende Artikel">Weiterführende Artikel</a>
+                <a href="#fazit-welcher-weg-ist-der-richtige-f%c3%bcr-dich" aria-label="Fazit: Welcher Weg ist der richtige für dich?">Fazit: Welcher Weg ist der richtige für dich?</a>
             </li>
         </ul>
     </div>
 </details>
 
   <div class="post-content md-content"><p><strong>Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten</strong></p>
-<p>Die Virtualisierungslandschaft hat sich 2026 grundlegend verändert. Seit Broadcom VMware übernommen und die kostenlose ESXi-Lizenz abgeschafft hat, suchen Tausende Homelab-Betreiber und kleine Unternehmen nach einer <strong>leistungsstarken, kostenlosen Alternative</strong>. Proxmox Virtual Environment (VE) hat sich dabei als klarer Gewinner herausgestellt – und das völlig zu Recht.</p>
-<p>Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was macht Proxmox zur besseren Wahl als VMware? Dieser Artikel gibt dir eine vollständige und ehrliche Antwort.</p>
-<h2 id="was-ist-virtualisierung-eine-kurze-einführung">Was ist Virtualisierung? Eine kurze Einführung<a hidden class="anchor" aria-hidden="true" href="#was-ist-virtualisierung-eine-kurze-einführung">#</a></h2>
-<p>Virtualisierung erlaubt es, auf einem einzigen physischen Server mehrere virtuelle Server (VMs) oder Container gleichzeitig zu betreiben. Statt fünf separater Rechner für Pi-hole, Nextcloud, Jellyfin, eine Entwicklungsumgebung und einen Spiele-Server zu kaufen, reicht ein einziger leistungsstarker Mini-PC oder Server.</p>
-<p>Man unterscheidet zwei Arten von Hypervisoren:</p>
+<p>Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole als Werbeblocker fürs ganze Netz, ein Medienserver für Filme (Jellyfin), eine Cloud für deine Fotos (Nextcloud) und vielleicht noch ein Game-Server. Müsstest du für jeden Dienst einen eigenen Rechner kaufen, wärst du schnell bei 500–1.000 € und einem Berg Kabelgewirr.</p>
+<p><strong>Virtualisierung</strong> löst genau dieses Problem – und Proxmox VE ist der einfachste Weg, das kostenlos umzusetzen.</p>
+<p>Dieser Artikel richtet sich an <strong>Homelab-Einsteiger ohne Vorkenntnisse</strong>, die eine günstige Alternative zu VMware suchen. Fachbegriffe? Erklären wir kurz und mit einem Bild im Kopf.</p>
+<hr>
+<h2 id="-kurzempfehlung-welcher-weg-passt-zu-dir">🥇 Kurzempfehlung: Welcher Weg passt zu dir?<a hidden class="anchor" aria-hidden="true" href="#-kurzempfehlung-welcher-weg-passt-zu-dir">#</a></h2>
 <table>
   <thead>
       <tr>
-          <th>Hypervisor-Typ</th>
+          <th>Kategorie</th>
+          <th>Empfehlung</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>🥇 Beste Preis-Leistung</td>
+          <td>Proxmox VE auf gebrauchtem HP ProDesk 400 G4 (~90 €)</td>
+      </tr>
+      <tr>
+          <td>💰 Günstigster Einstieg</td>
+          <td>Proxmox VE auf Fujitsu Futro S7010 (~40 €)</td>
+      </tr>
+      <tr>
+          <td>🚀 Beste Wahl für lokale KI</td>
+          <td>Proxmox auf Lenovo M720q (~120 €) + 32 GB RAM</td>
+      </tr>
+      <tr>
+          <td>🏠 Beste Wahl für Home Assistant</td>
+          <td>Proxmox LXC-Container (2 GB RAM reichen)</td>
+      </tr>
+      <tr>
+          <td>🔧 Beste Wahl für Proxmox Cluster</td>
+          <td>2× Dell Optiplex 3070 Micro (~100 €/Stück)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="was-ist-virtualisierung-einfach-erklärt">Was ist Virtualisierung? (Einfach erklärt)<a hidden class="anchor" aria-hidden="true" href="#was-ist-virtualisierung-einfach-erklärt">#</a></h2>
+<p>Stell dir vor, dein Computer ist ein <strong>Mehrfamilienhaus</strong> mit einem einzigen großen Raum. Virtualisierung baut <strong>Zwischenwände ein</strong> – plötzlich können mehrere Familien (VMs oder Container) gleichzeitig im selben Haus wohnen, ohne sich gegenseitig zu stören. Jede Familie hat ihren eigenen Bereich, ihr eigenes Inventar und kann unabhängig ein- und ausziehen.</p>
+<p>Es gibt zwei Bauarten für diese &ldquo;Zwischenwände&rdquo;:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Typ</th>
           <th>Beschreibung</th>
-          <th>Beispiele</th>
+          <th>Beispiel</th>
       </tr>
   </thead>
   <tbody>
       <tr>
           <td><strong>Typ 1 (Bare Metal)</strong></td>
-          <td>Läuft direkt auf der Hardware, kein Betriebssystem darunter</td>
-          <td>Proxmox VE, VMware ESXi, Microsoft Hyper-V</td>
+          <td>Läuft direkt auf der Hardware – wie ein Vermieter, der im Erdgeschoss wohnt</td>
+          <td>Proxmox VE, VMware ESXi</td>
       </tr>
       <tr>
           <td><strong>Typ 2 (Gehostet)</strong></td>
-          <td>Läuft auf einem bestehenden Betriebssystem</td>
-          <td>VirtualBox, VMware Workstation, QEMU/KVM</td>
+          <td>Läuft als Programm in Windows oder Linux – wie ein Untermieter</td>
+          <td>VirtualBox, VMware Workstation</td>
       </tr>
   </tbody>
 </table>
-<p>Proxmox VE ist ein <strong>Typ-1-Hypervisor</strong>: Er läuft direkt auf der Hardware, nutzt Ressourcen maximal effizient und bietet native Hardware-Virtualisierung.</p>
-<p>Im Homelab bringt Virtualisierung große Vorteile:</p>
+<p>Proxmox VE ist ein <strong>Typ-1-Hypervisor</strong>: Er sitzt direkt auf der Hardware und verteilt die Ressourcen (CPU, RAM, Festplatte) effizient auf alle virtuellen Maschinen.</p>
+<h3 id="was-bringt-dir-das-konkret">Was bringt dir das konkret?<a hidden class="anchor" aria-hidden="true" href="#was-bringt-dir-das-konkret">#</a></h3>
 <ul>
-<li><strong>Isolation:</strong> Ein abgestürzter Dienst reißt andere nicht mit.</li>
-<li><strong>Snapshots:</strong> Vor experimentellen Änderungen einen Schnappschuss erstellen und bei Bedarf zurücksetzen.</li>
-<li><strong>Kosteneffizienz:</strong> Ein Server ersetzt fünf – weniger Strom, weniger Platz, weniger Lärm.</li>
-<li><strong>Flexibilität:</strong> Verschiedene Betriebssysteme parallel betreiben – Linux für Docker, Windows für bestimmte Anwendungen.</li>
-<li><strong>Lernplattform:</strong> Proxmox-Cluster, Ceph-Storage, Docker im LXC – alles im geschützten Rahmen.</li>
+<li><strong>Isolation:</strong> Ein abgestürzter Dienst reißt die anderen nicht mit – dein Medienserver läuft weiter, auch wenn Pi-hole gerade neu startet</li>
+<li><strong>Snapshots:</strong> Bevor du eine riskante Änderung machst, knipst du einen Schnappschuss. Läuft was schief? Ein Klick und alles ist wie vorher</li>
+<li><strong>Kosteneffizienz:</strong> Ein Server ersetzt fünf – weniger Strom, weniger Platz, weniger Lärm</li>
+<li><strong>Flexibilität:</strong> Du kannst verschiedene Betriebssysteme parallel fahren – Linux für Docker, Windows für bestimmte Anwendungen</li>
 </ul>
-<h2 id="proxmox-ve--die-open-source-lösung-fürs-homelab">Proxmox VE – Die Open-Source-Lösung fürs Homelab<a hidden class="anchor" aria-hidden="true" href="#proxmox-ve--die-open-source-lösung-fürs-homelab">#</a></h2>
-<p>Proxmox Virtual Environment ist eine <strong>komplett kostenlose</strong>, auf Debian basierende Virtualisierungsplattform. Sie vereint zwei Virtualisierungstechnologien unter einer gemeinsamen Weboberfläche:</p>
-<h3 id="kvm-vms-vollständige-virtualisierung">KVM-VMs (vollständige Virtualisierung)<a hidden class="anchor" aria-hidden="true" href="#kvm-vms-vollständige-virtualisierung">#</a></h3>
-<p>Klassische virtuelle Maschinen mit eigenem BIOS/UEFI, eigener CPU, eigenem RAM und virtuellem Netzwerk. Ideal, wenn du verschiedene Betriebssysteme parallel betreiben möchtest – Windows Server, Ubuntu, Rocky Linux, OpenMediaVault und FreeBSD nebeneinander.</p>
-<h3 id="lxc-container-leichtgewichtige-virtualisierung">LXC-Container (leichtgewichtige Virtualisierung)<a hidden class="anchor" aria-hidden="true" href="#lxc-container-leichtgewichtige-virtualisierung">#</a></h3>
-<p>Container teilen sich den Host-Kernel und benötigen kein vollständiges Betriebssystem – das macht sie extrem ressourcensparend. Ein LXC-Container mit Ubuntu 24.04 belegt nur <strong>rund 100 MB RAM</strong> statt 2 GB für eine vollständige VM. Perfekt für Docker-Hosts, Pi-hole, n8n oder einen Spiele-Server.</p>
-<h3 id="die-wichtigsten-proxmox-funktionen-auf-einen-blick">Die wichtigsten Proxmox-Funktionen auf einen Blick<a hidden class="anchor" aria-hidden="true" href="#die-wichtigsten-proxmox-funktionen-auf-einen-blick">#</a></h3>
+<hr>
+<h2 id="proxmox-ve--die-kostenlose-lösung-für-dein-homelab">Proxmox VE – Die kostenlose Lösung für dein Homelab<a hidden class="anchor" aria-hidden="true" href="#proxmox-ve--die-kostenlose-lösung-für-dein-homelab">#</a></h2>
+<p>Proxmox Virtual Environment (VE) ist eine <strong>komplett kostenlose Virtualisierungsplattform</strong> auf Debian-Basis. Sie vereint zwei Technologien unter einer Weboberfläche:</p>
+<h3 id="kvm-vms-der-gästeraum-mit-eigenem-eingang">KVM-VMs (der &ldquo;Gästeraum mit eigenem Eingang&rdquo;)<a hidden class="anchor" aria-hidden="true" href="#kvm-vms-der-gästeraum-mit-eigenem-eingang">#</a></h3>
+<p>Virtuelle Maschinen mit eigenem BIOS, eigener CPU und eigenem RAM. Ideal, wenn du Windows Server, Ubuntu, Rocky Linux und FreeBSD <strong>gleichzeitig</strong> auf einem Rechner betreiben willst.</p>
+<h3 id="lxc-container-die-wg-mit-geteilter-küche">LXC-Container (die &ldquo;WG mit geteilter Küche&rdquo;)<a hidden class="anchor" aria-hidden="true" href="#lxc-container-die-wg-mit-geteilter-küche">#</a></h3>
+<p>Container teilen sich den Linux-Kernel des Hosts – das spart enorm Ressourcen. Ein LXC-Container mit Ubuntu braucht nur <strong>~100 MB RAM</strong> statt 2 GB für eine vollständige VM. Das ist der Unterschied zwischen einer möblierten Wohnung (LXC) und einem kompletten Hausbau (KVM).</p>
+<p><strong>Perfekt für:</strong> Docker-Hosts, Pi-hole, n8n, Home Assistant – alles, was schlank laufen soll.</p>
+<h3 id="die-wichtigsten-funktionen-auf-einen-blick">Die wichtigsten Funktionen auf einen Blick<a hidden class="anchor" aria-hidden="true" href="#die-wichtigsten-funktionen-auf-einen-blick">#</a></h3>
 <table>
   <thead>
       <tr>
@@ -344,42 +398,35 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
   <tbody>
       <tr>
           <td><strong>Web-UI</strong></td>
-          <td>Vollständige Verwaltung über den Browser – keine Kommandozeile nötig</td>
+          <td>Verwaltung über den Browser – keine Linux-Kenntnisse nötig</td>
       </tr>
       <tr>
-          <td><strong>ZFS</strong></td>
-          <td>Integriertes Dateisystem mit Snapshots, Kompression und Deduplizierung</td>
+          <td><strong>Snapshots</strong></td>
+          <td>Zustand der VM einfrieren und bei Bedarf zurückrollen</td>
       </tr>
       <tr>
           <td><strong>Backup</strong></td>
-          <td>Integriertes VZDump-Backup (voll, inkrementell, differentiell)</td>
+          <td>Komplettes VM-Backup mit einem Klick (VZDump)</td>
       </tr>
       <tr>
           <td><strong>Cluster</strong></td>
-          <td>Mehrere Nodes zentral verwalten, bis zu 32 Nodes</td>
-      </tr>
-      <tr>
-          <td><strong>Ceph</strong></td>
-          <td>Verteilter Speicher – Hochverfügbarkeit ohne teure Storage-Hardware</td>
-      </tr>
-      <tr>
-          <td><strong>Firewall</strong></td>
-          <td>Integrierte Firewall auf zwei Ebenen (Cluster + Node)</td>
-      </tr>
-      <tr>
-          <td><strong>REST API</strong></td>
-          <td>Vollständige Automatisierung via API, Terraform, Ansible</td>
+          <td>Mehrere Rechner als einen großen Server verwalten</td>
       </tr>
       <tr>
           <td><strong>Live-Migration</strong></td>
-          <td>Laufende VMs ohne Ausfallzeit zwischen Nodes verschieben</td>
+          <td>VM umziehen, während sie läuft – keine Ausfallzeit</td>
+      </tr>
+      <tr>
+          <td><strong>REST API</strong></td>
+          <td>Automatisierung per Skript – für Fortgeschrittene</td>
       </tr>
   </tbody>
 </table>
 <blockquote>
 <p>👉 <a href="https://www.amazon.de/s?k=Proxmox+VE+Virtualisierung&amp;tag=makmatas-homelab-21">Proxmox VE bei Amazon suchen (Bücher &amp; Hardware)</a></p></blockquote>
+<hr>
 <h2 id="proxmox-vs-vmware-esxi--der-vergleich-2026">Proxmox vs. VMware ESXi – Der Vergleich 2026<a hidden class="anchor" aria-hidden="true" href="#proxmox-vs-vmware-esxi--der-vergleich-2026">#</a></h2>
-<p>Mit der Übernahme von VMware durch Broadcom im November 2023 hat sich die Preis- und Lizenzstruktur radikal verändert. Das einst kostenlose <strong>VMware ESXi Free</strong> wurde eingestellt. Stattdessen gibt es nur noch kostenpflichtige Bundles:</p>
+<p>Seit Broadcom VMware übernommen hat, ist Schluss mit der kostenlosen ESXi-Version. Wer VMware weiternutzen will, zahlt <strong>mindestens ~500 € pro Jahr</strong> (vSphere Foundation) – und das ohne Storage-Funktionen wie ZFS oder Ceph.</p>
 <table>
   <thead>
       <tr>
@@ -392,57 +439,22 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
       <tr>
           <td><strong>Preis</strong></td>
           <td><strong>0 €</strong> – komplett kostenlos</td>
-          <td><strong>Ab ~500 €/Jahr</strong> (vSphere Foundation)</td>
-      </tr>
-      <tr>
-          <td><strong>Lizenz-Modell</strong></td>
-          <td>Open Source (GPLv2) – keine Einschränkungen</td>
-          <td>Pro-Socket-Lizenz, Mindestabnahme 16 Kerne</td>
-      </tr>
-      <tr>
-          <td><strong>VM-Speicher</strong></td>
-          <td>Unbegrenzt</td>
-          <td>Begrenzt pro Lizenz-Stufe</td>
-      </tr>
-      <tr>
-          <td><strong>API</strong></td>
-          <td>Vollständige REST API (frei)</td>
-          <td>REST API (nur mit kostenpflichtiger Lizenz)</td>
-      </tr>
-      <tr>
-          <td><strong>Backup</strong></td>
-          <td>Integriert (VZDump, PBS)</td>
-          <td>Zusatzkosten (Veeam oder VMware Data Recovery)</td>
+          <td><strong>Ab ~500 €/Jahr</strong> – nur mit Support-Lizenz</td>
       </tr>
       <tr>
           <td><strong>Container</strong></td>
           <td>LXC inkludiert</td>
-          <td>Nur VMs – kein Container-Support</td>
+          <td>Nicht vorhanden (nur VMs)</td>
       </tr>
       <tr>
-          <td><strong>ZFS</strong></td>
-          <td>Native ZFS-Integration</td>
-          <td>Kein ZFS, nur VMFS</td>
+          <td><strong>ZFS / Snapshots</strong></td>
+          <td>Ja, integriert</td>
+          <td>Nur mit Zusatzkosten</td>
       </tr>
       <tr>
           <td><strong>Ceph Storage</strong></td>
-          <td>Integriert (keine Extrakosten)</td>
-          <td>vSAN – <strong>ab ~2.000 €/Jahr</strong></td>
-      </tr>
-      <tr>
-          <td><strong>Live-Migration</strong></td>
-          <td>Ja</td>
-          <td>Ja (nur mit Lizenz)</td>
-      </tr>
-      <tr>
-          <td><strong>Web-UI</strong></td>
-          <td>Ja (modern, HTML5)</td>
-          <td>Ja (vSphere Client, HTML5)</td>
-      </tr>
-      <tr>
-          <td><strong>Cluster (HA)</strong></td>
-          <td>Ja, bis 32 Nodes</td>
-          <td>Ja (nur mit kostenpflichtiger Lizenz)</td>
+          <td>Integriert (Hochverfügbarkeit)</td>
+          <td>vSAN ab <strong>~2.000 €/Jahr</strong></td>
       </tr>
       <tr>
           <td><strong>Community</strong></td>
@@ -451,15 +463,16 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
       </tr>
       <tr>
           <td><strong>Updates</strong></td>
-          <td>Kostenlos (Enterprise-Repo frei für Non-Commercial)</td>
+          <td>Kostenlos (Community-Repo)</td>
           <td>Nur mit gültigem Support-Vertrag</td>
       </tr>
   </tbody>
 </table>
-<p>Die Botschaft ist klar: Proxmox bietet <strong>mehr Funktionen als der ehemalige ESXi Free</strong> – und das völlig kostenlos. Hinzu kommen ZFS, LXC-Container und Ceph, die VMware nur gegen Aufpreis (vSAN, Tanzu) anbietet.</p>
+<p><strong>Die Botschaft:</strong> Proxmox bietet mehr Funktionen als der alte ESXi Free – und das völlig kostenlos.</p>
+<hr>
 <h2 id="wie-viel-hardware-brauchst-du-für-proxmox">Wie viel Hardware brauchst du für Proxmox?<a hidden class="anchor" aria-hidden="true" href="#wie-viel-hardware-brauchst-du-für-proxmox">#</a></h2>
-<p>Proxmox läuft selbst auf älterer Hardware hervorragend. Anders als VMware ESXi mit seiner strikten Hardware Compatibility List (HCL) unterstützt Proxmox nahezu jeden x86_64-Prozessor.</p>
-<h3 id="minimal-ausstattung">Minimal-Ausstattung<a hidden class="anchor" aria-hidden="true" href="#minimal-ausstattung">#</a></h3>
+<p>Proxmox läuft auch auf älteren Rechnern. Anders als VMware (das eine strikte Hardware-Kompatibilitätsliste hat) unterstützt Proxmox praktisch jeden x86_64-Prozessor.</p>
+<h3 id="minimal-ausstattung-tabellen-struktur">Minimal-Ausstattung (Tabellen-Struktur)<a hidden class="anchor" aria-hidden="true" href="#minimal-ausstattung-tabellen-struktur">#</a></h3>
 <table>
   <thead>
       <tr>
@@ -471,7 +484,7 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
   <tbody>
       <tr>
           <td><strong>CPU</strong></td>
-          <td>4 Kerne (z. B. Intel Core i5-6500)</td>
+          <td>4 Kerne (z. B. Intel Core i5-6500, 4C/4T)</td>
           <td>8+ Kerne (Intel i7/i9 oder AMD Ryzen)</td>
       </tr>
       <tr>
@@ -482,7 +495,7 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
       <tr>
           <td><strong>Storage</strong></td>
           <td>256 GB SSD</td>
-          <td>1 TB NVMe + HDD für Backup</td>
+          <td>1 TB NVMe + HDD für Backups</td>
       </tr>
       <tr>
           <td><strong>Netzwerk</strong></td>
@@ -491,112 +504,185 @@ Doch warum ist Virtualisierung überhaupt so wichtig für dein Homelab? Und was 
       </tr>
   </tbody>
 </table>
-<p><strong>Gute Hardware für dein Proxmox-Homelab:</strong></p>
-<p>👉 <a href="https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&amp;tag=makmatas-homelab-21">HP ProDesk 400 G4/G5 Mini oder Dell Optiplex 3060/3070 Micro</a> – Die gebrauchten 1-Liter-PCs ab rund 70–100 € sind die heimlichen Helden im Homelab. Intel Core i5 der 8./9. Generation, bis zu 32 GB RAM möglich, geringer Stromverbrauch und leise – ideal für den 24/7-Betrieb.</p>
-<p>👉 <a href="https://www.amazon.de/s?k=Fujitsu+Futro+S740&amp;tag=makmatas-homelab-21">Fujitsu Futro S740 oder S7010 (gebraucht)</a> – Ultragünstiger Einstieg ab rund 40–60 € gebraucht. Lüfterlos, sehr leise, ideal für erste Proxmox-Experimente oder als dedizierten Backup- bzw. Monitoring-Node.</p>
-<p>👉 Günstige NVMe-SSD für den ZFS-Root-Pool – teure High-End-SSDs lohnen sich im Homelab selten. Empfehlenswert:</p>
-<ul>
-<li><a href="https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de">Kingston NV3 NVMe PCIe 4.0 (1 TB, ~139 €)</a></li>
-<li><a href="https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de">Western Digital WD Blue SA510 (1 TB, ~135 €)</a></li>
-</ul>
-<h2 id="proxmox-einrichten--die-ersten-schritte">Proxmox einrichten – Die ersten Schritte<a hidden class="anchor" aria-hidden="true" href="#proxmox-einrichten--die-ersten-schritte">#</a></h2>
-<p>Die Installation von Proxmox VE ist erstaunlich einfach – das ist eine der Stärken der Plattform:</p>
-<ol>
-<li><strong>ISO herunterladen</strong> von <a href="https://www.proxmox.com/downloads">proxmox.com</a></li>
-<li><strong>Auf USB-Stick schreiben</strong> (Rufus, Balena Etcher oder <code>dd</code>)</li>
-<li><strong>Booten und dem Installations-Assistenten folgen</strong> – dauert etwa 5 Minuten</li>
-<li><strong>Web-UI aufrufen:</strong> <code>https://deine-ip:8006</code></li>
-<li><strong>LXC-Template herunterladen</strong> und erste Container starten</li>
-</ol>
-<p>Nach der Installation findest du im Web-UI eine übersichtliche Oberfläche:</p>
-<ul>
-<li><strong>Datacenter-Ansicht:</strong> Alle Nodes, Storage-Pools und Cluster-Optionen</li>
-<li><strong>Node-Ansicht:</strong> Detaillierte Hardware-Informationen eines Hosts</li>
-<li><strong>VM/CT-Ansicht:</strong> Konsole, Monitoring und Einstellungen pro Maschine</li>
-</ul>
 <blockquote>
 <p><strong>Tipp:</strong> Proxmox VE 9.2 (basierend auf Debian 13.5 „Trixie“) bringt den modernen Linux-Kernel 7.0, QEMU 11.0, LXC 7.0 sowie ZFS 2.4 – die neueste Version mit Dynamic Load Balancer, erweitertem SDN, HA-Arm/Disarm und verwaltbaren CPU-Profilen.</p></blockquote>
-<h2 id="drei-tools-die-dein-proxmox-homelab-auf-das-nächste-level-bringen">Drei Tools, die dein Proxmox-Homelab auf das nächste Level bringen<a hidden class="anchor" aria-hidden="true" href="#drei-tools-die-dein-proxmox-homelab-auf-das-nächste-level-bringen">#</a></h2>
-<h3 id="1-proxmox-backup-server-pbs--kostenlose-backups-ohne-lizenzstress">1. Proxmox Backup Server (PBS) – Kostenlose Backups ohne Lizenzstress<a hidden class="anchor" aria-hidden="true" href="#1-proxmox-backup-server-pbs--kostenlose-backups-ohne-lizenzstress">#</a></h3>
-<p>Broadcom hat VMware Data Recovery eingestellt. Der Proxmox Backup Server ist die <strong>kostenlose Alternative</strong>: deduplizierte, verschlüsselte Backups mit Bandbreiten-Begrenzung. Ideal für wichtige VM-Daten.</p>
-<h3 id="2-terraform--proxmox-provider">2. Terraform + Proxmox Provider<a hidden class="anchor" aria-hidden="true" href="#2-terraform--proxmox-provider">#</a></h3>
-<p>Infrastruktur als Code für dein Homelab. Definiere VMs, Netzwerke und Storage in YAML-Dateien und erstelle sie per <code>terraform apply</code>. Perfekt, wenn du Proxmox als Lernplattform für DevOps-Techniken nutzt.</p>
-<h3 id="3-docker-in-lxc-vs-docker-in-vm">3. Docker in LXC vs. Docker in VM<a hidden class="anchor" aria-hidden="true" href="#3-docker-in-lxc-vs-docker-in-vm">#</a></h3>
-<p>Ein klassischer Streitpunkt: Soll Docker in einem LXC-Container oder in einer vollständigen VM laufen?</p>
+<hr>
+<h2 id="gute-hardware-für-dein-proxmox-homelab--nach-budget">Gute Hardware für dein Proxmox-Homelab – nach Budget<a hidden class="anchor" aria-hidden="true" href="#gute-hardware-für-dein-proxmox-homelab--nach-budget">#</a></h2>
+<h3 id="-bis-50---fujitsu-futro-s7010">💰 Bis 50 € – Fujitsu Futro S7010<a hidden class="anchor" aria-hidden="true" href="#-bis-50---fujitsu-futro-s7010">#</a></h3>
+<ul>
+<li><strong>CPU:</strong> Intel J4125 (4 Kerne, 4 Threads) – lüfterlos, 10 Watt Leerlauf</li>
+<li><strong>RAM:</strong> 8 GB offiziell, 16 GB getestet – ein RAM-Slot, DDR4-SODIMM</li>
+<li><strong>Storage:</strong> 64 GB M.2 SATA – kein zweiter Slot, Upgrade auf größere SSD nötig</li>
+<li><strong>Netzwerk:</strong> 1× GbE</li>
+<li><strong>Upgrade-Fähigkeit:</strong> ❌ RAM verlötet? Nein – aber nur ein Slot. SSD austauschbar, aber M.2 SATA only.</li>
+<li><strong>KI-Potenzial:</strong> ❌ Kein lokales KI-Modell möglich (4 Kerne, 8–16 GB RAM). Für Ollama nicht geeignet.</li>
+<li><strong>Betriebssystem-Empfehlung:</strong> Proxmox VE mit LXC-Containern (Pi-hole, AdGuard, einfacher Webserver)</li>
+<li><strong>Stromverbrauch Idle:</strong> ca. 6–8 Watt – damit günstiger im Dauerbetrieb als jede Glühbirne</li>
+<li><strong>Praxis-Tipp:</strong> Läuft bei mir seit Monaten als OPNSense-Firewall und AdGuard-DNS – absolut lautlos, kein Lüftergeräusch</li>
+</ul>
+<p><strong>Ideal für:</strong> Erste Proxmox-Experimente, DNS/DHCP, Monitoring, Backup-Ziel (PBS)</p>
+<p>👉 <a href="https://www.amazon.de/s?k=Fujitsu+Futro+S7010&amp;tag=makmatas-homelab-21">Fujitsu Futro S7010 bei Amazon suchen</a></p>
+<hr>
+<h3 id="-50100---hp-prodesk-400-g4-mini--dell-optiplex-3060-micro">💰 50–100 € – HP ProDesk 400 G4 Mini / Dell Optiplex 3060 Micro<a hidden class="anchor" aria-hidden="true" href="#-50100---hp-prodesk-400-g4-mini--dell-optiplex-3060-micro">#</a></h3>
+<ul>
+<li><strong>CPU:</strong> Intel Core i5-8500T (6 Kerne, 6 Threads) – mit Lüfter, ~15 Watt Leerlauf</li>
+<li><strong>RAM:</strong> 32 GB DDR4 möglich – zwei RAM-Slots (kein verlöteter RAM)</li>
+<li><strong>Storage:</strong> 1× M.2 NVMe + 1× 2,5-Zoll-SATA – zweiter Platz vorhanden</li>
+<li><strong>Netzwerk:</strong> 1× GbE</li>
+<li><strong>Upgrade-Fähigkeit:</strong> ✅ RAM auf 32 GB erweiterbar. Platz für zweite SSD (2,5 Zoll). Kein PCIe-Slot.</li>
+<li><strong>KI-Potenzial:</strong> ⚠️ Basis möglich. Llama-3-8B via CPU (ohne GPU) läuft langsam (~2-3 Tokens/s). Für Phi-3-mini (3,8B) reicht es flüssig mit 16+ GB RAM.</li>
+<li><strong>Betriebssystem-Empfehlung:</strong> Proxmox VE + Docker-LXC + Home Assistant VM + Jellyfin</li>
+<li><strong>Stromverbrauch Idle:</strong> ca. 12–18 Watt – je nach verbauter SSD und RAM-Bestückung</li>
+<li><strong>USB-C?</strong> Nein. Nur USB 3.0 (Typ A). Kein DisplayPort über USB-C.</li>
+</ul>
+<p><strong>Ideal für:</strong> Vollwertigen Proxmox-Host für 3–5 VMs/Container, Home Assistant, Medienserver</p>
+<ul>
+<li>🔍 <a href="https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&amp;tag=makmatas-homelab-21">HP ProDesk 400 G4 Mini bei Amazon suchen</a></li>
+<li>🔍 <a href="https://www.amazon.de/s?k=Dell+Optiplex+3060+Micro&amp;tag=makmatas-homelab-21">Dell Optiplex 3060 Micro bei Amazon suchen</a></li>
+</ul>
+<hr>
+<h3 id="-100150---dell-optiplex-3070-micro--lenovo-m720q-tiny">💰 100–150 € – Dell Optiplex 3070 Micro / Lenovo M720q Tiny<a hidden class="anchor" aria-hidden="true" href="#-100150---dell-optiplex-3070-micro--lenovo-m720q-tiny">#</a></h3>
+<ul>
+<li><strong>CPU:</strong> Intel Core i5-9500T (6 Kerne, 6 Threads) – mit Lüfter</li>
+<li><strong>RAM:</strong> Bis zu 32 GB DDR4 – zwei RAM-Slots (SODIMM)</li>
+<li><strong>Storage:</strong> 1× M.2 NVMe + 1× 2,5-Zoll-SATA</li>
+<li><strong>Netzwerk:</strong> 1× GbE</li>
+<li><strong>Upgrade-Fähigkeit:</strong> ✅ RAM erweiterbar, zweiter SSD-Slot vorhanden. <strong>Lenovo M720q:</strong> zusätzlicher PCIe-Slot (Riser-Karte) für 10GbE oder GPU</li>
+<li><strong>KI-Potenzial:</strong> ✅ Phi-3-mini und Llama-3-8B via CPU nutzbar (4-5 Tokens/s). 32 GB RAM empfohlen. Reine CPU-Inferenz ohne dedizierte GPU.</li>
+<li><strong>Betriebssystem-Empfehlung:</strong> Proxmox VE mit Ollama-LXC + Open WebUI + Home Assistant + Nextcloud</li>
+<li><strong>USB-C?</strong> Dell Optiplex 3070: <strong>Nein</strong>. Lenovo M720q: <strong>Ja</strong> – einmal USB-C (DisplayPort-alt)</li>
+<li><strong>Stromverbrauch Idle:</strong> ca. 12–20 Watt</li>
+</ul>
+<p><strong>Ideal für:</strong> Den ersten &ldquo;richtigen&rdquo; Homelab-Server mit KI-Spielerei. Lenovo M720q für Cluster-Bau mit PCIe-Anbindung.</p>
+<ul>
+<li>🔍 <a href="https://www.amazon.de/s?k=Dell+Optiplex+3070+Micro&amp;tag=makmatas-homelab-21">Dell Optiplex 3070 Micro bei Amazon suchen</a></li>
+<li>🔍 <a href="https://www.amazon.de/s?k=Lenovo+M720q+Tiny&amp;tag=makmatas-homelab-21">Lenovo M720q Tiny bei Amazon suchen</a></li>
+</ul>
+<hr>
+<h3 id="-150300---lenovo-m720q--gmktec-g3s-neu">💰 150–300 € – Lenovo M720q / GMKtec G3S (neu)<a hidden class="anchor" aria-hidden="true" href="#-150300---lenovo-m720q--gmktec-g3s-neu">#</a></h3>
+<p><strong>Lenovo M720q (gebraucht, ~90–150 €)</strong></p>
+<ul>
+<li>Wie oben, <strong>aber mit PCIe-Slot</strong> – du kannst eine 10GbE-Karte oder eine kleine GPU einbauen</li>
+<li><strong>Upgrade-Fähigkeit:</strong> ✅ Einziger 1L-PC mit PCIe-Slot. RAM + Dual-Storage + GPU/10GbE = maximale Flexibilität</li>
+</ul>
+<p><strong>GMKtec G3S (neu, ~200–230 €)</strong></p>
+<ul>
+<li><strong>CPU:</strong> Intel N95 Alder Lake (4 Kerne, 4 Threads, 2023) – lüfterlos? Nein, mit Lüfter, ~10–15 Watt Leerlauf</li>
+<li><strong>RAM:</strong> 16 GB DDR4 verlötet – <strong>nicht erweiterbar</strong> ⚠️</li>
+<li><strong>Storage:</strong> 1× M.2 NVMe – kein zweiter Slot</li>
+<li><strong>Upgrade-Fähigkeit:</strong> ❌ RAM verlötet, nur ein SSD-Slot. Kaufentscheidung: direkt mit genug RAM kaufen</li>
+<li><strong>KI-Potenzial:</strong> ❌ 16 GB RAM für KI zu knapp, CPU zu schwach für flüssige Modelle</li>
+<li><strong>Betriebssystem-Empfehlung:</strong> Proxmox VE für leichte Dienste (Pi-hole, AdGuard, kleiner Webserver)</li>
+</ul>
+<p><strong>Ideal für:</strong> Wer Neugerät mit Garantie will (GMKtec) oder maximale Erweiterbarkeit braucht (Lenovo).</p>
+<ul>
+<li>🔍 <a href="https://www.amazon.de/s?k=Lenovo+M720q+Tiny&amp;tag=makmatas-homelab-21">Lenovo M720q Tiny bei Amazon suchen</a></li>
+<li>🔍 <a href="https://www.amazon.de/s?k=GMKtec+G3S&amp;tag=makmatas-homelab-21">GMKtec G3S bei Amazon suchen</a></li>
+</ul>
+<hr>
+<h2 id="-günstige-ssd-empfehlung">💾 Günstige SSD-Empfehlung<a hidden class="anchor" aria-hidden="true" href="#-günstige-ssd-empfehlung">#</a></h2>
+<p>High-End-SSDs wie die Samsung 990 Pro (150+ €) lohnen sich im Homelab selten. Dein ZFS-Root-Pool wird auch mit einer günstigen NVMe flott:</p>
 <table>
   <thead>
       <tr>
-          <th>Kriterium</th>
-          <th>Docker in LXC</th>
-          <th>Docker in VM</th>
+          <th>Modell</th>
+          <th>Preis (ca.)</th>
+          <th>Typ</th>
+          <th>Besonderheit</th>
       </tr>
   </thead>
   <tbody>
       <tr>
-          <td>RAM-Verbrauch</td>
-          <td>~100 MB Basis</td>
-          <td>~1–2 GB Basis</td>
+          <td><a href="https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de">Kingston NV3 1 TB</a></td>
+          <td>~139 €</td>
+          <td>NVMe PCIe 4.0</td>
+          <td>Solide Allround-SSD, 6.000 MB/s lesend</td>
       </tr>
       <tr>
-          <td>Performance</td>
-          <td>Nativ (fast kein Overhead)</td>
-          <td>Winziger Overhead</td>
-      </tr>
-      <tr>
-          <td>Isolation</td>
-          <td>Weniger strikt</td>
-          <td>Volle Isolation</td>
-      </tr>
-      <tr>
-          <td>Kernel-Module</td>
-          <td>Teilweise eingeschränkt</td>
-          <td>Volle Kontrolle</td>
-      </tr>
-      <tr>
-          <td>Empfehlung</td>
-          <td>Für die meisten Heim-Anwendungen</td>
-          <td>Für produktive/geschäftliche Nutzung</td>
+          <td><a href="https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de">WD Blue SA510 1 TB</a></td>
+          <td>~135 €</td>
+          <td>SATA (M.2)</td>
+          <td>Günstiger, aber SATA-Limit (560 MB/s) – fürs Boot-Laufwerk völlig ausreichend</td>
       </tr>
   </tbody>
 </table>
-<h2 id="häufig-gestellte-fragen-faq">Häufig gestellte Fragen (FAQ)<a hidden class="anchor" aria-hidden="true" href="#häufig-gestellte-fragen-faq">#</a></h2>
-<h3 id="ist-proxmox-ve-wirklich-komplett-kostenlos">Ist Proxmox VE wirklich komplett kostenlos?<a hidden class="anchor" aria-hidden="true" href="#ist-proxmox-ve-wirklich-komplett-kostenlos">#</a></h3>
-<p>Ja. Proxmox VE ist Open Source (GPLv2). Du kannst es unbegrenzt nutzen, ohne eine Lizenz zu kaufen. Es gibt zwar ein kostenpflichtiges Enterprise-Repository, doch das <strong>Community-Repository reicht für den Homelab-Einsatz völlig aus</strong> – Updates und Sicherheits-Patches inklusive.</p>
-<h3 id="kann-ich-meine-bestehenden-vmware-vms-zu-proxmox-migrieren">Kann ich meine bestehenden VMware-VMs zu Proxmox migrieren?<a hidden class="anchor" aria-hidden="true" href="#kann-ich-meine-bestehenden-vmware-vms-zu-proxmox-migrieren">#</a></h3>
-<p>Ja, auf mehreren Wegen:</p>
-<ol>
-<li><strong>OVF/OVA-Export</strong> aus VMware → Import in Proxmox</li>
-<li><strong>QEMU-Konvertierung</strong> via <code>qemu-img convert</code></li>
-<li><strong>virt-v2v-Tool</strong> für die automatisierte Konvertierung</li>
-</ol>
-<p>Praktisch alle gängigen Betriebssysteme laufen unter Proxmox ohne Anpassungen.</p>
-<h3 id="brauche-ich-linux-kenntnisse-für-proxmox">Brauche ich Linux-Kenntnisse für Proxmox?<a hidden class="anchor" aria-hidden="true" href="#brauche-ich-linux-kenntnisse-für-proxmox">#</a></h3>
-<p>Für die grundlegende Nutzung: nein. Die Weboberfläche erlaubt die vollständige Verwaltung per Mausklick. Bei fortgeschrittenen Themen (ZFS-Tuning, Ceph, CLI-Administration) helfen Grundkenntnisse der Linux-Befehlszeile.</p>
-<h3 id="wie-sicher-ist-proxmox-im-homelab">Wie sicher ist Proxmox im Homelab?<a hidden class="anchor" aria-hidden="true" href="#wie-sicher-ist-proxmox-im-homelab">#</a></h3>
-<p>Sehr sicher. Proxmox erhält regelmäßige Sicherheits-Updates, bietet eine integrierte Firewall (auf Basis von iptables/nftables), unterstützt Let&rsquo;s Encrypt für SSL-Zertifikate und erlaubt die Zwei-Faktor-Authentifizierung. Bei Nutzung des Community-Repos werden Updates sogar schneller ausgerollt als im Enterprise-Repo.</p>
-<h3 id="was-ist-mit-docker--snap--oder-app-containern-brauche-ich-die-zusätzlich">Was ist mit Docker-, Snap- oder App-Containern? Brauche ich die zusätzlich?<a hidden class="anchor" aria-hidden="true" href="#was-ist-mit-docker--snap--oder-app-containern-brauche-ich-die-zusätzlich">#</a></h3>
-<p>Proxmox-LXC-Container sind systemnahe Container (System-Container). Für Docker-Container (Anwendungs-Container) empfehle ich, einen einzelnen LXC-Container oder eine VM mit Docker zu installieren. Die Kombination <strong>Proxmox + LXC + Docker</strong> ist extrem leistungsfähig und skaliert vom Mini-PC bis zum Cluster.</p>
-<h2 id="fazit-warum-proxmox-2026-die-nr-1-für-dein-homelab-ist">Fazit: Warum Proxmox 2026 die Nr. 1 für dein Homelab ist<a hidden class="anchor" aria-hidden="true" href="#fazit-warum-proxmox-2026-die-nr-1-für-dein-homelab-ist">#</a></h2>
-<p>Proxmox VE hat sich in den letzten Jahren zur <strong>führenden Virtualisierungsplattform für Homelabs, kleine und mittlere Unternehmen (KMU) und Bildungseinrichtungen</strong> entwickelt. Die Gründe liegen auf der Hand:</p>
-<p>✅ <strong>Komplett kostenlos</strong> – keine Lizenzkosten, keine versteckten Gebühren
-✅ <strong>Mehr Funktionen, als VMware ESXi Free je hatte</strong> – ZFS, LXC, Ceph, integriertes Backup
-✅ <strong>Einfache Migration</strong> – bestehende VMware-VMs lassen sich übernehmen
-✅ <strong>Breite Hardware-Kompatibilität</strong> – läuft auf alter und neuer Hardware
-✅ <strong>Aktive deutsche Community</strong> – Hilfe auf Deutsch in Foren, Reddit und Discord
-✅ <strong>Zukunftssicher</strong> – Open Source bedeutet keine Abhängigkeit von einem Konzern</p>
-<p>Wenn du dein Homelab mit Proxmox starten möchtest, empfehle ich dir für den Einstieg:</p>
-<ol>
-<li>👉 <strong>Empfohlener Proxmox-Host:</strong> <a href="https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&amp;tag=makmatas-homelab-21">HP ProDesk 400 G4/G5 Mini oder Dell Optiplex 3060/3070 Micro</a> – gebraucht ab rund 70–100 €, leise, stromsparend</li>
-<li>👉 <strong>Budget-Host:</strong> <a href="https://www.amazon.de/s?k=Fujitsu+Futro+S740&amp;tag=makmatas-homelab-21">Fujitsu Futro S740 oder S7010</a> – gebraucht ab rund 40–60 €, lüfterlos</li>
-<li>👉 <strong>Günstiger Einstieg gebraucht:</strong> <a href="https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&amp;tag=makmatas-homelab-21">HP ProDesk 400 G4 bei Amazon suchen</a> – ab rund 70 €</li>
-<li>👉 <strong>Günstige NVMe-SSD:</strong> <a href="https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de">Kingston NV3 1 TB (~139 €)</a> oder <a href="https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de">WD Blue SA510 1 TB (~135 €)</a></li>
-</ol>
-<p>Die VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative. Starte noch heute – dein zukünftiges Ich wird es dir danken, wenn du 500 € im Jahr sparst und gleichzeitig mehr Flexibilität gewinnst.</p>
 <hr>
-<h2 id="weiterführende-artikel">Weiterführende Artikel<a hidden class="anchor" aria-hidden="true" href="#weiterführende-artikel">#</a></h2>
+<h2 id="proxmox-einrichten--die-ersten-schritte-auch-für-einsteiger">Proxmox einrichten – Die ersten Schritte (auch für Einsteiger)<a hidden class="anchor" aria-hidden="true" href="#proxmox-einrichten--die-ersten-schritte-auch-für-einsteiger">#</a></h2>
+<p>Die Installation ist erstaunlich einfach – eine der großen Stärken von Proxmox:</p>
+<ol>
+<li><strong>ISO herunterladen</strong> von <a href="https://www.proxmox.com/downloads">proxmox.com</a> (kostenlos, keine Registrierung nötig)</li>
+<li><strong>Auf USB-Stick schreiben</strong> – mit <a href="https://rufus.ie/de/">Rufus</a> (Windows) oder Balena Etcher (Mac/Linux)</li>
+<li><strong>Vom USB-Stick booten</strong> – den Rechner starten, F2/F12 drücken, USB als Boot-Laufwerk auswählen</li>
+<li><strong>Installations-Assistent folgen</strong> – dauert etwa 5 Minuten, nur: Festplatte auswählen, Passwort setzen, IP-Adresse eingeben</li>
+<li><strong>Web-UI aufrufen:</strong> <code>https://deine-ip:8006</code> im Browser – fertig!</li>
+</ol>
+<blockquote>
+<p><strong>Keine Linux-Kenntnisse nötig?</strong> Für die Grundnutzung: ja. Das Web-UI ist übersichtlich und selbsterklärend. Erst wenn du ZFS-Tuning, Ceph-Cluster oder Kommandozeilen-Backups machen willst, helfen Linux-Grundlagen.</p></blockquote>
+<hr>
+<h2 id="das-solltest-du-vor-dem-kauf-wissen">Das solltest du vor dem Kauf wissen<a hidden class="anchor" aria-hidden="true" href="#das-solltest-du-vor-dem-kauf-wissen">#</a></h2>
+<p>Bevor du Hardware kaufst, hier ein paar <strong>praktische Fallstricke</strong> aus meiner Erfahrung:</p>
 <ul>
-<li>🔗 <a href="/homelab-blog/posts/mini-pc-homelab-2025-vergleich/">Mini PC fürs Homelab nach Budget: Von 50€ bis 650€ – welcher passt zu dir?</a> — <em>(Thema: hardware,mini-pc)</em></li>
+<li><strong>RAM nicht unterschätzen:</strong> Proxmox selbst braucht kaum RAM (~2 GB), aber jede VM will ihren eigenen Speicher. Faustregel: 8 GB Basis + 2 GB pro LXC + 4 GB pro VM. 32 GB sind ein guter Startwert.</li>
+<li><strong>Eine SSD reicht:</strong> ZFS mag zwei SSDs im Mirror, aber fürs Homelab tut es auch eine. Mach regelmäßige Backups auf eine externe HDD oder einen zweiten Rechner.</li>
+<li><strong>Netzwerk nicht vergessen:</strong> Ein GbE-Anschluss reicht für die ersten Schritte. Erst wenn du mehrere VMs gleichzeitig stark belastest (z. B. Jellyfin + Nextcloud + Game-Server), wird 2,5 GbE interessant.</li>
+<li><strong>Gebraucht ist oft besser als neu:</strong> Für 100–150 € bekommst du einen Business-1L-PC, der vor 5 Jahren noch 1.000 € gekostet hat. Die Dinger sind für 24/7-Betrieb ausgelegt und laufen Jahre ohne Probleme.</li>
 </ul>
+<hr>
+<h2 id="drei-tools-die-dein-homelab-auf-das-nächste-level-bringen">Drei Tools, die dein Homelab auf das nächste Level bringen<a hidden class="anchor" aria-hidden="true" href="#drei-tools-die-dein-homelab-auf-das-nächste-level-bringen">#</a></h2>
+<h3 id="1-proxmox-backup-server-pbs--kostenlose-backups">1. Proxmox Backup Server (PBS) – Kostenlose Backups<a hidden class="anchor" aria-hidden="true" href="#1-proxmox-backup-server-pbs--kostenlose-backups">#</a></h3>
+<p>Sicherungen deiner VMs und Container – dedupliziert, verschlüsselt, mit Bandbreiten-Limit. Ideal als zweiter LXC-Container auf demselben Host oder einem günstigen Futro.</p>
+<h3 id="2-home-assistant-via-lxc">2. Home Assistant via LXC<a hidden class="anchor" aria-hidden="true" href="#2-home-assistant-via-lxc">#</a></h3>
+<p>Home Assistant in einem LXC-Container braucht nur ~2 GB RAM und lässt sich in 10 Minuten einrichten. Perfekt für Smart-Home-Steuerung (Licht, Heizung, Kameras) direkt auf deinem Proxmox-Host.</p>
+<h3 id="3-ollama--open-webui-für-lokale-ki">3. Ollama + Open WebUI für lokale KI<a hidden class="anchor" aria-hidden="true" href="#3-ollama--open-webui-für-lokale-ki">#</a></h3>
+<p>Ab 32 GB RAM kannst du kleine KI-Modelle wie <strong>Phi-3-mini (3,8B Parameter)</strong> oder <strong>Llama-3-8B</strong> direkt auf deinem Proxmox-Host laufen lassen. Einrichtung per LXC-Container mit Docker – in 15 Minuten erledigt. Die Modelle laufen rein über die CPU (keine GPU nötig), aber erwarte ~2–5 Tokens pro Sekunde, nicht ChatGPT-Tempo.</p>
+<hr>
+<h2 id="häufig-gestellte-fragen">Häufig gestellte Fragen<a hidden class="anchor" aria-hidden="true" href="#häufig-gestellte-fragen">#</a></h2>
+<h3 id="ist-proxmox-ve-wirklich-komplett-kostenlos">Ist Proxmox VE wirklich komplett kostenlos?<a hidden class="anchor" aria-hidden="true" href="#ist-proxmox-ve-wirklich-komplett-kostenlos">#</a></h3>
+<p>Ja. Proxmox VE ist Open Source (GPLv2). Du kannst es unbegrenzt nutzen, ohne zu bezahlen. Es gibt ein Enterprise-Repository (kostenpflichtig), aber das <strong>Community-Repository reicht fürs Homelab völlig aus</strong> – Updates und Sicherheits-Patches inklusive.</p>
+<h3 id="kann-ich-meine-bestehenden-vmware-vms-zu-proxmox-migrieren">Kann ich meine bestehenden VMware-VMs zu Proxmox migrieren?<a hidden class="anchor" aria-hidden="true" href="#kann-ich-meine-bestehenden-vmware-vms-zu-proxmox-migrieren">#</a></h3>
+<p>Ja. Du hast drei Wege: Export aus VMware als OVF/OVA und Import in Proxmox, Konvertierung per <code>qemu-img convert</code> oder das automatisierte <code>virt-v2v</code>-Tool. Die meisten Betriebssysteme laufen ohne Anpassungen.</p>
+<h3 id="brauche-ich-linux-kenntnisse-für-proxmox">Brauche ich Linux-Kenntnisse für Proxmox?<a hidden class="anchor" aria-hidden="true" href="#brauche-ich-linux-kenntnisse-für-proxmox">#</a></h3>
+<p>Für die ersten Schritte: nein. Die Weboberfläche erlaubt die vollständige Verwaltung per Mausklick. Für Fortgeschrittenes (ZFS-Tuning, Cluster, Kommandozeile) helfen Grundkenntnisse, aber die lernst du mit der Zeit von selbst.</p>
+<hr>
+<h2 id="fazit-welcher-weg-ist-der-richtige-für-dich">Fazit: Welcher Weg ist der richtige für dich?<a hidden class="anchor" aria-hidden="true" href="#fazit-welcher-weg-ist-der-richtige-für-dich">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Budget</th>
+          <th>Empfehlung</th>
+          <th>Kosten (ca.)</th>
+          <th>Ideal für</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Bis 50 €</strong></td>
+          <td>Fujitsu Futro S7010 + 16 GB RAM</td>
+          <td>~50 €</td>
+          <td>Erste Schritte, Pi-hole, DNS, Monitoring</td>
+      </tr>
+      <tr>
+          <td><strong>~100 €</strong></td>
+          <td>HP ProDesk 400 G4 oder Dell Optiplex 3060</td>
+          <td>~90–120 €</td>
+          <td>Vollwertiger Homelab-Host, Home Assistant, Jellyfin</td>
+      </tr>
+      <tr>
+          <td><strong>~150 €</strong></td>
+          <td>Lenovo M720q + PCIe-Erweiterung</td>
+          <td>~130–180 €</td>
+          <td>KI-Spielereien, 10GbE, Cluster-Node</td>
+      </tr>
+      <tr>
+          <td><strong>~250 €</strong></td>
+          <td>Lenovo M720q + 32 GB RAM + SSD</td>
+          <td>~200–250 €</td>
+          <td>KI + Home Assistant + Nextcloud + Backup alles in einem</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Meine klare Empfehlung für Einsteiger:</strong> Hol dir einen <strong>HP ProDesk 400 G4 Mini gebraucht für ~90 €</strong>, pack 16–32 GB RAM rein, eine günstige 500 GB NVMe und installiere Proxmox. Damit hast du für unter <strong>150 € Gesamtkosten</strong> eine Plattform, die dich die nächsten Jahre begleitet.</p>
+<p>Die VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative – und mit gebrauchter Business-Hardware kommst du günstiger weg als mit jedem Fertig-NAS oder Mini-PC aus dem Laden.</p>
 <p><em>Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</em></p>
 
   </div>
