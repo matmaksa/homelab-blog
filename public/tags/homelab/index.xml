@@ -32,19 +32,6 @@
 &lt;p&gt;Statt einer generischen Rangliste zeige ich dir hier die besten Optionen &lt;strong&gt;nach Preisklasse&lt;/strong&gt; – vom 40-Euro-Thin-Client bis zur 300-Euro-Neumaschine.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Proxmox Cluster selber bauen: 3 gebrauchte Mini-PCs im Benchmark-Vergleich ab 42 €</title>
-      <link>https://makmatas.github.io/homelab-blog/posts/proxmox-cluster-mini-pc-benchmark-vergleich/</link>
-      <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://makmatas.github.io/homelab-blog/posts/proxmox-cluster-mini-pc-benchmark-vergleich/</guid>
-      <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Du möchtest dein Homelab auf das nächste Level bringen und mehrere Server zu einem &lt;strong&gt;Proxmox-Cluster&lt;/strong&gt; verbinden? Oder du stehst gerade am Anfang und fragst dich, ob ein einzelner Mini-PC reicht – oder ob du lieber gleich mehrere gebrauchte kaufen solltest?&lt;/p&gt;
-&lt;p&gt;In diesem Artikel habe ich &lt;strong&gt;drei meiner eigenen Proxmox-Server&lt;/strong&gt; einem ausführlichen Benchmark-Test unterzogen: einen HP ProDesk 600 G4 Mini, einen Dell OptiPlex 3070 Micro und einen Fujitsu Futro S7010. Die Ergebnisse zeigen dir, welcher Server sich für welche Aufgabe am besten eignet.&lt;/p&gt;
-&lt;figure&gt;
-    &lt;img loading=&#34;lazy&#34; src=&#34;rollenverteilung.svg&#34;
-         alt=&#34;Rollenverteilung der 3 Proxmox Server&#34; width=&#34;800&#34;/&gt; 
-&lt;/figure&gt;</description>
-    </item>
-    <item>
       <title>Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab</title>
       <link>https://makmatas.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</link>
       <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
