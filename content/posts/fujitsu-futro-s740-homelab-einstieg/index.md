@@ -36,7 +36,7 @@ In diesem Artikel zeige ich dir, was der kleine Thin Client kann, welche Use-Cas
 | **80–120 €** | Futro S740 + 16 GB RAM + 256 GB NVMe | Mehrere Docker-Container, NAS light |
 | **120–250 €** | Alternativen: HP ProDesk 400 G3 oder Lenovo M720q | VMs mit Proxmox, PCIe-Erweiterungen |
 
-> **💡 Einsteiger-Tipp:** Der Futro S740 wird meist ohne RAM und ohne Festplatte verkauft. Achte beim Kauf darauf, ob Netzteil dabei ist. **Ganz wichtig: Der Futro hat KEIN HDMI – nur DisplayPort!** Du brauchst zwingend einen **DisplayPort-auf-HDMI-Adapter (ca. 5 €)** für die Ersteinrichtung am Monitor. Ohne Adapter siehst du nichts.
+> **💡 Einsteiger-Tipp:** Der Futro S740 wird oft **mit RAM und SSD** verkauft – achte beim Kauf auf die Angebotsbeschreibung (Links unten). **Achtung beim Monitor-Anschluss:** Der Futro hat **DisplayPort**, kein HDMI. Prüf kurz, ob dein Monitor einen DisplayPort-Eingang hat (runde Buchse mit abgeschrägter Ecke). Falls nicht: Du brauchst einen **DisplayPort-auf-HDMI-Adapter (ca. 5 €)** für die Ersteinrichtung.
 
 ## Was ist der Fujitsu Futro S740?
 
@@ -75,13 +75,18 @@ Der S7010 hat den minimal besseren J4125-Prozessor und eignet sich besonders gut
 
 ### Bis 30 €: Der absolute Einstieg
 
-Für **20–60 Euro** bekommst du das Basismodell. Meist fehlen RAM und Festplatte – aber das ist einkalkuliert. Viele Verkäufer bieten den Futro als "ohne RAM/HDD" an, was den Preis drückt.
+Für **20–60 Euro** bekommst du das Basismodell. Viele Angebote enthalten bereits RAM und eine kleine SSD (4 GB + 16–32 GB sind üblich) – prüf einfach die Beschreibung. Das senkt deine Einstiegskosten deutlich.
 
 **Was du brauchst:**
 - ✅ Netzteil (meist Fujitsu Original-12V-Netzteil, oft dabei)
-- ✅ **DisplayPort-auf-HDMI-Adapter (ca. 5 €)** – der Futro hat **kein HDMI**, nur DisplayPort. Ohne Adapter bekommst du keinen Monitor angeschlossen!
-- ❌ DDR4 SODIMM RAM (brauchst 4–16 GB, ab ~8€ gebraucht)
-- ❌ SSD (M.2 NVMe oder 2,5-Zoll-SATA, ab ~15€)
+- ✅ **DisplayPort-auf-HDMI-Adapter (ca. 5 €) falls nötig** – der Futro hat DisplayPort, kein HDMI. Check: Hat dein Monitor einen DisplayPort-Eingang (eckige Buchse mit abgeschrägter Seite)? Dann brauchst du keinen Adapter. Sieht er nur HDMI-Buchsen? Dann Adapter besorgen.
+- ❌ DDR4 SODIMM RAM (falls nicht im Angebot enthalten – oft ist RAM dabei)
+- ❌ SSD (M.2 NVMe oder 2,5-Zoll-SATA, falls nicht im Angebot enthalten)
+
+**Beispiel-Angebote (oft mit RAM + SSD):**
+- [Ram-König: Futro S740 mit 4 GB RAM + 16 GB SSD](https://www.ram-koenig.de/fujitsu-futro-s740-thin-client-intel-j4105-4gbddr4-16gb-psu-included/10381?referralCode=019cd701aff574318721876292eacd57)
+- [QuantElectronic: Futro S740 mit 4 GB RAM + 32 GB SSD](https://www.quantelectronic.de/de/Computer/ThinClient/Fujitsu-Futro-S740-Workstation-A-Ware-Grade-A-Inte-l-Celeron-J4105-1-5GHz-4GB-32GB-M-2-onboard.html)
+- [eBay: Futro S740 gebraucht](https://www.ebay.de/itm/298300189378?var=0&mkevt=1&mkcid=1&mkrid=707-53477-19255-0&toolid=20006&campid=5338791727&customid=sPeA6HLykEYp7nQp1loxbg)
 
 🔍 [Fujitsu Futro S740 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S740&tag=makmatas-homelab-21)
 
@@ -143,7 +148,7 @@ Der Futro bleibt die Nummer 1, wenn:
 
 ## Proxmox auf dem Futro S740 – geht das?
 
-Ja, **Proxmox VE 8.x** läuft auf dem Futro S740, aber mit Einschränkungen:
+Ja, **Proxmox VE** läuft auf dem Futro S740, aber mit Einschränkungen:
 
 **✅ Was funktioniert:**
 - 1–3 leichte LXC-Container (z. B. Pi-hole, Home Assistant, Unbound)
