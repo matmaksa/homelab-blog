@@ -1,0 +1,293 @@
+{
+  "scan_date": "2026-06-25T13:20:20.173049",
+  "total_articles": 4,
+  "total_links": 41,
+  "broken_links": [
+    {
+      "url": "https://www.ebay.de/itm/298300189378",
+      "status": "broken",
+      "code": 500,
+      "error": "HTTP 500"
+    },
+    {
+      "url": "https://www.quantelectronic.de/de/Computer/ThinClient/Fujitsu-Futro-S740-Workstation-A-Ware-Grade-A-Inte-l-Celeron-J4105-1-5GHz-4GB-32GB-M-2-onboard.html",
+      "status": "broken",
+      "code": 404,
+      "error": "HTTP 404"
+    }
+  ],
+  "check_manual": [],
+  "ok_links": 39,
+  "articles_scanned": [
+    {
+      "slug": "fujitsu-futro-s7010-homelab-einstieg",
+      "links": [
+        {
+          "url": "https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=DDR4+16GB+Dual+Rank+SODIMM&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=DDR4+SODIMM+8GB&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=M.2+SATA+120GB+SSD&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=M.2+SATA+500GB+SSD&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.ebay.de/itm/298300189378",
+          "status": "broken",
+          "code": 500,
+          "error": "HTTP 500"
+        },
+        {
+          "url": "https://www.quantelectronic.de/de/Computer/ThinClient/Fujitsu-Futro-S740-Workstation-A-Ware-Grade-A-Inte-l-Celeron-J4105-1-5GHz-4GB-32GB-M-2-onboard.html",
+          "status": "broken",
+          "code": 404,
+          "error": "HTTP 404"
+        },
+        {
+          "url": "https://www.ram-koenig.de/fujitsu-futro-s740-thin-client-intel-j4105-4gbddr4-16gb-psu-included/10381?referralCode=019cd701aff574318721876292eacd57",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        }
+      ],
+      "broken_count": 2
+    },
+    {
+      "slug": "home-assistant-gebrauchter-mini-pc-2026",
+      "links": [
+        {
+          "url": "https://www.amazon.de/s?k=16GB+DDR4+SO-DIMM&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=256GB+M.2+NVMe+SSD&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=32GB+DDR4+SO-DIMM&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=512GB+M.2+NVMe+SSD&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=DDR4+8GB+SO-DIMM&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=GMKtec+G3S+N95&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=M.2+SATA+64GB+SSD&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.home-assistant.io/installation/",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        }
+      ],
+      "broken_count": 0
+    },
+    {
+      "slug": "mini-pc-homelab-vergleich",
+      "links": [
+        {
+          "url": "https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Dell+OptiPlex+Micro&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=GMKtec+G3S&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=HP+ProDesk+600+G4+Mini&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        }
+      ],
+      "broken_count": 0
+    },
+    {
+      "slug": "virtualisierung-kostenlos-2026-proxmox-vmware-alternative",
+      "links": [
+        {
+          "url": "https://geizhals.de/kingston-nv3-nvme-pcie-4-0-ssd-1tb-snv3s-1000g-a3248579.html?hloc=de",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://geizhals.de/minisforum-ms-01-a3260346.html",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://rufus.ie/de/",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Dell+Optiplex+3070+Micro&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=makmatas-homelab-21",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        },
+        {
+          "url": "https://www.proxmox.com/downloads",
+          "status": "ok",
+          "code": 200,
+          "error": ""
+        }
+      ],
+      "broken_count": 0
+    }
+  ]
+}

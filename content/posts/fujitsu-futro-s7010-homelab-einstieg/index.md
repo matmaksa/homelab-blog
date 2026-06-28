@@ -118,7 +118,7 @@ Für **30–50 Euro** bekommst du das Basismodell. Viele Angebote enthalten bere
 - [QuantElectronic: S740 mit 4 GB RAM + 32 GB SSD](https://www.quantelectronic.de/de/Computer/ThinClient/Fujitsu-Futro-S740-Workstation-A-Ware-Grade-A-Inte-l-Celeron-J4105-1-5GHz-4GB-32GB-M-2-onboard.html)
 - [eBay: Futro S740/S7010 gebraucht](https://www.ebay.de/itm/298300189378)
 
-🔍 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21)
+🔍 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21)
 
 **Wichtig:** Prüfe, ob ein Netzteil dabei ist. Ohne Netzteil brauchst du ein Fujitsu-kompatibles 12V-Netzteil.
 
@@ -130,10 +130,10 @@ Die günstigste Komplettlösung. Tipp: Oft ist der Futro **mit 4 GB RAM und 64 G
 
 | Komponente | Preis | Link |
 |-----------|-------|------|
-| Futro S7010 | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21) |
-| 8 GB DDR4 SODIMM | ~50 € | 🔍 [DDR4 SODIMM](https://www.amazon.de/s?k=DDR4+SODIMM+8GB&tag=makmatas-homelab-21) |
-| 120 GB M.2 SATA SSD | ~30 € | 🔍 [M.2 SATA SSD](https://www.amazon.de/s?k=M.2+SATA+120GB+SSD&tag=makmatas-homelab-21) |
-| DisplayPort-Adapter | ~7 € | 🔍 [Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) |
+| Futro S7010 | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21) |
+| 8 GB DDR4 SODIMM | ~50 € | 🔍 [DDR4 SODIMM](https://www.amazon.de/s?k=DDR4+SODIMM+8GB&tag=matmaksa-homelab-21) |
+| 120 GB M.2 SATA SSD | ~30 € | 🔍 [M.2 SATA SSD](https://www.amazon.de/s?k=M.2+SATA+120GB+SSD&tag=matmaksa-homelab-21) |
+| DisplayPort-Adapter | ~7 € | 🔍 [Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=matmaksa-homelab-21) |
 | **Gesamt** | **~130 €** | |
 
 **Damit machbar:** Home Assistant (Smarthome), Pi-hole (Werbeblocker), PiVPN (Remote-Zugriff), 1–2 leichte Docker-Container.
@@ -146,10 +146,10 @@ Die Ausbaustufe für ein richtiges Homelab. **Achtung:** Nur **ein RAM-Slot** �
 
 | Komponente | Preis | Link |
 |-----------|-------|------|
-| Futro S7010 | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21) |
-| 16 GB DDR4 Dual Rank | ~100 € | 🔍 [16GB Dual Rank](https://www.amazon.de/s?k=DDR4+16GB+Dual+Rank+SODIMM&tag=makmatas-homelab-21) |
-| 500 GB M.2 SATA SSD | ~60 € | 🔍 [500GB M.2 SATA](https://www.amazon.de/s?k=M.2+SATA+500GB+SSD&tag=makmatas-homelab-21) |
-| DisplayPort-Adapter | ~7 € | 🔍 [Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) |
+| Futro S7010 | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21) |
+| 16 GB DDR4 Dual Rank | ~100 € | 🔍 [16GB Dual Rank](https://www.amazon.de/s?k=DDR4+16GB+Dual+Rank+SODIMM&tag=matmaksa-homelab-21) |
+| 500 GB M.2 SATA SSD | ~60 € | 🔍 [500GB M.2 SATA](https://www.amazon.de/s?k=M.2+SATA+500GB+SSD&tag=matmaksa-homelab-21) |
+| DisplayPort-Adapter | ~7 € | 🔍 [Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=matmaksa-homelab-21) |
 | **Gesamt** | **~210 €** | |
 
 **Damit realistisch:** 3–5 Docker-Container, Home Assistant + Zigbee2MQTT, kleiner NAS, OPNSense-Firewall, Proxmox mit 1–2 Containern.
@@ -217,9 +217,9 @@ Ja, aber beschränkt: 1–3 Container oder 1 leichte virtuelle Maschine. Der Cel
 
 | Was | Tipp |
 |-----|------|
-| 🔍 [Futro S7010 bei Amazon](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21) | Netzteil dabei? Oft mit 4+64 GB |
-| 🔍 [DisplayPort-HDMI-Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) | Nur nötig wenn Monitor kein DP hat |
-| 🔍 [16 GB Dual Rank](https://www.amazon.de/s?k=DDR4+16GB+Dual+Rank+SODIMM&tag=makmatas-homelab-21) | Nur 1 Slot, Dual Rank nötig |
+| 🔍 [Futro S7010 bei Amazon](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21) | Netzteil dabei? Oft mit 4+64 GB |
+| 🔍 [DisplayPort-HDMI-Adapter](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=matmaksa-homelab-21) | Nur nötig wenn Monitor kein DP hat |
+| 🔍 [16 GB Dual Rank](https://www.amazon.de/s?k=DDR4+16GB+Dual+Rank+SODIMM&tag=matmaksa-homelab-21) | Nur 1 Slot, Dual Rank nötig |
 | 🔍 [WD Blue SA510 1TB SATA M.2](https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de) | **SATA!** Kein NVMe |
 
 **Fazit:** Für ~45 € den günstigsten lüfterlosen 24/7-Server. Mit 16 GB + 500 GB SSD ~210 € – günstiger und leiser als jeder Raspberry Pi mit Gehäuse.

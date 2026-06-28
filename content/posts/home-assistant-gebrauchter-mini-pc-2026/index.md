@@ -89,7 +89,7 @@ Home Assistant läuft auch auf einem Raspberry Pi – aber ein **x86-Mini-PC**
 
 **💡 DisplayPort:** Der Futro hat DisplayPort, nicht HDMI. Falls du nur einen HDMI-Monitor hast, brauchst du einen Adapter (~5–7 €).
 
-🔍 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21)
+🔍 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21)
 
 ---
 
@@ -99,11 +99,11 @@ Wer mehr Leistung braucht (Kameras mit Frigate, lokale KI-Sprachassistenten, Par
 
 | Gerät | CPU | RAM | SSD | Lüfterlos? | Idle (W) | Preis | Amazon |
 |-------|-----|-----|-----|-----------|----------|-------|--------|
-| **Futro S7010** | J4125 (4C) | 1 Sl. max 16 GB | M.2 SATA only | ✅ Ja | 4–8 | ~45 € | 🔍 [Suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21) |
-| **HP ProDesk 400 G4** | i5-8500T (6C) | 2 Sl. max 32 GB | NVMe + SATA | ❌ Nein | 8–14 | ~120 € | 🔍 [Suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=makmatas-homelab-21) |
-| **Dell OptiPlex 3070** | i5-9500T (6C) | 2 Sl. max 32 GB | NVMe + SATA | ❌ Nein | 6–12 | ~130 € | 🔍 [Suchen](https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=makmatas-homelab-21) |
-| **Lenovo M720q Tiny** | i5-8500T (6C) | 2 Sl. max 64 GB | NVMe + SATA | ❌ Nein | 6–12 | ~150 € | 🔍 [Suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=makmatas-homelab-21) |
-| **GMKtec G3S** (neu) | N95 (4C) | 1 Sl. max 16 GB | M.2 NVMe | ❌ Nein | 5–8 | ~210 € | 🔍 [Suchen](https://www.amazon.de/s?k=GMKtec+G3S+N95&tag=makmatas-homelab-21) |
+| **Futro S7010** | J4125 (4C) | 1 Sl. max 16 GB | M.2 SATA only | ✅ Ja | 4–8 | ~45 € | 🔍 [Suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21) |
+| **HP ProDesk 400 G4** | i5-8500T (6C) | 2 Sl. max 32 GB | NVMe + SATA | ❌ Nein | 8–14 | ~120 € | 🔍 [Suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=matmaksa-homelab-21) |
+| **Dell OptiPlex 3070** | i5-9500T (6C) | 2 Sl. max 32 GB | NVMe + SATA | ❌ Nein | 6–12 | ~130 € | 🔍 [Suchen](https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=matmaksa-homelab-21) |
+| **Lenovo M720q Tiny** | i5-8500T (6C) | 2 Sl. max 64 GB | NVMe + SATA | ❌ Nein | 6–12 | ~150 € | 🔍 [Suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=matmaksa-homelab-21) |
+| **GMKtec G3S** (neu) | N95 (4C) | 1 Sl. max 16 GB | M.2 NVMe | ❌ Nein | 5–8 | ~210 € | 🔍 [Suchen](https://www.amazon.de/s?k=GMKtec+G3S+N95&tag=matmaksa-homelab-21) |
 
 **Kurz gesagt:** Der HP ProDesk ist der beste Allrounder (6 Kerne, 2 RAM-Slots, günstig). Der Lenovo M720q hat den seltenen PCIe-Slot für Erweiterungen. Der GMKtec G3S ist das Neugerät mit Garantie.
 
@@ -128,7 +128,7 @@ Wer mehr Leistung braucht (Kameras mit Frigate, lokale KI-Sprachassistenten, Par
 | **Conbee II** | ~30–35 € | Sehr ausgereift |
 | **TubeZB PoE** | ~40 € | Mit PoE – per LAN-Kabel statt USB |
 
-🔍 [Sonoff Zigbee 3.0 USB Dongle P bei Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=makmatas-homelab-21)
+🔍 [Sonoff Zigbee 3.0 USB Dongle P bei Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=matmaksa-homelab-21)
 
 ### 2. Empfohlene Sensoren für den Start
 
@@ -220,29 +220,29 @@ Je nach Budget und Zielsetzung gibt es drei klare Pfade. Alle Links enthalten de
 ### Das 80€-Budget-Setup (für Einsteiger)
 | Was | Empfehlung | Preis | Link |
 |-----|-----------|-------|------|
-| **Mini-PC** | Fujitsu Futro S7010 (gebraucht) | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21) |
-| **RAM** | 8 GB DDR4 SO-DIMM | ~15 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DDR4+8GB+SO-DIMM&tag=makmatas-homelab-21) |
-| **SSD** | 64 GB M.2 SATA | ~10 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=M.2+SATA+64GB+SSD&tag=makmatas-homelab-21) |
-| **Zigbee-Stick** | Sonoff Zigbee 3.0 Dongle P | ~18 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=makmatas-homelab-21) |
-| **Adapter** | DisplayPort → HDMI | ~7 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) |
+| **Mini-PC** | Fujitsu Futro S7010 (gebraucht) | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21) |
+| **RAM** | 8 GB DDR4 SO-DIMM | ~15 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DDR4+8GB+SO-DIMM&tag=matmaksa-homelab-21) |
+| **SSD** | 64 GB M.2 SATA | ~10 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=M.2+SATA+64GB+SSD&tag=matmaksa-homelab-21) |
+| **Zigbee-Stick** | Sonoff Zigbee 3.0 Dongle P | ~18 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=matmaksa-homelab-21) |
+| **Adapter** | DisplayPort → HDMI | ~7 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=matmaksa-homelab-21) |
 
 ### Das 150€-Power-Setup (für Smarthome-Fans)
 | Was | Empfehlung | Preis | Link |
 |-----|-----------|-------|------|
-| **Mini-PC** | HP ProDesk 400 G4 (gebraucht) | ~100 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=makmatas-homelab-21) |
-| **RAM** | 16 GB DDR4 SO-DIMM | ~25 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=16GB+DDR4+SO-DIMM&tag=makmatas-homelab-21) |
-| **SSD** | 256 GB M.2 NVMe | ~25 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=256GB+M.2+NVMe+SSD&tag=makmatas-homelab-21) |
-| **Zigbee-Stick** | Sonoff Zigbee 3.0 Dongle P | ~18 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=makmatas-homelab-21) |
-| **Adapter** | DisplayPort → HDMI | ~7 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) |
+| **Mini-PC** | HP ProDesk 400 G4 (gebraucht) | ~100 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=matmaksa-homelab-21) |
+| **RAM** | 16 GB DDR4 SO-DIMM | ~25 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=16GB+DDR4+SO-DIMM&tag=matmaksa-homelab-21) |
+| **SSD** | 256 GB M.2 NVMe | ~25 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=256GB+M.2+NVMe+SSD&tag=matmaksa-homelab-21) |
+| **Zigbee-Stick** | Sonoff Zigbee 3.0 Dongle P | ~18 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=matmaksa-homelab-21) |
+| **Adapter** | DisplayPort → HDMI | ~7 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=matmaksa-homelab-21) |
 
 ### Das 250€-Homelab-Setup (für Enthusiasten)
 | Was | Empfehlung | Preis | Link |
 |-----|-----------|-------|------|
-| **Mini-PC** | Lenovo M720q Tiny (gebraucht) | ~150 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=makmatas-homelab-21) |
-| **RAM** | 32 GB DDR4 SO-DIMM | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=32GB+DDR4+SO-DIMM&tag=makmatas-homelab-21) |
-| **SSD** | 512 GB M.2 NVMe | ~40 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=512GB+M.2+NVMe+SSD&tag=makmatas-homelab-21) |
-| **Zigbee-Stick** | Sonoff Zigbee 3.0 Dongle P | ~18 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=makmatas-homelab-21) |
-| **Adapter** | DisplayPort → HDMI | ~7 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=makmatas-homelab-21) |
+| **Mini-PC** | Lenovo M720q Tiny (gebraucht) | ~150 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=matmaksa-homelab-21) |
+| **RAM** | 32 GB DDR4 SO-DIMM | ~45 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=32GB+DDR4+SO-DIMM&tag=matmaksa-homelab-21) |
+| **SSD** | 512 GB M.2 NVMe | ~40 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=512GB+M.2+NVMe+SSD&tag=matmaksa-homelab-21) |
+| **Zigbee-Stick** | Sonoff Zigbee 3.0 Dongle P | ~18 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=Sonoff+Zigbee+3.0+USB+Dongle+P&tag=matmaksa-homelab-21) |
+| **Adapter** | DisplayPort → HDMI | ~7 € | 🔍 [Amazon suchen](https://www.amazon.de/s?k=DisplayPort+HDMI+Adapter&tag=matmaksa-homelab-21) |
 
 ---
 

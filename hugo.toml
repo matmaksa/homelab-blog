@@ -1,4 +1,4 @@
-baseURL = 'https://makmatas.github.io/homelab-blog/'
+baseURL = 'https://matmaksa.github.io/homelab-blog/'
 title = 'Homelab Guide'
 languageCode = 'de-de'
 theme = 'PaperMod'

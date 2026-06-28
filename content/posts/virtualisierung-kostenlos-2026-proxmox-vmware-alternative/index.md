@@ -131,7 +131,7 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
 **Ideal für:** Erste Proxmox-Experimente, Pi-hole (Werbeblocker), AdGuard (DNS-Filter), Netzwerk-Monitoring
 
-👉 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21)
+👉 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21)
 
 ---
 
@@ -150,8 +150,8 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
 **Wichtiger Hinweis zur SSD-Kompatibilität:** Dieses Gerät unterstützt **NVMe-SSDs** (den schnellen Standard mit bis zu 6.000 MB/s). Der günstigere Fujitsu Futro weiter oben unterstützt **nur SATA-SSDs** (langsamer, ~560 MB/s, aber für Proxmox völlig ausreichend). Wenn du beide Komponenten kaufst, achte darauf, dass die SSD zum PC passt!
 
-- 🔍 [HP ProDesk 400 G4 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=makmatas-homelab-21)
-- 🔍 [Dell Optiplex 3070 Micro bei Amazon suchen](https://www.amazon.de/s?k=Dell+Optiplex+3070+Micro&tag=makmatas-homelab-21)
+- 🔍 [HP ProDesk 400 G4 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G4+Mini&tag=matmaksa-homelab-21)
+- 🔍 [Dell Optiplex 3070 Micro bei Amazon suchen](https://www.amazon.de/s?k=Dell+Optiplex+3070+Micro&tag=matmaksa-homelab-21)
 
 ---
 
@@ -168,7 +168,7 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 
 **Ideal für:** KI-Spielereien (Ollama für lokale KI-Modelle), Cluster-Node mit PCIe-Erweiterung, Home Assistant + Nextcloud + KI alles in einem
 
-- 🔍 [Lenovo M720q Tiny bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=makmatas-homelab-21)
+- 🔍 [Lenovo M720q Tiny bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=matmaksa-homelab-21)
 
 ---
 

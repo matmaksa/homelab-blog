@@ -84,7 +84,7 @@ Die CPU ist ein **Intel Celeron J4125** (4 Kerne, 2,0–2,7 GHz). Das klingt nac
 
 **Ideal für:** Pi-hole (Werbeblocker), Home Assistant (Smart Home), leichte Docker-Container, kleiner Dateiserver. Perfekt als **erster Server** zum Ausprobieren, ohne Geld zu verbrennen.
 
-🔍 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21)
+🔍 [Fujitsu Futro S7010 bei Amazon suchen](https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21)
 
 ---
 
@@ -105,7 +105,7 @@ In dieser Preiskategorie hast du die **freie Wahl** – nimm einfach das Modell,
 
 **Ideal für:** Ersten Proxmox-Server, Pi-hole, Docker, leichte NAS-Aufgaben.
 
-🔍 [HP ProDesk 400 G3 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=makmatas-homelab-21)
+🔍 [HP ProDesk 400 G3 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=matmaksa-homelab-21)
 
 ### HP ProDesk 600 G4 Mini (~100–180 € gebraucht)
 
@@ -119,7 +119,7 @@ Der schnellere Bruder mit neueren CPUs der 8. Generation. Der **i5-8500T (6 Kern
 
 **Ideal für:** Mehrere VMs unter Proxmox, Docker-Stack mit 5+ Containern.
 
-🔍 [HP ProDesk 600 G4 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+600+G4+Mini&tag=makmatas-homelab-21)
+🔍 [HP ProDesk 600 G4 Mini bei Amazon suchen](https://www.amazon.de/s?k=HP+ProDesk+600+G4+Mini&tag=matmaksa-homelab-21)
 
 ### Dell OptiPlex 3060/3070 Micro (~80–180 € gebraucht)
 
@@ -131,7 +131,7 @@ Die direkte Konkurrenz zu HP. Identisches Preisniveau, ähnliche Specs. Der **30
 - **Netzwerk:** 1 Gigabit (Intel)
 - **USB-C?** Nein (nur Dell Optiplex, Lenovo M720q hat USB-C)
 
-🔍 [Dell OptiPlex 3060/3070 bei Amazon suchen](https://www.amazon.de/s?k=Dell+OptiPlex+Micro&tag=makmatas-homelab-21)
+🔍 [Dell OptiPlex 3060/3070 bei Amazon suchen](https://www.amazon.de/s?k=Dell+OptiPlex+Micro&tag=matmaksa-homelab-21)
 
 ---
 
@@ -152,7 +152,7 @@ Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, di
 
 **Ideal für:** Homelab mit Erweiterungsplänen (10GbE, GPU), Proxmox-Cluster, KI-Spielereien.
 
-🔍 [Lenovo ThinkCentre M720q bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=makmatas-homelab-21)
+🔍 [Lenovo ThinkCentre M720q bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=matmaksa-homelab-21)
 
 ---
 
@@ -174,7 +174,7 @@ Der GMKtec G3S ist die beste Wahl, wenn du ein **Neugerät mit Garantie** möcht
 
 **Ideal für:** Wer Neugerät mit Garantie will, Docker-Server, Home Assistant, Mediencenter.
 
-👉 [GMKtec G3S bei Amazon suchen](https://www.amazon.de/s?k=GMKtec+G3S&tag=makmatas-homelab-21)
+👉 [GMKtec G3S bei Amazon suchen](https://www.amazon.de/s?k=GMKtec+G3S&tag=matmaksa-homelab-21)
 
 ---
 

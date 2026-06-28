@@ -1,0 +1,179 @@
+{
+  "scan_date": "2026-06-25T13:35:35.091326",
+  "total_devices": 10,
+  "fresh": 0,
+  "stale": 0,
+  "missing": 10,
+  "devices": [
+    {
+      "id": "hp_prodesk_400_g3",
+      "name": "HP ProDesk 400 G3 Mini",
+      "current_price": "50-100 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=HP%20ProDesk%20400%20G3%20Mini&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=HP%20ProDesk%20400%20G3%20Mini&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-hp-prodesk-400-g3-mini/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=HP%20ProDesk%20400%20G3%20Mini&_sop=15"
+      }
+    },
+    {
+      "id": "hp_prodesk_600_g4",
+      "name": "HP ProDesk 600 G4 Mini",
+      "current_price": "100-180 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=HP%20ProDesk%20600%20G4%20Mini&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=HP%20ProDesk%20600%20G4%20Mini&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-hp-prodesk-600-g4-mini/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=HP%20ProDesk%20600%20G4%20Mini&_sop=15"
+      }
+    },
+    {
+      "id": "dell_optiplex_3070_micro",
+      "name": "Dell OptiPlex 3070 Micro",
+      "current_price": "100-180 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Dell%20OptiPlex%203070%20Micro&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Dell%20OptiPlex%203070%20Micro&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-dell-optiplex-3070-micro/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Dell%20OptiPlex%203070%20Micro&_sop=15"
+      }
+    },
+    {
+      "id": "dell_optiplex_7070_micro",
+      "name": "Dell OptiPlex 7070 Micro",
+      "current_price": "150-250 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Dell%20OptiPlex%207070%20Micro&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Dell%20OptiPlex%207070%20Micro&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-dell-optiplex-7070-micro/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Dell%20OptiPlex%207070%20Micro&_sop=15"
+      }
+    },
+    {
+      "id": "lenovo_m720q_tiny",
+      "name": "Lenovo ThinkCentre M720q Tiny",
+      "current_price": "90-200 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Lenovo%20ThinkCentre%20M720q%20Tiny&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Lenovo%20ThinkCentre%20M720q%20Tiny&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-lenovo-thinkcentre-m720q-tiny/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Lenovo%20ThinkCentre%20M720q%20Tiny&_sop=15"
+      }
+    },
+    {
+      "id": "lenovo_m920q_tiny",
+      "name": "Lenovo ThinkCentre M920q Tiny",
+      "current_price": "150-280 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Lenovo%20ThinkCentre%20M920q%20Tiny&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Lenovo%20ThinkCentre%20M920q%20Tiny&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-lenovo-thinkcentre-m920q-tiny/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Lenovo%20ThinkCentre%20M920q%20Tiny&_sop=15"
+      }
+    },
+    {
+      "id": "fujitsu_futro_s7010",
+      "name": "Fujitsu Futro S7010",
+      "current_price": "30-50 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Fujitsu%20Futro%20S7010&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Fujitsu%20Futro%20S7010&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-fujitsu-futro-s7010/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Fujitsu%20Futro%20S7010&_sop=15"
+      }
+    },
+    {
+      "id": "fujitsu_futro_s740",
+      "name": "Fujitsu Futro S740",
+      "current_price": "30-60 € (gebraucht)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Fujitsu%20Futro%20S740&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Fujitsu%20Futro%20S740&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-fujitsu-futro-s740/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Fujitsu%20Futro%20S740&_sop=15"
+      }
+    },
+    {
+      "id": "gmktec_g3s",
+      "name": "GMKtec G3S",
+      "current_price": "200-230 € (neu)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=GMKtec%20G3S&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=GMKtec%20G3S&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-gmktec-g3s/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=GMKtec%20G3S&_sop=15"
+      }
+    },
+    {
+      "id": "minisforum_ms01",
+      "name": "Minisforum MS-01",
+      "current_price": "550-700 € (neu)",
+      "price_date": "nie geprüft",
+      "price_source": "unbekannt",
+      "price_age": {
+        "status": "missing",
+        "days_old": null
+      },
+      "urls": {
+        "amazon": "https://www.amazon.de/s?k=Minisforum%20MS-01&tag=makmatas-homelab-21",
+        "geizhals": "https://geizhals.de/?fs=Minisforum%20MS-01&hloc=de",
+        "kleinanzeigen": "https://www.kleinanzeigen.de/s-minisforum-ms-01/k0",
+        "ebay": "https://www.ebay.de/sch/i.html?_nkw=Minisforum%20MS-01&_sop=15"
+      }
+    }
+  ]
+}

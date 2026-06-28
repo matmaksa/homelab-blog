@@ -29,6 +29,8 @@ devices:
     load_power_watts: 25-35
     noise_level: "Sehr leise (< 20 dB im Leerlauf)"
     price_range_german: "50-100 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Homelab-Einstieg, 2-3 VMs, Docker, Pi-hole"
     pros:
       - "Extrem günstig auf dem Gebrauchtmarkt"
@@ -39,7 +41,7 @@ devices:
       - "Nur 4 Kerne"
       - "Kein PCIe-Slot oder 2,5GbE"
       - "Max 32 GB RAM"
-    amazon_link: "https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=HP+ProDesk+400+G3+Mini&tag=matmaksa-homelab-21"
     sources:
       - "Intel ARK: i5-6500T"
       - "HP QuickSpecs: ProDesk 400 G3"
@@ -67,6 +69,8 @@ devices:
     idle_power_watts: 8-14
     load_power_watts: 30-45
     price_range_german: "100-180 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Mehrere VMs, Docker-Cluster, 6 Kerne für Proxmox"
     pros:
       - "6 Kerne (i5/i7) – spürbar mehr Leistung als G3"
@@ -76,7 +80,7 @@ devices:
       - "Max 32 GB offiziell"
       - "Kein PCIe-Slot"
       - "Kein 2,5GbE"
-    amazon_link: "https://www.amazon.de/s?k=HP+ProDesk+600+G4+Mini&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=HP+ProDesk+600+G4+Mini&tag=matmaksa-homelab-21"
     sources:
       - "HP QuickSpecs: ProDesk 600 G4"
 
@@ -104,6 +108,8 @@ devices:
     idle_power_watts: 6-12
     load_power_watts: 25-40
     price_range_german: "100-180 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Allround-Homelab, sparsamer Betrieb als HP"
     pros:
       - "Sehr stromsparend (oft unter 10W im Leerlauf)"
@@ -112,7 +118,7 @@ devices:
     cons:
       - "M.2 nur bis 2230 (kürzere SSDs, teurer)"
       - "Weniger Aufrüstmöglichkeiten als Lenovo"
-    amazon_link: "https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=matmaksa-homelab-21"
     sources:
       - "Dell Tech Specs: OptiPlex 3070 Micro"
 
@@ -139,6 +145,8 @@ devices:
     idle_power_watts: 7-14
     load_power_watts: 30-50
     price_range_german: "150-250 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Leistungsstarkes Homelab, bis zu 8 Kerne"
     pros:
       - "i7-9700T mit 8 Kernen → viele VMs möglich"
@@ -146,7 +154,7 @@ devices:
     cons:
       - "Kein PCIe-Slot"
       - "Teurer als vergleichbare HP/Lenovo Modelle"
-    amazon_link: "https://www.amazon.de/s?k=Dell+OptiPlex+7070+Micro&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=Dell+OptiPlex+7070+Micro&tag=matmaksa-homelab-21"
     sources:
       - "Dell Tech Specs: OptiPlex 7070 Micro"
 
@@ -173,6 +181,8 @@ devices:
     idle_power_watts: 6-12
     load_power_watts: 30-45
     price_range_german: "90-200 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Erweiterbares Homelab mit 10GbE-Ambitionen, PCIe-Nutzung"
     pros:
       - "Einziger 1L-PC dieser Klasse mit PCIe-Slot"
@@ -183,7 +193,7 @@ devices:
     cons:
       - "Nur 1GbE onboard"
       - "Gebrauchtkauf – kein Garantie"
-    amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M720q+Tiny&tag=matmaksa-homelab-21"
     sources:
       - "Lenovo PSREF: M720q Tiny"
       - "Intel ARK: i5-8500T"
@@ -211,6 +221,8 @@ devices:
     idle_power_watts: 6-12
     load_power_watts: 30-45
     price_range_german: "150-280 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Fortgeschrittenes Homelab, 2× M.2, PCIe-Mods"
     pros:
       - "Bessere Anschlussvielfalt als M720q"
@@ -219,7 +231,7 @@ devices:
     cons:
       - "Teurer als M720q auf dem Gebrauchtmarkt"
       - "Seltenere Verfügbarkeit"
-    amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M920q+Tiny&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=Lenovo+ThinkCentre+M920q+Tiny&tag=matmaksa-homelab-21"
     sources:
       - "Lenovo PSREF: M920q Tiny"
 
@@ -244,6 +256,8 @@ devices:
     dimensions_cm: "18 × 12 × 4"
     ram_max_unofficial: "16 GB (getestet)"
     price_range_german: "30-50 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Ultra-Budget-Server, Pi-hole, Home Assistant, leichte Docker-Dienste"
     ideal_for_tags:
       - home_assistant
@@ -271,7 +285,7 @@ devices:
       - "Nur 1 RAM-Slot (max 8 GB offiziell)"
       - "M.2 SATA only (kein NVMe)"
       - "Realtek NIC (kein Intel – Proxmox-Probleme möglich)"
-    amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21"
     sources:
       - "Intel ARK: Celeron J4125"
       - "Fujitsu Datasheet: Futro S7010"
@@ -293,6 +307,8 @@ devices:
     cooling: "Passiv (lüfterlos)"
     noise_level: "Absolut lautlos"
     price_range_german: "30-60 € (gebraucht)"
+    price_date: "2026-06-25"
+    price_source: "Kleinanzeigen, eBay (gebraucht)"
     ideal_for: "Ultra-Budget, Home Assistant, lautloser Betrieb, PoE-Betrieb"
     pros:
       - "Lüfterlos – absolut lautlos"
@@ -304,7 +320,7 @@ devices:
       - "J4105 etwas langsamer als J4125 (S7010)"
       - "M.2 SATA only (kein NVMe)"
       - "Realtek NIC"
-    amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S740&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=Fujitsu+Futro+S740&tag=matmaksa-homelab-21"
     sources:
       - "Intel ARK: Celeron J4105"
 
@@ -326,6 +342,8 @@ devices:
     idle_power_watts: 5-8
     load_power_watts: 15-25
     price_range_german: "200-230 € (neu)"
+    price_date: "2026-06-25"
+    price_source: "Amazon (Neuware)"
     ideal_for: "Neugerät mit Garantie, Docker, Home Assistant, Office"
     pros:
       - "Intel N95 (Alder Lake) – modernere Architektur als J4125"
@@ -335,7 +353,7 @@ devices:
       - "Nur 1 RAM-Slot (max 16 GB)"
       - "Kein PCIe-Slot"
       - "Nur Gigabit Ethernet (kein 2.5GbE)"
-    amazon_link: "https://www.amazon.de/s?k=GMKtec+G3S+N95&tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/s?k=GMKtec+G3S+N95&tag=matmaksa-homelab-21"
     sources:
       - "Intel ARK: N95"
       - "GMKtec Produktseite"
@@ -362,6 +380,8 @@ devices:
     idle_power_watts: 15-25
     load_power_watts: 65-90
     price_range_german: "550-700 € (neu)"
+    price_date: "2026-06-25"
+    price_source: "Amazon, Geizhals (Neuware)"
     ideal_for: "High-End Proxmox, 10GbE-Cluster, viele VMs, KI-Experimente"
     pros:
       - "2× 10GbE SFP+ onboard"
@@ -372,7 +392,7 @@ devices:
       - "Hoher Preis"
       - "Wird unter Last warm"
       - "Overkill für einfaches Homelab"
-    amazon_link: "https://www.amazon.de/dp/B0D45JQCN7/?tag=makmatas-homelab-21"
+    amazon_link: "https://www.amazon.de/dp/B0D45JQCN7/?tag=matmaksa-homelab-21"
     sources:
       - "Intel ARK: i9-13900H"
       - "Minisforum MS-01 Spec Sheet"
