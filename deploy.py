@@ -128,6 +128,29 @@ if r.returncode != 0:
     deploy_msg = f"Deployed: https://matmaksa.github.io/homelab-blog/"
     log_step("DEPLOY", "SUCCESS", deploy_msg)
     print(f"\n{deploy_msg}")
+
+    # ── Step 6: Search Engine Pings ──────────────────────
+    sitemap_url = "https://matmaksa.github.io/homelab-blog/sitemap.xml"
+    indexnow_key = "4d6302cc551849e2a4cdd84223a1b2f1"
+
+    # Google Sitemap Ping
+    log("INFO", "Pinging Google with sitemap...")
+    gp = subprocess.run(
+        ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+         f"https://www.google.com/ping?sitemap={sitemap_url}"],
+        capture_output=True, text=True, timeout=15)
+    log("INFO", f"Google ping response: {gp.stdout.strip()}")
+
+    # IndexNow – alle neuen Artikel einzeln melden
+    slugs = [os.path.basename(os.path.dirname(fp)) for fp in new_files if os.path.exists(fp)]
+    for slug in slugs:
+        article_url = f"https://matmaksa.github.io/homelab-blog/posts/{slug}/"
+        inp = subprocess.run(
+            ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+             f"https://www.bing.com/indexnow?url={article_url}&key={indexnow_key}"],
+            capture_output=True, text=True, timeout=15)
+        log("INFO", f"IndexNow ping for {slug}: {inp.stdout.strip()}")
+    log_step("PING", "SEARCH_ENGINES", f"{len(slugs)} URLs submitted")
 else:
     log_step("DEPLOY", "SKIP", "Nothing to commit")
     print("Nothing to commit")

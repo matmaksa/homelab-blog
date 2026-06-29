@@ -9,6 +9,8 @@ pygmentsUseClasses = true
 buildDrafts = false
 
 [params]
+  [params.analytics.google]
+    SiteVerificationTag = "google09a060456df1ed16.html"
   ShowShareButtons = true
   ShowReadingTime = true
   ShowBreadCrumbs = true
