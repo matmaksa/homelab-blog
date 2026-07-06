@@ -1,7 +1,7 @@
 ---
 title: "Homelab unter 100€: Was du wirklich brauchst"
 date: 2026-07-06
-draft: false
+draft: true
 description: "Ein Homelab muss nicht teuer sein. Wer mit gebrauchter Business-Hardware startet, kommt schon für unter 100€ zu einem voll funktionsfähigen Server für Docker, Proxmox oder Pi-hole."
 tags:
   - homelab
@@ -12,14 +12,14 @@ tags:
   - sparen
 categories:
   - Homelab
-content_state: published
-audit_status: passed
-user_approval_required: false
-approved_for_publish: true
+content_state: revision_required
+audit_status: failed
+user_approval_required: true
+approved_for_publish: false
 content_intent: pillar
 monetization_intent: soft_affiliate
 affiliate_disclosure_required: true
-price_research_required: false
+price_research_required: true
 price_research_done: 2026-07-06
 price_research_notes: >
   Typische Gebrauchtpreise Juli 2026 recherchiert: Thin Clients 20–50€ bei eBay/gewerblichen Rückläufern,
@@ -28,7 +28,7 @@ price_research_notes: >
 product_recommendation_allowed: true
 instagram_derivatives_required: true
 risk_level: low
-next_action: user_review_before_publish
+next_action: "Fix incorrect price claims, hardware compatibility assumptions, broken links, then private preview review before republishing."
 cover:
     image: featured.jpg
     alt: "Thin Client auf einem Schreibtisch als Homelab-Einstieg unter 100€"
