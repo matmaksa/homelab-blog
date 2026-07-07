@@ -76,7 +76,7 @@ Speichern für später. Link in Bio. 🎯
 **Watchtime-Strategie**: Gesteigerte Überraschung bei Preisvergleichen
 **Ablauf**:
 - "Raspberry Pi 5 + Gehäuse + Netzteil + SD-Karte = ~150€"
-- "Gebrauchter Futro S920 + SSD = ~40€. Mehr RAM. Mehr Leistung."
+- "Gebrauchter Thin Client (Futro S740/S7010) + SSD = ~40€. Mehr RAM. Mehr Leistung."
 - "Rate mal, welcher besser für Proxmox ist."
 **Ende**: "Schreib in die Kommentare: Mit welcher Hardware hast du angefangen?"
 **CTA**: "Kommentieren – welche Hardware war dein erster Homelab?"
