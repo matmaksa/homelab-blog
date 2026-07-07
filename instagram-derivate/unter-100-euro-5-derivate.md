@@ -1,8 +1,9 @@
 # Instagram-Derivate: "Homelab unter 100€ – Was du wirklich brauchst"
 
-Quellartikel: `/root/homelab-blog/content/posts/homelab-unter-100-euro-was-du-brauchst/index.md`
+Quellartikel: https://matmaksa.github.io/homelab-blog/posts/homelab-unter-100-euro-was-du-brauchst/
 Erstellt: Juli 2026
-Status: Bereit für Review
+Final URL: https://matmaksa.github.io/homelab-blog/posts/homelab-unter-100-euro-was-du-brauchst/
+Status: Bereit für Instagram-Promotion
 
 ---
 
