@@ -4,24 +4,34 @@
 |---|---|
 | Datum | 2026-07-07 |
 | Uhrzeit | ~16:47–16:55 UTC |
-| Provider | fal.ai |
-| Modell | FLUX.2 Klein 9B (Draft) |
-| Finalmodell | Noch nicht verwendet (wartet auf User-Auswahl) |
-| Budget | ca. 10 $ vorhanden |
+| Start | 2026-07-07 (erwartet) |
+| Modell | FLUX.2 Klein 9B (Draft, nur Konzeptreferenz) |
+| Finalmodell | Noch nicht verwendet – Priorität auf echte Fotos |
+| Budget | ca. 10 $ vorhanden (für ergänzende KI-Icons/Hintergründe reserviert) |
 
-## Generierte Assets
+## KI-Bild-Status
+
+**❌ Nicht final – KI-Varianten nur als Konzeptreferenz.**
+
+Für Hardware-Content gilt ab 2026-07-07:
+- Real-Photo-Strategie: echte Fotos des Nutzers haben Vorrang.
+- KI-Bilder (fal.ai) werden **nur für abstrakte Hintergründe, Icons oder ergänzende Visuals** genutzt.
+- Die 27 generierten Varianten dienen als visuelle Ideensammlung, nicht als Veröffentlichungsmaterial.
+- Der Shot-Plan in `real-photo-shot-plan.md` beschreibt, welche echten Fotos benötigt werden.
+
+## Generierte Assets (KI-Konzeptreferenz)
 
 | Asset-Name | Format | Varianten | Kontaktbogen | Status |
 |---|---|---|---|---|
-| Reel 1: Homelab für unter 100€ | 9:16 | 3 | ✅ | Generiert, Auswahl offen |
-| Carousel Slide 1: Hook | 4:5 | 3 | ✅ | Generiert, Auswahl offen |
-| Carousel Slide 2: Das Herz | 4:5 | 3 | ✅ | Generiert, Auswahl offen |
-| Carousel Slide 3: Speicher | 4:5 | 3 | ✅ | Generiert, Auswahl offen |
-| Carousel Slide 4: Nicht kaufen | 4:5 | 3 | ✅ | Generiert, Auswahl offen |
-| Carousel Slide 5: Setup | 4:5 | 3 | ✅ | Generiert, Auswahl offen |
-| Reel 3: Größter Fehler Neugeräte | 9:16 | 3 | ✅ | Generiert, Auswahl offen |
-| Reel 4: Stromkosten | 9:16 | 3 | ✅ | Generiert, Auswahl offen |
-| Reel 5: 3 Dinge nicht kaufen | 9:16 | 3 | ✅ | Generiert, Auswahl offen |
+| Reel 1: Homelab für unter 100€ | 9:16 | 3 | ✅ | KI-Konzeptreferenz – echtes Foto geplant |
+| Carousel Slide 1: Hook | 4:5 | 3 | ✅ | KI-Konzeptreferenz – echtes Foto geplant |
+| Carousel Slide 2: Das Herz | 4:5 | 3 | ✅ | KI-Konzeptreferenz – echtes Foto geplant |
+| Carousel Slide 3: Speicher | 4:5 | 3 | ✅ | KI-Konzeptreferenz – echtes Foto geplant |
+| Carousel Slide 4: Nicht kaufen | 4:5 | 3 | ✅ | KI-Konzeptreferenz – echtes Foto geplant |
+| Carousel Slide 5: Setup | 4:5 | 3 | ✅ | KI-Konzeptreferenz – Flatlay geplant |
+| Reel 3: Größter Fehler Neugeräte | 9:16 | 3 | ✅ | KI-Konzeptreferenz – echte Fotos geplant |
+| Reel 4: Stromkosten | 9:16 | 3 | ✅ | KI-Konzeptreferenz – Messgerät-Foto geplant |
+| Reel 5: 3 Dinge nicht kaufen | 9:16 | 3 | ✅ | KI-Konzeptreferenz – Zettel-Foto geplant |
 
 ## Kostenkontrolle
 
