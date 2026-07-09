@@ -1,0 +1,74 @@
+[
+  {
+    "file": "slide_01_v3.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside": true,
+    "oob": [],
+    "no_slide_numbers": true,
+    "cta_visible": true,
+    "futro_rule_ok": true
+  },
+  {
+    "file": "slide_02_v3.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside": true,
+    "oob": [],
+    "no_slide_numbers": true,
+    "cta_visible": true,
+    "futro_rule_ok": true
+  },
+  {
+    "file": "slide_03_v3.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside": true,
+    "oob": [],
+    "no_slide_numbers": true,
+    "cta_visible": true,
+    "futro_rule_ok": true
+  },
+  {
+    "file": "slide_04_v3.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside": true,
+    "oob": [],
+    "no_slide_numbers": true,
+    "cta_visible": true,
+    "futro_rule_ok": true
+  },
+  {
+    "file": "slide_05_v3.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside": true,
+    "oob": [],
+    "no_slide_numbers": true,
+    "cta_visible": true,
+    "futro_rule_ok": true
+  },
+  {
+    "file": "slide_06_v3.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside": true,
+    "oob": [],
+    "no_slide_numbers": true,
+    "cta_visible": true,
+    "futro_rule_ok": true
+  }
+]
