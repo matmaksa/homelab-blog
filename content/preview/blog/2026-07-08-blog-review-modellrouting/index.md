@@ -10,8 +10,35 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
+draft = true
 source_draft = '/root/hermes/review-queue/blog/2026-07-08-blog-review-modellrouting.md'
+
+# Preview Classification
+preview_content_type = "review_doc"
+publish_eligible = false
+user_visual_approval_required = false
+fact_check_required = false
+link_check_required = false
+price_check_required = false
+recommended_action = "archive_or_use_as_internal_review_only"
+content_intent = "internal_review"
+monetization_intent = "none"
+affiliate_disclosure_required = false
+price_research_required = false
+product_recommendation_allowed = false
+instagram_derivatives_required = false
+risk_level = "low"
 +++
+
+> [!IMPORTANT]
+> **Preview-Review-Box**  
+> TYPE=review_doc  
+> PUBLISH_ELIGIBLE=no  
+> USER_VISUAL_APPROVAL_REQUIRED=yes  
+> FACT_CHECK_REQUIRED=no  
+> LINK_CHECK_REQUIRED=no  
+> PRICE_CHECK_REQUIRED=no  
+> RECOMMENDED_ACTION=archive_or_use_as_internal_review_only
 
 > **Preview-Hinweis:** Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.  
 > Quelle: `/root/hermes/review-queue/blog/2026-07-08-blog-review-modellrouting.md`

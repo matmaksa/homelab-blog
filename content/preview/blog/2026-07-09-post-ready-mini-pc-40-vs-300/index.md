@@ -10,17 +10,43 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-source_draft = '/root/hermes/review-queue/blog/2026-07-09-post-ready-mini-pc-40-vs-300.md'
+source_draft = 'review-queue/2026-07-09-post-ready-mini-pc-40-vs-300.md'
+
+# Preview Classification
+preview_content_type = "post_pack"
+publish_eligible = false
+user_visual_approval_required = true
+fact_check_required = true
+link_check_required = true
+price_check_required = true
+recommended_action = "requires_final_user_approval_before_any_posting"
+content_intent = "social_media_content"
+monetization_intent = "soft_affiliate"
+affiliate_disclosure_required = true
+price_research_required = true
+product_recommendation_allowed = true
+instagram_derivatives_required = true
+risk_level = "medium"
 +++
 
+> [!IMPORTANT]
+> **Preview-Review-Box**  
+> TYPE=post_pack  
+> PUBLISH_ELIGIBLE=no  
+> USER_VISUAL_APPROVAL_REQUIRED=yes  
+> FACT_CHECK_REQUIRED=yes  
+> LINK_CHECK_REQUIRED=yes  
+> PRICE_CHECK_REQUIRED=yes  
+> RECOMMENDED_ACTION=requires_final_user_approval_before_any_posting
+
 > **Preview-Hinweis:** Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.  
-> Quelle: `/root/hermes/review-queue/blog/2026-07-09-post-ready-mini-pc-40-vs-300.md`
+> Quelle: `review-queue/2026-07-09-post-ready-mini-pc-40-vs-300.md`
 
 ---
 
 # 🎬 Post-Ready: Mini-PC Reel "40€ vs 300€"
 
-**Basis:** IG-Derivat 2 aus `/root/hermes/review-queue/blog/2026-07-09-ig-derivate-mini-pc-vergleich.md`  
+**Basis:** IG-Derivat 2 aus `review-queue/2026-07-09-ig-derivate-mini-pc-vergleich.md`  
 **Blogartikel:** [Mini PC fürs Homelab nach Budget: Von 40€ bis 300€](https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/)  
 **Status:** Post-ready-Vorbereitung · **Nicht veröffentlicht** · Freigabe erforderlich
 
@@ -137,4 +163,4 @@ Falls Reel nicht gewünscht, alternativ als Carousel mit 5 Slides:
 
 - **Posting:** ❌ Nicht veröffentlicht
 - **Nächster Schritt:** Nach Freigabe: Textfolien erstellen, Reel schneiden (CapCut/Canva), Container erstellen, Posting-Zeit festlegen
-- **Datei:** `/root/hermes/review-queue/blog/2026-07-09-post-ready-mini-pc-40-vs-300.md`
+- **Datei:** `review-queue/2026-07-09-post-ready-mini-pc-40-vs-300.md`

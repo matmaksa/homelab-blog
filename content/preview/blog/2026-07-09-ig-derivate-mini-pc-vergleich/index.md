@@ -10,11 +10,37 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-mini-pc-vergleich.md'
+source_draft = 'review-queue/2026-07-09-ig-derivate-mini-pc-vergleich.md'
+
+# Preview Classification
+preview_content_type = "ig_plan"
+publish_eligible = false
+user_visual_approval_required = true
+fact_check_required = false
+link_check_required = true
+price_check_required = true
+recommended_action = "keep_as_instagram_plan_not_blog_publish_candidate"
+content_intent = "instagram_derivative"
+monetization_intent = "soft_affiliate"
+affiliate_disclosure_required = true
+price_research_required = true
+product_recommendation_allowed = true
+instagram_derivatives_required = true
+risk_level = "medium"
 +++
 
+> [!IMPORTANT]
+> **Preview-Review-Box**  
+> TYPE=ig_plan  
+> PUBLISH_ELIGIBLE=no  
+> USER_VISUAL_APPROVAL_REQUIRED=yes  
+> FACT_CHECK_REQUIRED=no  
+> LINK_CHECK_REQUIRED=yes  
+> PRICE_CHECK_REQUIRED=yes  
+> RECOMMENDED_ACTION=keep_as_instagram_plan_not_blog_publish_candidate
+
 > **Preview-Hinweis:** Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.  
-> Quelle: `/root/hermes/review-queue/blog/2026-07-09-ig-derivate-mini-pc-vergleich.md`
+> Quelle: `review-queue/2026-07-09-ig-derivate-mini-pc-vergleich.md`
 
 ---
 

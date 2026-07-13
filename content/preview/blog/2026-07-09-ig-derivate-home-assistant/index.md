@@ -10,17 +10,43 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-home-assistant.md'
+source_draft = 'review-queue/2026-07-09-ig-derivate-home-assistant.md'
+
+# Preview Classification
+preview_content_type = "ig_plan"
+publish_eligible = false
+user_visual_approval_required = true
+fact_check_required = true
+link_check_required = true
+price_check_required = true
+recommended_action = "blocked_requires_price_research_and_review"
+content_intent = "instagram_derivative"
+monetization_intent = "none"
+affiliate_disclosure_required = false
+price_research_required = true
+product_recommendation_allowed = false
+instagram_derivatives_required = true
+risk_level = "high"
 +++
 
+> [!IMPORTANT]
+> **Preview-Review-Box**  
+> TYPE=ig_plan  
+> PUBLISH_ELIGIBLE=no  
+> USER_VISUAL_APPROVAL_REQUIRED=yes  
+> FACT_CHECK_REQUIRED=yes  
+> LINK_CHECK_REQUIRED=yes  
+> PRICE_CHECK_REQUIRED=yes  
+> RECOMMENDED_ACTION=blocked_requires_price_research_and_review
+
 > **Preview-Hinweis:** Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.  
-> Quelle: `/root/hermes/review-queue/blog/2026-07-09-ig-derivate-home-assistant.md`
+> Quelle: `review-queue/2026-07-09-ig-derivate-home-assistant.md`
 
 ---
 
 # 📸 IG-Derivate: Home Assistant auf dem Mini-PC
 
-**Blogartikel:** Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€  
+**Blogartikel:** Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale auf dem Mini-PC  
 **Publiziert:** 24.06.2026  
 **Blogziel:** Leser zeigen, wie sie mit einem gebrauchten Mini-PC eine leistungsstarke Smarthome-Zentrale für Home Assistant bauen  
 **Zielgruppe:** Smarthome-Einsteiger, HA-Interessierte, Homelaber, Low-Budget-Bastler  
@@ -38,9 +64,9 @@ source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-home-assis
 |------|------|
 | **Format** | Reel (9:16, 30-45s) |
 | **Priorität** | 🟢 Hoch |
-| **Hook**** | Der HA Green kostet 100€. Mein Mini-PC hat 40€ gekostet und kann mehr. |
-| **Kernaussage** | Ein gebrauchter Mini-PC ist günstiger, leistungsfähiger und flexibler als fertige Smarthome-Boxen. |
-| **Caption-Entwurf** | Home Assistant Green: 100€, 4 GB RAM, max 50 Add-ons. Gebrauchter Dell OptiPlex 3070: 70€, 32 GB RAM, unbegrenzte Add-ons, gleichzeitig Pi-hole, AdGuard und Headscale. Und rate mal, was stabiler läuft? 😏 Wer aufrüsten will, steckt einfach mehr RAM rein – beim HA Green geht das nicht. Meine Installations-Anleitung mit Schritt-für-Schritt-Code wartet im Blog. 🔗 |
+| **Hook** | Der HA Green kostet 100€. Mein gebrauchter Mini-PC hat weniger gekostet und kann mehr. |
+| **Kernaussage** | Ein gebrauchter Mini-PC ist oft günstiger, leistungsfähiger und flexibler als fertige Smarthome-Boxen. |
+| **Caption-Entwurf** | Home Assistant Green: 100€, 4 GB RAM, fest verbaut. Gebrauchter Dell OptiPlex: mehr RAM, auch zusätzliche Dienste wie Pi-hole, AdGuard und Headscale gleichzeitig möglich. HA Green ist eine gute Einsteiger-Lösung, ein Mini-PC bietet dir langfristig mehr Flexibilität. Wer aufrüsten will, steckt einfach mehr RAM rein – beim HA Green geht das nicht. Meine Installations-Anleitung mit Schritt-für-Schritt-Code wartet im Blog. 🔗 |
 | **Visual-Idee** | Side-by-Side: HA Green Box (klein, begrenzt) vs gebrauchter Mini-PC (offen, RAM-Slot sichtbar) – plus Preis-Overlay |
 | **CTA** | Installations-Guide → Blog in Bio 🔗 |
 | **Affiliate** | ✅ Ja (Disclosure wegen Hardware-Links) |
@@ -55,7 +81,7 @@ source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-home-assis
 | **Priorität** | 🟢 Hoch |
 | **Hook** | Smarthome-Zentrale für unter 100€. Ja, das geht wirklich. |
 | **Kernaussage** | Für ~70€ bekommst du ein komplettes HA-Setup: Mini-PC, Zigbee-Stick, SSD und SD-Karte. Keine Cloud-Abhängigkeit, alles läuft lokal. |
-| **Caption-Entwurf** | Deine erste Smarthome-Zentrale für unter 100€: 1️⃣ Mini-PC Dell OptiPlex 3070 – 70€ gebraucht 2️⃣ Sonoff Zigbee 3.0 USB Dongle – 15€ 3️⃣ 120 GB SSD – gebraucht ~10€ 4️⃣ Home Assistant OS installieren – kostenlos 5️⃣ Fertig! Keine Cloud, alles lokal, volle Kontrolle. Zigbee, WLAN, Bluetooth – alles an einem Mini-PC. Meine detaillierte Anleitung mit Installations-Befehlen findest du im Blog. 🔗 |
+|| **Caption-Entwurf** | Deine erste Smarthome-Zentrale mit kleinem Budget: 1️⃣ Gebrauchter Mini-PC (z. B. Dell OptiPlex) 2️⃣ Sonoff Zigbee 3.0 USB Dongle 3️⃣ Kleine SSD 4️⃣ Home Assistant OS installieren – kostenlos 5️⃣ Fertig! Keine Cloud, alles lokal, volle Kontrolle. Zigbee, WLAN, Bluetooth – alles an einem Mini-PC. Meine detaillierte Anleitung mit Installations-Befehlen findest du im Blog. 🔗 |
 | **Visual-Idee** | 5 Slides: je eine Komponente mit Foto + Preis + kurzem Text – Blog-Screenshots reichen |
 | **CTA** | Schritt-für-Schritt-Anleitung → Blog 🔗 |
 | **Affiliate** | ✅ Ja |

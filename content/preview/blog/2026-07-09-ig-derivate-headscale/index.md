@@ -10,11 +10,37 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-headscale.md'
+source_draft = 'review-queue/2026-07-09-ig-derivate-headscale.md'
+
+# Preview Classification
+preview_content_type = "ig_plan"
+publish_eligible = false
+user_visual_approval_required = true
+fact_check_required = false
+link_check_required = true
+price_check_required = false
+recommended_action = "keep_as_instagram_plan_not_blog_publish_candidate"
+content_intent = "instagram_derivative"
+monetization_intent = "none"
+affiliate_disclosure_required = false
+price_research_required = false
+product_recommendation_allowed = false
+instagram_derivatives_required = true
+risk_level = "low"
 +++
 
+> [!IMPORTANT]
+> **Preview-Review-Box**  
+> TYPE=ig_plan  
+> PUBLISH_ELIGIBLE=no  
+> USER_VISUAL_APPROVAL_REQUIRED=yes  
+> FACT_CHECK_REQUIRED=no  
+> LINK_CHECK_REQUIRED=yes  
+> PRICE_CHECK_REQUIRED=no  
+> RECOMMENDED_ACTION=keep_as_instagram_plan_not_blog_publish_candidate
+
 > **Preview-Hinweis:** Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.  
-> Quelle: `/root/hermes/review-queue/blog/2026-07-09-ig-derivate-headscale.md`
+> Quelle: `review-queue/2026-07-09-ig-derivate-headscale.md`
 
 ---
 
@@ -38,9 +64,9 @@ source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-headscale.
 |------|------|
 | **Format** | Reel (9:16, 45-60s) |
 | **Priorität** | 🟢 Hoch |
-| **Hook** | Tailscale ist bequem. Aber deine Daten gehen durch deren Server. Ich hoste meinen eigenen. |
-| **Kernaussage** | Tailscale ist bequem, aber deine Schlüssel liegen auf fremden Servern. Headscale ist die gleiche Technik – nur auf deiner Hardware. |
-| **Caption-Entwurf** | Tailscale ist super bequem – aber alle deine Schlüssel und dein Mesh-Management liegen auf Tailscale-Servern. Ich hoste meinen eigenen Control-Server mit Headscale. Gleiche Technik (WireGuard), gleiche Benutzerfreundlichkeit (Login mit SSO) – aber alles auf meinem 40€-Mini-PC im Wohnzimmer. Seit Monaten stabil. Wer umsteigen will: Die Installations-Anleitung mit allen Befehlen gibt's im Blog. 🔗 |
+|| **Hook** | Tailscale ist bequem. Aber die Kontrolle über dein Mesh-Netzwerk liegt auf deren Servern – deine Daten fließen direkt zwischen deinen Geräten. Ich hoste meinen eigenen Control-Server. |
+|| **Kernaussage** | Tailscale ist bequem, aber die Kontrolle über dein Mesh-Netzwerk (Control Plane) liegt auf fremden Servern. Deine privaten Node-Schlüssel bleiben lokal auf deinen Geräten. Headscale ist die gleiche Technik – nur auf deiner Hardware. |
+|| **Caption-Entwurf** | Tailscale ist super bequem – aber die Kontrolle über dein Mesh-Netzwerk (Control Plane) liegt auf Tailscale-Servern. Deine Daten fließen direkt zwischen deinen Geräten – Tailscale vermittelt nur die Verbindung (Peer-to-Peer). Deine privaten Node-Schlüssel bleiben lokal. Ich hoste meinen eigenen Control-Server mit Headscale. Gleiche Technik (WireGuard), gleiche Benutzerfreundlichkeit (Login mit SSO) – aber alles auf meinem eigenen Mini-PC im Wohnzimmer. Mehr Kontrolle, aber auch mehr Wartungsaufwand. Wer umsteigen will: Die Installations-Anleitung mit allen Befehlen gibt's im Blog. 🔗 |
 | **Visual-Idee** | Split-Screen: links Tailscale-Cloud (unbekannter Server), rechts Headscale-LXC (eigener Mini-PC) mit Pfeil "100% Kontrolle" |
 | **CTA** | Installations-Guide → Blog in Bio 🔗 |
 | **Affiliate** | Nein |
@@ -85,7 +111,7 @@ source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-headscale.
 | **Priorität** | 🟡 Mittel |
 | **Hook** | Tailscale, Headscale oder purer WireGuard? Welcher Mesh-VPN-Typ bist du? |
 | **Kernaussage** | Tailscale (bequem, Cloud), Headscale (bequem, selbst gehostet), WireGuard pur (maximale Kontrolle, mehr Arbeit). Für die meisten Einsteiger ist Headscale der Sweet Spot. |
-| **Caption-Entwurf**** | Drei Wege zum Mesh-VPN: 🥇 **Tailscale** – bequem, funktioniert sofort, aber Daten laufen über Tailscale-Cloud 🥈 **Headscale** – gleicher Komfort, aber komplett auf eigener Hardware. Mein Favorit. 🥉 **WireGuard pur** – maximale Kontrolle, aber jede Verbindung manuell konfigurieren. Für Einsteiger: Headscale. Für Profis: WireGuard pur. Wer den einfachen Einstieg mit Headscale sucht: Die Anleitung wartet im Blog. 🔗 |
+| **Caption-Entwurf**** | Drei Wege zum Mesh-VPN: 🥇 **Tailscale** – bequem, funktioniert sofort, aber die Control Plane liegt in der Tailscale-Cloud (deine Daten fließen direkt zwischen Geräten – Tailscale vermittelt nur die Verbindung) 🥈 **Headscale** – gleicher Komfort, aber Control Plane komplett auf eigener Hardware. Mein Favorit, aber mit mehr Wartungsaufwand. 🥉 **WireGuard pur** – maximale Kontrolle, aber jede Verbindung manuell konfigurieren. Für Einsteiger: Headscale. Für Profis: WireGuard pur. Wer den einfachen Einstieg mit Headscale sucht: Die Anleitung wartet im Blog. 🔗 |
 | **Visual-Idee** | 3 Slides mit je einem Ansatz + Bewertung (⭐⭐⭐) + 1 Satz |
 | **CTA** | Blog-Guide in Bio 🔗 |
 | **Affiliate** | Nein |
@@ -98,9 +124,9 @@ source_draft = '/root/hermes/review-queue/blog/2026-07-09-ig-derivate-headscale.
 |------|------|
 | **Format** | Story-Serie (3 Stories) |
 | **Priorität** | 🟢 Hoch |
-| **Hook** | Von unterwegs auf mein Homelab zugreifen – ohne Cloud, ohne VPN-Client, einfach so. |
+| **Hook** | Von unterwegs auf mein Homelab zugreifen – ohne Cloud-Zwischenhändler, einfach so. |
 | **Kernaussage** | Mit Headscale verbinde ich mein Handy, Laptop und Homeserver in einem Mesh. Von unterwegs greife ich per SSH, Webinterface oder App auf alles zu. |
-| **Caption-Entwurf** | Von unterwegs auf mein Homelab: So geht's mit Headscale: 1️⃣ Einmal Tailscale-Client auf dem Handy installieren 2️⃣ Als Login-Server meine Headscale-URL angeben 3️⃣ Fertig – ich kann von überall per SSH, WebUI oder App auf meine Server zugreifen. Kein Cloud-Zwischenhändler, kein Port-Forwarding, keine extra VPN-Software. Alles läuft über WireGuard-Verschlüsselung. Das Setup in 15 Minuten – die Anleitung findest du im Blog. 🔗 |
+| **Caption-Entwurf** | Von unterwegs auf mein Homelab: So geht's mit Headscale: 1️⃣ Einmal Tailscale-Client auf dem Handy installieren 2️⃣ Als Login-Server meine Headscale-URL angeben 3️⃣ Fertig – ich kann von überall per SSH, WebUI oder App auf meine Server zugreifen. Kein Cloud-Zwischenhändler, kein Port-Forwarding. Alles läuft über WireGuard-Verschlüsselung. Das Setup in 15 Minuten – die Anleitung findest du im Blog. 🔗 |
 | **Visual-Idee** | 3 Slides: 1) Handy unterwegs + Headscale-Verbindung 2) SSH ins Homelab 3) Dashboard-Ansicht – Blog-Screenshots |
 | **CTA** | Blog in Bio 🔗 |
 | **Affiliate** | Nein |

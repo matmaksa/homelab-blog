@@ -1,6 +1,6 @@
 +++
 title = 'Headscale Clients verbinden und ACLs setzen'
-description = "Nicht veröffentlichter Review-/Draft-Preview"
+description = 'Headscale Clients verbinden: Tailscale-Clients per Web-Login oder Pre-Auth-Key koppeln, Zugriffsregeln per ACLs definieren und optional Subnet-Router einrichten.'
 date = 2026-07-13
 robotsNoIndex = true
 sitemap = { exclude = true }
@@ -10,23 +10,52 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-source_draft = '/root/homelab-blog/content/posts/headscale-clients-acls-homelab/index.md'
+
+cover.image = "featured.jpg"
+cover.relative = true
+cover.alt = "Mini-PC als Headscale-Server in einem dunklen Homelab mit Netzwerkkabeln zu mehreren Geräten"
+# Preview Classification
+preview_content_type = "article_draft"
+publish_eligible = false
+user_visual_approval_required = true
+fact_check_required = true
+link_check_required = true
+price_check_required = false
+recommended_action = "technical_test_required_before_publish_candidate"
+content_intent = "deep_dive"
+monetization_intent = "none"
+affiliate_disclosure_required = false
+price_research_required = false
+product_recommendation_allowed = false
+instagram_derivatives_required = false
+risk_level = "medium"
 +++
 
-> **Preview-Hinweis:** Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.  
-> Quelle: `/root/homelab-blog/content/posts/headscale-clients-acls-homelab/index.md`
+> [!IMPORTANT]
+> **Preview-Review-Box**
+> TYPE=article_draft
+> PUBLISH_ELIGIBLE=no
+> USER_VISUAL_APPROVAL_REQUIRED=yes
+> FACT_CHECK_REQUIRED=yes (Headscale-Befehle gegen v0.29.2+ prüfen)
+> LINK_CHECK_REQUIRED=yes
+> PRICE_CHECK_REQUIRED=no
+> RECOMMENDED_ACTION=technical_test_required_before_publish_candidate
+
+> **Preview-Hinweis:** Nicht veröffentlichter Entwurf – noch nicht publish-ready.
+> **Technischer Hinweis:** Alle Befehle müssen vor Veröffentlichung gegen die genutzte Headscale-Version getestet werden. Geprüft gegen Dokumentation v0.29.2.
+> **Cover-Bild:** Wird vor Freigabe generiert.
 
 ---
 
-**Aktualisiert: Juli 2026 | Lesezeit: 8 Minuten**
+# Headscale Clients verbinden und ACLs setzen
 
-<!--more-->
+**Aktualisiert: Juli 2026 | Lesezeit: 8 Minuten**
 
 ## TL;DR: So kommen deine Geräte sauber ins Headscale-Netz
 
 Wenn Headscale läuft, verbindest du deine Geräte mit dem normalen Tailscale-Client und gibst als Login-Server deine Headscale-URL an. Für Linux-Server nimmst du einen kurz gültigen Pre-Auth-Key, für Laptop oder Desktop ist die Web-Freigabe übersichtlicher.
 
-ACLs sind danach Pflicht, wenn nicht jedes Gerät jedes andere Gerät erreichen soll. Starte mit einer einfachen Regel: Admin-Geräte dürfen alles, normale Clients dürfen nur auf Homelab-Server, Server dürfen nicht ungefragt zurück auf deine privaten Geräte.
+ACLs empfehle ich danach, wenn nicht jedes Gerät jedes andere Gerät erreichen soll. Starte mit einer einfachen Regel: Admin-Geräte dürfen alles, normale Clients dürfen nur auf Homelab-Server, Server dürfen nicht ungefragt zurück auf deine privaten Geräte.
 
 ## Voraussetzungen
 
@@ -36,7 +65,7 @@ ACLs sind danach Pflicht, wenn nicht jedes Gerät jedes andere Gerät erreichen 
 | 💰 Kosten | 0 € |
 | 📊 Schwierigkeit | ⭐⭐⭐☆☆ |
 | 🖥️ Benötigt | Laufender Headscale-Server, erreichbare HTTPS-URL, Tailscale-Client |
-| 🎯 Ziel | Clients verbinden und erste Zugriffregeln setzen |
+| 🎯 Ziel | Clients verbinden und erste Zugriffsregeln setzen |
 | ✅ Geprüft gegen | Headscale-Dokumentation v0.29.2, Tailscale-Client-Befehle |
 
 > Das ist der Anschlussartikel zu [Headscale im Homelab – Tailscale-Alternative selbst hosten](/posts/headscale-tailscale-alternative-selbst-hosten/). Dort geht es um Installation und Grundidee. Hier geht es um den Alltag danach: Geräte verbinden, prüfen, einschränken.
@@ -65,7 +94,7 @@ Headscale kennt zwei einfache Wege, um neue Geräte aufzunehmen.
 | Dein Laptop / Desktop | Web-Login | Du siehst bewusst, welches Gerät du freigibst |
 | Server / LXC | Pre-Auth-Key | Einmaliger Befehl, gut für SSH und Automatisierung |
 | Handy / Tablet | App mit alternativem Server | Kein Terminal nötig |
-| Temporäres Testgerät | kurz gültiger Pre-Auth-Key | Danach kann der Key nicht weitergegeben werden |
+| Temporäres Testgerät | Kurz gültiger Pre-Auth-Key | Danach kann der Key nicht weitergegeben werden |
 
 **Meine Faustregel:** Persönliche Geräte per Web-Login, Server per Pre-Auth-Key. So bleibt die Einrichtung einfach, ohne dass dauerhaft gültige Schlüssel herumliegen.
 
@@ -126,16 +155,28 @@ headscale nodes list
 
 Wenn das Gerät in beiden Listen auftaucht, ist die Verbindung hergestellt.
 
-> Wichtig: In aktuellen Headscale-Versionen läuft die Freigabe über `headscale auth register --user ... --auth-id ...`. Ältere Anleitungen nennen teilweise andere Befehle. Wenn ein Befehl nicht existiert, prüfe mit `headscale auth --help` und `headscale nodes --help`.
+> **Wichtig:** In aktuellen Headscale-Versionen läuft die Freigabe über `headscale auth register --user ... --auth-id ...`. Ältere Anleitungen nennen teilweise andere Befehle. Wenn ein Befehl nicht existiert, prüfe mit `headscale auth --help` und `headscale nodes --help`.
 
 ---
 
 ## Schritt 3: Server oder LXC per Pre-Auth-Key verbinden
 
-Für Server ist ein Pre-Auth-Key praktischer. Du erzeugst ihn auf dem Headscale-Server:
+Zuerst prüfst du, welche Benutzer existieren:
+
+```bash
+headscale users list
+```
+
+Dann erstellst du den Pre-Auth-Key, optional mit Tags für Server:
 
 ```bash
 headscale preauthkeys create --user homelab
+```
+
+Für einen Server, der automatisch bestimmte Tags bekommt:
+
+```bash
+headscale preauthkeys create --user homelab --tags tag:server
 ```
 
 Der Befehl gibt einen Schlüssel aus. Nutze ihn direkt auf dem Zielserver:
@@ -145,6 +186,8 @@ sudo tailscale up \
   --login-server https://headscale.deine-domain.de \
   --authkey <PRE_AUTH_KEY>
 ```
+
+Nutze den **Key mit Tags** (zweite Variante), wenn der Server feste Tag-basierte Regeln bekommen soll. Den einfachen Key (erste Variante) für Geräte ohne spezielle Tags.
 
 Danach den Schlüssel nicht in Notizen, Skripten oder Chatverläufen speichern. Standardmäßig ist so ein Key nur begrenzt gültig und nicht für dauerhafte Geheimnisverwaltung gedacht.
 
@@ -212,6 +255,25 @@ Ein Beispiel:
 
 ACLs verhindern nicht jeden Fehler. Aber sie reduzieren den Schaden, wenn ein Gerät falsch konfiguriert ist oder ein Testdienst zu viel darf.
 
+### ACLs oder Grants – was ist der Unterschied?
+
+Headscale unterstützt zwei Arten von Zugriffsregeln:
+
+**Grants (empfohlen)** – das neuere Modell:
+- Ersetzen das klassische ACL-System.
+- Arbeiten mit Rollen und Capabilities.
+- Werden von Headscale als Zukunft empfohlen.
+- Sind flexibler bei wachsenden Netzen.
+- Für den Einstieg etwas abstrakter, aber langfristig der bessere Weg.
+
+**ACLs (Access Control Lists)** – das klassische, einfachere Modell:
+- Arbeiten mit Tags (`tag:server`, `tag:nas`) und Benutzern.
+- Jede Regel sagt explizit: „Wer darf was auf welchem Ziel?"
+- Leichter zu verstehen für den ersten Durchstieg.
+- Gut geeignet, wenn du erstmal verstehen willst, wie Zugriffsregeln funktionieren.
+
+**Meine Empfehlung:** Wenn du dich einarbeiten willst, starte mit Grants – das ist der von Headscale empfohlene Weg. Wenn dir die Syntax zu abstrakt ist, sind klassische ACLs ein bewusst einfacher Einstieg und für kleine Netze völlig ausreichend. Beide Wege sind valide – wichtig ist, dass du überhaupt Regeln setzt.
+
 ---
 
 ## Schritt 6: Einfache Policy-Datei anlegen
@@ -255,18 +317,11 @@ Ein einfacher Startpunkt:
 
 Das Beispiel ist bewusst klein. Es zeigt drei Dinge:
 
-1. Der Benutzer `homelab` darf Geräte mit diesen Tags registrieren.
-2. Persönliche Geräte dürfen nur auf konkrete Homelab-Dienste.
+1. Der Benutzer `homelab` darf Geräte mit diesen Tags registrieren (tagOwners).
+2. Persönliche Geräte dürfen nur auf konkrete Homelab-Dienste (ACLs).
 3. Server bekommen keine pauschale Freigabe auf alle anderen Geräte.
 
-Wenn du einen Server mit Tag verbinden willst, nutzt du beim Login zusätzlich `--advertise-tags`:
-
-```bash
-sudo tailscale up \
-  --login-server https://headscale.deine-domain.de \
-  --authkey <PRE_AUTH_KEY> \
-  --advertise-tags=tag:server
-```
+Wenn du einen Server mit Tag versehen willst, nutze den Pre-Auth-Key mit `--tags` (siehe Schritt 3 oben). Dann verbindet sich der Server automatisch mit dem passenden Tag.
 
 ---
 
@@ -327,11 +382,13 @@ Typische Ursachen:
 - `policy.path` zeigt auf die falsche Datei
 - Headscale wurde nach Änderung nicht neu geladen
 - deine Gruppe enthält mehr Nutzer/Geräte als gedacht
-- `*: *` beziehungsweise `*:*` wurde zu früh als Bequemlichkeitsregel genutzt
+- `*:*` wurde zu früh als Bequemlichkeitsregel genutzt
 
 ---
 
-## Optional: Subnet-Router fürs LAN
+## Optional für später: Subnet-Router fürs LAN
+
+> **Das ist optional und kein Pflichtschritt.** Verbinde erst zwei normale Clients, teste Ping und SSH, dann kommt Routing.
 
 Ein Subnet-Router ist ein Gerät im Headscale-Netz, das zusätzlich dein normales LAN erreichbar macht. Das ist nützlich, wenn du Geräte erreichen willst, auf denen kein Tailscale läuft: Drucker, Switch, IP-Kamera oder ältere Weboberflächen.
 
@@ -360,8 +417,6 @@ Auf dem Client, der die Route nutzen soll:
 ```bash
 sudo tailscale set --accept-routes
 ```
-
-Setze Subnet-Router nicht als ersten Schritt ein. Verbinde erst zwei normale Clients, teste Ping und SSH, dann kommt Routing.
 
 ---
 
@@ -431,7 +486,7 @@ Für einen Test mit zwei Geräten nicht zwingend. Für ein echtes Homelab: ja. O
 
 ### Soll ich ACLs oder Grants verwenden?
 
-Headscale unterstützt beides. Die Headscale-Dokumentation empfiehlt Grants, weil Tailscale ACLs als älteres Modell behandelt. Für Einsteiger sind klassische ACLs aber leichter zu verstehen und reichen für den Start.
+Headscale unterstützt beides. Klassische ACLs sind für Einsteiger leichter zu verstehen und reichen für den Start. Grants sind das neuere Modell, das mehr Flexibilität bietet, aber auch komplexer ist. Lies die detaillierte Erklärung im Abschnitt „Warum ACLs wichtig sind" weiter oben.
 
 ### Kann ich Headscale ohne öffentliche Domain nutzen?
 
@@ -445,7 +500,7 @@ Ja. Du nutzt die offiziellen Tailscale-Clients, stellst aber einen eigenen Login
 
 ## Nächster Schritt
 
-Wenn Clients und ACLs laufen, lohnt sich als nächstes ein sauberer Subnet-Router-Artikel: ein Gerät im Headscale-Netz macht ein ganzes VLAN erreichbar, ohne dass du Tailscale auf jedem einzelnen Gerät installieren musst.
+Wenn Clients und ACLs laufen, lohnt sich als nächstes ein sauberer Subnet-Router-Artikel: Ein Gerät im Headscale-Netz macht ein ganzes VLAN erreichbar, ohne dass du Tailscale auf jedem einzelnen Gerät installieren musst.
 
 Bis dahin reicht diese Reihenfolge:
 
@@ -468,5 +523,7 @@ Bis dahin reicht diese Reihenfolge:
 - [ ] `policy.path` in Headscale setzen
 - [ ] erlaubte und blockierte Zugriffe testen
 
-**Einrichten wenn:** du mehrere Homelab-Geräte sicher verbinden willst und bereit bist, die Zugriffsregeln selbst zu pflegen.  
+---
+
+**Einrichten wenn:** du mehrere Homelab-Geräte sicher verbinden willst und bereit bist, die Zugriffsregeln selbst zu pflegen.
 **Nicht einrichten wenn:** du nur einen einzelnen Dienst erreichen willst und eine einfache WireGuard-Verbindung bereits zuverlässig läuft.
