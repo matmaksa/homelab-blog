@@ -11,7 +11,7 @@ ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
 draft = true
-source_draft = '/root/hermes/review-queue/blog/2026-07-08-blog-review-modellrouting.md'
+source_draft = 'review-queue/blog/2026-07-08-blog-review-modellrouting.md'
 
 # Preview Classification
 preview_content_type = "review_doc"
