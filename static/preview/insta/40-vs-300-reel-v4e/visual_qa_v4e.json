@@ -1,0 +1,116 @@
+[
+  {
+    "file": "slide_01_v4e.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside_boxes": true,
+    "out_of_bounds": [],
+    "no_slide_numbers": true,
+    "top_labels_removed": true,
+    "no_top_branding_or_category_chip": true,
+    "footer_consistent": true,
+    "footer_short": true,
+    "futro_rule_ok": true,
+    "cta_visible": true,
+    "affiliate_removed_from_slide": true,
+    "background": "bg_hook.png",
+    "bullet_count": 0
+  },
+  {
+    "file": "slide_02_v4e.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside_boxes": true,
+    "out_of_bounds": [],
+    "no_slide_numbers": true,
+    "top_labels_removed": true,
+    "no_top_branding_or_category_chip": true,
+    "footer_consistent": true,
+    "footer_short": true,
+    "futro_rule_ok": true,
+    "cta_visible": true,
+    "affiliate_removed_from_slide": true,
+    "background": "bg_40eur.png",
+    "bullet_count": 3
+  },
+  {
+    "file": "slide_03_v4e.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside_boxes": true,
+    "out_of_bounds": [],
+    "no_slide_numbers": true,
+    "top_labels_removed": true,
+    "no_top_branding_or_category_chip": true,
+    "footer_consistent": true,
+    "footer_short": true,
+    "futro_rule_ok": true,
+    "cta_visible": true,
+    "affiliate_removed_from_slide": true,
+    "background": "bg_40eur.png",
+    "bullet_count": 3
+  },
+  {
+    "file": "slide_04_v4e.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside_boxes": true,
+    "out_of_bounds": [],
+    "no_slide_numbers": true,
+    "top_labels_removed": true,
+    "no_top_branding_or_category_chip": true,
+    "footer_consistent": true,
+    "footer_short": true,
+    "futro_rule_ok": true,
+    "cta_visible": true,
+    "affiliate_removed_from_slide": true,
+    "background": "bg_300eur.png",
+    "bullet_count": 3
+  },
+  {
+    "file": "slide_05_v4e.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside_boxes": true,
+    "out_of_bounds": [],
+    "no_slide_numbers": true,
+    "top_labels_removed": true,
+    "no_top_branding_or_category_chip": true,
+    "footer_consistent": true,
+    "footer_short": true,
+    "futro_rule_ok": true,
+    "cta_visible": true,
+    "affiliate_removed_from_slide": true,
+    "background": "bg_300eur.png",
+    "bullet_count": 3
+  },
+  {
+    "file": "slide_06_v4e.png",
+    "size": [
+      1080,
+      1920
+    ],
+    "text_inside_boxes": true,
+    "out_of_bounds": [],
+    "no_slide_numbers": true,
+    "top_labels_removed": true,
+    "no_top_branding_or_category_chip": true,
+    "footer_consistent": true,
+    "footer_short": true,
+    "futro_rule_ok": true,
+    "cta_visible": true,
+    "affiliate_removed_from_slide": true,
+    "background": "bg_decision.png",
+    "bullet_count": 3
+  }
+]
