@@ -1,0 +1,141 @@
+/* ============================================================
+   ARTICLE CARDS – Wiederverwendbare Karten-Komponente
+   ============================================================ */
+
+.article-card {
+  background: var(--hl-bg-card);
+  border-radius: var(--hl-radius);
+  overflow: hidden;
+  box-shadow: var(--hl-shadow);
+  transition: box-shadow var(--hl-transition), transform var(--hl-transition);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--hl-border);
+  position: relative;
+}
+
+.article-card:hover {
+  box-shadow: var(--hl-shadow-md);
+  transform: translateY(-2px);
+}
+
+@media (hover: none) {
+  .article-card:hover {
+    transform: none;
+    box-shadow: var(--hl-shadow);
+  }
+}
+
+/* --- Card Image --- */
+.article-card-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--hl-bg-body);
+}
+
+.article-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+/* Fallback wenn kein Bild */
+.article-card-image .card-img-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hl-primary-light);
+  color: var(--hl-primary);
+  font-size: 2rem;
+}
+
+/* --- Card Body --- */
+.article-card-body {
+  padding: var(--hl-space-md) var(--hl-space-lg) var(--hl-space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Card Category --- */
+.article-card-category {
+  font-size: var(--hl-text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--hl-primary);
+  margin-bottom: var(--hl-space-sm);
+}
+
+/* Kategorie-Farben */
+.cat-hardware .article-card-category { color: var(--cat-hardware); }
+.cat-software .article-card-category { color: var(--cat-software); }
+.cat-smarthome .article-card-category { color: var(--cat-smarthome); }
+.cat-virtualisierung .article-card-category { color: var(--cat-virtualisierung); }
+.cat-homelab .article-card-category { color: var(--cat-homelab); }
+
+/* --- Card Title --- */
+.article-card-title {
+  font-size: var(--hl-text-lg);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--hl-text);
+  margin: 0 0 var(--hl-space-sm);
+}
+
+.article-card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--hl-transition);
+}
+
+.article-card-title a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.article-card-title a:hover {
+  color: var(--hl-primary);
+}
+
+/* --- Card Excerpt --- */
+.article-card-excerpt {
+  font-size: var(--hl-text-sm);
+  line-height: 1.55;
+  color: var(--hl-text-body);
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: var(--hl-space-md);
+}
+
+/* --- Card Meta --- */
+.article-card-meta {
+  font-size: var(--hl-text-xs);
+  color: var(--hl-text-light);
+  display: flex;
+  align-items: center;
+  gap: var(--hl-space-sm);
+  margin-top: auto;
+  padding-top: var(--hl-space-sm);
+  border-top: 1px solid var(--hl-border-light);
+  position: relative;
+  z-index: 2;
+}
+
+.article-card-meta time {
+  white-space: nowrap;
+}
+
+.article-card-meta .reading-time {
+  white-space: nowrap;
+}

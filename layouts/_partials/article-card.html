@@ -10,24 +10,26 @@
   {{- $img = index .Params.images 0 | absURL }}
 {{- end }}
 <article class="article-card{{ if $cat }} cat-{{ $cat | urlize }}{{ end }}">
-  {{- if $img }}
   <div class="article-card-image">
-    <a href="{{ .Permalink }}" aria-label="{{ .Title | plainify }}">
-      <img src="{{ $img }}" alt="{{ .Title | plainify }}" loading="lazy" decoding="async">
-    </a>
+    {{- if $img }}
+    <img src="{{ $img }}" alt="{{ .Title | plainify }}" loading="lazy" decoding="async" width="400" height="225">
+    {{- else }}
+    <div class="card-img-fallback" aria-hidden="true">⚡</div>
+    {{- end }}
   </div>
-  {{- end }}
   <div class="article-card-body">
     {{- if $cat }}
     <div class="article-card-category">{{ $cat }}</div>
     {{- end }}
-    <h3 class="article-card-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
-    <div class="article-card-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 150 }}</div>
+    <h3 class="article-card-title">
+      <a href="{{ .Permalink }}" aria-label="{{ .Title | plainify }}">{{ .Title }}</a>
+    </h3>
+    <p class="article-card-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 150 }}</p>
     <div class="article-card-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
       {{- if (.Param "ShowReadingTime") }}
-      <span>·</span>
-      <span>{{ .ReadingTime }} Min.</span>
+      <span aria-hidden="true">·</span>
+      <span class="reading-time">{{ .ReadingTime }} Min.</span>
       {{- end }}
     </div>
   </div>

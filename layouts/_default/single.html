@@ -1,13 +1,14 @@
 {{- define "main" }}
 
+<main id="main-content" class="main-content" role="main">
 <article class="post-single">
   <header class="post-header">
     {{- partial "breadcrumbs.html" . }}
-    <h1 class="post-title entry-hint-parent">
+    <h1 class="post-title">
       {{ .Title }}
       {{- if .Draft }}
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+      <span class="entry-hint" title="Entwurf">
+        <svg xmlns="http://www.w3.org/2000/svg" height="28" viewBox="0 -960 960 960" fill="currentColor" aria-hidden="true">
           <path d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
         </svg>
       </span>
@@ -24,7 +25,7 @@
         {{- range . }}
         <a href="{{ "/categories/" | absLangURL }}{{ . | urlize }}/" class="post-cat">{{ . }}</a>
         {{- end }}
-        <span>·</span>
+        <span class="meta-sep" aria-hidden="true">·</span>
       {{- end }}
       {{- partial "post_meta.html" . -}}
       {{- partial "translation_list.html" . -}}
@@ -49,9 +50,17 @@
     {{- end }}
     {{- if $coverImg }}
     <div class="post-cover">
-      <img src="{{ $coverImg }}" alt="{{ .Title | plainify }}" loading="eager">
+      <img src="{{ $coverImg }}" alt="Titelbild: {{ .Title | plainify }}" loading="eager" decoding="async">
     </div>
     {{- end }}
+  {{- end }}
+
+  {{- /* Affiliate Notice (check if article has affiliate links) */}}
+  {{- if .Params.affiliateLinks | default false }}
+  <div class="affiliate-notice" role="note">
+    <span class="affiliate-notice-icon" aria-hidden="true">🔗</span>
+    <span><strong>Affiliate-Hinweis:</strong> Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich eine kleine Provision. Für dich entstehen keine zusätzlichen Kosten.</span>
+  </div>
   {{- end }}
 
   {{- if (.Param "ShowToc") }}
@@ -61,7 +70,7 @@
   {{- end }}
 
   {{- if .Content }}
-  <div class="post-content md-content">
+  <div class="post-content">
     {{- if not (.Param "disableAnchoredHeadings") }}
     {{- partial "anchored_headings.html" .Content -}}
     {{- else }}{{ .Content }}{{ end }}
@@ -93,5 +102,6 @@
   {{- partial "comments.html" . }}
   {{- end }}
 </article>
+</main>
 
 {{- end }}{{/* end main */}}

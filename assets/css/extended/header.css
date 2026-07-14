@@ -1,0 +1,342 @@
+/* ============================================================
+   HEADER & NAVIGATION – Magazin-Stil
+   ============================================================ */
+
+/* --- Header --- */
+.site-header {
+  background: var(--hl-bg-card);
+  border-bottom: 1px solid var(--hl-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  height: var(--hl-header-height);
+}
+
+.header-inner {
+  max-width: var(--hl-content-width);
+  margin: 0 auto;
+  padding: 0 var(--hl-space-lg);
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: var(--hl-space-md);
+}
+
+/* --- Brand / Logo --- */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--hl-space-sm);
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-brand-icon img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.header-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.header-brand-name {
+  font-size: var(--hl-text-lg);
+  font-weight: 700;
+  color: var(--hl-text);
+  letter-spacing: -0.02em;
+}
+
+.header-brand-tagline {
+  font-size: var(--hl-text-xs);
+  font-weight: 600;
+  color: var(--hl-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .header-brand-tagline {
+    display: block;
+  }
+}
+
+/* --- Navigation (Desktop) --- */
+.main-nav {
+  display: none;
+  align-items: center;
+  margin-left: auto;
+}
+
+@media (min-width: 1024px) {
+  .main-nav {
+    display: flex;
+  }
+}
+
+.main-nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2px;
+}
+
+.main-nav-list li a {
+  display: block;
+  padding: 8px 12px;
+  font-size: var(--hl-text-sm);
+  font-weight: 500;
+  color: var(--hl-text-muted);
+  text-decoration: none;
+  border-radius: var(--hl-radius-sm);
+  transition: color var(--hl-transition), background var(--hl-transition);
+  position: relative;
+  white-space: nowrap;
+}
+
+.main-nav-list li a::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: var(--hl-primary);
+  transform: scaleX(0);
+  transition: transform var(--hl-transition);
+}
+
+.main-nav-list li a:hover,
+.main-nav-list li a:focus-visible {
+  color: var(--hl-primary);
+  background: var(--hl-primary-light);
+}
+
+.main-nav-list li a:hover::after,
+.main-nav-list li a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.main-nav-list li a.active {
+  color: var(--hl-primary);
+  font-weight: 600;
+}
+
+.main-nav-list li a.active::after {
+  transform: scaleX(1);
+}
+
+/* --- Header Actions (Search + Theme Toggle) --- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--hl-space-xs);
+  margin-left: auto;
+}
+
+@media (min-width: 1024px) {
+  .header-actions {
+    margin-left: 0;
+  }
+}
+
+/* --- Icon Buttons --- */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: var(--hl-radius-pill);
+  color: var(--hl-text-muted);
+  cursor: pointer;
+  transition: background var(--hl-transition), color var(--hl-transition);
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  background: var(--hl-primary-light);
+  color: var(--hl-primary);
+}
+
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+/* --- Hamburger Button (Mobile) --- */
+.hamburger-btn {
+  display: flex;
+}
+
+@media (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+}
+
+/* --- Mobile Menu Overlay --- */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.mobile-menu-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 80vw);
+  background: var(--hl-bg-card);
+  border-left: 1px solid var(--hl-border);
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 250ms ease;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.mobile-menu.open {
+  transform: translateX(0);
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--hl-space-md) var(--hl-space-lg);
+  border-bottom: 1px solid var(--hl-border);
+}
+
+.mobile-menu-title {
+  font-size: var(--hl-text-lg);
+  font-weight: 700;
+  color: var(--hl-text);
+  margin: 0;
+}
+
+.mobile-menu-close {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: var(--hl-radius-pill);
+  color: var(--hl-text-muted);
+  cursor: pointer;
+}
+
+.mobile-menu-close:hover {
+  background: var(--hl-primary-light);
+  color: var(--hl-primary);
+}
+
+.mobile-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: var(--hl-space-sm) 0;
+}
+
+.mobile-menu-list li a {
+  display: flex;
+  align-items: center;
+  padding: 14px var(--hl-space-lg);
+  font-size: var(--hl-text-base);
+  font-weight: 500;
+  color: var(--hl-text-body);
+  text-decoration: none;
+  transition: background var(--hl-transition), color var(--hl-transition);
+  gap: var(--hl-space-sm);
+}
+
+.mobile-menu-list li a:hover,
+.mobile-menu-list li a:focus-visible {
+  background: var(--hl-primary-light);
+  color: var(--hl-primary);
+}
+
+.mobile-menu-list li a.active {
+  color: var(--hl-primary);
+  font-weight: 600;
+}
+
+.mobile-menu-footer {
+  margin-top: auto;
+  padding: var(--hl-space-md) var(--hl-space-lg);
+  border-top: 1px solid var(--hl-border);
+  font-size: var(--hl-text-sm);
+  color: var(--hl-text-light);
+  display: flex;
+  gap: var(--hl-space-md);
+  flex-wrap: wrap;
+}
+
+.mobile-menu-footer a {
+  color: var(--hl-text-light);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.mobile-menu-footer a:hover {
+  color: var(--hl-text);
+}
+
+/* --- Scrollbar im mobilen Menü --- */
+.mobile-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: var(--hl-border);
+  border-radius: 2px;
+}
+
+/* --- Mobile Nav als horizontales Scrollband (alt, nur Fallback) --- */
+@media (max-width: 1023px) {
+  .main-nav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* --- Theme Toggle Icons --- */
+.theme-icon-light,
+.theme-icon-dark {
+  display: none;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+  display: block;
+}
+
+[data-theme="light"] .theme-icon-light {
+  display: block;
+}

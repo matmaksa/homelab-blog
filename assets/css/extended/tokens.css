@@ -1,0 +1,122 @@
+/* ============================================================
+   DESIGN TOKENS – Homelab Guide (Magazin-Stil)
+   Inspiriert von raspberry.tips, aber eigenständige Marke
+   ============================================================ */
+
+:root {
+  /* --- Brand Colors --- */
+  --hl-primary:       #1a56db;   /* Kräftiges Homelab-Blau */
+  --hl-primary-dark:  #1341b0;   /* Dunkler für Hover */
+  --hl-primary-light: #e8f0fe;   /* Hell für Hintergründe */
+  --hl-accent:        #059669;   /* Technischer Akzent (Grün) */
+  --hl-accent-soft:   #d1fae5;   /* Heller Akzent-Hintergrund */
+
+  /* --- Text Colors --- */
+  --hl-text:          #111827;   /* Sehr dunkel – fast schwarz */
+  --hl-text-body:     #374151;   /* Fließtext */
+  --hl-text-muted:    #6b7280;   /* Meta-Infos */
+  --hl-text-light:    #9ca3af;   /* Sehr dezent */
+
+  /* --- Backgrounds --- */
+  --hl-bg-body:       #f3f4f6;   /* Heller grau-blauer Seitenhintergrund */
+  --hl-bg-card:       #ffffff;   /* Weiße Inhaltsflächen */
+  --hl-bg-alt:        #e5e7eb;   /* Alternativer Hintergrund */
+  --hl-bg-code:       #1f2937;   /* Codeblock-Hintergrund */
+
+  /* --- Borders & Shadows --- */
+  --hl-border:        #e5e7eb;
+  --hl-border-light:  #f3f4f6;
+  --hl-shadow-sm:     0 1px 2px rgba(0,0,0,0.04);
+  --hl-shadow:        0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --hl-shadow-md:     0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --hl-shadow-lg:     0 10px 25px -5px rgba(0,0,0,0.08), 0 4px 10px -5px rgba(0,0,0,0.04);
+
+  /* --- Radius --- */
+  --hl-radius:        10px;
+  --hl-radius-sm:     6px;
+  --hl-radius-pill:   9999px;
+
+  /* --- Spacing --- */
+  --hl-space-xs:      4px;
+  --hl-space-sm:      8px;
+  --hl-space-md:      16px;
+  --hl-space-lg:      24px;
+  --hl-space-xl:      32px;
+  --hl-space-2xl:     48px;
+  --hl-space-3xl:     64px;
+
+  /* --- Layout --- */
+  --hl-content-width:  1260px;
+  --hl-content-narrow: 740px;
+  --hl-sidebar-width:  280px;
+  --hl-header-height:  72px;
+
+  /* --- Typography (System-Font-Stack) --- */
+  --hl-font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
+  --hl-font-mono:  'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+
+  /* --- Font Sizes --- */
+  --hl-text-xs:       0.75rem;   /* 12px */
+  --hl-text-sm:       0.875rem;  /* 14px */
+  --hl-text-base:     1rem;      /* 16px */
+  --hl-text-lg:       1.125rem;  /* 18px */
+  --hl-text-xl:       1.25rem;   /* 20px */
+  --hl-text-2xl:      1.5rem;    /* 24px */
+  --hl-text-3xl:      1.875rem;  /* 30px */
+  --hl-text-4xl:      2.25rem;   /* 36px */
+
+  /* --- Line Heights --- */
+  --hl-leading-tight: 1.25;
+  --hl-leading-normal: 1.5;
+  --hl-leading-relaxed: 1.7;
+
+  /* --- Breakpoints (für Media Queries) --- */
+  /* Mobile first */
+  /* sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1440px */
+
+  /* --- Focus States --- */
+  --hl-focus-ring: 0 0 0 3px rgba(26, 86, 219, 0.35);
+
+  /* --- Transitions --- */
+  --hl-transition: 200ms ease;
+}
+
+/* ============================================================
+   DARK MODE – Bewusst gestaltet, nicht invertiert
+   ============================================================ */
+[data-theme="dark"] {
+  --hl-primary:       #60a5fa;
+  --hl-primary-dark:  #93bbfc;
+  --hl-primary-light: #1e293b;
+  --hl-accent:        #34d399;
+  --hl-accent-soft:   #064e3b;
+
+  --hl-text:          #f1f5f9;
+  --hl-text-body:     #cbd5e1;
+  --hl-text-muted:    #94a3b8;
+  --hl-text-light:    #64748b;
+
+  --hl-bg-body:       #0b1120;
+  --hl-bg-card:       #111827;
+  --hl-bg-alt:        #1e293b;
+  --hl-bg-code:       #0f172a;
+
+  --hl-border:        #1e293b;
+  --hl-border-light:  #1e293b;
+
+  --hl-shadow-sm:     0 1px 2px rgba(0,0,0,0.2);
+  --hl-shadow:        0 1px 3px rgba(0,0,0,0.3);
+  --hl-shadow-md:     0 4px 6px rgba(0,0,0,0.3);
+  --hl-shadow-lg:     0 10px 25px -5px rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   KATEGORIE-FARBEN
+   ============================================================ */
+:root {
+  --cat-hardware:         #ea580c;   /* Orange */
+  --cat-software:         var(--hl-primary);
+  --cat-smarthome:        #059669;   /* Grün */
+  --cat-virtualisierung:  #7c3aed;   /* Violett */
+  --cat-homelab:          #2563eb;   /* Blau */
+}

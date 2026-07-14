@@ -1,10 +1,13 @@
+<!-- GoatCounter Analytics -->
 <script data-goatcounter="https://matmaksa.goatcounter.com/count"
   async src="//gc.zgo.at/count.js"></script>
 
+<!-- Robots / Noindex -->
 {{- if .Params.noindex | default .Params.robotsNoIndex | default false }}
 <meta name="robots" content="noindex, nofollow">
 {{- end }}
 
+<!-- Preview Banner Styling -->
 {{- if .Params.preview }}
 <style>
   .preview-banner {
@@ -43,3 +46,6 @@
   }
 </style>
 {{- end }}
+
+<!-- Main JS -->
+<script src="{{ "/js/main.js" | relURL }}" defer></script>
