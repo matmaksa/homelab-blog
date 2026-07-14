@@ -45,7 +45,7 @@ risk_level = "medium"
 |---|---|
 | Proxmox-Version | 9.2.4 (Kernel 7.0.14-4-pve) |
 | RAM gesamt | 3.730.072 kB (3,6 GiB) |
-| RAM belegt (Host) | **1,3 GiB** |
+| RAM belegt (Host, Leerlauf) | **1,3 GiB** |
 | RAM verfügbar | 2,2 GiB |
 | Swap | 7,2 GiB (0 B genutzt) |
 | Load Average | 0,09 / 0,04 / 0,08 |
@@ -53,33 +53,34 @@ risk_level = "medium"
 | SSD thin-pool | 17,2 GB für Gäste |
 | USB-Backup-HDD | 931 GB (870 GB frei) |
 
-**Wichtig:** Proxmox allein beansprucht bereits ~1,3 GB RAM. Für Gäste bleiben effektiv **2,2 GB**. Das ist nicht viel.
+**Wichtig:** Proxmox allein beansprucht bereits ~1,3 GB RAM. Für Gäste bleiben effektiv **2,2 GB**. Das ist nicht viel. Ein LXC verbraucht aus Host-Sicht inklusive Overhead und Cache rund **110 MB** (cgroup memory.current), auch wenn das Gast-System selbst nur 16 MB ausweist.
 
-## Sinnvolle Dienste im Kaufzustand
+## Sinnvolles Profil im Kaufzustand (4 GB)
 
-- **Ein DNS-Blocker** (Pi-hole oder AdGuard Home, ~16–50 MB)
-- **Ein kleiner Test-LXC** (zeitweise, ~256–512 MB)
-- **USB-Backups** der Gäste
-- **Lern- und Experimentierplattform**
+- **Ein DNS-Blocker** (Pi-hole, ~110 MB Host-Effekt inkl. Cache)
+- **Ein kleiner Test-LXC** (zeitweise, ~256–512 MB konfiguriert)
+- **USB-Backups** der Gäste **Lern- und Experimentierplattform**
+
+**Nicht möglich / nicht empfohlen im Kaufzustand:**
+- Mehrere parallele VMs
+- Produktive Nextcloud-Instanz
+- KI-/Ollama-Modelle
+- Immich (Foto-Management mit ML)
+- NAS-Ersatz
+- Media-Transcoding
 
 ## Grenzen des Kaufzustands
 
-> **Nicht möglich / nicht empfohlen im Kaufzustand:**
-> - KI-/Ollama-Modelle
-> - Immich (Foto-Management mit ML)
-> - Produktive Nextcloud-Instanz
-> - Mehrere parallele VMs
-> - NAS-Ersatz
-> - Media-Transcoding
+Die 4 GB RAM sind die engste Ressource. Zwar können die meisten Systeme auf dem Papier mit 512 MB konfiguriert werden, doch der tatsächliche Host-Effekt (inkl. Dateicache und LXC-Overhead) liegt höher. Für dauerhaften Betrieb mehrerer Dienste sind 8 GB RAM empfehlenswert.
 
 ## Upgrade-Pfad
 
 ### Empfohlen: 8 GB RAM (~15–20 Euro)
 
-- Mehrere kleine LXC gleichzeitig
-- Reverse Proxy als Zusatzprojekt
-- Nextcloud-Testinstanz
-- Deutlich bessere Reserve für Dateicache
+- Mehrere kleine LXC gleichzeitig betreibbar
+- Reverse Proxy als Zusatzprojekt möglich
+- Nextcloud-Testinstanz (eingeschränkt)
+- Deutlich bessere Reserve für Dateicache und Updates
 
 ### Separates Datenlaufwerk
 
@@ -90,7 +91,5 @@ risk_level = "medium"
 
 ## Fazit
 
-Der Fujitsu Futro S7010 ist ein **sparsamer Einsteiger-Proxmox-Host** für 40 Euro. Im Kaufzustand mit 4 GB RAM laufen **ein bis zwei kleine LXC** stabil. Wer mehrere Dienste betreiben will, sollte **8 GB RAM** nachrüsten. Ein **separates Datenlaufwerk** ist für jede Form der Datenablage Pflicht.
-
-Kein Wunder-Server, aber ein **ehrliches Lernsystem** für den Homelab-Einstieg.
+Der Fujitsu Futro S7010 ist ein **sparsamer Einsteiger-Proxmox-Host** für 40 Euro. Im Kaufzustand mit 4 GB RAM laufen stabil **ein DNS-LXC und zeitweise ein zweiter kleiner Test-LXC**. Wer mehrere Dienste dauerhaft betreiben will, sollte **8 GB RAM** nachrüsten. Ein **separates Datenlaufwerk** ist für jede Form der Datenablage Pflicht.
 +++

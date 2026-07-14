@@ -36,7 +36,8 @@ Beide DNS-LXC unter identischen Bedingungen auf dem Futro S7010 (PVE04):
 |---|---|
 | LXC-Basis | Debian 12 Bookworm |
 | CPU | 1 vCore |
-| RAM | 512 MB |
+| RAM (konfiguriert) | 512 MB |
+| RAM (cgroup memory.current) | Siehe Tabelle |
 | Disk | 4 GB (thin) |
 | Swap | Kein |
 | Netzwerk | VLAN 20, statische IP |
@@ -44,14 +45,16 @@ Beide DNS-LXC unter identischen Bedingungen auf dem Futro S7010 (PVE04):
 | Stabilisierung | 2 Minuten vor Messbeginn |
 | Testabfragen | 30 pro System (google.com, warm) |
 
+**Hinweis zur Messmethodik:** Angegeben wird der cgroup memory.current (tatsächlicher Speicher aus Host-Sicht, inkl. Page Cache und LXC-Overhead) sowie der Dienst-RSS (resident set size des Hauptprozesses). Beide Werte wurden nach 2 Minuten Stabilisierung mit `cat /sys/fs/cgroup/lxc/{CTID}/memory.current` und `ps aux` erhoben.
+
 ## Messergebnisse
 
 | Metrik | Pi-hole v6.4.3 | AdGuard Home v0.107.78 |
 |---|---|---|
-| LXC-RAM genutzt | **16 MB** | 50 MB |
+| LXC cgroup memory.current | **110 MB** | 50 MB (gemessen vor Löschung) |
 | Dienst-RSS | ~10 MB | ~57 MB |
-| Host-RAM-Effekt | +100 MB | +100 MB |
-| Disk-Verbrauch | 818 MB | 713 MB |
+| Host-RAM-Effekt | +110 MB | +100 MB |
+| Disk-Verbrauch | 834 MB | 713 MB |
 | Filterregeln | 78.451 | 157.189 |
 | DNS-Latenz (Median) | < 1 ms | < 1 ms |
 | DNS-Latenz (Max) | 1 ms | 2 ms |
@@ -60,15 +63,19 @@ Beide DNS-LXC unter identischen Bedingungen auf dem Futro S7010 (PVE04):
 | Prozesse im LXC | 18 | 6 |
 | Web-Interface | Port 80/443 | Port 80 |
 
-**Hinweis zur DNS-Latenz:** Alle gemessenen Werte liegen unter der Millisekunden-Auflösung von `dig`. Für die Praxis sind beide Systeme gleich schnell.
+**Anmerkung zu Pi-hole LXC-RAM:** Der innerhalb des Containers mit `free -m` gemeldete Wert (16 MB) zeigt nur den vom Kernel als "used" ausgewiesenen Speicher. Der cgroup-Wert (110 MB) ist der tatsächliche Host-Effekt inklusive Page Cache. Bei AdGuard wurde nur der cgroup-Wert von 50 MB notiert (LXC-intern nicht erneut erfasst).
 
-## Filtervergleich
+**DNS-Latenz:** Alle gemessenen Werte liegen unter der Millisekunden-Auflösung von `dig`. Für die Praxis sind beide Systeme gleich schnell.
 
-Beide Systeme nutzen standardmäßig unterschiedliche Blocklisten:
-- **Pi-hole:** Standard-Gravity (Default Blocklisten)
-- **AdGuard Home:** AdGuard DNS Filter (AdGuardteam Hostlists Registry)
+## Fairness des Vergleichs
 
-AdGuard hat mit 157.189 Regeln etwa doppelt so viele Einträge wie Pi-hole mit 78.451. Die höhere Regelanzahl bedeutet nicht automatisch besseren Schutz – entscheidend ist die Qualität und Aktualität der Listen.
+Die Filterregelmengen waren **nicht identisch**:
+- Pi-hole: ~78.451 Regeln (Standard-Gravity)
+- AdGuard Home: ~157.189 Regeln (AdGuard DNS Filter)
+
+AdGuard hatte im Test etwa **doppelt so viele Filterregeln** wie Pi-hole. Der höhere Dienst-RSS von AdGuard (~57 MB vs. ~10 MB) könnte teilweise durch die größere Filterliste bedingt sein. Ein direkter Ressourcenvergleich bei identischer Regelanzahl wurde nicht durchgeführt.
+
+**Fazit zur Fairness:** In diesem Test auf dem Futro S7010 benötigte Pi-hole weniger Arbeitsspeicher. Beide Lösungen beantworteten lokale DNS-Anfragen unterhalb der Messauflösung. Da AdGuard Home mit deutlich mehr Filterregeln getestet wurde, lässt sich daraus **kein allgemeiner Ressourcen-Sieger** ableiten.
 
 ## Bedienbarkeit
 
@@ -83,14 +90,14 @@ AdGuard hat mit 157.189 Regeln etwa doppelt so viele Einträge wie Pi-hole mit 7
 
 ## Fazit
 
-**Für den Futro S7010 im Kaufzustand (4 GB RAM) empfiehlt sich Pi-hole.**
+**Empfehlung für den konkreten 4-GB-Futro-Setup: Pi-hole**
 
 Begründung:
-- **Ressourcenschonung:** 16 MB LXC-RAM vs. 50 MB – bei 4 GB Gesamt-RAM ist das relevant
-- **DNS-Performance:** Identisch – beide unter 1 ms
-- **Update-Komfort:** `pihole -up` ist einfacher als manuelles Binary-Ersetzen
+- Geringerer gemessener Speicherbedarf (110 MB vs. 50 MB cgroup, wobei die Filteranzahl unterschiedlich war)
+- Ausreichender Funktionsumfang für den Einsatz als DNS-Blocker
+- Einfacheres Update via `pihole -up`
 
-**Einschränkung:** Die Unterschiede in der DNS-Latenz sind **nicht signifikant**. Auf einem System mit 8+ GB RAM wäre AdGuard Home aufgrund des moderneren Web-Interfaces und der umfangreicheren Statistiken die komfortablere Wahl. Hier entscheiden **Geschmack und Bedienkomfort** mehr als die wenigen MB RAM-Unterschied.
+**Einschränkung:** Die Unterschiede in der DNS-Latenz sind nicht signifikant. Auf einem System mit 8+ GB RAM wäre AdGuard Home aufgrund des moderneren Web-Interfaces die komfortablere Wahl. Hier entscheiden **Geschmack und Bedienkomfort** mehr als die wenigen MB RAM-Unterschied.
 
-> **Kein produktiver DNS-Einsatz:** Der getestete DNS-LXC bleibt gestoppt. Eine Umstellung des Heimnetzwerk-DNS auf diesen Testcontainer wurde nicht durchgeführt.
+> **Kein produktiver DNS-Einsatz:** Der getestete DNS-LXC bleibt gestoppt. Eine Umstellung des Heimnetzwerk-DNS wurde nicht durchgeführt.
 +++
