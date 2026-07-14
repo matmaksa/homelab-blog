@@ -13,14 +13,26 @@
 <meta name="theme-color" content="#1a56db">
 {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | absURL }}">{{ end }}
 
+{{/* DARK MODE – frühe Initialisierung vor Rendering, exakt Blog-Schlüssel */}}
+<script>
+(function(){
+  var p=new URLSearchParams(window.location.search),t=p.get('mode');
+  if(!t)t=localStorage.getItem('pref-theme');
+  if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
+})();
+</script>
+
 {{/* Import blog design tokens + links page component CSS */}}
 {{ $tokens := resources.Get "css/extended/tokens.css" | resources.Minify | resources.Fingerprint }}
 {{ $linksCSS := resources.Get "css/extended/links.css" | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $tokens.Permalink }}">
 <link rel="stylesheet" href="{{ $linksCSS.Permalink }}">
 </head>
-<body>
-<div class="ll-container" role="main">
+<body class="links-page">
+<div class="ll-page">
+  <div class="ll-content-area">
+    <div class="ll-container" role="main">
   {{/* MARKENKOPF */}}
   <header class="ll-brand">
     <div class="ll-brand-icon" aria-hidden="true">
@@ -295,6 +307,8 @@
       </a>
     </div>
   </section>
+  </div>
+</div>
 </div>
 
 {{/* COMPAKTER FOOTER */}}
@@ -309,18 +323,5 @@
     <p class="ll-footer-copy">&copy; {{ now.Format "2006" }} Homelab Guide</p>
   </div>
 </footer>
-
-{{/* DARK MODE – übernimmt istenierende Einstellung */}}
-<script>
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var saved = params.get('mode') || localStorage.getItem('PaperMod.theme');
-  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var theme = saved || (prefersDark ? 'dark' : 'light');
-  if (theme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
-})();
-</script>
 </body>
 </html>
