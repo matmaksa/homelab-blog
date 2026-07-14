@@ -1,5 +1,6 @@
 ---
 title: "Mini PC fürs Homelab nach Budget: Von 40€ bis 300€ – welcher passt zu dir?"
+description: "Mini-PC-Vergleich fürs Homelab: Thin Client, NUC oder Workstation? Die beste Hardware für jedes Budget von 40€ bis 300€ mit Vor- und Nachteilen."
 date: 2026-06-19
 draft: false
 image: "featured.jpg"
