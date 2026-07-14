@@ -1,5 +1,6 @@
 ---
 title: "Fujitsu Futro S7010 als Homelab-Einstieg 2026: Der 40€-Server"
+description: "Fujitsu Futro S7010 als günstigen Homelab-Server nutzen: Proxmox, Docker, Pi-hole und mehr auf einem 40€-Thin-Client mit geringem Stromverbrauch."
 date: 2026-06-22
 draft: false
 image: "featured.jpg"

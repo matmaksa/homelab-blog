@@ -1,18 +1,21 @@
-{{- $cat := index .Params.categories 0 | default "" }}
+{{/* Article card – called with a page context directly */}}
+{{- $p := . }}
+{{- $cat := index $p.Params.categories 0 | default "" }}
 {{- $img := "" }}
-{{- if .Params.cover.image }}
-  {{- if or .Params.cover.relative (not (or (hasPrefix .Params.cover.image "/") (hasPrefix .Params.cover.image "http"))) }}
-    {{- $img = path.Join .RelPermalink .Params.cover.image }}
+{{- if $p.Params.cover.image }}
+  {{- if or $p.Params.cover.relative (not (or (hasPrefix $p.Params.cover.image "/") (hasPrefix $p.Params.cover.image "http"))) }}
+    {{- $img = path.Join $p.RelPermalink $p.Params.cover.image }}
   {{- else }}
-    {{- $img = .Params.cover.image | absURL }}
+    {{- $img = $p.Params.cover.image | absURL }}
   {{- end }}
-{{- else if (index .Params.images 0) }}
-  {{- $img = index .Params.images 0 | absURL }}
+{{- else if (index $p.Params.images 0) }}
+  {{- $img = index $p.Params.images 0 | absURL }}
 {{- end }}
+{{- $excerpt := partial "clean-excerpt.html" $p }}
 <article class="article-card{{ if $cat }} cat-{{ $cat | urlize }}{{ end }}">
   <div class="article-card-image">
     {{- if $img }}
-    <img src="{{ $img }}" alt="{{ .Title | plainify }}" loading="lazy" decoding="async" width="400" height="225">
+    <img src="{{ $img }}" alt="{{ $p.Title | plainify }}" loading="lazy" decoding="async" width="400" height="225">
     {{- else }}
     <div class="card-img-fallback" aria-hidden="true">⚡</div>
     {{- end }}
@@ -22,14 +25,16 @@
     <div class="article-card-category">{{ $cat }}</div>
     {{- end }}
     <h3 class="article-card-title">
-      <a href="{{ .Permalink }}" aria-label="{{ .Title | plainify }}">{{ .Title }}</a>
+      <a href="{{ $p.Permalink }}" aria-label="{{ $p.Title | plainify }}">{{ $p.Title }}</a>
     </h3>
-    <p class="article-card-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 150 }}</p>
+    {{- if $excerpt }}
+    <p class="article-card-excerpt">{{ $excerpt }}</p>
+    {{- end }}
     <div class="article-card-meta">
-      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
-      {{- if (.Param "ShowReadingTime") }}
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02.01.2006" }}</time>
+      {{- if ($p.Param "ShowReadingTime") }}
       <span aria-hidden="true">·</span>
-      <span class="reading-time">{{ .ReadingTime }} Min.</span>
+      <span class="reading-time">{{ $p.ReadingTime }} Min.</span>
       {{- end }}
     </div>
   </div>

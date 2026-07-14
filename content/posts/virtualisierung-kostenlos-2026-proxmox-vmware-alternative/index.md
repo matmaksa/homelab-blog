@@ -1,5 +1,6 @@
 ---
 title: "Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab"
+description: "Proxmox VE als kostenlose VMware-Alternative: Virtualisierung fürs Homelab mit VMs, LXC-Containern, Live-Migration und integriertem Backup."
 date: 2026-06-17
 draft: false
 image: "featured.jpg"

@@ -1,0 +1,30 @@
+{{/* 
+  clean-excerpt.html – Returns a clean excerpt for article cards
+  Prefers description from front matter, falls back to auto-summary
+*/}}
+{{- $excerpt := "" }}
+{{- if .Params.description }}
+  {{- $excerpt = .Params.description | plainify | htmlUnescape }}
+{{- else if .Summary }}
+  {{- $excerpt = .Summary | plainify | htmlUnescape }}
+  {{- /* Strip leading metadata patterns */}}
+  {{- /* Pattern 1: "Aktualisiert: ..." at start */}}
+  {{- $cleaned := $excerpt }}
+  {{- if hasPrefix $cleaned "Aktualisiert:" }}
+    {{- $cleaned = substr $cleaned 13 | strings.TrimPrefix " " }}
+    {{- /* Try to find where the content actually starts - look for double space or second sentence */}}
+    {{- $parts := split $cleaned "  " }}
+    {{- if ge (len $parts) 2 }}
+      {{- $cleaned = index $parts 1 }}
+    {{- end }}
+  {{- end }}
+  {{- $excerpt = $cleaned }}
+{{- end }}
+{{- /* Remove residual affiliate/Hinweis text */}}
+{{- $excerpt = replaceRE `Hinweis:[^.!?]*[.!?]` "" $excerpt }}
+{{- $excerpt = replaceRE `Als Amazon-Partner[^.]*\.` "" $excerpt }}
+{{- /* Trim whitespace/punctuation */}}
+{{- $excerpt = trim $excerpt " ,;.-" }}
+{{- $excerpt = replaceRE `\s+` " " $excerpt }}
+{{- $excerpt = trim $excerpt " ,;.-" }}
+{{- return ($excerpt | truncate 180) -}}
