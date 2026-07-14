@@ -83,6 +83,12 @@ Meine Einsteiger-Faustregel:
 
 > **Erster Dienst = LXC. Erstes vollständiges Betriebssystem = VM.**
 
+### In der Praxis getestet
+
+Auf meinem PVE04-Host mit einem Debian 12 LXC (2 GB RootFS, 512 MB RAM, 1 Core, unprivilegiert) lief die Einrichtung in unter 2 Minuten. Der Create-CT-Wizard in der Proxmox-WebGUI führt Schritt für Schritt durch: Template auswählen, Root-Passwort setzen, Speicher und Netzwerk konfigurieren, dann starten.
+
+Der offensichtlichste Unterschied im Alltag: Ein LXC startet in Sekunden, eine VM braucht je nach Gast-OS 10–30 Sekunden. Beim täglichen Betrieb merkt man nach dem Start kaum einen Unterschied.
+
 ## Schritt für Schritt: Ersten LXC-Container anlegen
 
 Der sicherste Start ist ein kleiner Debian- oder Ubuntu-LXC. Damit lernst du Proxmox, ohne direkt viel RAM oder Speicher zu verbrauchen.

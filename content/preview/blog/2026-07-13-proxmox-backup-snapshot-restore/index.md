@@ -100,7 +100,9 @@ Ein Backup braucht ein Ziel. Drei realistische Varianten für Einsteiger:
 
 **Wichtig:** Ein Backup auf derselben internen SSD schützt nicht vor Hardware-Defekt, hilft aber gegen Konfigurationsfehler, versehentliches Löschen und kaputte Updates.
 
-In meinem Homelab sichert Proxmox auf eine Synology DS720 per NFS-Mount. Das ist ein stabiles Setup, aber kein Pflichtkauf – jedes NAS oder eine zweite Festplatte reicht für den Einstieg.
+In meinem Homelab sichert Proxmox auf eine angeschlossene **1-TB-USB-Festplatte** (HGST HTS721010A9E630). Die Platte hängt am USB-Port des Proxmox-Hosts und ist als Directory Storage `Backup` eingebunden. Das ist ein einfaches, kostengünstiges externes Backup-Ziel – kein Pflichtkauf, aber ein stabiler Einstieg.
+
+Die Einrichtung zeige ich dir im Artikel **[USB-Festplatte als Proxmox-Backup-Ziel einrichten](/preview/blog/proxmox-usb-festplatte-backup-ziel/)**.
 
 ### 2. Backup über die Weboberfläche starten
 
@@ -188,7 +190,7 @@ Nicht zwingend für den ersten Lernschritt. Proxmox Backup Server ist ein guter 
 
 ### Kann ich auf eine USB-Festplatte sichern?
 
-Als Einstieg kann das funktionieren, wenn sie sauber eingebunden ist und zuverlässig erreichbar bleibt. Nicht ideal, aber besser als kein separates Ziel.
+Als Einstieg ja: Ich verwende eine 1-TB-USB-Festplatte als Backup-Ziel (siehe **[USB-Festplatte als Proxmox-Backup-Ziel einrichten](/preview/blog/proxmox-usb-festplatte-backup-ziel/)**). Die Platte ist per UUID im fstab eingetragen und als Proxmox-Storage eingerichtet. Nicht ideal (Single Point of Failure), aber deutlich besser als nur Snapshots oder Backups auf der System-SSD. Ein NAS oder Proxmox Backup Server ist der nächste sinnvolle Schritt.
 
 ### Muss ich jede VM und jeden LXC sichern?
 
@@ -196,8 +198,9 @@ Nein. Sichere zuerst die Dienste, deren Neuaufbau nervig oder zeitkritisch wäre
 
 ## Nächster Schritt
 
-Nach diesem Artikel bietet sich ein Praxisartikel an:
+Nach diesem Artikel bieten sich zwei Praxisartikel an:
 
+- **„[USB-Festplatte als Proxmox-Backup-Ziel einrichten](/preview/blog/proxmox-usb-festplatte-backup-ziel/)"** – sollte direkt nach dem Grundlagenartikel als Nächstes gelesen werden.
 - **„Proxmox Backup Server im Homelab: Lohnt sich ein zweiter Mini-PC?"** – wenn mehrere LXCs regelmäßig gesichert werden sollen.
 - Oder als Direkteinstieg: **„Pi-hole oder AdGuard im Proxmox-LXC einrichten"** – mit dem Wissen, vor dem Produktivbetrieb ein Backup zu erstellen.
 
