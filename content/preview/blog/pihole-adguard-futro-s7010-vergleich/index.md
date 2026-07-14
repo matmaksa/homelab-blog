@@ -34,7 +34,7 @@ Der Fujitsu Futro S7010 ist ein typisches Einstiegs-System fürs Homelab. Gebrau
 
 Was ist mit so einem schmalen System realistisch möglich? Welche DNS-Werbeblocker laufen darauf stabil? Und reichen 256 MB Arbeitsspeicher für einen LXC-Container mit Pi-hole oder AdGuard Home, oder muss es mehr sein?
 
-Dieser Artikel vergleicht Pi-hole v6.4.3 und AdGuard Home v0.107.78 auf einem Futro S7010 – mit 512 MB und mit 256 MB RAM. Ziel ist nicht, einen allgemeingültigen Sieger zu küren, sondern eine datenbasierte Orientierung für Einsteiger mit schmalem Budget zu geben.
+Dieser Artikel vergleicht Pi-hole und AdGuard Home auf einem Futro S7010. Getestet am 14. Juli 2026 mit Pi-hole v6.4.3 und AdGuard Home v0.107.78 – mit 512 MB und mit 256 MB RAM. Ziel ist nicht, einen allgemeingültigen Sieger zu küren, sondern eine datenbasierte Orientierung für Einsteiger mit schmalem Budget zu geben.
 
 > **Dieser Artikel ist ein Praxisvergleich und keine vollständige Installationsanleitung.**
 
@@ -50,6 +50,9 @@ Dieser Artikel vergleicht Pi-hole v6.4.3 und AdGuard Home v0.107.78 auf einem Fu
 - **Upstream-DNS** – Der übergeordnete DNS-Server, an den dein Werbeblocker Anfragen weiterleitet, wenn die Domain nicht auf der Sperrliste steht.
 - **DNS-Anfrage, auch Query genannt** – Wenn dein Computer nach der IP-Adresse einer Webseite fragt.
 - **OOM** (Out of Memory) – Ein Absturz, weil der Arbeitsspeicher nicht ausreicht.
+- **Cosmetic Filtering** – Optisches Ausblenden von Werbeelementen im Browser; ein reiner DNS-Filter kann das nicht leisten.
+- **Hosts-basierte Filterliste** – Eine Liste von Domains, die auf eine nicht erreichbare Adresse umgeleitet und dadurch blockiert werden.
+- **Cluster** – Zusammenschluss mehrerer Proxmox-Hosts zu einem Verbund; PVE04 lief hier eigenständig ohne Cluster.
 
 ## 2. Testaufbau
 
@@ -90,7 +93,9 @@ Mehr zugewiesener RAM machte die Dienste im Test nicht automatisch schneller. Er
 
 ### Technischer Hintergrund zur Speichermessung
 
-Der Speicherverbrauch wurde vom Host-System pro Container erfasst. Der gemessene Wert umfasst den gesamten allokierten Speicher – also Prozesse, Datei-Zwischenspeicher und System-Overhead. Der Datei-Zwischenspeicher kann bei Bedarf vom Hauptsystem freigegeben werden. Die tatsächliche Belastung des Hosts war bei beiden Systemen ähnlich: Pi-hole verbrauchte weniger reinen Prozessspeicher, baute aber mehr Datei-Zwischenspeicher auf, sodass der Gesamtwert nah beieinander lag. Das ist normal und kein Fehler.
+Der Speicherverbrauch wurde vom Host-System pro Container erfasst. Der gemessene Wert umfasst den gesamten zugewiesenen Speicher – also Prozesse, Datei-Zwischenspeicher und System-Overhead. Der Datei-Zwischenspeicher kann bei Bedarf vom Hauptsystem freigegeben werden. Die tatsächliche Belastung des Hosts war bei beiden Systemen ähnlich: Pi-hole verbrauchte weniger reinen Prozessspeicher, baute aber mehr Datei-Zwischenspeicher auf, sodass der Gesamtwert nah beieinander lag. Das ist normal und kein Fehler.
+
+Dass Pi-hole bei 256 MB (ca. 114 MB) und bei 512 MB (ca. 113 MB) fast gleich viel verbrauchte, zeigt: Der Dienst nutzt nur den tatsächlich benötigten Speicher. Mehr zugewiesener RAM schafft hauptsächlich zusätzliche Reserve.
 
 ## 5. DNS-Antwortzeiten
 
@@ -103,7 +108,7 @@ Der Latenztest nutzte 1.000 DNS-Anfragen bei maximal 10 Anfragen pro Sekunde –
 | AdGuard Home | 512 MB | 3,03 ms | 0 |
 | AdGuard Home | 256 MB | 3,15 ms | 0 |
 
-Pi-hole zeigte in diesem Test niedrigere durchschnittliche Antwortzeiten. Die genaue Ursache wurde nicht untersucht. Im kleinen Heimnetz sind sowohl rund 1,5 als auch rund 3 Millisekunden praktisch sehr schnell.
+In den durchgeführten Testläufen lagen die durchschnittlichen Antwortzeiten bei Pi-hole niedriger. Die genaue Ursache wurde nicht untersucht. Beide Ergebnisse waren für ein kleines Heimnetz praktisch schnell.
 
 **Einordnung:** Der Unterschied zwischen 1,5 ms und 3,0 ms ist für einen menschlichen Nutzer nicht spürbar. Beide Werte liegen weit unter jeder kritischen Schwelle. Es gibt keinen allgemeinen Performance-Sieger.
 
@@ -135,14 +140,14 @@ Mit 256 MB RAM wurden beide Weboberflächen getestet und waren vollständig nutz
 
 ## 8. Blockabdeckung im Auslieferungszustand
 
-Der Browser-Werbeblocktest über einen standardisierten Test zeigte:
+Der Browser-Werbeblocktest über den standardisierten Test auf adblock.turtlecute.org zeigte:
 
 | System | Blockierte Test-Domains | Quote |
 |---|---|---|
 | Pi-hole | 94 von 133 | ca. 70,7 % |
 | AdGuard Home | 107 von 133 | ca. 80,5 % |
 
-**Wichtige Einschränkung:** Die Filterlisten sind nicht direkt vergleichbar. Pi-hole nutzte eine Hosts-basierte Liste (~78.000 Regeln), AdGuard Home einen vollwertigen DNS-Filter (~157.000 Regeln) – etwa doppelt so viele. Der Unterschied in der Blockabdeckung ist daher nicht auf die Software, sondern maßgeblich auf die unterschiedlichen Filterlisten zurückzuführen.
+**Wichtige Einschränkung:** Die Filterlisten sind nicht direkt vergleichbar. Pi-hole nutzte eine hosts-basierte Liste (~78.000 Regeln), AdGuard Home einen vollwertigen DNS-Filter (~157.000 Regeln) – etwa doppelt so viele. Die Prozentwerte sind deshalb ein Out-of-the-box-Praxistest, kein normierter Qualitätsvergleich. Der Unterschied in der Blockabdeckung ist daher nicht auf die Software, sondern maßgeblich auf die unterschiedlichen Filterlisten zurückzuführen.
 
 Zudem ist zu beachten: Das Ausblenden von Werbeplätzen auf Webseiten (Cosmetic Filtering) ist keine DNS-Funktion und wurde nicht bewertet.
 
@@ -174,12 +179,12 @@ Für Pi-hole liegt das 256-MB-Profil unter der offiziellen Speicherempfehlung (d
 
 Ein Futro S7010 im Kaufzustand (4 GB RAM, 64 GB SSD) kann realistisch betreiben:
 
-- Proxmox VE (benötigt ca. 1,3 GB RAM)
-- **Einen DNS-Container** (Pi-hole oder AdGuard, 256–512 MB RAM)
-- Einen kleinen zusätzlichen Test-Container (z. B. ein Monitoring-Werkzeug)
+- Proxmox VE (belegte auf diesem Futro im Leerlauf rund 1,3 GB RAM)
+- **Einen DNS-Container** (Pi-hole oder AdGuard, 512 MB empfohlen)
+- Einen zusätzlichen kleinen Test-Container, der nur zeitweise läuft – beispielsweise mit 256 bis 512 MB (z. B. ein Monitoring-Werkzeug)
 - USB-Festplatte als Backup-Ziel
 
-Was nicht sinnvoll ist: mehrere virtuelle Maschinen, KI-Dienste, Medien-Server oder Cloud-Anwendungen. Dafür fehlen schlicht Arbeitsspeicher und Rechenleistung im Kaufzustand.
+Was nicht sinnvoll ist: mehrere Dienste gleichzeitig, mehrere virtuelle Maschinen, KI-Dienste, Medien-Server oder Cloud-Anwendungen. Dafür fehlen schlicht Arbeitsspeicher und Rechenleistung im Kaufzustand.
 
 ## 12. Bevor du den DNS-Server im Router einträgst
 
@@ -199,10 +204,8 @@ Die Ergebnisse gelten für die getesteten Versionen, Filterlisten und diesen Fut
 
 ## 14. Wie geht es jetzt weiter?
 
-In folgenden Artikeln geht es mit dem Thema weiter:
-
-- **Pi-hole in einem Proxmox-LXC installieren** – Eine Schritt-für-Schritt-Anleitung folgt als eigener Artikel.
-- **AdGuard Home in einem Proxmox-LXC installieren** – Eine Schritt-für-Schritt-Anleitung folgt als eigener Artikel.
-- **DNS im Router sicher umstellen** – Eine Schritt-für-Schritt-Anleitung folgt als eigener Artikel.
-- **Den DNS-Container sichern und wiederherstellen** – Eine Schritt-für-Schritt-Anleitung folgt als eigener Artikel.
-- **USB-Festplatte als Proxmox-Backup-Ziel verwenden** – Eine Schritt-für-Schritt-Anleitung folgt als eigener Artikel.
+- **Pi-hole in einem Proxmox-LXC installieren** – Eine Schritt-für-Schritt-Anleitung ist geplant.
+- **AdGuard Home in einem Proxmox-LXC installieren** – Eine Schritt-für-Schritt-Anleitung ist geplant.
+- **DNS im Router sicher umstellen** – Eine Schritt-für-Schritt-Anleitung ist geplant.
+- **Den DNS-Container sichern und wiederherstellen** – Eine Schritt-für-Schritt-Anleitung ist geplant.
+- **USB-Festplatte als Proxmox-Backup-Ziel verwenden** – Eine Schritt-für-Schritt-Anleitung ist geplant.
