@@ -463,6 +463,59 @@ body.links-page {
   }
 }
 
+/* ============================================================
+   TEXTFARBEN – Explizite Light/Dark Overrides für Links-Seite
+   ============================================================ */
+
+/* --- Light Mode Variablen (Standard) --- */
+.links-page {
+  --ll-heading-color: #0f172a;
+  --ll-description-color: #334155;
+  --ll-disclosure-text: #1e293b;
+}
+
+/* Apply to elements */
+.links-page .ll-section-head h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ll-heading-color);
+}
+
+.links-page .ll-section-desc {
+  font-size: 0.9375rem;
+  font-weight: 450;
+  line-height: 1.5;
+  color: var(--ll-description-color);
+}
+
+.links-page .ll-disclosure {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ll-disclosure-text);
+}
+
+.links-page .ll-disclosure p {
+  color: var(--ll-disclosure-text);
+}
+
+/* --- Light Mode Affiliate-Box Hintergrund --- */
+html:not([data-theme="dark"]) .links-page .ll-disclosure {
+  background: #dbeafe;
+  border-color: #93c5fd;
+}
+
+/* --- Dark Mode Override --- */
+html[data-theme="dark"] .links-page {
+  --ll-heading-color: #f8fafc;
+  --ll-description-color: #cbd5e1;
+  --ll-disclosure-text: #e2e8f0;
+}
+
+html[data-theme="dark"] .links-page .ll-disclosure {
+  background: #1e293b;
+  border-color: #334155;
+}
+
 /* --- prefers-reduced-motion --- */
 @media (prefers-reduced-motion: reduce) {
   .ll-card,

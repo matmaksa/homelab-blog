@@ -26,8 +26,8 @@
 {{/* Import blog design tokens + links page component CSS */}}
 {{ $tokens := resources.Get "css/extended/tokens.css" | resources.Minify | resources.Fingerprint }}
 {{ $linksCSS := resources.Get "css/extended/links.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $tokens.Permalink }}">
-<link rel="stylesheet" href="{{ $linksCSS.Permalink }}">
+<link rel="stylesheet" href="{{ $tokens.RelPermalink }}">
+<link rel="stylesheet" href="{{ $linksCSS.RelPermalink }}">
 </head>
 <body class="links-page">
 <div class="ll-page">
