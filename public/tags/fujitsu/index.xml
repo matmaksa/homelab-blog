@@ -1,4 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Fujitsu on Homelab Guide</title><link>https://matmaksa.github.io/homelab-blog/tags/fujitsu/</link><description>Recent content in Fujitsu on Homelab Guide</description><image><title>Homelab Guide</title><url>https://matmaksa.github.io/homelab-blog/og-image.png</url><link>https://matmaksa.github.io/homelab-blog/og-image.png</link></image><generator>Hugo</generator><language>de-de</language><lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://matmaksa.github.io/homelab-blog/tags/fujitsu/index.xml" rel="self" type="application/rss+xml"/><item><title>Fujitsu Futro S7010 als Homelab-Einstieg 2026: Der 40€-Server</title><link>https://matmaksa.github.io/homelab-blog/posts/fujitsu-futro-s7010-homelab-einstieg/</link><pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate><guid>https://matmaksa.github.io/homelab-blog/posts/fujitsu-futro-s7010-homelab-einstieg/</guid><description>&lt;p>&lt;strong>Aktualisiert: Juni 2026 | Lesezeit: 9 Minuten&lt;/strong>&lt;/p>
-&lt;p>Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Dann ist der &lt;strong>Fujitsu Futro S7010&lt;/strong> genau das richtige Gerät für dich. Für gerade einmal &lt;strong>30 bis 50 Euro&lt;/strong> bekommst du einen lüfterlosen, extrem stromsparenden Server, der sich perfekt für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container eignet.&lt;/p>
-&lt;p>Genau so ein Gerät habe ich selbst für ~40 € gekauft und betreibe es seit Monaten als OPNSense-Firewall und AdGuard-DNS – absolut lautlos, 24/7, ohne einen einzigen Absturz.&lt;/p>
-&lt;p>In diesem Artikel zeige ich dir, was der kleine Thin Client kann, welche Use-Cases realistisch sind und welche Komponenten du für den Start benötigst.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Fujitsu | Homelab Guide</title>
+    <link>https://matmaksa.de/tags/fujitsu/</link>
+    <description>Recent content in Fujitsu on Homelab Guide</description>
+    <generator>Hugo</generator>
+    <language>de-de</language>
+    <lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://matmaksa.de/tags/fujitsu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fujitsu Futro S7010 als Homelab-Einstieg 2026: Der 40€-Server</title>
+      <link>https://matmaksa.de/posts/fujitsu-futro-s7010-homelab-einstieg/</link>
+      <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://matmaksa.de/posts/fujitsu-futro-s7010-homelab-einstieg/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 9 Minuten&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
+&lt;p&gt;Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Dann ist der &lt;strong&gt;Fujitsu Futro S7010&lt;/strong&gt; genau das richtige Gerät für dich. Für gerade einmal &lt;strong&gt;30 bis 50 Euro&lt;/strong&gt; bekommst du einen lüfterlosen, extrem stromsparenden Server, der sich perfekt für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container eignet.&lt;/p&gt;
+&lt;p&gt;Genau so ein Gerät habe ich selbst für ~40 € gekauft und betreibe es seit Monaten als OPNSense-Firewall und AdGuard-DNS – absolut lautlos, 24/7, ohne einen einzigen Absturz.&lt;/p&gt;
+&lt;p&gt;In diesem Artikel zeige ich dir, was der kleine Thin Client kann, welche Use-Cases realistisch sind und welche Komponenten du für den Start benötigst.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -17,9 +17,29 @@ tags:
   - docker
 categories:
   - Smarthome
----
 
+# Production State Flow
+content_state: "published"
+audit_status: "passed"
+user_approval_required: false
+approved_for_publish: true
+instagram_derivatives_required: true
+instagram_derivatives_status: "planned"
+content_cluster: "home-assistant"
+content_role: "pillar"
+risk_level: "medium"
+next_action: "complete_instagram_derivative_review_and_cta_utm_check"
+related_articles:
+  - "mini-pc-homelab-vergleich"
+  - "fujitsu-futro-s7010-homelab-einstieg"
+notes:
+  - "Published Home Assistant pillar article."
+  - "Instagram derivatives exist but still need review/CTA/UTM checks."
+---
 **Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten**
+
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+
 
 Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.
 
@@ -215,7 +235,7 @@ Viele Nutzer starten mit Home Assistant und merken schnell, dass ihr Mini-PC noc
 
 ## 🛒 Drei Starter-Konfigurationen – von Budget bis Homelab
 
-Je nach Budget und Zielsetzung gibt es drei klare Pfade. Alle Links enthalten den Affiliate-Tag – für dich ändert sich der Preis nicht.
+Je nach Budget und Zielsetzung gibt es drei klare Pfade.
 
 ### Das 80€-Budget-Setup (für Einsteiger)
 | Was | Empfehlung | Preis | Link |
@@ -258,4 +278,3 @@ Home Assistant auf einem Mini-PC ist **der beste Weg ins Smart Home**: Mehr Leis
 
 **Meine Klartext-Empfehlung:** Kauf einen Fujitsu Futro S7010 für ~45 € und einen Sonoff Zigbee-Stick für ~18 €. Zusammen 63 € für eine leise, stromsparende Smart-Home-Zentrale. Investiere das gesparte Geld in ein paar Sensoren für den Start.
 
-*Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.*

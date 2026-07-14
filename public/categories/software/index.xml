@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Software on Homelab Guide</title><link>https://matmaksa.github.io/homelab-blog/categories/software/</link><description>Recent content in Software on Homelab Guide</description><image><title>Homelab Guide</title><url>https://matmaksa.github.io/homelab-blog/og-image.png</url><link>https://matmaksa.github.io/homelab-blog/og-image.png</link></image><generator>Hugo</generator><language>de-de</language><lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://matmaksa.github.io/homelab-blog/categories/software/index.xml" rel="self" type="application/rss+xml"/><item><title>Headscale im Homelab – Tailscale-Alternative selbst hosten</title><link>https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/</link><pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate><guid>https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/</guid><description>&lt;p>&lt;strong>Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten&lt;/strong>&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Software | Homelab Guide</title>
+    <link>https://matmaksa.de/categories/software/</link>
+    <description>Recent content in Software on Homelab Guide</description>
+    <generator>Hugo</generator>
+    <language>de-de</language>
+    <lastBuildDate>Mon, 29 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://matmaksa.de/categories/software/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Headscale im Homelab – Tailscale-Alternative selbst hosten</title>
+      <link>https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/</link>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

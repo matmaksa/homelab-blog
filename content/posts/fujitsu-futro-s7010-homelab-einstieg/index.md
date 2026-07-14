@@ -17,9 +17,29 @@ tags:
   - proxmox
 categories:
   - Hardware
----
 
+# Production State Flow
+content_state: "published"
+audit_status: "passed"
+user_approval_required: false
+approved_for_publish: true
+instagram_derivatives_required: true
+instagram_derivatives_status: "planned"
+content_cluster: "hardware"
+content_role: "affiliate"
+risk_level: "medium"
+next_action: "prioritize_s7010_carousel_and_keep_static_futro_asset_on_hold"
+related_articles:
+  - "mini-pc-homelab-vergleich"
+  - "home-assistant-gebrauchter-mini-pc-2026"
+notes:
+  - "Published Futro S7010 article."
+  - "Futro should remain low-budget positioning, not KI/Ollama recommendation."
+---
 **Aktualisiert: Juni 2026 | Lesezeit: 9 Minuten**
+
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+
 
 Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Dann ist der **Fujitsu Futro S7010** genau das richtige Gerät für dich. Für gerade einmal **30 bis 50 Euro** bekommst du einen lüfterlosen, extrem stromsparenden Server, der sich perfekt für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container eignet.
 
@@ -224,4 +244,3 @@ Ja, aber beschränkt: 1–3 Container oder 1 leichte virtuelle Maschine. Der Cel
 
 **Fazit:** Für ~45 € den günstigsten lüfterlosen 24/7-Server. Mit 16 GB + 500 GB SSD ~210 € – günstiger und leiser als jeder Raspberry Pi mit Gehäuse.
 
-*Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.*

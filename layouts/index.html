@@ -1,0 +1,145 @@
+{{- define "main" }}
+
+{{- $pages := site.RegularPages }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $pages = where $pages "Params.preview" "!=" true }}
+{{- $pages = where $pages "Section" "in" (slice "posts") }}
+{{- $published := sort $pages "Date" "desc" }}
+
+<div class="home-layout">
+  <div class="home-content">
+
+    {{- /* === HERO: Neuester Artikel (große Karte) === */}}
+    {{- range first 1 $published }}
+    {{- $cat := index .Params.categories 0 | default "" }}
+    {{- $img := "" }}
+    {{- if .Params.cover.image }}
+      {{- if or .Params.cover.relative (not (or (hasPrefix .Params.cover.image "/") (hasPrefix .Params.cover.image "http"))) }}
+        {{- $img = path.Join .RelPermalink .Params.cover.image }}
+      {{- else }}
+        {{- $img = .Params.cover.image | absURL }}
+      {{- end }}
+    {{- else if (index .Params.images 0) }}
+      {{- $img = index .Params.images 0 | absURL }}
+    {{- end }}
+    <article class="hero-card">
+      <a href="{{ .Permalink }}" class="entry-link" style="position:absolute;inset:0;z-index:1;border-radius:inherit;"></a>
+      <div class="hero-card-inner">
+        <div class="hero-card-image">
+          {{- if $img }}
+          <img src="{{ $img }}" alt="{{ .Title | plainify }}" loading="eager" decoding="async">
+          {{- else }}
+          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--hl-primary-light);color:var(--hl-primary);font-size:56px;">🏠</div>
+          {{- end }}
+        </div>
+        <div class="hero-card-body">
+          {{- if $cat }}
+          <div class="hero-card-category">{{ $cat }}</div>
+          {{- end }}
+          <h1 class="hero-card-title">{{ .Title }}</h1>
+          <div class="hero-card-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 200 }}</div>
+          <div class="hero-card-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+            {{- if (.Param "ShowReadingTime") }}
+            <span>·</span>
+            <span>{{ .ReadingTime }} Min. Lesezeit</span>
+            {{- end }}
+          </div>
+        </div>
+      </div>
+    </article>
+    {{- end }}
+
+    {{- /* === AKTUELLE ARTIKEL === */}}
+    {{- $recent := after 1 $published }}
+    {{- if $recent }}
+    <div class="section-wrapper">
+      <div class="section-header">
+        <h2><span class="section-emoji">📰</span> Aktuelle Artikel</h2>
+        <a href="{{ "posts/" | absLangURL }}">Alle Artikel →</a>
+      </div>
+      <div class="article-grid">
+        {{- range first 4 $recent }}
+        {{- partial "article-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    {{- /* === KATEGORIE-BLÖCKE === */}}
+    {{- range $catName, $catPages := $.Site.Taxonomies.categories }}
+    {{- $catSlug := $catName | urlize }}
+    {{- $catEmoji := "📌" }}
+    {{- $catLabel := $catName }}
+
+    {{- if eq $catSlug "hardware" }}{{ $catEmoji = "🔧" }}{{ $catLabel = "Hardware & Geräte" }}
+    {{- else if eq $catSlug "software" }}{{ $catEmoji = "💻" }}{{ $catLabel = "Software & Tools" }}
+    {{- else if eq $catSlug "smarthome" }}{{ $catEmoji = "🏠" }}{{ $catLabel = "Smart Home" }}
+    {{- else if eq $catSlug "homelab" }}{{ $catEmoji = "⚡" }}{{ $catLabel = "Homelab Starter" }}
+    {{- else if eq $catSlug "virtualisierung" }}{{ $catEmoji = "🖥️" }}{{ $catLabel = "Virtualisierung" }}
+    {{- end }}
+
+    {{- $catArticles := where $catPages.Pages "Params.preview" "!=" true }}
+    {{- $catArticles = sort $catArticles "Date" "desc" }}
+    {{- $catArticles = where $catArticles "Permalink" "ne" ((index $published 0).Permalink | default "") }}
+    {{- if $catArticles }}
+    <div class="section-wrapper">
+      <div class="section-header">
+        <h2><span class="section-emoji">{{ $catEmoji }}</span> {{ $catLabel }}</h2>
+        <a href="{{ $catPages.Page.RelPermalink }}">Alle anzeigen →</a>
+      </div>
+      <div class="article-grid">
+        {{- range first 3 $catArticles }}
+        {{- partial "article-card.html" . }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+    {{- end }}
+
+  </div>
+
+  {{- /* === SIDEBAR === */}}
+  <aside class="home-sidebar">
+    {{- /* Neueste Artikel */}}
+    <div class="sidebar-widget">
+      <div class="sidebar-widget-title">Neueste Beiträge</div>
+      <ul class="sidebar-post-list">
+        {{- range first 5 $published }}
+        <li class="sidebar-post-item">
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+          <div class="sidebar-post-date">{{ .Date.Format "02.01.2006" }}</div>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+
+    {{- /* Kategorien */}}
+    <div class="sidebar-widget">
+      <div class="sidebar-widget-title">Kategorien</div>
+      <ul class="sidebar-post-list">
+        {{- range site.Taxonomies.categories.ByCount }}
+        <li class="sidebar-post-item" style="display:flex;justify-content:space-between;align-items:center;">
+          <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+          <span style="font-size:12px;color:var(--hl-text-light);background:var(--hl-primary-light);padding:2px 8px;border-radius:10px;">{{ .Count }}</span>
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+
+    {{- /* Tags */}}
+    {{- $tags := site.Taxonomies.tags }}
+    {{- if $tags }}
+    <div class="sidebar-widget">
+      <div class="sidebar-widget-title">Tags</div>
+      <div class="sidebar-tag-cloud">
+        {{- range $tags.ByCount | first 20 }}
+        <a href="{{ .Page.RelPermalink }}" class="sidebar-tag">{{ .Page.Title }}</a>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+  </aside>
+</div>
+
+{{- end }}{{/* end main */}}

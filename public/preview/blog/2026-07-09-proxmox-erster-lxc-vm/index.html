@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen? | Homelab Guide</title>
+<meta name="keywords" content="">
+<meta name="description" content="Proxmox erste VM oder LXC? Dieser Einsteiger-Guide zeigt, wann du einen LXC-Container und wann du eine VM nutzt – mit Beispielen für Pi-hole, Home Assistant und Docker.">
+<meta name="author" content="">
+<link rel="canonical" href="https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/">
+<meta name="google-site-verification" content="google09a060456df1ed16.html">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="de" href="https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/">
+  <meta property="og:site_name" content="Homelab Guide">
+  <meta property="og:title" content="Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen?">
+  <meta property="og:description" content="Proxmox erste VM oder LXC? Dieser Einsteiger-Guide zeigt, wann du einen LXC-Container und wann du eine VM nutzt – mit Beispielen für Pi-hole, Home Assistant und Docker.">
+  <meta property="og:locale" content="de_de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="preview">
+    <meta property="article:published_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="og:image" content="https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured.jpg">
+  <meta name="twitter:title" content="Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen?">
+  <meta name="twitter:description" content="Proxmox erste VM oder LXC? Dieser Einsteiger-Guide zeigt, wann du einen LXC-Container und wann du eine VM nutzt – mit Beispielen für Pi-hole, Home Assistant und Docker.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Preview – Entwürfe",
+      "item": "https://matmaksa.de/preview/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Blog-Preview – unveröffentlichte Entwürfe",
+      "item": "https://matmaksa.de/preview/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen?",
+      "item": "https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen?",
+  "name": "Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen?",
+  "description": "Proxmox erste VM oder LXC? Dieser Einsteiger-Guide zeigt, wann du einen LXC-Container und wann du eine VM nutzt – mit Beispielen für Pi-hole, Home Assistant und Docker.",
+  "keywords": [
+    
+  ],
+  "articleBody": " [!IMPORTANT] Preview-Review-Box TYPE=article_draft PUBLISH_ELIGIBLE=no USER_VISUAL_APPROVAL_REQUIRED=yes FACT_CHECK_REQUIRED=yes (Proxmox-UI-Bezeichnungen, Template-Namen) LINK_CHECK_REQUIRED=yes PRICE_CHECK_REQUIRED=no RECOMMENDED_ACTION=second_article_candidate_after_fact_check_and_visual_review\nPreview-Hinweis: Nicht veröffentlichter Entwurf – noch nicht publish-ready. Cover-Bild: Wird vor Freigabe generiert.\nProxmox erste VM oder LXC: Was du nach der Installation wirklich tun solltest TL;DR: Nimm für den Start meist einen LXC Wenn du Proxmox gerade installiert hast, starte für deinen ersten kleinen Dienst meistens mit einem LXC-Container. Ein LXC braucht wenig RAM, startet schnell und reicht für typische Homelab-Dienste wie Pi-hole, AdGuard, kleine Webtools oder Monitoring.\nEine VM nimmst du, wenn du ein vollständiges eigenes Betriebssystem brauchst – zum Beispiel Home Assistant OS, eine Windows-Testmaschine oder eine Linux-Umgebung, die komplett getrennt vom Proxmox-Host laufen soll.\nVoraussetzungen Punkt Wert ⏱ Zeit 30–45 Minuten 💰 Kosten 0 € 📊 Schwierigkeit ⭐⭐☆☆☆ 🖥️ Benötigt Laufender Proxmox-Host, Browser, lokaler Netzwerkzugriff 🎯 Ziel Einen ersten sinnvollen LXC oder eine erste VM anlegen ✅ Getestet mit Proxmox VE (aktuelle Version) VM oder LXC: Die einfache Entscheidung Viele Einsteiger bleiben nach der Proxmox-Installation an genau dieser Frage hängen: Was lege ich jetzt an?\nDie folgende Tabelle hilft dir, in 10 Sekunden die richtige Wahl zu treffen:\nWenn du … Dann nimm … Warum Pi-hole, AdGuard, Uptime Kuma oder kleine Linux-Dienste starten willst LXC Spart RAM und ist schnell eingerichtet Docker ausprobieren willst VM (oder bewusst vorbereiteter LXC) Für Einsteiger ist eine VM oft leichter zu verstehen Home Assistant OS nutzen willst VM Home Assistant OS erwartet ein eigenes System Windows testen willst VM Windows läuft nicht als Linux-Container möglichst wenig Ressourcen verbrauchen willst LXC Kein komplettes Gast-Betriebssystem nötig Meine Einsteiger-Faustregel:\nErster Dienst = LXC. Erstes vollständiges Betriebssystem = VM.\nIn der Praxis getestet Auf meinem PVE04-Host mit einem Debian 12 LXC (2 GB RootFS, 512 MB RAM, 1 Core, unprivilegiert) lief die Einrichtung in unter 2 Minuten. Der Create-CT-Wizard in der Proxmox-WebGUI führt Schritt für Schritt durch: Template auswählen, Root-Passwort setzen, Speicher und Netzwerk konfigurieren, dann starten.\nDer offensichtlichste Unterschied im Alltag: Ein LXC startet in Sekunden, eine VM braucht je nach Gast-OS 10–30 Sekunden. Beim täglichen Betrieb merkt man nach dem Start kaum einen Unterschied.\nSchritt für Schritt: Ersten LXC-Container anlegen Der sicherste Start ist ein kleiner Debian- oder Ubuntu-LXC. Damit lernst du Proxmox, ohne direkt viel RAM oder Speicher zu verbrauchen.\n1. Template herunterladen In der Proxmox-Weboberfläche:\nWähle links deinen Node (Server) aus. Öffne den lokalen Speicher, der Templates enthält. Gehe zum Bereich „CT Templates\". Lade ein Debian- oder Ubuntu-Template herunter. Nimm ein aktuelles Standard-Template aus der Proxmox-Oberfläche. Keine exotischen Community-Images für den ersten Versuch.\n2. LXC erstellen Klicke oben rechts auf „Create CT\". Diese Startwerte (beispielhaft) sind für den ersten Container empfehlenswert:\nEinstellung Startwerte (beispielhaft) Hostname test-lxc (oder Name des geplanten Dienstes) CPU 1 Kern RAM 512 MB bis 1 GB Speicher 8 GB Netzwerk DHCP für den Anfang Privilegiert? Nein – unprivilegiert lassen Start nach Boot Erst aktivieren, wenn der Dienst sauber läuft Für den ersten Test ist DHCP einfacher, weil dein Router automatisch eine IP-Adresse vergibt. Eine feste IP kannst du später setzen, wenn der Dienst dauerhaft bleiben soll.\n3. Container starten und Konsole öffnen Nach dem Erstellen:\nContainer in der Seitenleiste auswählen. Auf „Start\" klicken. „Console\" öffnen. Mit dem gesetzten Root-Passwort anmelden. Dann aktualisierst du das System:\napt update apt upgrade -y Wenn das ohne Fehler durchläuft, funktioniert dein erster LXC grundsätzlich.\n4. Ersten Testdienst installieren Installiere einen einfachen Webserver, um zu prüfen, ob alles erreichbar ist:\napt install nginx -y systemctl status nginx Danach im Browser öffnen:\nhttp://IP-DEINES-CONTAINERS Wenn die Nginx-Startseite erscheint, hast du deinen ersten Proxmox-Dienst erfolgreich gestartet. Herzlichen Glückwunsch!\nAlternative: Wann eine VM besser ist Eine VM ist schwerer als ein LXC, aber sauberer getrennt. Für Einsteiger ist das manchmal sogar einfacher, weil sich die VM wie ein normaler Computer verhält.\nNimm eine VM, wenn:\ndu Home Assistant OS installieren willst du Windows testen möchtest du Docker ohne LXC-Sonderfälle lernen willst du ein komplettes Linux-System mit eigenem Kernel brauchst Meine einfache Faustregel für die Entscheidung:\nKleiner Linux-Dienst und geringe Ressourcen: LXC. Eigenes Betriebssystem, stärkere Isolation oder Appliance: VM.\nStartwerte (beispielhaft) für eine kleine Linux-VM:\nEinstellung Startwerte (beispielhaft) CPU 2 Kerne RAM 2 GB Speicher 16–32 GB ISO Debian oder Ubuntu Server Netzwerk VirtIO / Standard-Bridge Für sehr kleine Hardware wie einen Fujitsu Futro S7010 ist ein LXC oft angenehmer. Für stärkere Mini-PCs wie Dell OptiPlex oder HP ProDesk ist eine kleine VM ebenfalls realistisch.\nWarum funktioniert das? Proxmox kann zwei Arten von virtuellen Umgebungen verwalten:\nVMs sind wie eigene kleine Computer. Sie bringen ihr eigenes Betriebssystem mit und sind stärker vom Host getrennt. LXC-Container teilen sich den Linux-Kernel mit dem Proxmox-Host. Dadurch sind sie schlanker, aber etwas näher am Host. Für Einsteiger zählt nicht die Theorie, sondern die praktische Folge:\nEin LXC ist schnell, sparsam und ideal für kleine Dienste. Eine VM ist sauberer getrennt und besser, wenn ein Dienst ein komplettes System erwartet. Du musst dich nicht für immer entscheiden. Viele Homelabs nutzen beides: LXC für kleine Dienste, VMs für größere oder speziellere Systeme.\nTroubleshooting 1. Der LXC bekommt keine IP-Adresse Prüfe zuerst, ob dein Heimrouter DHCP aktiviert hat. Danach in Proxmox kontrollieren, ob der Container an der richtigen Netzwerk-Bridge hängt. In einfachen Setups heißt diese meist vmbr0.\n2. Ich kann den Container nicht im Browser öffnen Prüfe drei Dinge:\nLäuft der Dienst im Container wirklich? (systemctl status nginx) Stimmt die IP-Adresse? Öffnest du den richtigen Port? Für Nginx ist es Port 80, also http://IP-DES-CONTAINERS.\n3. apt update schlägt fehl Oft ist DNS oder Netzwerk die Ursache. Teste im Container:\nping 1.1.1.1 ping debian.org Wenn die erste Zeile funktioniert und die zweite nicht, liegt es wahrscheinlich an DNS.\n4. Der Container startet nicht Prüfe in Proxmox die Logs des Containers. Häufige Ursachen: zu wenig Speicher, falsches Template oder ein versehentlich privilegierter Container.\n5. Docker im LXC? Für den ersten Docker-Test ist eine kleine VM oft verständlicher. Docker im LXC geht technisch, bringt aber zusätzliche Details mit sich – für Einsteiger nicht der erste Weg.\nFAQ Ist LXC unsicher? Nicht automatisch. Für normale Homelab-Dienste sind unprivilegierte LXC-Container ein sinnvoller Einstieg. Wenn du starke Isolation brauchst oder fremden Code testest, ist eine VM die bessere Wahl.\nKann ich später von LXC auf VM wechseln? Nicht per Ein-Klick-Umwandlung. Du kannst aber den Dienst sichern und in einer VM neu aufsetzen. Deshalb lohnt es sich, früh Backups und Dokumentation zu üben.\nSollte jeder Dienst einen eigenen Container bekommen? Für Einsteiger: ja, meistens. Ein Dienst pro Container bleibt übersichtlich. Wenn etwas kaputtgeht, betrifft es nicht direkt alle anderen Dienste.\nBrauche ich direkt feste IP-Adressen? Nicht für den ersten Test. Für dauerhaft genutzte Dienste sind feste IPs oder DHCP-Reservierungen aber sinnvoll, damit Links und Dashboards nicht ständig angepasst werden müssen.\nNächster Schritt Dein erster LXC läuft? Dann geht es weiter mit den wichtigsten Diensten für dein Homelab:\n„Proxmox Backup für Einsteiger\" – Bevor du produktive Dienste startest, solltest du Backup und Restore verstehen. „Pi-hole oder AdGuard im Proxmox-LXC einrichten\" – Dein erster echter Dienst: Werbeblocker fürs ganze Netzwerk. Passende Einstiegsartikel im Blog:\nVirtualisierung kostenlos: Proxmox als VMware-Alternative Homelab unter 100 Euro: Was du wirklich brauchst ✅ Das solltest du jetzt können Nach dem Artikel solltest du:\n✅ wissen, wann ein LXC sinnvoller ist als eine VM ✅ wissen, wann eine VM die bessere Wahl ist ✅ einen ersten LXC mit wenig Ressourcen anlegen können ✅ einen einfachen Testdienst installieren können ✅ die häufigsten Fehler bei IP, DNS und Netzwerk kennen ✅ einen klaren nächsten Schritt für dein Homelab haben Einrichten wenn: du Proxmox installiert hast und den ersten LXC oder die erste VM anlegen willst.\nNicht einrichten wenn: du bereits konkrete Dienste im Kopf hast – dann starte direkt mit dem passenden Dienst-Container.\n",
+  "wordCount" : "1264",
+  "inLanguage": "de",
+  "image":"https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured.jpg","datePublished": "2026-07-13T00:00:00Z",
+  "dateModified": "2026-07-13T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Homelab Guide",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://matmaksa.de/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+                    <span class="brand-title">Homelab Guide</span>
+                    <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
+                </span>
+            </a>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                    <span>Kategorien</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                    <span>🔍 Suche</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/about/" title="Über">
+                    <span>Über</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                    <span>⭐ Empfehlungen</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-switches">
+            <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+<main class="main">
+<div class="preview-banner">
+  <div class="preview-banner-icon">⚠️</div>
+  <div class="preview-banner-text">
+    <strong>Preview / Draft:</strong> Dieser Artikel ist noch nicht veröffentlicht und befindet sich in Prüfung.
+  </div>
+</div>
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Proxmox nach der Installation: erste VM oder erster LXC – was solltest du als Einsteiger anlegen?
+    </h1>
+    <div class="post-description">
+      Proxmox erste VM oder LXC? Dieser Einsteiger-Guide zeigt, wann du einen LXC-Container und wann du eine VM nutzt – mit Beispielen für Pi-hole, Home Assistant und Docker.
+    </div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager"
+                srcset='https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured_hu_a4e100bc87ea1f98.jpg 360w,https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured_hu_3b70f671fd111a4c.jpg 480w,https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured_hu_b36c61d9c9b435a8.jpg 720w,https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured_hu_c3fc62df4d162326.jpg 1080w,https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured.jpg 1408w'
+                src="https://matmaksa.de/preview/blog/2026-07-09-proxmox-erster-lxc-vm/featured.jpg"
+                sizes="(min-width: 768px) 720px, 100vw"
+                width="1408" height="768"
+                alt="Mini-PC auf einem dunklen Schreibtisch mit Monitor, der Proxmox-Oberfläche mit VM und LXC-Container zeigt">
+        
+</figure>
+  <div class="post-content md-content"><blockquote>
+<p>[!IMPORTANT]
+<strong>Preview-Review-Box</strong>
+TYPE=article_draft
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=yes (Proxmox-UI-Bezeichnungen, Template-Namen)
+LINK_CHECK_REQUIRED=yes
+PRICE_CHECK_REQUIRED=no
+RECOMMENDED_ACTION=second_article_candidate_after_fact_check_and_visual_review</p></blockquote>
+<blockquote>
+<p><strong>Preview-Hinweis:</strong> Nicht veröffentlichter Entwurf – noch nicht publish-ready.
+<strong>Cover-Bild:</strong> Wird vor Freigabe generiert.</p></blockquote>
+<hr>
+<h1 id="proxmox-erste-vm-oder-lxc-was-du-nach-der-installation-wirklich-tun-solltest">Proxmox erste VM oder LXC: Was du nach der Installation wirklich tun solltest<a hidden class="anchor" aria-hidden="true" href="#proxmox-erste-vm-oder-lxc-was-du-nach-der-installation-wirklich-tun-solltest">#</a></h1>
+<h2 id="tldr-nimm-für-den-start-meist-einen-lxc">TL;DR: Nimm für den Start meist einen LXC<a hidden class="anchor" aria-hidden="true" href="#tldr-nimm-für-den-start-meist-einen-lxc">#</a></h2>
+<p>Wenn du Proxmox gerade installiert hast, starte für deinen ersten kleinen Dienst meistens mit einem <strong>LXC-Container</strong>. Ein LXC braucht wenig RAM, startet schnell und reicht für typische Homelab-Dienste wie Pi-hole, AdGuard, kleine Webtools oder Monitoring.</p>
+<p>Eine <strong>VM</strong> nimmst du, wenn du ein vollständiges eigenes Betriebssystem brauchst – zum Beispiel Home Assistant OS, eine Windows-Testmaschine oder eine Linux-Umgebung, die komplett getrennt vom Proxmox-Host laufen soll.</p>
+<h2 id="voraussetzungen">Voraussetzungen<a hidden class="anchor" aria-hidden="true" href="#voraussetzungen">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Punkt</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>⏱ Zeit</td>
+          <td>30–45 Minuten</td>
+      </tr>
+      <tr>
+          <td>💰 Kosten</td>
+          <td>0 €</td>
+      </tr>
+      <tr>
+          <td>📊 Schwierigkeit</td>
+          <td>⭐⭐☆☆☆</td>
+      </tr>
+      <tr>
+          <td>🖥️ Benötigt</td>
+          <td>Laufender Proxmox-Host, Browser, lokaler Netzwerkzugriff</td>
+      </tr>
+      <tr>
+          <td>🎯 Ziel</td>
+          <td>Einen ersten sinnvollen LXC oder eine erste VM anlegen</td>
+      </tr>
+      <tr>
+          <td>✅ Getestet mit</td>
+          <td>Proxmox VE (aktuelle Version)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="vm-oder-lxc-die-einfache-entscheidung">VM oder LXC: Die einfache Entscheidung<a hidden class="anchor" aria-hidden="true" href="#vm-oder-lxc-die-einfache-entscheidung">#</a></h2>
+<p>Viele Einsteiger bleiben nach der Proxmox-Installation an genau dieser Frage hängen: <strong>Was lege ich jetzt an?</strong></p>
+<p>Die folgende Tabelle hilft dir, in 10 Sekunden die richtige Wahl zu treffen:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Wenn du &hellip;</th>
+          <th>Dann nimm &hellip;</th>
+          <th>Warum</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pi-hole, AdGuard, Uptime Kuma oder kleine Linux-Dienste starten willst</td>
+          <td><strong>LXC</strong></td>
+          <td>Spart RAM und ist schnell eingerichtet</td>
+      </tr>
+      <tr>
+          <td>Docker ausprobieren willst</td>
+          <td><strong>VM</strong> (oder bewusst vorbereiteter LXC)</td>
+          <td>Für Einsteiger ist eine VM oft leichter zu verstehen</td>
+      </tr>
+      <tr>
+          <td>Home Assistant OS nutzen willst</td>
+          <td><strong>VM</strong></td>
+          <td>Home Assistant OS erwartet ein eigenes System</td>
+      </tr>
+      <tr>
+          <td>Windows testen willst</td>
+          <td><strong>VM</strong></td>
+          <td>Windows läuft nicht als Linux-Container</td>
+      </tr>
+      <tr>
+          <td>möglichst wenig Ressourcen verbrauchen willst</td>
+          <td><strong>LXC</strong></td>
+          <td>Kein komplettes Gast-Betriebssystem nötig</td>
+      </tr>
+  </tbody>
+</table>
+<p>Meine Einsteiger-Faustregel:</p>
+<blockquote>
+<p><strong>Erster Dienst = LXC. Erstes vollständiges Betriebssystem = VM.</strong></p></blockquote>
+<h3 id="in-der-praxis-getestet">In der Praxis getestet<a hidden class="anchor" aria-hidden="true" href="#in-der-praxis-getestet">#</a></h3>
+<p>Auf meinem PVE04-Host mit einem Debian 12 LXC (2 GB RootFS, 512 MB RAM, 1 Core, unprivilegiert) lief die Einrichtung in unter 2 Minuten. Der Create-CT-Wizard in der Proxmox-WebGUI führt Schritt für Schritt durch: Template auswählen, Root-Passwort setzen, Speicher und Netzwerk konfigurieren, dann starten.</p>
+<p>Der offensichtlichste Unterschied im Alltag: Ein LXC startet in Sekunden, eine VM braucht je nach Gast-OS 10–30 Sekunden. Beim täglichen Betrieb merkt man nach dem Start kaum einen Unterschied.</p>
+<h2 id="schritt-für-schritt-ersten-lxc-container-anlegen">Schritt für Schritt: Ersten LXC-Container anlegen<a hidden class="anchor" aria-hidden="true" href="#schritt-für-schritt-ersten-lxc-container-anlegen">#</a></h2>
+<p>Der sicherste Start ist ein kleiner Debian- oder Ubuntu-LXC. Damit lernst du Proxmox, ohne direkt viel RAM oder Speicher zu verbrauchen.</p>
+<h3 id="1-template-herunterladen">1. Template herunterladen<a hidden class="anchor" aria-hidden="true" href="#1-template-herunterladen">#</a></h3>
+<p>In der Proxmox-Weboberfläche:</p>
+<ol>
+<li>Wähle links deinen Node (Server) aus.</li>
+<li>Öffne den lokalen Speicher, der Templates enthält.</li>
+<li>Gehe zum Bereich „CT Templates&quot;.</li>
+<li>Lade ein Debian- oder Ubuntu-Template herunter.</li>
+</ol>
+<p>Nimm ein aktuelles Standard-Template aus der Proxmox-Oberfläche. Keine exotischen Community-Images für den ersten Versuch.</p>
+<h3 id="2-lxc-erstellen">2. LXC erstellen<a hidden class="anchor" aria-hidden="true" href="#2-lxc-erstellen">#</a></h3>
+<p>Klicke oben rechts auf „Create CT&quot;. Diese Startwerte (beispielhaft) sind für den ersten Container empfehlenswert:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Einstellung</th>
+          <th>Startwerte (beispielhaft)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Hostname</td>
+          <td><code>test-lxc</code> (oder Name des geplanten Dienstes)</td>
+      </tr>
+      <tr>
+          <td>CPU</td>
+          <td>1 Kern</td>
+      </tr>
+      <tr>
+          <td>RAM</td>
+          <td>512 MB bis 1 GB</td>
+      </tr>
+      <tr>
+          <td>Speicher</td>
+          <td>8 GB</td>
+      </tr>
+      <tr>
+          <td>Netzwerk</td>
+          <td>DHCP für den Anfang</td>
+      </tr>
+      <tr>
+          <td>Privilegiert?</td>
+          <td>Nein – unprivilegiert lassen</td>
+      </tr>
+      <tr>
+          <td>Start nach Boot</td>
+          <td>Erst aktivieren, wenn der Dienst sauber läuft</td>
+      </tr>
+  </tbody>
+</table>
+<p>Für den ersten Test ist DHCP einfacher, weil dein Router automatisch eine IP-Adresse vergibt. Eine feste IP kannst du später setzen, wenn der Dienst dauerhaft bleiben soll.</p>
+<h3 id="3-container-starten-und-konsole-öffnen">3. Container starten und Konsole öffnen<a hidden class="anchor" aria-hidden="true" href="#3-container-starten-und-konsole-öffnen">#</a></h3>
+<p>Nach dem Erstellen:</p>
+<ol>
+<li>Container in der Seitenleiste auswählen.</li>
+<li>Auf „Start&quot; klicken.</li>
+<li>„Console&quot; öffnen.</li>
+<li>Mit dem gesetzten Root-Passwort anmelden.</li>
+</ol>
+<p>Dann aktualisierst du das System:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt update
+</span></span><span class="line"><span class="cl">apt upgrade -y
+</span></span></code></pre></div><p>Wenn das ohne Fehler durchläuft, funktioniert dein erster LXC grundsätzlich.</p>
+<h3 id="4-ersten-testdienst-installieren">4. Ersten Testdienst installieren<a hidden class="anchor" aria-hidden="true" href="#4-ersten-testdienst-installieren">#</a></h3>
+<p>Installiere einen einfachen Webserver, um zu prüfen, ob alles erreichbar ist:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apt install nginx -y
+</span></span><span class="line"><span class="cl">systemctl status nginx
+</span></span></code></pre></div><p>Danach im Browser öffnen:</p>
+<pre tabindex="0"><code>http://IP-DEINES-CONTAINERS
+</code></pre><p>Wenn die Nginx-Startseite erscheint, hast du deinen ersten Proxmox-Dienst erfolgreich gestartet. Herzlichen Glückwunsch!</p>
+<h2 id="alternative-wann-eine-vm-besser-ist">Alternative: Wann eine VM besser ist<a hidden class="anchor" aria-hidden="true" href="#alternative-wann-eine-vm-besser-ist">#</a></h2>
+<p>Eine VM ist schwerer als ein LXC, aber sauberer getrennt. Für Einsteiger ist das manchmal sogar einfacher, weil sich die VM wie ein normaler Computer verhält.</p>
+<p>Nimm eine VM, wenn:</p>
+<ul>
+<li>du Home Assistant OS installieren willst</li>
+<li>du Windows testen möchtest</li>
+<li>du Docker ohne LXC-Sonderfälle lernen willst</li>
+<li>du ein komplettes Linux-System mit eigenem Kernel brauchst</li>
+</ul>
+<p>Meine einfache Faustregel für die Entscheidung:</p>
+<blockquote>
+<p><strong>Kleiner Linux-Dienst und geringe Ressourcen: LXC. Eigenes Betriebssystem, stärkere Isolation oder Appliance: VM.</strong></p></blockquote>
+<p>Startwerte (beispielhaft) für eine kleine Linux-VM:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Einstellung</th>
+          <th>Startwerte (beispielhaft)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CPU</td>
+          <td>2 Kerne</td>
+      </tr>
+      <tr>
+          <td>RAM</td>
+          <td>2 GB</td>
+      </tr>
+      <tr>
+          <td>Speicher</td>
+          <td>16–32 GB</td>
+      </tr>
+      <tr>
+          <td>ISO</td>
+          <td>Debian oder Ubuntu Server</td>
+      </tr>
+      <tr>
+          <td>Netzwerk</td>
+          <td>VirtIO / Standard-Bridge</td>
+      </tr>
+  </tbody>
+</table>
+<p>Für sehr kleine Hardware wie einen Fujitsu Futro S7010 ist ein LXC oft angenehmer. Für stärkere Mini-PCs wie Dell OptiPlex oder HP ProDesk ist eine kleine VM ebenfalls realistisch.</p>
+<h2 id="warum-funktioniert-das">Warum funktioniert das?<a hidden class="anchor" aria-hidden="true" href="#warum-funktioniert-das">#</a></h2>
+<p>Proxmox kann zwei Arten von virtuellen Umgebungen verwalten:</p>
+<ul>
+<li><strong>VMs</strong> sind wie eigene kleine Computer. Sie bringen ihr eigenes Betriebssystem mit und sind stärker vom Host getrennt.</li>
+<li><strong>LXC-Container</strong> teilen sich den Linux-Kernel mit dem Proxmox-Host. Dadurch sind sie schlanker, aber etwas näher am Host.</li>
+</ul>
+<p>Für Einsteiger zählt nicht die Theorie, sondern die praktische Folge:</p>
+<ul>
+<li>Ein LXC ist schnell, sparsam und ideal für kleine Dienste.</li>
+<li>Eine VM ist sauberer getrennt und besser, wenn ein Dienst ein komplettes System erwartet.</li>
+</ul>
+<p>Du musst dich nicht für immer entscheiden. Viele Homelabs nutzen beides: LXC für kleine Dienste, VMs für größere oder speziellere Systeme.</p>
+<h2 id="troubleshooting">Troubleshooting<a hidden class="anchor" aria-hidden="true" href="#troubleshooting">#</a></h2>
+<h3 id="1-der-lxc-bekommt-keine-ip-adresse">1. Der LXC bekommt keine IP-Adresse<a hidden class="anchor" aria-hidden="true" href="#1-der-lxc-bekommt-keine-ip-adresse">#</a></h3>
+<p>Prüfe zuerst, ob dein Heimrouter DHCP aktiviert hat. Danach in Proxmox kontrollieren, ob der Container an der richtigen Netzwerk-Bridge hängt. In einfachen Setups heißt diese meist <code>vmbr0</code>.</p>
+<h3 id="2-ich-kann-den-container-nicht-im-browser-öffnen">2. Ich kann den Container nicht im Browser öffnen<a hidden class="anchor" aria-hidden="true" href="#2-ich-kann-den-container-nicht-im-browser-öffnen">#</a></h3>
+<p>Prüfe drei Dinge:</p>
+<ul>
+<li>Läuft der Dienst im Container wirklich? (<code>systemctl status nginx</code>)</li>
+<li>Stimmt die IP-Adresse?</li>
+<li>Öffnest du den richtigen Port?</li>
+</ul>
+<p>Für Nginx ist es Port 80, also <code>http://IP-DES-CONTAINERS</code>.</p>
+<h3 id="3-apt-update-schlägt-fehl">3. <code>apt update</code> schlägt fehl<a hidden class="anchor" aria-hidden="true" href="#3-apt-update-schlägt-fehl">#</a></h3>
+<p>Oft ist DNS oder Netzwerk die Ursache. Teste im Container:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ping 1.1.1.1
+</span></span><span class="line"><span class="cl">ping debian.org
+</span></span></code></pre></div><p>Wenn die erste Zeile funktioniert und die zweite nicht, liegt es wahrscheinlich an DNS.</p>
+<h3 id="4-der-container-startet-nicht">4. Der Container startet nicht<a hidden class="anchor" aria-hidden="true" href="#4-der-container-startet-nicht">#</a></h3>
+<p>Prüfe in Proxmox die Logs des Containers. Häufige Ursachen: zu wenig Speicher, falsches Template oder ein versehentlich privilegierter Container.</p>
+<h3 id="5-docker-im-lxc">5. Docker im LXC?<a hidden class="anchor" aria-hidden="true" href="#5-docker-im-lxc">#</a></h3>
+<p>Für den ersten Docker-Test ist eine kleine VM oft verständlicher. Docker im LXC geht technisch, bringt aber zusätzliche Details mit sich – für Einsteiger nicht der erste Weg.</p>
+<h2 id="faq">FAQ<a hidden class="anchor" aria-hidden="true" href="#faq">#</a></h2>
+<h3 id="ist-lxc-unsicher">Ist LXC unsicher?<a hidden class="anchor" aria-hidden="true" href="#ist-lxc-unsicher">#</a></h3>
+<p>Nicht automatisch. Für normale Homelab-Dienste sind unprivilegierte LXC-Container ein sinnvoller Einstieg. Wenn du starke Isolation brauchst oder fremden Code testest, ist eine VM die bessere Wahl.</p>
+<h3 id="kann-ich-später-von-lxc-auf-vm-wechseln">Kann ich später von LXC auf VM wechseln?<a hidden class="anchor" aria-hidden="true" href="#kann-ich-später-von-lxc-auf-vm-wechseln">#</a></h3>
+<p>Nicht per Ein-Klick-Umwandlung. Du kannst aber den Dienst sichern und in einer VM neu aufsetzen. Deshalb lohnt es sich, früh Backups und Dokumentation zu üben.</p>
+<h3 id="sollte-jeder-dienst-einen-eigenen-container-bekommen">Sollte jeder Dienst einen eigenen Container bekommen?<a hidden class="anchor" aria-hidden="true" href="#sollte-jeder-dienst-einen-eigenen-container-bekommen">#</a></h3>
+<p>Für Einsteiger: ja, meistens. Ein Dienst pro Container bleibt übersichtlich. Wenn etwas kaputtgeht, betrifft es nicht direkt alle anderen Dienste.</p>
+<h3 id="brauche-ich-direkt-feste-ip-adressen">Brauche ich direkt feste IP-Adressen?<a hidden class="anchor" aria-hidden="true" href="#brauche-ich-direkt-feste-ip-adressen">#</a></h3>
+<p>Nicht für den ersten Test. Für dauerhaft genutzte Dienste sind feste IPs oder DHCP-Reservierungen aber sinnvoll, damit Links und Dashboards nicht ständig angepasst werden müssen.</p>
+<h2 id="nächster-schritt">Nächster Schritt<a hidden class="anchor" aria-hidden="true" href="#nächster-schritt">#</a></h2>
+<p>Dein erster LXC läuft? Dann geht es weiter mit den wichtigsten Diensten für dein Homelab:</p>
+<ul>
+<li><strong>„Proxmox Backup für Einsteiger&quot;</strong> – Bevor du produktive Dienste startest, solltest du Backup und Restore verstehen.</li>
+<li><strong>„Pi-hole oder AdGuard im Proxmox-LXC einrichten&quot;</strong> – Dein erster echter Dienst: Werbeblocker fürs ganze Netzwerk.</li>
+</ul>
+<p>Passende Einstiegsartikel im Blog:</p>
+<ul>
+<li><a href="/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/">Virtualisierung kostenlos: Proxmox als VMware-Alternative</a></li>
+<li><a href="/posts/homelab-unter-100-euro-was-du-brauchst/">Homelab unter 100 Euro: Was du wirklich brauchst</a></li>
+</ul>
+<h2 id="-das-solltest-du-jetzt-können">✅ Das solltest du jetzt können<a hidden class="anchor" aria-hidden="true" href="#-das-solltest-du-jetzt-können">#</a></h2>
+<p>Nach dem Artikel solltest du:</p>
+<ul>
+<li>✅ wissen, wann ein LXC sinnvoller ist als eine VM</li>
+<li>✅ wissen, wann eine VM die bessere Wahl ist</li>
+<li>✅ einen ersten LXC mit wenig Ressourcen anlegen können</li>
+<li>✅ einen einfachen Testdienst installieren können</li>
+<li>✅ die häufigsten Fehler bei IP, DNS und Netzwerk kennen</li>
+<li>✅ einen klaren nächsten Schritt für dein Homelab haben</li>
+</ul>
+<hr>
+<p><strong>Einrichten wenn:</strong> du Proxmox installiert hast und den ersten LXC oder die erste VM anlegen willst.<br>
+<strong>Nicht einrichten wenn:</strong> du bereits konkrete Dienste im Kopf hast – dann starte direkt mit dem passenden Dienst-Container.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    <footer class="footer-custom">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3>Homelab Guide</h3>
+            <p>Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern.</p>
+            <p style="font-size: 12px; margin-top: 12px; color: #718096;">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Kategorien</h3>
+            <ul>
+                <li><a href="/categories/hardware/">Hardware</a></li>
+                <li><a href="/categories/homelab/">Homelab</a></li>
+                <li><a href="/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/categories/software/">Software</a></li>
+                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Folgen</h3>
+            <ul>
+                <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>
+            Powered by
+            <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;
+            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        </span>
+    </div>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+    var toplink = document.getElementById("top-link");
+    if (toplink) {
+        window.onscroll = function () {
+            const scrollThreshold = window.innerHeight;
+            if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+        };
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>

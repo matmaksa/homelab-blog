@@ -1,13 +1,275 @@
-<!doctype html><html lang=de dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Smarthome | Homelab Guide</title>
-<meta name=keywords content><meta name=description content="Homelab, Virtualisierung & KI Modelle – Praxis-Guides für dein Zuhause-Rechenzentrum"><meta name=author content><link rel=canonical href=https://matmaksa.github.io/homelab-blog/categories/smarthome/><link crossorigin=anonymous href=/homelab-blog/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as=style><link rel=icon href=https://matmaksa.github.io/homelab-blog/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://matmaksa.github.io/homelab-blog/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://matmaksa.github.io/homelab-blog/favicon-32x32.png><link rel=apple-touch-icon href=https://matmaksa.github.io/homelab-blog/apple-touch-icon.png><link rel=mask-icon href=https://matmaksa.github.io/homelab-blog/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://matmaksa.github.io/homelab-blog/categories/smarthome/index.xml title=rss><link rel=alternate hreflang=de href=https://matmaksa.github.io/homelab-blog/categories/smarthome/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><script data-goatcounter=https://matmaksa.goatcounter.com/count async src=//gc.zgo.at/count.js></script><meta property="og:url" content="https://matmaksa.github.io/homelab-blog/categories/smarthome/"><meta property="og:site_name" content="Homelab Guide"><meta property="og:title" content="Smarthome"><meta property="og:description" content="Homelab, Virtualisierung & KI Modelle – Praxis-Guides für dein Zuhause-Rechenzentrum"><meta property="og:locale" content="de_de"><meta property="og:type" content="website"><meta property="og:image" content="https://matmaksa.github.io/homelab-blog/og-image.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://matmaksa.github.io/homelab-blog/og-image.png"><meta name=twitter:title content="Smarthome"><meta name=twitter:description content="Homelab, Virtualisierung & KI Modelle – Praxis-Guides für dein Zuhause-Rechenzentrum"></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://matmaksa.github.io/homelab-blog/ accesskey=h title="Homelab Guide (Alt + H)">Homelab Guide</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme"><svg class="moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg class="sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://matmaksa.github.io/homelab-blog/categories/ title=Kategorien><span>Kategorien</span></a></li><li><a href=https://matmaksa.github.io/homelab-blog/tags/ title=Tags><span>Tags</span></a></li><li><a href=https://matmaksa.github.io/homelab-blog/search/ title="🔍 Suche"><span>🔍 Suche</span></a></li><li><a href=https://matmaksa.github.io/homelab-blog/about/ title=Über><span>Über</span></a></li><li><a href=https://matmaksa.github.io/homelab-blog/links/ title="⭐ Empfehlungen"><span>⭐ Empfehlungen</span></a></li></ul></nav></header><main class=main><header class=page-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=/homelab-blog/>Home</a>
-<svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
-<a href=/homelab-blog/categories/>Categories</a><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg></nav><h1>Smarthome</h1></header><article class="post-entry tag-entry"><figure class=entry-cover><img loading=lazy srcset='https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/featured_hu_1cd432888a238737.jpg 360w,https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/featured_hu_97260242c701d13f.jpg 480w,https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/featured_hu_ae429ef22936c699.jpg 720w,https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/featured_hu_1c16579886820756.jpg 1080w,https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/featured.jpg 1408w' src=https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/featured.jpg sizes="(min-width: 768px) 720px, 100vw" width=1408 height=768 alt="Home Assistant auf einem Mini-PC – Smarthome-Zentrale für unter 100 Euro"></figure><header class=entry-header><h2 class=entry-hint-parent>Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€</h2></header><div class=entry-content><p>Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten
-Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.
-Home Assistant ist die beste Lösung dafür – eine kostenlose Open-Source-Software, die über 2.000 verschiedene Geräte und Dienste miteinander verbindet. Vergiss teure Fertig-Boxen wie den HA Green oder den Raspberry Pi – ein refurbished Mini-PC bietet die dreifache Leistung zum halben Preis.
-Dieser Artikel zeigt dir, welcher Mini-PC für dein Smart Home am besten geeignet ist, was du außer dem PC noch brauchst und wie du alles in 15 Minuten zum Laufen bringst.
-...</p></div><footer class=entry-footer><span title='2026-06-24 00:00:00 +0000 UTC'>24. Juni 2026</span>&nbsp;·&nbsp;<span>8 Minuten</span></footer><a class=entry-link aria-label="post link to Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€" href=https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://matmaksa.github.io/homelab-blog/>Homelab Guide</a></span> ·
-Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. ·
-<span>Powered by
-<a href="https://gohugo.io/?utm_source=papermod" rel=noopener target=_blank>Hugo</a> &
-        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
-</a><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>
+<!DOCTYPE html>
+<html lang="de" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Smarthome | Homelab Guide</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="canonical" href="https://matmaksa.de/categories/smarthome/">
+<meta name="google-site-verification" content="google09a060456df1ed16.html">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://matmaksa.de/categories/smarthome/index.xml" title="rss">
+<link rel="alternate" hreflang="de" href="https://matmaksa.de/categories/smarthome/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://matmaksa.de/categories/smarthome/">
+  <meta property="og:site_name" content="Homelab Guide">
+  <meta property="og:title" content="Smarthome">
+  <meta property="og:locale" content="de_de">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Smarthome">
+
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+                    <span class="brand-title">Homelab Guide</span>
+                    <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
+                </span>
+            </a>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                    <span>Kategorien</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                    <span>🔍 Suche</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/about/" title="Über">
+                    <span>Über</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                    <span>⭐ Empfehlungen</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-switches">
+            <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+<main class="main">
+<header class="page-header">
+  <h1>
+    Smarthome
+  </h1>
+</header>
+<div class="article-grid" style="margin-top:8px;">
+<article class="article-card cat-smarthome">
+  <div class="article-card-image">
+    <a href="https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/" aria-label="Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€">
+      <img src="/posts/home-assistant-gebrauchter-mini-pc-2026/featured.jpg" alt="Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€" loading="lazy" decoding="async">
+    </a>
+  </div>
+  <div class="article-card-body">
+    <div class="article-card-category">Smarthome</div>
+    <h3 class="article-card-title"><a href="https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/">Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€</a></h3>
+    <div class="article-card-excerpt">Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-06-24">24.06.2026</time>
+    </div>
+  </div>
+</article>
+
+</div>
+    </main>
+    <footer class="footer-custom">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3>Homelab Guide</h3>
+            <p>Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern.</p>
+            <p style="font-size: 12px; margin-top: 12px; color: #718096;">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Kategorien</h3>
+            <ul>
+                <li><a href="/categories/hardware/">Hardware</a></li>
+                <li><a href="/categories/homelab/">Homelab</a></li>
+                <li><a href="/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/categories/software/">Software</a></li>
+                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Folgen</h3>
+            <ul>
+                <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>
+            Powered by
+            <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;
+            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        </span>
+    </div>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+    var toplink = document.getElementById("top-link");
+    if (toplink) {
+        window.onscroll = function () {
+            const scrollThreshold = window.innerHeight;
+            if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+        };
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>

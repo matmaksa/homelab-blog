@@ -1,4 +1,4 @@
-baseURL = 'https://matmaksa.github.io/homelab-blog/'
+baseURL = 'https://matmaksa.de/'
 title = 'Homelab Guide'
 languageCode = 'de-de'
 theme = 'PaperMod'
@@ -11,6 +11,11 @@ buildDrafts = false
 [params]
   [params.analytics.google]
     SiteVerificationTag = "google09a060456df1ed16.html"
+
+  # Label / Branding (raspberry.tips-style Header)
+  [params.label]
+    tagline = "Praxis-Guides für dein Homelab-Rechenzentrum"
+
   ShowShareButtons = true
   ShowReadingTime = true
   ShowBreadCrumbs = true
@@ -19,7 +24,7 @@ buildDrafts = false
   ShowToc = true
   description = "Homelab, Virtualisierung & KI Modelle – Praxis-Guides für dein Zuhause-Rechenzentrum"
   keywords = ["Homelab", "Proxmox", "Virtualisierung", "KI Modelle", "Docker", "Server", "Selbsthosten"]
-  images = ["/homelab-blog/og-image.png"]
+  images = ["/og-image.png"]
 
   [params.editPost]
     URL = "https://github.com/matmaksa/homelab-blog/content"
@@ -31,6 +36,9 @@ buildDrafts = false
   [params.homeInfoParams]
     Title = "Homelab Guide"
     Content = "Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern."
+
+  # Search page exists
+  searchPage = true
 
 [[params.socialIcons]]
   name = "github"

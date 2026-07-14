@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>IG-Derivate: Home Assistant auf dem Mini-PC | Homelab Guide</title>
+<meta name="keywords" content="">
+<meta name="description" content="Nicht veröffentlichter Review-/Draft-Preview">
+<meta name="author" content="">
+<link rel="canonical" href="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-home-assistant/">
+<meta name="google-site-verification" content="google09a060456df1ed16.html">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="de" href="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-home-assistant/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-home-assistant/">
+  <meta property="og:site_name" content="Homelab Guide">
+  <meta property="og:title" content="IG-Derivate: Home Assistant auf dem Mini-PC">
+  <meta property="og:description" content="Nicht veröffentlichter Review-/Draft-Preview">
+  <meta property="og:locale" content="de_de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="preview">
+    <meta property="article:published_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-13T00:00:00+00:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="IG-Derivate: Home Assistant auf dem Mini-PC">
+  <meta name="twitter:description" content="Nicht veröffentlichter Review-/Draft-Preview">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Preview – Entwürfe",
+      "item": "https://matmaksa.de/preview/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Blog-Preview – unveröffentlichte Entwürfe",
+      "item": "https://matmaksa.de/preview/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "IG-Derivate: Home Assistant auf dem Mini-PC",
+      "item": "https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-home-assistant/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "IG-Derivate: Home Assistant auf dem Mini-PC",
+  "name": "IG-Derivate: Home Assistant auf dem Mini-PC",
+  "description": "Nicht veröffentlichter Review-/Draft-Preview",
+  "keywords": [
+    
+  ],
+  "articleBody": " [!IMPORTANT] Preview-Review-Box\nTYPE=ig_plan\nPUBLISH_ELIGIBLE=no\nUSER_VISUAL_APPROVAL_REQUIRED=yes\nFACT_CHECK_REQUIRED=yes\nLINK_CHECK_REQUIRED=yes\nPRICE_CHECK_REQUIRED=yes\nRECOMMENDED_ACTION=blocked_requires_price_research_and_review\nPreview-Hinweis: Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.\nQuelle: review-queue/2026-07-09-ig-derivate-home-assistant.md\n📸 IG-Derivate: Home Assistant auf dem Mini-PC Blogartikel: Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale auf dem Mini-PC\nPubliziert: 24.06.2026\nBlogziel: Leser zeigen, wie sie mit einem gebrauchten Mini-PC eine leistungsstarke Smarthome-Zentrale für Home Assistant bauen\nZielgruppe: Smarthome-Einsteiger, HA-Interessierte, Homelaber, Low-Budget-Bastler\nContent-Typ: Pillar / Software-Guide\nAffiliate: Ja (Hardware-Empfehlungen)\nKategorie: Smarthome\n5 Instagram-Derivate Derivat 1 — Reel: “HA Green vs gebrauchter Mini-PC – der Preis-Schock” Feld Wert Format Reel (9:16, 30-45s) Priorität 🟢 Hoch Hook Der HA Green kostet 100€. Mein gebrauchter Mini-PC hat weniger gekostet und kann mehr. Kernaussage Ein gebrauchter Mini-PC ist oft günstiger, leistungsfähiger und flexibler als fertige Smarthome-Boxen. Caption-Entwurf Home Assistant Green: 100€, 4 GB RAM, fest verbaut. Gebrauchter Dell OptiPlex: mehr RAM, auch zusätzliche Dienste wie Pi-hole, AdGuard und Headscale gleichzeitig möglich. HA Green ist eine gute Einsteiger-Lösung, ein Mini-PC bietet dir langfristig mehr Flexibilität. Wer aufrüsten will, steckt einfach mehr RAM rein – beim HA Green geht das nicht. Meine Installations-Anleitung mit Schritt-für-Schritt-Code wartet im Blog. 🔗 Visual-Idee Side-by-Side: HA Green Box (klein, begrenzt) vs gebrauchter Mini-PC (offen, RAM-Slot sichtbar) – plus Preis-Overlay CTA Installations-Guide → Blog in Bio 🔗 Affiliate ✅ Ja (Disclosure wegen Hardware-Links) Derivat 2 — Carousel: “Smarthome für unter 100€ – das brauchst du” Feld Wert Format Carousel (5 Slides, 4:5) Priorität 🟢 Hoch Hook Smarthome-Zentrale für unter 100€. Ja, das geht wirklich. Kernaussage Für ~70€ bekommst du ein komplettes HA-Setup: Mini-PC, Zigbee-Stick, SSD und SD-Karte. Keine Cloud-Abhängigkeit, alles läuft lokal. Caption-Entwurf Visual-Idee 5 Slides: je eine Komponente mit Foto + Preis + kurzem Text – Blog-Screenshots reichen CTA Schritt-für-Schritt-Anleitung → Blog 🔗 Affiliate ✅ Ja Derivat 3 — Short Tip: “Home Assistant – 3 Add-ons für den Start” Feld Wert Format Story (3 Slides) Priorität 🟡 Mittel Hook 3 Add-ons, die ich direkt nach HA installiert habe – und bis heute nicht missen will. Kernaussage HACS (Community-Store), Zigbee2MQTT und Node-RED sind die drei wichtigsten Add-ons für jedes Smarthome. Caption-Entwurf Meine 3 Must-have-Add-ons direkt nach der HA-Installation: 1️⃣ HACS – Zugriff auf tausende Community-Integrationen 2️⃣ Zigbee2MQTT – verbindet alle Zigbee-Geräte (Licht, Sensoren, Steckdosen) 3️⃣ Node-RED – visuelle Automatisierung für komplexe Regeln. Aber Vorsicht: Installiere erst, wenn das Basis-System läuft. Die komplette Einrichtung Schritt für Schritt im Blog. 🔗 Visual-Idee 3 Slides mit Add-on-Name + Icon + 1-Satz-Beschreibung CTA Blog-Anleitung in Bio 🔗 Affiliate Nein (keine direkten Produktlinks) Derivat 4 — Before/After: “Vorher Cloud – Nachher lokal” Feld Wert Format Story / Single Post (4:5) Priorität 🟡 Mittel Hook Ich habe alle Cloud-Dienste für mein Smart Home gekündigt. Seitdem läuft alles besser. Kernaussage Lokale Steuerung (via Home Assistant auf eigenem Mini-PC) ist schneller, zuverlässiger und datenschutzfreundlicher als Cloud-Dienste. Caption-Entwurf Vorher: 5 Cloud-Apps für Licht, Heizung, Rollos, Sensorik und Sprachsteuerung. Nachher: Eine einzige lokale Home Assistant-Instanz auf einem 70€-Mini-PC. Seitdem: Weniger Latenz, keine Cloud-Ausfälle, volle Datenkontrolle. Und weil alles lokal läuft, funktioniert es auch, wenn das Internet ausfällt. 💪 Lohnt der Umstieg? Meine Erfahrungen und die Installations-Anleitung warten im Blog. 🔗 Visual-Idee Vorher: 5 Handy-Apps (Vendor-Clouds) → Nachher: Ein Mini-PC + HA-Dashboard CTA Zum Umstiegs-Guide → Blog 🔗 Affiliate Nein (Meinungsbeitrag) Derivat 5 — Reel: “HA auf Proxmox – so geht’s” Feld Wert Format Reel (9:16) Priorität 🟢 Hoch Hook Home Assistant in einer VM auf Proxmox – das Setup, das nie ausfällt. Kernaussage HA OS in einer Proxmox-VM läuft stabiler und flexibler als auf einem Raspberry Pi. Backup, Snapshots, Ressourcen-Anpassung – alles einfach. Caption-Entwurf Home Assistant in Proxmox – darum ist das Setup meiner Meinung nach besser als ein Raspberry Pi: ✅ VM-Snapshots vor Updates (Backup in 5 Sekunden) ✅ Mehr RAM/CPU wenn nötig ✅ Gleichzeitig Pi-hole, AdGuard, Headscale auf demselben Host Der Pi ist nett, aber für 70€ bekommst du einen Mini-PC, der alles kann. Die Installations-Anleitung für HA + Proxmox findest du im Blog. 🔗 Visual-Idee Proxmox-WebUI mit HA-VM + Terminal-Screenshot – Blog-Screenshots CTA Blog in Bio 🔗 Affiliate ✅ Ja Empfohlene Reihenfolge 🥇 Reel “HA Green vs Mini-PC” — starker Preis-Kontrast 🥇 Carousel “Smarthome unter 100€” — konkrete Einkaufsliste 🥇 Reel “HA auf Proxmox” — technischer Mehrwert 🥈 Before/After “Cloud → Lokal” — emotionaler Hebel 🥉 Short Tip “3 Add-ons” — Nischen-Content Status Blogartikel Instagram Derivatives Status: Vorschlag erstellt Nächster Schritt: Nach Freigabe: Bildmaterial aus Blog + Screenshots, Posting-Vorbereitung Freigabe erforderlich für: Posting, Bildgenerierung, Affiliate-Disclosure-Prüfung ",
+  "wordCount" : "726",
+  "inLanguage": "de",
+  "datePublished": "2026-07-13T00:00:00Z",
+  "dateModified": "2026-07-13T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-home-assistant/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Homelab Guide",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://matmaksa.de/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+                    <span class="brand-title">Homelab Guide</span>
+                    <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
+                </span>
+            </a>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                    <span>Kategorien</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                    <span>🔍 Suche</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/about/" title="Über">
+                    <span>Über</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                    <span>⭐ Empfehlungen</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-switches">
+            <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+<main class="main">
+<div class="preview-banner">
+  <div class="preview-banner-icon">⚠️</div>
+  <div class="preview-banner-text">
+    <strong>Preview / Draft:</strong> Dieser Artikel ist noch nicht veröffentlicht und befindet sich in Prüfung.
+    <br><small>Quelle: <code>review-queue/2026-07-09-ig-derivate-home-assistant.md</code></small>
+  </div>
+</div>
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      IG-Derivate: Home Assistant auf dem Mini-PC
+    </h1>
+    <div class="post-description">
+      Nicht veröffentlichter Review-/Draft-Preview
+    </div>
+  </header> 
+  <div class="post-content md-content"><blockquote>
+<p>[!IMPORTANT]
+<strong>Preview-Review-Box</strong><br>
+TYPE=ig_plan<br>
+PUBLISH_ELIGIBLE=no<br>
+USER_VISUAL_APPROVAL_REQUIRED=yes<br>
+FACT_CHECK_REQUIRED=yes<br>
+LINK_CHECK_REQUIRED=yes<br>
+PRICE_CHECK_REQUIRED=yes<br>
+RECOMMENDED_ACTION=blocked_requires_price_research_and_review</p></blockquote>
+<blockquote>
+<p><strong>Preview-Hinweis:</strong> Nicht veröffentlicht, nicht freigegeben, nicht im Sitemap-Index.<br>
+Quelle: <code>review-queue/2026-07-09-ig-derivate-home-assistant.md</code></p></blockquote>
+<hr>
+<h1 id="-ig-derivate-home-assistant-auf-dem-mini-pc">📸 IG-Derivate: Home Assistant auf dem Mini-PC<a hidden class="anchor" aria-hidden="true" href="#-ig-derivate-home-assistant-auf-dem-mini-pc">#</a></h1>
+<p><strong>Blogartikel:</strong> Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale auf dem Mini-PC<br>
+<strong>Publiziert:</strong> 24.06.2026<br>
+<strong>Blogziel:</strong> Leser zeigen, wie sie mit einem gebrauchten Mini-PC eine leistungsstarke Smarthome-Zentrale für Home Assistant bauen<br>
+<strong>Zielgruppe:</strong> Smarthome-Einsteiger, HA-Interessierte, Homelaber, Low-Budget-Bastler<br>
+<strong>Content-Typ:</strong> Pillar / Software-Guide<br>
+<strong>Affiliate:</strong> Ja (Hardware-Empfehlungen)<br>
+<strong>Kategorie:</strong> Smarthome</p>
+<hr>
+<h2 id="5-instagram-derivate">5 Instagram-Derivate<a hidden class="anchor" aria-hidden="true" href="#5-instagram-derivate">#</a></h2>
+<h3 id="derivat-1--reel-ha-green-vs-gebrauchter-mini-pc--der-preis-schock">Derivat 1 — Reel: &ldquo;HA Green vs gebrauchter Mini-PC – der Preis-Schock&rdquo;<a hidden class="anchor" aria-hidden="true" href="#derivat-1--reel-ha-green-vs-gebrauchter-mini-pc--der-preis-schock">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feld</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Format</strong></td>
+          <td>Reel (9:16, 30-45s)</td>
+      </tr>
+      <tr>
+          <td><strong>Priorität</strong></td>
+          <td>🟢 Hoch</td>
+      </tr>
+      <tr>
+          <td><strong>Hook</strong></td>
+          <td>Der HA Green kostet 100€. Mein gebrauchter Mini-PC hat weniger gekostet und kann mehr.</td>
+      </tr>
+      <tr>
+          <td><strong>Kernaussage</strong></td>
+          <td>Ein gebrauchter Mini-PC ist oft günstiger, leistungsfähiger und flexibler als fertige Smarthome-Boxen.</td>
+      </tr>
+      <tr>
+          <td><strong>Caption-Entwurf</strong></td>
+          <td>Home Assistant Green: 100€, 4 GB RAM, fest verbaut. Gebrauchter Dell OptiPlex: mehr RAM, auch zusätzliche Dienste wie Pi-hole, AdGuard und Headscale gleichzeitig möglich. HA Green ist eine gute Einsteiger-Lösung, ein Mini-PC bietet dir langfristig mehr Flexibilität. Wer aufrüsten will, steckt einfach mehr RAM rein – beim HA Green geht das nicht. Meine Installations-Anleitung mit Schritt-für-Schritt-Code wartet im Blog. 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Visual-Idee</strong></td>
+          <td>Side-by-Side: HA Green Box (klein, begrenzt) vs gebrauchter Mini-PC (offen, RAM-Slot sichtbar) – plus Preis-Overlay</td>
+      </tr>
+      <tr>
+          <td><strong>CTA</strong></td>
+          <td>Installations-Guide → Blog in Bio 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Affiliate</strong></td>
+          <td>✅ Ja (Disclosure wegen Hardware-Links)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="derivat-2--carousel-smarthome-für-unter-100--das-brauchst-du">Derivat 2 — Carousel: &ldquo;Smarthome für unter 100€ – das brauchst du&rdquo;<a hidden class="anchor" aria-hidden="true" href="#derivat-2--carousel-smarthome-für-unter-100--das-brauchst-du">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feld</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Format</strong></td>
+          <td>Carousel (5 Slides, 4:5)</td>
+      </tr>
+      <tr>
+          <td><strong>Priorität</strong></td>
+          <td>🟢 Hoch</td>
+      </tr>
+      <tr>
+          <td><strong>Hook</strong></td>
+          <td>Smarthome-Zentrale für unter 100€. Ja, das geht wirklich.</td>
+      </tr>
+      <tr>
+          <td><strong>Kernaussage</strong></td>
+          <td>Für ~70€ bekommst du ein komplettes HA-Setup: Mini-PC, Zigbee-Stick, SSD und SD-Karte. Keine Cloud-Abhängigkeit, alles läuft lokal.</td>
+      </tr>
+      <tr>
+          <td></td>
+          <td><strong>Caption-Entwurf</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Visual-Idee</strong></td>
+          <td>5 Slides: je eine Komponente mit Foto + Preis + kurzem Text – Blog-Screenshots reichen</td>
+      </tr>
+      <tr>
+          <td><strong>CTA</strong></td>
+          <td>Schritt-für-Schritt-Anleitung → Blog 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Affiliate</strong></td>
+          <td>✅ Ja</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="derivat-3--short-tip-home-assistant--3-add-ons-für-den-start">Derivat 3 — Short Tip: &ldquo;Home Assistant – 3 Add-ons für den Start&rdquo;<a hidden class="anchor" aria-hidden="true" href="#derivat-3--short-tip-home-assistant--3-add-ons-für-den-start">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feld</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Format</strong></td>
+          <td>Story (3 Slides)</td>
+      </tr>
+      <tr>
+          <td><strong>Priorität</strong></td>
+          <td>🟡 Mittel</td>
+      </tr>
+      <tr>
+          <td><strong>Hook</strong></td>
+          <td>3 Add-ons, die ich direkt nach HA installiert habe – und bis heute nicht missen will.</td>
+      </tr>
+      <tr>
+          <td><strong>Kernaussage</strong></td>
+          <td>HACS (Community-Store), Zigbee2MQTT und Node-RED sind die drei wichtigsten Add-ons für jedes Smarthome.</td>
+      </tr>
+      <tr>
+          <td><strong>Caption-Entwurf</strong></td>
+          <td>Meine 3 Must-have-Add-ons direkt nach der HA-Installation: 1️⃣ <strong>HACS</strong> – Zugriff auf tausende Community-Integrationen 2️⃣ <strong>Zigbee2MQTT</strong> – verbindet alle Zigbee-Geräte (Licht, Sensoren, Steckdosen) 3️⃣ <strong>Node-RED</strong> – visuelle Automatisierung für komplexe Regeln. Aber Vorsicht: Installiere erst, wenn das Basis-System läuft. Die komplette Einrichtung Schritt für Schritt im Blog. 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Visual-Idee</strong></td>
+          <td>3 Slides mit Add-on-Name + Icon + 1-Satz-Beschreibung</td>
+      </tr>
+      <tr>
+          <td><strong>CTA</strong></td>
+          <td>Blog-Anleitung in Bio 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Affiliate</strong></td>
+          <td>Nein (keine direkten Produktlinks)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="derivat-4--beforeafter-vorher-cloud--nachher-lokal">Derivat 4 — Before/After: &ldquo;Vorher Cloud – Nachher lokal&rdquo;<a hidden class="anchor" aria-hidden="true" href="#derivat-4--beforeafter-vorher-cloud--nachher-lokal">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feld</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Format</strong></td>
+          <td>Story / Single Post (4:5)</td>
+      </tr>
+      <tr>
+          <td><strong>Priorität</strong></td>
+          <td>🟡 Mittel</td>
+      </tr>
+      <tr>
+          <td><strong>Hook</strong></td>
+          <td>Ich habe alle Cloud-Dienste für mein Smart Home gekündigt. Seitdem läuft alles besser.</td>
+      </tr>
+      <tr>
+          <td><strong>Kernaussage</strong></td>
+          <td>Lokale Steuerung (via Home Assistant auf eigenem Mini-PC) ist schneller, zuverlässiger und datenschutzfreundlicher als Cloud-Dienste.</td>
+      </tr>
+      <tr>
+          <td><strong>Caption-Entwurf</strong></td>
+          <td>Vorher: 5 Cloud-Apps für Licht, Heizung, Rollos, Sensorik und Sprachsteuerung. Nachher: Eine einzige lokale Home Assistant-Instanz auf einem 70€-Mini-PC. Seitdem: Weniger Latenz, keine Cloud-Ausfälle, volle Datenkontrolle. Und weil alles lokal läuft, funktioniert es auch, wenn das Internet ausfällt. 💪 Lohnt der Umstieg? Meine Erfahrungen und die Installations-Anleitung warten im Blog. 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Visual-Idee</strong></td>
+          <td>Vorher: 5 Handy-Apps (Vendor-Clouds) → Nachher: Ein Mini-PC + HA-Dashboard</td>
+      </tr>
+      <tr>
+          <td><strong>CTA</strong></td>
+          <td>Zum Umstiegs-Guide → Blog 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Affiliate</strong></td>
+          <td>Nein (Meinungsbeitrag)</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h3 id="derivat-5--reel-ha-auf-proxmox--so-gehts">Derivat 5 — Reel: &ldquo;HA auf Proxmox – so geht&rsquo;s&rdquo;<a hidden class="anchor" aria-hidden="true" href="#derivat-5--reel-ha-auf-proxmox--so-gehts">#</a></h3>
+<table>
+  <thead>
+      <tr>
+          <th>Feld</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Format</strong></td>
+          <td>Reel (9:16)</td>
+      </tr>
+      <tr>
+          <td><strong>Priorität</strong></td>
+          <td>🟢 Hoch</td>
+      </tr>
+      <tr>
+          <td><strong>Hook</strong></td>
+          <td>Home Assistant in einer VM auf Proxmox – das Setup, das nie ausfällt.</td>
+      </tr>
+      <tr>
+          <td><strong>Kernaussage</strong></td>
+          <td>HA OS in einer Proxmox-VM läuft stabiler und flexibler als auf einem Raspberry Pi. Backup, Snapshots, Ressourcen-Anpassung – alles einfach.</td>
+      </tr>
+      <tr>
+          <td><strong>Caption-Entwurf</strong></td>
+          <td>Home Assistant in Proxmox – darum ist das Setup meiner Meinung nach besser als ein Raspberry Pi: ✅ VM-Snapshots vor Updates (Backup in 5 Sekunden) ✅ Mehr RAM/CPU wenn nötig ✅ Gleichzeitig Pi-hole, AdGuard, Headscale auf demselben Host Der Pi ist nett, aber für 70€ bekommst du einen Mini-PC, der alles kann. Die Installations-Anleitung für HA + Proxmox findest du im Blog. 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Visual-Idee</strong></td>
+          <td>Proxmox-WebUI mit HA-VM + Terminal-Screenshot – Blog-Screenshots</td>
+      </tr>
+      <tr>
+          <td><strong>CTA</strong></td>
+          <td>Blog in Bio 🔗</td>
+      </tr>
+      <tr>
+          <td><strong>Affiliate</strong></td>
+          <td>✅ Ja</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="empfohlene-reihenfolge">Empfohlene Reihenfolge<a hidden class="anchor" aria-hidden="true" href="#empfohlene-reihenfolge">#</a></h2>
+<ol>
+<li>🥇 Reel &ldquo;HA Green vs Mini-PC&rdquo; — starker Preis-Kontrast</li>
+<li>🥇 Carousel &ldquo;Smarthome unter 100€&rdquo; — konkrete Einkaufsliste</li>
+<li>🥇 Reel &ldquo;HA auf Proxmox&rdquo; — technischer Mehrwert</li>
+<li>🥈 Before/After &ldquo;Cloud → Lokal&rdquo; — emotionaler Hebel</li>
+<li>🥉 Short Tip &ldquo;3 Add-ons&rdquo; — Nischen-Content</li>
+</ol>
+<hr>
+<h2 id="status">Status<a hidden class="anchor" aria-hidden="true" href="#status">#</a></h2>
+<ul>
+<li><strong>Blogartikel Instagram Derivatives Status:</strong> Vorschlag erstellt</li>
+<li><strong>Nächster Schritt:</strong> Nach Freigabe: Bildmaterial aus Blog + Screenshots, Posting-Vorbereitung</li>
+<li><strong>Freigabe erforderlich für:</strong> Posting, Bildgenerierung, Affiliate-Disclosure-Prüfung</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    <footer class="footer-custom">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3>Homelab Guide</h3>
+            <p>Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern.</p>
+            <p style="font-size: 12px; margin-top: 12px; color: #718096;">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Kategorien</h3>
+            <ul>
+                <li><a href="/categories/hardware/">Hardware</a></li>
+                <li><a href="/categories/homelab/">Homelab</a></li>
+                <li><a href="/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/categories/software/">Software</a></li>
+                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Folgen</h3>
+            <ul>
+                <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>
+            Powered by
+            <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;
+            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        </span>
+    </div>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+    var toplink = document.getElementById("top-link");
+    if (toplink) {
+        window.onscroll = function () {
+            const scrollThreshold = window.innerHeight;
+            if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+        };
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>

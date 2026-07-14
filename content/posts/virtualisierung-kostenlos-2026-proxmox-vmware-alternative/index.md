@@ -15,9 +15,28 @@ tags:
   - open-source
 categories:
   - Virtualisierung
----
 
+# Production State Flow
+content_state: "published"
+audit_status: "passed"
+user_approval_required: false
+approved_for_publish: true
+instagram_derivatives_required: true
+instagram_derivatives_status: "planned"
+content_cluster: "proxmox"
+content_role: "pillar"
+risk_level: "low"
+next_action: "manual_duplicate_check_before_additional_proxmox_instagram_derivatives"
+related_articles:
+  - "mini-pc-homelab-vergleich"
+notes:
+  - "Published Proxmox pillar article."
+  - "Additional Proxmox Instagram derivatives need duplicate-risk check."
+---
 **Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten**
+
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+
 
 Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole (ein Werbeblocker fürs ganze Heimnetz), Jellyfin (ein Medienserver für Filme und Serien), Nextcloud (eine private Cloud für deine Fotos und Dokumente) und vielleicht noch ein Game-Server für dich und deine Freunde.
 
@@ -296,4 +315,3 @@ Für die **grundlegende Nutzung**: nein. Die Weboberfläche erlaubt die Verwaltu
 
 Die VMware-Ära im Homelab ist vorbei. Proxmox ist die logische, kostenlose und leistungsfähigere Alternative – und mit gebrauchter Business-Hardware kommst du günstiger weg als mit jedem Fertig-NAS oder Mini-PC aus dem Laden.
 
-*Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.*

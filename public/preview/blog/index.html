@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Blog-Preview – unveröffentlichte Entwürfe | Homelab Guide</title>
+<meta name="keywords" content="">
+<meta name="description" content="Nicht veröffentlichte Blog-Entwürfe und Review-Dokumente">
+<meta name="author" content="">
+<link rel="canonical" href="https://matmaksa.de/preview/blog/">
+<meta name="google-site-verification" content="google09a060456df1ed16.html">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://matmaksa.de/preview/blog/index.xml" title="rss">
+<link rel="alternate" hreflang="de" href="https://matmaksa.de/preview/blog/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://matmaksa.de/preview/blog/">
+  <meta property="og:site_name" content="Homelab Guide">
+  <meta property="og:title" content="Blog-Preview – unveröffentlichte Entwürfe">
+  <meta property="og:description" content="Nicht veröffentlichte Blog-Entwürfe und Review-Dokumente">
+  <meta property="og:locale" content="de_de">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Blog-Preview – unveröffentlichte Entwürfe">
+  <meta name="twitter:description" content="Nicht veröffentlichte Blog-Entwürfe und Review-Dokumente">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Preview – Entwürfe",
+      "item": "https://matmaksa.de/preview/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Blog-Preview – unveröffentlichte Entwürfe",
+      "item": "https://matmaksa.de/preview/blog/"
+    }
+  ]
+}
+</script>
+</head>
+<body class="list" id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+                    <span class="brand-title">Homelab Guide</span>
+                    <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
+                </span>
+            </a>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                    <span>Kategorien</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                    <span>🔍 Suche</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/about/" title="Über">
+                    <span>Über</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                    <span>⭐ Empfehlungen</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-switches">
+            <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+<main class="main">
+<header class="page-header">
+  <h1>
+    Blog-Preview – unveröffentlichte Entwürfe
+  </h1>
+  <div class="post-description">
+    Nicht veröffentlichte Blog-Entwürfe und Review-Dokumente
+  </div>
+</header>
+<div class="post-content md-content"><h1 id="blog-preview--unveröffentlichte-entwürfe">Blog-Preview – unveröffentlichte Entwürfe<a hidden class="anchor" aria-hidden="true" href="#blog-preview--unveröffentlichte-entwürfe">#</a></h1>
+<p>Diese Übersicht enthält nicht veröffentlichte Entwürfe und Review-Dokumente zur Prüfung.</p>
+<p><strong>Artikel-Entwürfe:</strong></p>
+<ul>
+<li><a href="/homelab-blog/preview/blog/headscale-clients-verbinden-und-acls-setzen/">Headscale Clients verbinden und ACLs setzen</a></li>
+<li><a href="/homelab-blog/preview/blog/2026-07-09-proxmox-erster-lxc-vm/">Proxmox nach der Installation: erste VM oder erster LXC</a></li>
+<li><a href="/homelab-blog/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/">Proxmox Backup für Einsteiger: Snapshot, Backup und Restore</a></li>
+</ul>
+<p><strong>IG-Planungsdokumente (keine Blog-Artikel):</strong></p>
+<ul>
+<li><a href="/homelab-blog/preview/blog/2026-07-09-ig-derivate-headscale/">IG-Derivate: Headscale im Homelab</a></li>
+<li><a href="/homelab-blog/preview/blog/2026-07-09-ig-derivate-home-assistant/">IG-Derivate: Home Assistant auf dem Mini-PC</a></li>
+<li><a href="/homelab-blog/preview/blog/2026-07-09-ig-derivate-mini-pc-vergleich/">IG-Derivate: Mini PC fürs Homelab</a></li>
+<li><a href="/homelab-blog/preview/blog/2026-07-09-ig-derivate-virtualisierung/">IG-Derivate: Virtualisierung kostenlos 2026</a></li>
+<li><a href="/homelab-blog/preview/blog/2026-07-09-post-ready-mini-pc-40-vs-300/">Post-Vorbereitung: Mini-PC Reel Vergleich</a></li>
+</ul>
+
+
+</div>
+<div class="article-grid" style="margin-top:8px;">
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/futro-s7010-kaufzustand-4gb-64gb/">Fujitsu Futro S7010 im Kaufzustand: Was geht mit 4 GB RAM und 64 GB SSD?</a></h3>
+    <div class="article-card-excerpt">Hardware Komponente Detail Modell Fujitsu Futro S7010 CPU AMD GX-217GA (2 Kerne, ~1,6 GHz) RAM 4 GB DDR3 (3,6 GiB nutzbar) SSD 64 GB intern Netzteil …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-14">14.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/handyfotos-lokal-sichern-futro-s7010/">Handyfotos lokal sichern: Reicht ein Futro S7010 mit 4 GB RAM?</a></h3>
+    <div class="article-card-excerpt">Kurze Antwort Nein, mit 4 GB RAM und 64 GB SSD nicht als dauerhafte Lösung. Der Futro S7010 kann als Testplattform dienen, aber für den produktiven …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-14">14.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/pihole-adguard-futro-s7010-vergleich/">Pi-hole oder AdGuard Home auf einem Futro S7010: Was läuft mit 256 MB RAM?</a></h3>
+    <div class="article-card-excerpt">1. Einleitung Der Fujitsu Futro S7010 ist ein typisches Einsteiger-System fürs Homelab. Gebraucht oft für etwa 40 Euro zu haben, mit 4 GB RAM und …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-14">14.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-image">
+    <a href="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/" aria-label="USB-Festplatte als Proxmox-Backup-Ziel einrichten">
+      <img src="/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg" alt="USB-Festplatte als Proxmox-Backup-Ziel einrichten" loading="lazy" decoding="async">
+    </a>
+  </div>
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/">USB-Festplatte als Proxmox-Backup-Ziel einrichten</a></h3>
+    <div class="article-card-excerpt">⚠️ Interner Review-Hinweis: Dieser Artikel ist ein Preview-Entwurf. Screenshots fehlen noch.
+👉 Nächster Schritt: Screenshots über die Proxmox-WebGUI …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-14">14.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-image">
+    <a href="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/" aria-label="Headscale Clients verbinden und ACLs setzen">
+      <img src="/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured.jpg" alt="Headscale Clients verbinden und ACLs setzen" loading="lazy" decoding="async">
+    </a>
+  </div>
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/">Headscale Clients verbinden und ACLs setzen</a></h3>
+    <div class="article-card-excerpt"> [!IMPORTANT] Preview-Review-Box TYPE=article_draft PUBLISH_ELIGIBLE=no USER_VISUAL_APPROVAL_REQUIRED=yes FACT_CHECK_REQUIRED=yes (Headscale-Befehle …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-13">13.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-headscale/">IG-Derivate: Headscale im Homelab – Tailscale-Alternative selbst hosten</a></h3>
+    <div class="article-card-excerpt"> [!IMPORTANT] Preview-Review-Box
+TYPE=ig_plan
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=no
+LINK_CHECK_REQUIRED=yes …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-13">13.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-home-assistant/">IG-Derivate: Home Assistant auf dem Mini-PC</a></h3>
+    <div class="article-card-excerpt"> [!IMPORTANT] Preview-Review-Box
+TYPE=ig_plan
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=yes
+LINK_CHECK_REQUIRED=yes …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-13">13.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-mini-pc-vergleich/">IG-Derivate: Mini PC fürs Homelab nach Budget — Von 40€ bis 300€</a></h3>
+    <div class="article-card-excerpt"> [!IMPORTANT] Preview-Review-Box
+TYPE=ig_plan
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=no
+LINK_CHECK_REQUIRED=yes …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-13">13.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/2026-07-09-ig-derivate-virtualisierung/">IG-Derivate: Virtualisierung kostenlos 2026 — Proxmox VE</a></h3>
+    <div class="article-card-excerpt"> [!IMPORTANT] Preview-Review-Box
+TYPE=ig_plan
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=no
+LINK_CHECK_REQUIRED=yes …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-13">13.07.2026</time>
+    </div>
+  </div>
+</article>
+
+<article class="article-card">
+  <div class="article-card-body">
+    <h3 class="article-card-title"><a href="https://matmaksa.de/preview/blog/2026-07-09-post-ready-mini-pc-40-vs-300/">Post-Ready: Mini-PC Reel &#34;40€ vs 300€&#34;</a></h3>
+    <div class="article-card-excerpt"> [!IMPORTANT] Preview-Review-Box
+TYPE=post_pack
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=yes
+LINK_CHECK_REQUIRED=yes …</div>
+    <div class="article-card-meta">
+      <time datetime="2026-07-13">13.07.2026</time>
+    </div>
+  </div>
+</article>
+
+</div>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://matmaksa.de/preview/blog/page/2/">Nächste&nbsp;&nbsp;»
+    </a>
+  </nav>
+</footer>
+    </main>
+    <footer class="footer-custom">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3>Homelab Guide</h3>
+            <p>Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern.</p>
+            <p style="font-size: 12px; margin-top: 12px; color: #718096;">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Kategorien</h3>
+            <ul>
+                <li><a href="/categories/hardware/">Hardware</a></li>
+                <li><a href="/categories/homelab/">Homelab</a></li>
+                <li><a href="/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/categories/software/">Software</a></li>
+                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Folgen</h3>
+            <ul>
+                <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>
+            Powered by
+            <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;
+            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        </span>
+    </div>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+    var toplink = document.getElementById("top-link");
+    if (toplink) {
+        window.onscroll = function () {
+            const scrollThreshold = window.innerHeight;
+            if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+        };
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>

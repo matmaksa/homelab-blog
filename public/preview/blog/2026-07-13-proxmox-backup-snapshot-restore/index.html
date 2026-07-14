@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen | Homelab Guide</title>
+<meta name="keywords" content="">
+<meta name="description" content="Proxmox Backup für Einsteiger: Snapshot ist kein Backup. Dieser Guide zeigt, wie du deine VMs und LXCs richtig sicherst und den Restore testest.">
+<meta name="author" content="">
+<link rel="canonical" href="https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/">
+<meta name="google-site-verification" content="google09a060456df1ed16.html">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="de" href="https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/">
+  <meta property="og:site_name" content="Homelab Guide">
+  <meta property="og:title" content="Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen">
+  <meta property="og:description" content="Proxmox Backup für Einsteiger: Snapshot ist kein Backup. Dieser Guide zeigt, wie du deine VMs und LXCs richtig sicherst und den Restore testest.">
+  <meta property="og:locale" content="de_de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="preview">
+    <meta property="article:published_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="og:image" content="https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured.jpg">
+  <meta name="twitter:title" content="Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen">
+  <meta name="twitter:description" content="Proxmox Backup für Einsteiger: Snapshot ist kein Backup. Dieser Guide zeigt, wie du deine VMs und LXCs richtig sicherst und den Restore testest.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Preview – Entwürfe",
+      "item": "https://matmaksa.de/preview/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Blog-Preview – unveröffentlichte Entwürfe",
+      "item": "https://matmaksa.de/preview/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen",
+      "item": "https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen",
+  "name": "Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen",
+  "description": "Proxmox Backup für Einsteiger: Snapshot ist kein Backup. Dieser Guide zeigt, wie du deine VMs und LXCs richtig sicherst und den Restore testest.",
+  "keywords": [
+    
+  ],
+  "articleBody": " [!IMPORTANT] Preview-Review-Box TYPE=article_draft PUBLISH_ELIGIBLE=no USER_VISUAL_APPROVAL_REQUIRED=yes FACT_CHECK_REQUIRED=yes (Proxmox-Menünamen, Backup-Ziel) LINK_CHECK_REQUIRED=yes PRICE_CHECK_REQUIRED=no RECOMMENDED_ACTION=next_article_candidate_after_fact_check_and_visual_review\nPreview-Hinweis: Nicht veröffentlichter Entwurf – noch nicht publish-ready. Cover-Bild: Wird vor Freigabe generiert.\nProxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen TL;DR: Snapshot ist kein Backup Ein Snapshot ist praktisch, wenn du vor einem Update schnell einen Rücksprungpunkt brauchst. Ein echtes Backup liegt getrennt von der VM oder dem LXC und lässt sich auch dann wiederherstellen, wenn dein Dienst kaputt konfiguriert wurde oder du den Container versehentlich gelöscht hast.\nMeine Einsteiger-Regel: Snapshot vor riskanten Änderungen, Backup regelmäßig, Restore mindestens einmal testen. Erst wenn du eine Wiederherstellung erfolgreich ausprobiert hast, weißt du wirklich, dass dein Homelab nicht nur läuft, sondern auch reparierbar ist.\nVoraussetzungen Punkt Wert ⏱ Zeit 30–45 Minuten 💰 Kosten 0 € mit vorhandenem Speicherziel 📊 Schwierigkeit ⭐⭐☆☆☆ 🖥️ Benötigt Laufender Proxmox-Host, mindestens eine VM oder ein LXC, ein Backup-Ziel 🎯 Ziel Erstes Backup erstellen und Wiederherstellung testweise prüfen ✅ Getestet mit Proxmox VE (aktuelle Version) Die einfache Entscheidung: Snapshot, Backup oder Restore-Test? Viele Einsteiger klicken in Proxmox zuerst auf „Snapshot\" und fühlen sich sicher. Das ist verständlich, aber gefährlich: Ein Snapshot hilft nur in bestimmten Situationen.\nSituation Nimm das Warum Du installierst ein Update und willst schnell zurück Snapshot Schnell erstellt, gut für kurze Tests Du willst eine VM/LXC regelmäßig sichern Backup Wiederherstellung unabhängig vom laufenden Zustand Du willst wissen, ob deine Sicherung wirklich funktioniert Restore-Test Nur ein getestetes Backup ist ein brauchbares Backup Du speicherst alles auf derselben internen SSD Nicht ausreichend Bei SSD-Ausfall sind Original und Sicherung weg Die wichtigste Unterscheidung:\nSnapshot: Kurzfristiger Rücksprungpunkt auf demselben Speicher – hilft, wenn du ein Update rückgängig machen musst. Ein Snapshot ist kein externes Backup und schützt nicht vor defekter Festplatte. Backup: Sicherung auf einem separaten Ziel – enthält VM-Konfiguration und Daten. Schützt vor Konfigurationsfehlern, versehentlichem Löschen und Hardware-Ausfall (nur bei getrenntem Speicher). Restore-Test: Beweis, dass dein Backup nicht nur existiert, sondern nutzbar ist. Schritt für Schritt: Backup-Ziel prüfen und ersten Backup-Job anlegen Für den ersten Artikel läuft der Ablauf über die Proxmox-Weboberfläche. Das senkt die Hürde für Einsteiger.\n1. Prüfen, wo dein Backup liegen soll Ein Backup braucht ein Ziel. Drei realistische Varianten für Einsteiger:\nBackup-Ziel Geeignet für Hinweis Zweite interne SSD/HDD Erste Tests Besser als nichts, aber kein Schutz vor Geräteausfall Externe USB-Festplatte Einfacher Start Muss sauber eingebunden und zuverlässig erreichbar sein NAS oder zweiter Mini-PC Dauerhafter Betrieb Sauberer, aber mehr Einrichtung nötig Wichtig: Ein Backup auf derselben internen SSD schützt nicht vor Hardware-Defekt, hilft aber gegen Konfigurationsfehler, versehentliches Löschen und kaputte Updates.\nIn meinem Homelab sichert Proxmox auf eine angeschlossene 1-TB-USB-Festplatte (HGST HTS721010A9E630). Die Platte hängt am USB-Port des Proxmox-Hosts und ist als Directory Storage Backup eingebunden. Das ist ein einfaches, kostengünstiges externes Backup-Ziel – kein Pflichtkauf, aber ein stabiler Einstieg.\nDie Einrichtung zeige ich dir im Artikel USB-Festplatte als Proxmox-Backup-Ziel einrichten.\n2. Backup über die Weboberfläche starten In Proxmox läuft der Einsteiger-Weg so:\nVM oder LXC in der Seitenleiste auswählen. Menüpunkt „Backup\" öffnen. Backup-Ziel auswählen (Storage). Modus und Kompression bei den Standardwerten lassen. Backup starten. Log prüfen: Der Job muss erfolgreich beendet sein. Tipp: Ändere beim ersten Backup so wenig wie möglich. Ziel ist nicht Tuning, sondern ein erfolgreiches, wiederherstellbares Backup.\n3. Einen einfachen Backup-Rhythmus festlegen Für den Einstieg reicht eine klare Regel besser als eine perfekte Enterprise-Strategie:\nTest-LXC: Backup vor größeren Änderungen. Wichtiger Dienst: Regelmäßiges automatisches Backup einrichten. Vor Updates: Kurzer Snapshot plus aktuelles Backup. Nach größeren Änderungen: Restore-Test einplanen. Restore testen: Der wichtigste Schritt Ein Backup ist erst dann beruhigend, wenn du einmal gesehen hast, dass die Wiederherstellung klappt. Viele Einsteiger lassen diesen Schritt aus – das ist nachvollziehbar, aber riskant.\nSo testest du risikoarm und ohne deine produktiven Dienste zu gefährden:\nTest-LXC sichern: Wähle einen kleinen, nicht kritischen Container aus oder lege einen neuen an. Das ist dein Testobjekt, an dem du den Restore übst.\nMit neuer ID wiederherstellen: Beim Restore vergibst du eine neue VMID/CTID. So bleibt der originale Container unverändert, und du vermeidest Konflikte im laufenden Betrieb.\nMit deaktiviertem Netzwerk starten: Starte den wiederhergestellten Container zunächst mit deaktiviertem Netzwerk – entweder über die Weboberfläche (Netzwerk-Interface deaktivieren) oder in einem isolierten Bridge-Port. So vermeidest du IP-Adresskonflikte mit dem laufenden Original, falls der Restore doch zu früh online geht.\nFunktion prüfen: Nach dem Start prüfst du Schritt für Schritt: Lässt sich der Login durchführen? Sind die konfigurierten Dienste erreichbar? Funktioniert das interne Netzwerk? Stimmen die Daten? Erst wenn du alles aktiv getestet hast, kannst du das Netzwerk zuschalten und die volle Erreichbarkeit prüfen.\nTest-Container löschen: Nach erfolgreicher Prüfung entfernst du den Test-Container sauber über „Remove\". Der originale LXC bleibt unberührt und läuft weiter.\nWichtig: Übe zuerst mit einem Test-LXC, bevor du den Restore auf einen echten Dienst anwendest. Der erste Restore ist der lehrreichste – da willst du nicht unter Zeitdruck stehen.\nWarum funktioniert das? Proxmox verwaltet VMs und LXC-Container als eigene Einheiten. Dadurch kann Proxmox nicht nur den laufenden Zustand anzeigen, sondern auch vollständige Sicherungen dieser Einheiten erstellen – inklusive Konfiguration und Daten.\nFür Einsteiger reicht die praktische Idee:\nDeine VM oder dein LXC ist die Arbeitskopie. Das Backup ist die Sicherheitskopie. Der Restore baut aus der Sicherheitskopie wieder eine lauffähige Maschine oder einen Container. Snapshots fühlen sich ähnlich an, sind aber wie ein Lesezeichen im aktuellen Buch. Ein Backup ist dagegen eine Kopie des Buchs, die du aus dem Regal holen kannst, wenn das Original beschädigt wurde.\nTypische Fehler und Lösungen Fehler 1: „Ich habe Snapshots, also brauche ich kein Backup\" Doch. Snapshots helfen bei kurzfristigen Änderungen, ersetzen aber keine separate Sicherung. Nutze Snapshots vor Updates und Backups für echte Wiederherstellung.\nFehler 2: „Mein Backup liegt auf derselben internen SSD wie die VM\" Das ist besser als gar kein Backup gegen Konfigurationsfehler, aber kein Schutz gegen Hardware-Defekt. Für wichtige Dienste sollte das Backup auf ein anderes Laufwerk, NAS oder einen zweiten Host.\nFehler 3: „Der Backup-Job läuft, aber ich habe nie restore getestet\" Dann weißt du nicht, ob dein Backup im Ernstfall reicht. Teste die Wiederherstellung zuerst mit einem kleinen LXC.\nFehler 4: „Ich sichere zu selten\" Frage dich: Wie viel Arbeit darf ich verlieren? Wenn du eine Woche Konfiguration nicht erneut machen willst, ist ein monatliches Backup zu wenig.\nFehler 5: „Ich sichere alles, aber dokumentiere nichts\" Notiere mindestens: Was wird gesichert, wohin, wie oft und wann der letzte Restore-Test erfolgreich war. Das reicht für den Anfang.\nFAQ Reicht ein Snapshot vor jedem Update? Für kleine Updates ist ein Snapshot hilfreich. Für wichtige Dienste sollte zusätzlich ein aktuelles Backup vorhanden sein.\nBrauche ich sofort Proxmox Backup Server? Nicht zwingend für den ersten Lernschritt. Proxmox Backup Server ist ein guter nächster Schritt, wenn mehrere VMs und LXCs regelmäßig gesichert werden sollen. Für den Einstieg zählt zuerst: Backup verstehen, erstellen, wiederherstellen.\nKann ich auf eine USB-Festplatte sichern? Als Einstieg ja: Ich verwende eine 1-TB-USB-Festplatte als Backup-Ziel (siehe USB-Festplatte als Proxmox-Backup-Ziel einrichten). Die Platte ist per UUID im fstab eingetragen und als Proxmox-Storage eingerichtet. Nicht ideal (Single Point of Failure), aber deutlich besser als nur Snapshots oder Backups auf der System-SSD. Ein NAS oder Proxmox Backup Server ist der nächste sinnvolle Schritt.\nMuss ich jede VM und jeden LXC sichern? Nein. Sichere zuerst die Dienste, deren Neuaufbau nervig oder zeitkritisch wäre: DNS/Werbeblocker, Home Assistant, Passwortmanager, wichtige Docker-Hosts, zentrale Dashboards.\nNächster Schritt Nach diesem Artikel bieten sich zwei Praxisartikel an:\n„USB-Festplatte als Proxmox-Backup-Ziel einrichten\" – sollte direkt nach dem Grundlagenartikel als Nächstes gelesen werden. „Proxmox Backup Server im Homelab: Lohnt sich ein zweiter Mini-PC?\" – wenn mehrere LXCs regelmäßig gesichert werden sollen. Oder als Direkteinstieg: „Pi-hole oder AdGuard im Proxmox-LXC einrichten\" – mit dem Wissen, vor dem Produktivbetrieb ein Backup zu erstellen. Im bestehenden Blog findest du passende Einstiegspunkte:\nVirtualisierung kostenlos: Proxmox als VMware-Alternative Homelab unter 100 Euro: Was du wirklich brauchst ✅ Das solltest du jetzt können Nach dem Artikel solltest du:\n✅ den Unterschied zwischen Snapshot und Backup erklären können ✅ wissen, warum ein Snapshot kein vollständiges Backup ersetzt ✅ ein erstes Proxmox-Backup über die Weboberfläche starten können ✅ ein einfaches Backup-Ziel bewusst auswählen können ✅ einen Restore-Test mit einem Test-LXC planen können ✅ einschätzen können, wann Proxmox Backup Server als nächster Schritt sinnvoll wird Einrichten wenn: du erste Dienste im Proxmox-Homelab betreibst und sicherstellen willst, dass sie nach einem Fehler wiederherstellbar sind.\nNicht einrichten wenn: du nur testest und keine Daten zu verlieren hast – aber dann reichen auch Snapshots.\n",
+  "wordCount" : "1383",
+  "inLanguage": "de",
+  "image":"https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured.jpg","datePublished": "2026-07-13T00:00:00Z",
+  "dateModified": "2026-07-13T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Homelab Guide",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://matmaksa.de/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+                    <span class="brand-title">Homelab Guide</span>
+                    <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
+                </span>
+            </a>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                    <span>Kategorien</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                    <span>🔍 Suche</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/about/" title="Über">
+                    <span>Über</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                    <span>⭐ Empfehlungen</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-switches">
+            <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+<main class="main">
+<div class="preview-banner">
+  <div class="preview-banner-icon">⚠️</div>
+  <div class="preview-banner-text">
+    <strong>Preview / Draft:</strong> Dieser Artikel ist noch nicht veröffentlicht und befindet sich in Prüfung.
+  </div>
+</div>
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen
+    </h1>
+    <div class="post-description">
+      Proxmox Backup für Einsteiger: Snapshot ist kein Backup. Dieser Guide zeigt, wie du deine VMs und LXCs richtig sicherst und den Restore testest.
+    </div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager"
+                srcset='https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured_hu_6d393013487df14e.jpg 360w,https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured_hu_f623affc78842e56.jpg 480w,https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured_hu_45413028f129578.jpg 720w,https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured_hu_33650cff8f225f65.jpg 1080w,https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured.jpg 1408w'
+                src="https://matmaksa.de/preview/blog/2026-07-13-proxmox-backup-snapshot-restore/featured.jpg"
+                sizes="(min-width: 768px) 720px, 100vw"
+                width="1408" height="768"
+                alt="Proxmox Backup Dashboard auf einem Monitor in einem dunklen Homelab-Rack mit Backup-Laufwerken">
+        
+</figure>
+  <div class="post-content md-content"><blockquote>
+<p>[!IMPORTANT]
+<strong>Preview-Review-Box</strong>
+TYPE=article_draft
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=yes (Proxmox-Menünamen, Backup-Ziel)
+LINK_CHECK_REQUIRED=yes
+PRICE_CHECK_REQUIRED=no
+RECOMMENDED_ACTION=next_article_candidate_after_fact_check_and_visual_review</p>
+<p><strong>Preview-Hinweis:</strong> Nicht veröffentlichter Entwurf – noch nicht publish-ready.
+<strong>Cover-Bild:</strong> Wird vor Freigabe generiert.</p></blockquote>
+<hr>
+<h1 id="proxmox-backup-für-einsteiger-snapshot-backup-und-restore-richtig-verstehen">Proxmox Backup für Einsteiger: Snapshot, Backup und Restore richtig verstehen<a hidden class="anchor" aria-hidden="true" href="#proxmox-backup-für-einsteiger-snapshot-backup-und-restore-richtig-verstehen">#</a></h1>
+<h2 id="tldr-snapshot-ist-kein-backup">TL;DR: Snapshot ist kein Backup<a hidden class="anchor" aria-hidden="true" href="#tldr-snapshot-ist-kein-backup">#</a></h2>
+<p>Ein <strong>Snapshot</strong> ist praktisch, wenn du vor einem Update schnell einen Rücksprungpunkt brauchst. Ein echtes <strong>Backup</strong> liegt getrennt von der VM oder dem LXC und lässt sich auch dann wiederherstellen, wenn dein Dienst kaputt konfiguriert wurde oder du den Container versehentlich gelöscht hast.</p>
+<p>Meine Einsteiger-Regel: <strong>Snapshot vor riskanten Änderungen, Backup regelmäßig, Restore mindestens einmal testen.</strong> Erst wenn du eine Wiederherstellung erfolgreich ausprobiert hast, weißt du wirklich, dass dein Homelab nicht nur läuft, sondern auch reparierbar ist.</p>
+<h2 id="voraussetzungen">Voraussetzungen<a hidden class="anchor" aria-hidden="true" href="#voraussetzungen">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Punkt</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>⏱ Zeit</td>
+          <td>30–45 Minuten</td>
+      </tr>
+      <tr>
+          <td>💰 Kosten</td>
+          <td>0 € mit vorhandenem Speicherziel</td>
+      </tr>
+      <tr>
+          <td>📊 Schwierigkeit</td>
+          <td>⭐⭐☆☆☆</td>
+      </tr>
+      <tr>
+          <td>🖥️ Benötigt</td>
+          <td>Laufender Proxmox-Host, mindestens eine VM oder ein LXC, ein Backup-Ziel</td>
+      </tr>
+      <tr>
+          <td>🎯 Ziel</td>
+          <td>Erstes Backup erstellen und Wiederherstellung testweise prüfen</td>
+      </tr>
+      <tr>
+          <td>✅ Getestet mit</td>
+          <td>Proxmox VE (aktuelle Version)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="die-einfache-entscheidung-snapshot-backup-oder-restore-test">Die einfache Entscheidung: Snapshot, Backup oder Restore-Test?<a hidden class="anchor" aria-hidden="true" href="#die-einfache-entscheidung-snapshot-backup-oder-restore-test">#</a></h2>
+<p>Viele Einsteiger klicken in Proxmox zuerst auf „Snapshot&quot; und fühlen sich sicher. Das ist verständlich, aber gefährlich: Ein Snapshot hilft nur in bestimmten Situationen.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Situation</th>
+          <th>Nimm das</th>
+          <th>Warum</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Du installierst ein Update und willst schnell zurück</td>
+          <td>Snapshot</td>
+          <td>Schnell erstellt, gut für kurze Tests</td>
+      </tr>
+      <tr>
+          <td>Du willst eine VM/LXC regelmäßig sichern</td>
+          <td>Backup</td>
+          <td>Wiederherstellung unabhängig vom laufenden Zustand</td>
+      </tr>
+      <tr>
+          <td>Du willst wissen, ob deine Sicherung wirklich funktioniert</td>
+          <td>Restore-Test</td>
+          <td>Nur ein getestetes Backup ist ein brauchbares Backup</td>
+      </tr>
+      <tr>
+          <td>Du speicherst alles auf derselben internen SSD</td>
+          <td>Nicht ausreichend</td>
+          <td>Bei SSD-Ausfall sind Original und Sicherung weg</td>
+      </tr>
+  </tbody>
+</table>
+<p>Die wichtigste Unterscheidung:</p>
+<ul>
+<li><strong>Snapshot:</strong> Kurzfristiger Rücksprungpunkt auf demselben Speicher – hilft, wenn du ein Update rückgängig machen musst. Ein Snapshot ist <strong>kein externes Backup</strong> und schützt nicht vor defekter Festplatte.</li>
+<li><strong>Backup:</strong> Sicherung auf einem separaten Ziel – enthält VM-Konfiguration <strong>und</strong> Daten. Schützt vor Konfigurationsfehlern, versehentlichem Löschen und Hardware-Ausfall (nur bei getrenntem Speicher).</li>
+<li><strong>Restore-Test:</strong> Beweis, dass dein Backup nicht nur existiert, sondern nutzbar ist.</li>
+</ul>
+<h2 id="schritt-für-schritt-backup-ziel-prüfen-und-ersten-backup-job-anlegen">Schritt für Schritt: Backup-Ziel prüfen und ersten Backup-Job anlegen<a hidden class="anchor" aria-hidden="true" href="#schritt-für-schritt-backup-ziel-prüfen-und-ersten-backup-job-anlegen">#</a></h2>
+<p>Für den ersten Artikel läuft der Ablauf über die Proxmox-Weboberfläche. Das senkt die Hürde für Einsteiger.</p>
+<h3 id="1-prüfen-wo-dein-backup-liegen-soll">1. Prüfen, wo dein Backup liegen soll<a hidden class="anchor" aria-hidden="true" href="#1-prüfen-wo-dein-backup-liegen-soll">#</a></h3>
+<p>Ein Backup braucht ein Ziel. Drei realistische Varianten für Einsteiger:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Backup-Ziel</th>
+          <th>Geeignet für</th>
+          <th>Hinweis</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Zweite interne SSD/HDD</td>
+          <td>Erste Tests</td>
+          <td>Besser als nichts, aber kein Schutz vor Geräteausfall</td>
+      </tr>
+      <tr>
+          <td>Externe USB-Festplatte</td>
+          <td>Einfacher Start</td>
+          <td>Muss sauber eingebunden und zuverlässig erreichbar sein</td>
+      </tr>
+      <tr>
+          <td>NAS oder zweiter Mini-PC</td>
+          <td>Dauerhafter Betrieb</td>
+          <td>Sauberer, aber mehr Einrichtung nötig</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Wichtig:</strong> Ein Backup auf derselben internen SSD schützt nicht vor Hardware-Defekt, hilft aber gegen Konfigurationsfehler, versehentliches Löschen und kaputte Updates.</p>
+<p>In meinem Homelab sichert Proxmox auf eine angeschlossene <strong>1-TB-USB-Festplatte</strong> (HGST HTS721010A9E630). Die Platte hängt am USB-Port des Proxmox-Hosts und ist als Directory Storage <code>Backup</code> eingebunden. Das ist ein einfaches, kostengünstiges externes Backup-Ziel – kein Pflichtkauf, aber ein stabiler Einstieg.</p>
+<p>Die Einrichtung zeige ich dir im Artikel <strong><a href="/preview/blog/proxmox-usb-festplatte-backup-ziel/">USB-Festplatte als Proxmox-Backup-Ziel einrichten</a></strong>.</p>
+<h3 id="2-backup-über-die-weboberfläche-starten">2. Backup über die Weboberfläche starten<a hidden class="anchor" aria-hidden="true" href="#2-backup-über-die-weboberfläche-starten">#</a></h3>
+<p>In Proxmox läuft der Einsteiger-Weg so:</p>
+<ol>
+<li>VM oder LXC in der Seitenleiste auswählen.</li>
+<li>Menüpunkt „Backup&quot; öffnen.</li>
+<li>Backup-Ziel auswählen (Storage).</li>
+<li>Modus und Kompression bei den Standardwerten lassen.</li>
+<li>Backup starten.</li>
+<li>Log prüfen: Der Job muss erfolgreich beendet sein.</li>
+</ol>
+<blockquote>
+<p><strong>Tipp:</strong> Ändere beim ersten Backup so wenig wie möglich. Ziel ist nicht Tuning, sondern ein erfolgreiches, wiederherstellbares Backup.</p></blockquote>
+<h3 id="3-einen-einfachen-backup-rhythmus-festlegen">3. Einen einfachen Backup-Rhythmus festlegen<a hidden class="anchor" aria-hidden="true" href="#3-einen-einfachen-backup-rhythmus-festlegen">#</a></h3>
+<p>Für den Einstieg reicht eine klare Regel besser als eine perfekte Enterprise-Strategie:</p>
+<ul>
+<li><strong>Test-LXC:</strong> Backup vor größeren Änderungen.</li>
+<li><strong>Wichtiger Dienst:</strong> Regelmäßiges automatisches Backup einrichten.</li>
+<li><strong>Vor Updates:</strong> Kurzer Snapshot plus aktuelles Backup.</li>
+<li><strong>Nach größeren Änderungen:</strong> Restore-Test einplanen.</li>
+</ul>
+<h2 id="restore-testen-der-wichtigste-schritt">Restore testen: Der wichtigste Schritt<a hidden class="anchor" aria-hidden="true" href="#restore-testen-der-wichtigste-schritt">#</a></h2>
+<p>Ein Backup ist erst dann beruhigend, wenn du einmal gesehen hast, dass die Wiederherstellung klappt. Viele Einsteiger lassen diesen Schritt aus – das ist nachvollziehbar, aber riskant.</p>
+<p>So testest du risikoarm und ohne deine produktiven Dienste zu gefährden:</p>
+<ol>
+<li>
+<p><strong>Test-LXC sichern:</strong> Wähle einen kleinen, nicht kritischen Container aus oder lege einen neuen an. Das ist dein Testobjekt, an dem du den Restore übst.</p>
+</li>
+<li>
+<p><strong>Mit neuer ID wiederherstellen:</strong> Beim Restore vergibst du eine neue VMID/CTID. So bleibt der originale Container unverändert, und du vermeidest Konflikte im laufenden Betrieb.</p>
+</li>
+<li>
+<p><strong>Mit deaktiviertem Netzwerk starten:</strong> Starte den wiederhergestellten Container zunächst mit deaktiviertem Netzwerk – entweder über die Weboberfläche (Netzwerk-Interface deaktivieren) oder in einem isolierten Bridge-Port. So vermeidest du IP-Adresskonflikte mit dem laufenden Original, falls der Restore doch zu früh online geht.</p>
+</li>
+<li>
+<p><strong>Funktion prüfen:</strong> Nach dem Start prüfst du Schritt für Schritt: Lässt sich der Login durchführen? Sind die konfigurierten Dienste erreichbar? Funktioniert das interne Netzwerk? Stimmen die Daten? Erst wenn du alles aktiv getestet hast, kannst du das Netzwerk zuschalten und die volle Erreichbarkeit prüfen.</p>
+</li>
+<li>
+<p><strong>Test-Container löschen:</strong> Nach erfolgreicher Prüfung entfernst du den Test-Container sauber über „Remove&quot;. Der originale LXC bleibt unberührt und läuft weiter.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Wichtig:</strong> Übe zuerst mit einem Test-LXC, bevor du den Restore auf einen echten Dienst anwendest. Der erste Restore ist der lehrreichste – da willst du nicht unter Zeitdruck stehen.</p></blockquote>
+<h2 id="warum-funktioniert-das">Warum funktioniert das?<a hidden class="anchor" aria-hidden="true" href="#warum-funktioniert-das">#</a></h2>
+<p>Proxmox verwaltet VMs und LXC-Container als eigene Einheiten. Dadurch kann Proxmox nicht nur den laufenden Zustand anzeigen, sondern auch vollständige Sicherungen dieser Einheiten erstellen – inklusive <strong>Konfiguration und Daten</strong>.</p>
+<p>Für Einsteiger reicht die praktische Idee:</p>
+<ul>
+<li>Deine VM oder dein LXC ist die Arbeitskopie.</li>
+<li>Das Backup ist die Sicherheitskopie.</li>
+<li>Der Restore baut aus der Sicherheitskopie wieder eine lauffähige Maschine oder einen Container.</li>
+</ul>
+<p>Snapshots fühlen sich ähnlich an, sind aber wie ein Lesezeichen im aktuellen Buch. Ein Backup ist dagegen eine Kopie des Buchs, die du aus dem Regal holen kannst, wenn das Original beschädigt wurde.</p>
+<h2 id="typische-fehler-und-lösungen">Typische Fehler und Lösungen<a hidden class="anchor" aria-hidden="true" href="#typische-fehler-und-lösungen">#</a></h2>
+<h3 id="fehler-1-ich-habe-snapshots-also-brauche-ich-kein-backup">Fehler 1: „Ich habe Snapshots, also brauche ich kein Backup&quot;<a hidden class="anchor" aria-hidden="true" href="#fehler-1-ich-habe-snapshots-also-brauche-ich-kein-backup">#</a></h3>
+<p>Doch. Snapshots helfen bei kurzfristigen Änderungen, ersetzen aber keine separate Sicherung. Nutze Snapshots vor Updates und Backups für echte Wiederherstellung.</p>
+<h3 id="fehler-2-mein-backup-liegt-auf-derselben-internen-ssd-wie-die-vm">Fehler 2: „Mein Backup liegt auf derselben internen SSD wie die VM&quot;<a hidden class="anchor" aria-hidden="true" href="#fehler-2-mein-backup-liegt-auf-derselben-internen-ssd-wie-die-vm">#</a></h3>
+<p>Das ist besser als gar kein Backup gegen Konfigurationsfehler, aber kein Schutz gegen Hardware-Defekt. Für wichtige Dienste sollte das Backup auf ein anderes Laufwerk, NAS oder einen zweiten Host.</p>
+<h3 id="fehler-3-der-backup-job-läuft-aber-ich-habe-nie-restore-getestet">Fehler 3: „Der Backup-Job läuft, aber ich habe nie restore getestet&quot;<a hidden class="anchor" aria-hidden="true" href="#fehler-3-der-backup-job-läuft-aber-ich-habe-nie-restore-getestet">#</a></h3>
+<p>Dann weißt du nicht, ob dein Backup im Ernstfall reicht. Teste die Wiederherstellung zuerst mit einem kleinen LXC.</p>
+<h3 id="fehler-4-ich-sichere-zu-selten">Fehler 4: „Ich sichere zu selten&quot;<a hidden class="anchor" aria-hidden="true" href="#fehler-4-ich-sichere-zu-selten">#</a></h3>
+<p>Frage dich: Wie viel Arbeit darf ich verlieren? Wenn du eine Woche Konfiguration nicht erneut machen willst, ist ein monatliches Backup zu wenig.</p>
+<h3 id="fehler-5-ich-sichere-alles-aber-dokumentiere-nichts">Fehler 5: „Ich sichere alles, aber dokumentiere nichts&quot;<a hidden class="anchor" aria-hidden="true" href="#fehler-5-ich-sichere-alles-aber-dokumentiere-nichts">#</a></h3>
+<p>Notiere mindestens: Was wird gesichert, wohin, wie oft und wann der letzte Restore-Test erfolgreich war. Das reicht für den Anfang.</p>
+<h2 id="faq">FAQ<a hidden class="anchor" aria-hidden="true" href="#faq">#</a></h2>
+<h3 id="reicht-ein-snapshot-vor-jedem-update">Reicht ein Snapshot vor jedem Update?<a hidden class="anchor" aria-hidden="true" href="#reicht-ein-snapshot-vor-jedem-update">#</a></h3>
+<p>Für kleine Updates ist ein Snapshot hilfreich. Für wichtige Dienste sollte zusätzlich ein aktuelles Backup vorhanden sein.</p>
+<h3 id="brauche-ich-sofort-proxmox-backup-server">Brauche ich sofort Proxmox Backup Server?<a hidden class="anchor" aria-hidden="true" href="#brauche-ich-sofort-proxmox-backup-server">#</a></h3>
+<p>Nicht zwingend für den ersten Lernschritt. Proxmox Backup Server ist ein guter nächster Schritt, wenn mehrere VMs und LXCs regelmäßig gesichert werden sollen. Für den Einstieg zählt zuerst: Backup verstehen, erstellen, wiederherstellen.</p>
+<h3 id="kann-ich-auf-eine-usb-festplatte-sichern">Kann ich auf eine USB-Festplatte sichern?<a hidden class="anchor" aria-hidden="true" href="#kann-ich-auf-eine-usb-festplatte-sichern">#</a></h3>
+<p>Als Einstieg ja: Ich verwende eine 1-TB-USB-Festplatte als Backup-Ziel (siehe <strong><a href="/preview/blog/proxmox-usb-festplatte-backup-ziel/">USB-Festplatte als Proxmox-Backup-Ziel einrichten</a></strong>). Die Platte ist per UUID im fstab eingetragen und als Proxmox-Storage eingerichtet. Nicht ideal (Single Point of Failure), aber deutlich besser als nur Snapshots oder Backups auf der System-SSD. Ein NAS oder Proxmox Backup Server ist der nächste sinnvolle Schritt.</p>
+<h3 id="muss-ich-jede-vm-und-jeden-lxc-sichern">Muss ich jede VM und jeden LXC sichern?<a hidden class="anchor" aria-hidden="true" href="#muss-ich-jede-vm-und-jeden-lxc-sichern">#</a></h3>
+<p>Nein. Sichere zuerst die Dienste, deren Neuaufbau nervig oder zeitkritisch wäre: DNS/Werbeblocker, Home Assistant, Passwortmanager, wichtige Docker-Hosts, zentrale Dashboards.</p>
+<h2 id="nächster-schritt">Nächster Schritt<a hidden class="anchor" aria-hidden="true" href="#nächster-schritt">#</a></h2>
+<p>Nach diesem Artikel bieten sich zwei Praxisartikel an:</p>
+<ul>
+<li><strong>„<a href="/preview/blog/proxmox-usb-festplatte-backup-ziel/">USB-Festplatte als Proxmox-Backup-Ziel einrichten</a>&quot;</strong> – sollte direkt nach dem Grundlagenartikel als Nächstes gelesen werden.</li>
+<li><strong>„Proxmox Backup Server im Homelab: Lohnt sich ein zweiter Mini-PC?&quot;</strong> – wenn mehrere LXCs regelmäßig gesichert werden sollen.</li>
+<li>Oder als Direkteinstieg: <strong>„Pi-hole oder AdGuard im Proxmox-LXC einrichten&quot;</strong> – mit dem Wissen, vor dem Produktivbetrieb ein Backup zu erstellen.</li>
+</ul>
+<p>Im bestehenden Blog findest du passende Einstiegspunkte:</p>
+<ul>
+<li><a href="/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/">Virtualisierung kostenlos: Proxmox als VMware-Alternative</a></li>
+<li><a href="/homelab-blog/posts/homelab-unter-100-euro-was-du-brauchst/">Homelab unter 100 Euro: Was du wirklich brauchst</a></li>
+</ul>
+<h2 id="-das-solltest-du-jetzt-können">✅ Das solltest du jetzt können<a hidden class="anchor" aria-hidden="true" href="#-das-solltest-du-jetzt-können">#</a></h2>
+<p>Nach dem Artikel solltest du:</p>
+<ul>
+<li>✅ den Unterschied zwischen Snapshot und Backup erklären können</li>
+<li>✅ wissen, warum ein Snapshot kein vollständiges Backup ersetzt</li>
+<li>✅ ein erstes Proxmox-Backup über die Weboberfläche starten können</li>
+<li>✅ ein einfaches Backup-Ziel bewusst auswählen können</li>
+<li>✅ einen Restore-Test mit einem Test-LXC planen können</li>
+<li>✅ einschätzen können, wann Proxmox Backup Server als nächster Schritt sinnvoll wird</li>
+</ul>
+<hr>
+<p><strong>Einrichten wenn:</strong> du erste Dienste im Proxmox-Homelab betreibst und sicherstellen willst, dass sie nach einem Fehler wiederherstellbar sind.<br>
+<strong>Nicht einrichten wenn:</strong> du nur testest und keine Daten zu verlieren hast – aber dann reichen auch Snapshots.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    <footer class="footer-custom">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3>Homelab Guide</h3>
+            <p>Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern.</p>
+            <p style="font-size: 12px; margin-top: 12px; color: #718096;">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Kategorien</h3>
+            <ul>
+                <li><a href="/categories/hardware/">Hardware</a></li>
+                <li><a href="/categories/homelab/">Homelab</a></li>
+                <li><a href="/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/categories/software/">Software</a></li>
+                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Folgen</h3>
+            <ul>
+                <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>
+            Powered by
+            <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;
+            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        </span>
+    </div>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+    var toplink = document.getElementById("top-link");
+    if (toplink) {
+        window.onscroll = function () {
+            const scrollThreshold = window.innerHeight;
+            if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+        };
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>

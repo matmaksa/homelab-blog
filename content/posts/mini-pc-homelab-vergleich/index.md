@@ -16,9 +16,29 @@ tags:
   - thin-client
 categories:
   - Hardware
----
 
+# Production State Flow
+content_state: "published"
+audit_status: "passed"
+user_approval_required: false
+approved_for_publish: true
+instagram_derivatives_required: true
+instagram_derivatives_status: "planned"
+content_cluster: "hardware"
+content_role: "affiliate"
+risk_level: "medium"
+next_action: "maintain_price_affiliate_and_derivative_gates"
+related_articles:
+  - "fujitsu-futro-s7010-homelab-einstieg"
+  - "home-assistant-gebrauchter-mini-pc-2026"
+notes:
+  - "Published hardware comparison article."
+  - "Affiliate and price freshness gates remain relevant."
+---
 **Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten**
+
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+
 
 Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und erste KI-Experimente. Aber welches Modell lohnt sich wirklich für dein Budget?
 
@@ -246,4 +266,3 @@ Die Mini-PCs haben oft nur Platz für 1–2 SSDs intern. Wenn du größere Daten
 
 **Meine persönliche Empfehlung für Einsteiger:** Hol dir einen **HP ProDesk 400 G4** gebraucht für ~90 €. Dazu nachrüstbar: 16–32 GB RAM (gebraucht oft günstiger) und eine 500 GB NVMe-SSD. Der Rechner hat 6 Kerne, läuft leise und stromsparend – und du kannst später bei Bedarf die zweite SSD nachrüsten.
 
-*Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Für dich ändert sich der Preis dadurch nicht.*

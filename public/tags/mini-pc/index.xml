@@ -1,6 +1,33 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Mini-Pc on Homelab Guide</title><link>https://matmaksa.github.io/homelab-blog/tags/mini-pc/</link><description>Recent content in Mini-Pc on Homelab Guide</description><image><title>Homelab Guide</title><url>https://matmaksa.github.io/homelab-blog/og-image.png</url><link>https://matmaksa.github.io/homelab-blog/og-image.png</link></image><generator>Hugo</generator><language>de-de</language><lastBuildDate>Wed, 24 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://matmaksa.github.io/homelab-blog/tags/mini-pc/index.xml" rel="self" type="application/rss+xml"/><item><title>Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€</title><link>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</link><pubDate>Wed, 24 Jun 2026 00:00:00 +0000</pubDate><guid>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</guid><description>&lt;p>&lt;strong>Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten&lt;/strong>&lt;/p>
-&lt;p>Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.&lt;/p>
-&lt;p>&lt;strong>Home Assistant&lt;/strong> ist die beste Lösung dafür – eine kostenlose Open-Source-Software, die über 2.000 verschiedene Geräte und Dienste miteinander verbindet. Vergiss teure Fertig-Boxen wie den HA Green oder den Raspberry Pi – ein refurbished Mini-PC bietet die dreifache Leistung zum halben Preis.&lt;/p>
-&lt;p>Dieser Artikel zeigt dir, welcher Mini-PC für dein Smart Home am besten geeignet ist, was du außer dem PC noch brauchst und wie du alles in 15 Minuten zum Laufen bringst.&lt;/p></description></item><item><title>Mini PC fürs Homelab nach Budget: Von 40€ bis 300€ – welcher passt zu dir?</title><link>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</link><pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate><guid>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</guid><description>&lt;p>&lt;strong>Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong>&lt;/p>
-&lt;p>Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und erste KI-Experimente. Aber welches Modell lohnt sich wirklich für dein Budget?&lt;/p>
-&lt;p>Statt einer generischen Rangliste zeige ich dir hier die besten Optionen &lt;strong>nach Preisklasse&lt;/strong> – vom 40-Euro-Thin-Client bis zur 300-Euro-Neumaschine. Die Modelle auf dieser Seite haben sich über Jahre bewährt und sind auch Mitte 2026 noch die ersten Wahl – in vielen Fällen wurden sie erst 2023/2024 auf den Markt gebracht und sind technisch topaktuell.&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Mini-Pc | Homelab Guide</title>
+    <link>https://matmaksa.de/tags/mini-pc/</link>
+    <description>Recent content in Mini-Pc on Homelab Guide</description>
+    <generator>Hugo</generator>
+    <language>de-de</language>
+    <lastBuildDate>Wed, 24 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://matmaksa.de/tags/mini-pc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€</title>
+      <link>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</link>
+      <pubDate>Wed, 24 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
+&lt;p&gt;Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Home Assistant&lt;/strong&gt; ist die beste Lösung dafür – eine kostenlose Open-Source-Software, die über 2.000 verschiedene Geräte und Dienste miteinander verbindet. Vergiss teure Fertig-Boxen wie den HA Green oder den Raspberry Pi – ein refurbished Mini-PC bietet die dreifache Leistung zum halben Preis.&lt;/p&gt;
+&lt;p&gt;Dieser Artikel zeigt dir, welcher Mini-PC für dein Smart Home am besten geeignet ist, was du außer dem PC noch brauchst und wie du alles in 15 Minuten zum Laufen bringst.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Mini PC fürs Homelab nach Budget: Von 40€ bis 300€ – welcher passt zu dir?</title>
+      <link>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</link>
+      <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
+&lt;p&gt;Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und erste KI-Experimente. Aber welches Modell lohnt sich wirklich für dein Budget?&lt;/p&gt;
+&lt;p&gt;Statt einer generischen Rangliste zeige ich dir hier die besten Optionen &lt;strong&gt;nach Preisklasse&lt;/strong&gt; – vom 40-Euro-Thin-Client bis zur 300-Euro-Neumaschine. Die Modelle auf dieser Seite haben sich über Jahre bewährt und sind auch Mitte 2026 noch die ersten Wahl – in vielen Fällen wurden sie erst 2023/2024 auf den Markt gebracht und sind technisch topaktuell.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

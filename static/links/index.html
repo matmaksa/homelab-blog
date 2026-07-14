@@ -45,6 +45,13 @@
     transition: background 0.15s;
   }
   .blog-link span:hover { background: #1b5e20; }
+  .disclosure {
+    background: #fff8e1; border: 1px solid #ffe082; border-radius: 14px;
+    color: #5d4037; font-size: 12px; line-height: 1.45;
+    padding: 12px 14px; margin: 16px 0 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .curation-note { color: #777; font-size: 12px; line-height: 1.45; margin: -4px 4px 18px; text-align: center; }
   .footer { text-align: center; color: #bbb; font-size: 11px; margin-top: 24px; line-height: 1.6; }
 </style>
 </head>
@@ -58,13 +65,18 @@
     <span>📖 Blog lesen →</span>
   </a>
 
+  <div class="disclosure">
+    Hinweis: Diese Seite enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+  </div>
+  <p class="curation-note">Kuratiert nach Homelab-Einsatz und sinnvollen Einsteiger-Use-Cases – keine vollständige Einkaufsliste.</p>
+
   <div class="section-title">🖥️ Homelab-Server</div>
 
   <a class="link-card" href="https://www.amazon.de/dp/B0FPCDJJ72?tag=matmaksa-homelab-21" target="_blank" rel="noopener">
     <span class="emoji">💻</span>
     <span class="text">
       <span class="title">HP ProDesk 400 G4 Mini</span>
-      <span class="desc">Mein Proxmox-Host (i5-8500T, 32GB)</span>
+      <span class="desc">Im Einsatz: Proxmox-Host (i5-8500T, 32GB)</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -73,7 +85,7 @@
     <span class="emoji">🖥️</span>
     <span class="text">
       <span class="title">Dell OptiPlex 3070 Micro</span>
-      <span class="desc">2. Proxmox-Node (i5-9500T, 32GB) ⭐ Neu</span>
+      <span class="desc">Im Einsatz: 2. Proxmox-Node (i5-9500T, 32GB)</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -82,7 +94,7 @@
     <span class="emoji">📦</span>
     <span class="text">
       <span class="title">Fujitsu Futro S7010</span>
-      <span class="desc">Dedizierte Firewall (J4125, 16GB) ⭐ Neu</span>
+      <span class="desc">Im Einsatz: Firewall/leichte Dienste – kein KI-Gerät</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -93,7 +105,7 @@
     <span class="emoji">🔌</span>
     <span class="text">
       <span class="title">TP-Link TL-SG1016PE</span>
-      <span class="desc">16-Port PoE Switch fürs Homelab</span>
+      <span class="desc">Empfehlung: 16-Port PoE für APs/Kameras</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -102,7 +114,7 @@
     <span class="emoji">📡</span>
     <span class="text">
       <span class="title">TP-Link EAP653 Access Point</span>
-      <span class="desc">WiFi 6 AP — 2× im Einsatz</span>
+      <span class="desc">Im Einsatz: WiFi 6 Access Point — 2×</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -111,7 +123,7 @@
     <span class="emoji">🌐</span>
     <span class="text">
       <span class="title">AVM Fritz!Box 7530 AX</span>
-      <span class="desc">Router mit WLAN 6</span>
+      <span class="desc">Empfehlung: Router mit WLAN 6</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -122,7 +134,7 @@
     <span class="emoji">📷</span>
     <span class="text">
       <span class="title">Reolink RLC-520A</span>
-      <span class="desc">5MP PoE Überwachungskamera</span>
+      <span class="desc">Empfehlung: 5MP PoE-Kamera</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -131,7 +143,7 @@
     <span class="emoji">🔌</span>
     <span class="text">
       <span class="title">TP-Link Tapo Steckdose</span>
-      <span class="desc">Smarte WLAN-Steckdose</span>
+      <span class="desc">Empfehlung: smarte WLAN-Steckdose</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -140,7 +152,7 @@
     <span class="emoji">🎛️</span>
     <span class="text">
       <span class="title">Sonoff Zigbee USB Stick</span>
-      <span class="desc">Zigbee-Gateway für Home Assistant</span>
+      <span class="desc">Empfehlung: Zigbee-Gateway für Home Assistant</span>
     </span>
     <span class="arrow">→</span>
   </a>
@@ -149,7 +161,7 @@
     <span class="emoji">🪟</span>
     <span class="text">
       <span class="title">Rolladen-Aktor</span>
-      <span class="desc">Smarte Rolladensteuerung</span>
+      <span class="desc">Empfehlung: smarte Rolladensteuerung</span>
     </span>
     <span class="arrow">→</span>
   </a>

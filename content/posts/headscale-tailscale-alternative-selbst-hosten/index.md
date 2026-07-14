@@ -19,6 +19,24 @@ tags:
   - netzwerk
 categories:
   - Software
+
+# Production State Flow
+content_state: "published"
+audit_status: "passed"
+user_approval_required: false
+approved_for_publish: true
+instagram_derivatives_required: true
+instagram_derivatives_status: "planned"
+content_cluster: "headscale"
+content_role: "pillar"
+risk_level: "medium"
+next_action: "manual_review_headscale_basis_commands_for_consistency"
+related_articles:
+  - "headscale-clients-acls-homelab"
+notes:
+  - "Published Headscale basis article."
+  - "Align older Headscale CLI/config examples before publishing the follow-up."
+  - "Instagram asset headscale-selfhost is planned/review_ready."
 ---
 
 **Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten**

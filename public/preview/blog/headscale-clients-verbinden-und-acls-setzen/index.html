@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="de" dir="auto" data-theme="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Headscale Clients verbinden und ACLs setzen | Homelab Guide</title>
+<meta name="keywords" content="">
+<meta name="description" content="Headscale Clients verbinden: Tailscale-Clients per Web-Login oder Pre-Auth-Key koppeln, Zugriffsregeln per ACLs definieren und optional Subnet-Router einrichten.">
+<meta name="author" content="">
+<link rel="canonical" href="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/">
+<meta name="google-site-verification" content="google09a060456df1ed16.html">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.de/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="de" href="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script><meta property="og:url" content="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/">
+  <meta property="og:site_name" content="Homelab Guide">
+  <meta property="og:title" content="Headscale Clients verbinden und ACLs setzen">
+  <meta property="og:description" content="Headscale Clients verbinden: Tailscale-Clients per Web-Login oder Pre-Auth-Key koppeln, Zugriffsregeln per ACLs definieren und optional Subnet-Router einrichten.">
+  <meta property="og:locale" content="de_de">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="preview">
+    <meta property="article:published_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-07-13T00:00:00+00:00">
+    <meta property="og:image" content="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured.jpg">
+  <meta name="twitter:title" content="Headscale Clients verbinden und ACLs setzen">
+  <meta name="twitter:description" content="Headscale Clients verbinden: Tailscale-Clients per Web-Login oder Pre-Auth-Key koppeln, Zugriffsregeln per ACLs definieren und optional Subnet-Router einrichten.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Preview – Entwürfe",
+      "item": "https://matmaksa.de/preview/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Blog-Preview – unveröffentlichte Entwürfe",
+      "item": "https://matmaksa.de/preview/blog/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Headscale Clients verbinden und ACLs setzen",
+      "item": "https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Headscale Clients verbinden und ACLs setzen",
+  "name": "Headscale Clients verbinden und ACLs setzen",
+  "description": "Headscale Clients verbinden: Tailscale-Clients per Web-Login oder Pre-Auth-Key koppeln, Zugriffsregeln per ACLs definieren und optional Subnet-Router einrichten.",
+  "keywords": [
+    
+  ],
+  "articleBody": " [!IMPORTANT] Preview-Review-Box TYPE=article_draft PUBLISH_ELIGIBLE=no USER_VISUAL_APPROVAL_REQUIRED=yes FACT_CHECK_REQUIRED=yes (Headscale-Befehle gegen v0.29.2+ prüfen) LINK_CHECK_REQUIRED=yes PRICE_CHECK_REQUIRED=no RECOMMENDED_ACTION=technical_test_required_before_publish_candidate\nPreview-Hinweis: Nicht veröffentlichter Entwurf – noch nicht publish-ready. Technischer Hinweis: Alle Befehle müssen vor Veröffentlichung gegen die genutzte Headscale-Version getestet werden. Geprüft gegen Dokumentation v0.29.2. Cover-Bild: Wird vor Freigabe generiert.\nHeadscale Clients verbinden und ACLs setzen Aktualisiert: Juli 2026 | Lesezeit: 8 Minuten\nTL;DR: So kommen deine Geräte sauber ins Headscale-Netz Wenn Headscale läuft, verbindest du deine Geräte mit dem normalen Tailscale-Client und gibst als Login-Server deine Headscale-URL an. Für Linux-Server nimmst du einen kurz gültigen Pre-Auth-Key, für Laptop oder Desktop ist die Web-Freigabe übersichtlicher.\nACLs empfehle ich danach, wenn nicht jedes Gerät jedes andere Gerät erreichen soll. Starte mit einer einfachen Regel: Admin-Geräte dürfen alles, normale Clients dürfen nur auf Homelab-Server, Server dürfen nicht ungefragt zurück auf deine privaten Geräte.\nVoraussetzungen Punkt Wert ⏱ Zeit 30–45 Minuten 💰 Kosten 0 € 📊 Schwierigkeit ⭐⭐⭐☆☆ 🖥️ Benötigt Laufender Headscale-Server, erreichbare HTTPS-URL, Tailscale-Client 🎯 Ziel Clients verbinden und erste Zugriffsregeln setzen ✅ Geprüft gegen Headscale-Dokumentation v0.29.2, Tailscale-Client-Befehle Das ist der Anschlussartikel zu Headscale im Homelab – Tailscale-Alternative selbst hosten. Dort geht es um Installation und Grundidee. Hier geht es um den Alltag danach: Geräte verbinden, prüfen, einschränken.\nFür wen lohnt sich dieser Schritt? Richte Clients und ACLs ein, wenn du mehr als einen Server oder mehrere Geräte im Homelab hast:\nProxmox-Node, NAS oder LXC sollen von unterwegs erreichbar sein Laptop und Handy sollen ins Homelab, aber nicht alles dürfen ein Server soll als Subnet-Router dein LAN erreichbar machen du willst nicht jedes Gerät per Portfreigabe ins Internet stellen Nicht einrichten, wenn du nur einen einzelnen Dienst zu Hause nutzt und schon mit WireGuard auf der FRITZ!Box zufrieden bist. Headscale lohnt sich erst, wenn mehrere Geräte und klare Zugriffsregeln ins Spiel kommen.\nDie Entscheidung: Web-Login oder Pre-Auth-Key? Headscale kennt zwei einfache Wege, um neue Geräte aufzunehmen.\nGerätetyp Empfehlung Warum Dein Laptop / Desktop Web-Login Du siehst bewusst, welches Gerät du freigibst Server / LXC Pre-Auth-Key Einmaliger Befehl, gut für SSH und Automatisierung Handy / Tablet App mit alternativem Server Kein Terminal nötig Temporäres Testgerät Kurz gültiger Pre-Auth-Key Danach kann der Key nicht weitergegeben werden Meine Faustregel: Persönliche Geräte per Web-Login, Server per Pre-Auth-Key. So bleibt die Einrichtung einfach, ohne dass dauerhaft gültige Schlüssel herumliegen.\nSchritt 1: Headscale-Server kurz prüfen Bevor du Clients verbindest, prüfst du zwei Dinge: Ist Headscale erreichbar und gibt es einen Benutzer?\nAuf dem Headscale-Server:\nheadscale users list Falls noch kein Benutzer existiert:\nheadscale users create homelab Prüfe außerdem den Health-Endpunkt im Browser oder per Terminal:\ncurl https://headscale.deine-domain.de/health Wenn hier nichts zurückkommt, ist noch nicht der Client dein Problem. Dann stimmt meistens DNS, Reverse Proxy oder HTTPS nicht.\nSchritt 2: Linux-Client per Web-Login verbinden Auf dem Linux-Gerät installierst du den Tailscale-Client und verweist ihn auf deinen Headscale-Server.\ncurl -fsSL https://tailscale.com/install.sh | sh sudo tailscale up --login-server https://headscale.deine-domain.de Der Client zeigt dir danach eine URL oder eine Auth-ID an. Die Freigabe machst du auf dem Headscale-Server:\nheadscale auth register --user homelab --auth-id Danach prüfst du auf dem Client:\ntailscale status Und auf dem Server:\nheadscale nodes list Wenn das Gerät in beiden Listen auftaucht, ist die Verbindung hergestellt.\nWichtig: In aktuellen Headscale-Versionen läuft die Freigabe über headscale auth register --user ... --auth-id .... Ältere Anleitungen nennen teilweise andere Befehle. Wenn ein Befehl nicht existiert, prüfe mit headscale auth --help und headscale nodes --help.\nSchritt 3: Server oder LXC per Pre-Auth-Key verbinden Zuerst prüfst du, welche Benutzer existieren:\nheadscale users list Dann erstellst du den Pre-Auth-Key, optional mit Tags für Server:\nheadscale preauthkeys create --user homelab Für einen Server, der automatisch bestimmte Tags bekommt:\nheadscale preauthkeys create --user homelab --tags tag:server Der Befehl gibt einen Schlüssel aus. Nutze ihn direkt auf dem Zielserver:\nsudo tailscale up \\ --login-server https://headscale.deine-domain.de \\ --authkey Nutze den Key mit Tags (zweite Variante), wenn der Server feste Tag-basierte Regeln bekommen soll. Den einfachen Key (erste Variante) für Geräte ohne spezielle Tags.\nDanach den Schlüssel nicht in Notizen, Skripten oder Chatverläufen speichern. Standardmäßig ist so ein Key nur begrenzt gültig und nicht für dauerhafte Geheimnisverwaltung gedacht.\nFür wiederholbare Server-Setups kannst du später mit Ablaufzeiten und wiederverwendbaren Keys arbeiten. Für den Einstieg reicht: Key erzeugen, Gerät verbinden, Key vergessen.\nSchritt 4: Windows, macOS, Android und iOS verbinden Du nutzt weiter die offiziellen Tailscale-Clients. Der Unterschied ist nur der Login-Server.\nSystem Vorgehen Windows Tailscale installieren, PowerShell öffnen, tailscale login --login-server https://headscale.deine-domain.de ausführen macOS Tailscale installieren, im Terminal denselben Login-Befehl nutzen oder im Menü einen Custom Login Server setzen Android Tailscale-App öffnen → Accounts → Drei-Punkte-Menü → Alternate Server / alternativer Server iOS Tailscale-App öffnen → Log in → Optionen → Custom Coordination Server Danach musst du das Gerät wie bei Linux auf dem Headscale-Server freigeben, sofern du keinen Pre-Auth-Key nutzt.\nSchritt 5: Verbindungen testen Nach zwei verbundenen Geräten sollte ein Ping über die Tailscale-IP funktionieren.\nAuf Gerät A:\ntailscale status Suche die 100.x.x.x-Adresse von Gerät B und teste:\nping 100.x.x.x Falls MagicDNS aktiv ist, kannst du auch den Namen testen:\nping servername Praktischer Test für dein Homelab:\nssh root@100.x.x.x Wenn SSH über die Tailscale-IP klappt, brauchst du für diesen Server keine öffentliche Portfreigabe mehr.\nWarum ACLs wichtig sind Ohne Policy-Datei gilt sinngemäß: Geräte im Tailnet dürfen miteinander sprechen. Für ein kleines Testnetz ist das okay. Für dein echtes Homelab ist das zu grob.\nEin Beispiel:\ndein Laptop darf auf Proxmox, NAS und Uptime Kuma dein Handy darf vielleicht nur auf Home Assistant ein LXC für Monitoring muss nicht auf deinen privaten Laptop zugreifen ein Testserver soll nicht automatisch das ganze Netz sehen ACLs verhindern nicht jeden Fehler. Aber sie reduzieren den Schaden, wenn ein Gerät falsch konfiguriert ist oder ein Testdienst zu viel darf.\nACLs oder Grants – was ist der Unterschied? Headscale unterstützt zwei Arten von Zugriffsregeln:\nGrants (empfohlen) – das neuere Modell:\nErsetzen das klassische ACL-System. Arbeiten mit Rollen und Capabilities. Werden von Headscale als Zukunft empfohlen. Sind flexibler bei wachsenden Netzen. Für den Einstieg etwas abstrakter, aber langfristig der bessere Weg. ACLs (Access Control Lists) – das klassische, einfachere Modell:\nArbeiten mit Tags (tag:server, tag:nas) und Benutzern. Jede Regel sagt explizit: „Wer darf was auf welchem Ziel?\" Leichter zu verstehen für den ersten Durchstieg. Gut geeignet, wenn du erstmal verstehen willst, wie Zugriffsregeln funktionieren. Meine Empfehlung: Wenn du dich einarbeiten willst, starte mit Grants – das ist der von Headscale empfohlene Weg. Wenn dir die Syntax zu abstrakt ist, sind klassische ACLs ein bewusst einfacher Einstieg und für kleine Netze völlig ausreichend. Beide Wege sind valide – wichtig ist, dass du überhaupt Regeln setzt.\nSchritt 6: Einfache Policy-Datei anlegen Headscale nutzt das gleiche huJSON-Format wie Tailscale. In aktuellen Headscale-Versionen verweist du in der Konfiguration über policy.path auf diese Datei.\nFür Zugriffsregeln sind Tags praktischer als Gerätenamen. Ein Server bekommt zum Beispiel tag:server, dein NAS bekommt tag:nas. Dann bleibt die Regel stabil, auch wenn sich die Tailscale-IP ändert.\nLege auf dem Headscale-Server eine Policy-Datei an:\nnano /etc/headscale/policy.hujson Ein einfacher Startpunkt:\n{ \"tagOwners\": { \"tag:server\": [\"homelab\"], \"tag:nas\": [\"homelab\"], \"tag:homeassistant\": [\"homelab\"] }, \"acls\": [ { // Persönliche Geräte des Benutzers homelab dürfen auf SSH/Webdienste \"action\": \"accept\", \"src\": [\"homelab\"], \"dst\": [\"tag:server:22\", \"tag:nas:443\", \"tag:homeassistant:8123\"] }, { // Server dürfen nur gezielt zum NAS-Webdienst \"action\": \"accept\", \"src\": [\"tag:server\"], \"dst\": [\"tag:nas:443\"] } ] } Das Beispiel ist bewusst klein. Es zeigt drei Dinge:\nDer Benutzer homelab darf Geräte mit diesen Tags registrieren (tagOwners). Persönliche Geräte dürfen nur auf konkrete Homelab-Dienste (ACLs). Server bekommen keine pauschale Freigabe auf alle anderen Geräte. Wenn du einen Server mit Tag versehen willst, nutze den Pre-Auth-Key mit --tags (siehe Schritt 3 oben). Dann verbindet sich der Server automatisch mit dem passenden Tag.\nSchritt 7: Policy in Headscale aktivieren Öffne die Headscale-Konfiguration:\nnano /etc/headscale/config.yaml Suche den Policy-Bereich und setze den Pfad:\npolicy: path: /etc/headscale/policy.hujson Danach Headscale neu laden:\nsystemctl reload headscale Falls Reload nicht funktioniert:\nsystemctl restart headscale journalctl -u headscale -n 80 --no-pager Headscale schreibt beim Laden ins Log, ob die Policy verarbeitet werden konnte. Genau dort findest du Tippfehler in JSON, falsche Gruppen oder ungültige Ziele.\nSchritt 8: ACLs wirklich testen Teste nicht nur den erlaubten Fall. Teste auch, was blockiert sein soll.\nVom Laptop:\nssh root@proxmox curl -k https://nas curl http://homeassistant:8123 Danach ein absichtlich nicht erlaubtes Ziel testen:\nssh root@homeassistant Wenn alles erreichbar ist, obwohl du es nicht erlaubt hast, greift deine Policy nicht oder die Regel ist zu breit.\nTypische Ursachen:\npolicy.path zeigt auf die falsche Datei Headscale wurde nach Änderung nicht neu geladen deine Gruppe enthält mehr Nutzer/Geräte als gedacht *:* wurde zu früh als Bequemlichkeitsregel genutzt Optional für später: Subnet-Router fürs LAN Das ist optional und kein Pflichtschritt. Verbinde erst zwei normale Clients, teste Ping und SSH, dann kommt Routing.\nEin Subnet-Router ist ein Gerät im Headscale-Netz, das zusätzlich dein normales LAN erreichbar macht. Das ist nützlich, wenn du Geräte erreichen willst, auf denen kein Tailscale läuft: Drucker, Switch, IP-Kamera oder ältere Weboberflächen.\nAuf dem Router-Gerät:\nsudo tailscale up \\ --login-server https://headscale.deine-domain.de \\ --advertise-routes=192.168.30.0/24 Auf dem Headscale-Server anzeigen:\nheadscale nodes list-routes Route freigeben:\nheadscale nodes approve-routes --identifier --routes 192.168.30.0/24 Auf dem Client, der die Route nutzen soll:\nsudo tailscale set --accept-routes Troubleshooting 1. Client zeigt Login-Link, aber nichts passiert Prüfe auf dem Headscale-Server:\njournalctl -u headscale -f Starte den Login auf dem Client neu und achte auf die Auth-ID. Danach:\nheadscale auth register --user homelab --auth-id 2. tailscale status zeigt Geräte, aber Ping geht nicht Prüfe lokale Firewalls. Auf Linux blocken ufw, firewalld oder Container-Firewalls gerne ICMP oder SSH.\nZum Testen:\nsudo tailscale ping Das testet die Tailscale-Verbindung direkter als ein normaler Ping.\n3. Policy-Datei lädt nicht Prüfe die letzten Logs:\njournalctl -u headscale -n 100 --no-pager Häufige Fehler: fehlendes Komma, falsche Anführungszeichen, falscher Pfad in config.yaml.\n4. Nach ACL-Aktivierung geht plötzlich nichts mehr Dann hast du wahrscheinlich zu streng gestartet. Setze kurzfristig eine Admin-Regel für dein Hauptgerät und teste danach schrittweise enger.\n{ \"action\": \"accept\", \"src\": [\"group:admins\"], \"dst\": [\"*:*\"] } Diese Regel ist als Rettungsleine okay. Sie sollte nicht deine einzige Policy bleiben.\n5. Android oder iOS verbindet sich nicht Prüfe zuerst, ob die Headscale-URL im mobilen Browser erreichbar ist. Wenn schon die /health-URL nicht lädt, liegt es nicht an der App, sondern an DNS, HTTPS oder Erreichbarkeit.\nFAQ Brauche ich ACLs sofort? Für einen Test mit zwei Geräten nicht zwingend. Für ein echtes Homelab: ja. Ohne Regeln ist das Netz zu offen.\nSoll ich ACLs oder Grants verwenden? Headscale unterstützt beides. Klassische ACLs sind für Einsteiger leichter zu verstehen und reichen für den Start. Grants sind das neuere Modell, das mehr Flexibilität bietet, aber auch komplexer ist. Lies die detaillierte Erklärung im Abschnitt „Warum ACLs wichtig sind\" weiter oben.\nKann ich Headscale ohne öffentliche Domain nutzen? Lokal ja, unterwegs nur eingeschränkt. Deine Clients müssen den Headscale-Server erreichen können. Für Handy und Laptop außerhalb deines LANs brauchst du eine erreichbare HTTPS-Adresse oder einen anderen sicheren Weg ins Heimnetz.\nKann ich meine normalen Tailscale-Clients weiterverwenden? Ja. Du nutzt die offiziellen Tailscale-Clients, stellst aber einen eigenen Login-Server ein. Genau das macht Headscale für Homelabs attraktiv.\nNächster Schritt Wenn Clients und ACLs laufen, lohnt sich als nächstes ein sauberer Subnet-Router-Artikel: Ein Gerät im Headscale-Netz macht ein ganzes VLAN erreichbar, ohne dass du Tailscale auf jedem einzelnen Gerät installieren musst.\nBis dahin reicht diese Reihenfolge:\nzwei Clients verbinden Ping und SSH testen einfache Policy aktivieren blockierte Zugriffe bewusst testen erst danach Subnet-Router oder Exit-Node einrichten ✅ Das solltest du jetzt können Headscale-Benutzer prüfen oder anlegen Linux-Client per Web-Login verbinden Server oder LXC per Pre-Auth-Key verbinden Windows, macOS, Android oder iOS mit eigenem Login-Server einordnen Geräte mit tailscale status und headscale nodes list prüfen einfache Policy-Datei anlegen policy.path in Headscale setzen erlaubte und blockierte Zugriffe testen Einrichten wenn: du mehrere Homelab-Geräte sicher verbinden willst und bereit bist, die Zugriffsregeln selbst zu pflegen. Nicht einrichten wenn: du nur einen einzelnen Dienst erreichen willst und eine einfache WireGuard-Verbindung bereits zuverlässig läuft.\n",
+  "wordCount" : "1960",
+  "inLanguage": "de",
+  "image":"https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured.jpg","datePublished": "2026-07-13T00:00:00Z",
+  "dateModified": "2026-07-13T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Homelab Guide",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://matmaksa.de/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+                    <span class="brand-title">Homelab Guide</span>
+                    <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
+                </span>
+            </a>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                    <span>Kategorien</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                    <span>🔍 Suche</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/about/" title="Über">
+                    <span>Über</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                    <span>⭐ Empfehlungen</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="logo-switches">
+            <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+</header>
+<main class="main">
+<div class="preview-banner">
+  <div class="preview-banner-icon">⚠️</div>
+  <div class="preview-banner-text">
+    <strong>Preview / Draft:</strong> Dieser Artikel ist noch nicht veröffentlicht und befindet sich in Prüfung.
+  </div>
+</div>
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Headscale Clients verbinden und ACLs setzen
+    </h1>
+    <div class="post-description">
+      Headscale Clients verbinden: Tailscale-Clients per Web-Login oder Pre-Auth-Key koppeln, Zugriffsregeln per ACLs definieren und optional Subnet-Router einrichten.
+    </div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager"
+                srcset='https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured_hu_9e4e09fb485b35e4.jpg 360w,https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured_hu_a9934108c598ac54.jpg 480w,https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured_hu_3412f89dd5d31112.jpg 720w,https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured_hu_40c6ba11a4c6c6e.jpg 1080w,https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured.jpg 1408w'
+                src="https://matmaksa.de/preview/blog/headscale-clients-verbinden-und-acls-setzen/featured.jpg"
+                sizes="(min-width: 768px) 720px, 100vw"
+                width="1408" height="768"
+                alt="Mini-PC als Headscale-Server in einem dunklen Homelab mit Netzwerkkabeln zu mehreren Geräten">
+        
+</figure>
+  <div class="post-content md-content"><blockquote>
+<p>[!IMPORTANT]
+<strong>Preview-Review-Box</strong>
+TYPE=article_draft
+PUBLISH_ELIGIBLE=no
+USER_VISUAL_APPROVAL_REQUIRED=yes
+FACT_CHECK_REQUIRED=yes (Headscale-Befehle gegen v0.29.2+ prüfen)
+LINK_CHECK_REQUIRED=yes
+PRICE_CHECK_REQUIRED=no
+RECOMMENDED_ACTION=technical_test_required_before_publish_candidate</p></blockquote>
+<blockquote>
+<p><strong>Preview-Hinweis:</strong> Nicht veröffentlichter Entwurf – noch nicht publish-ready.
+<strong>Technischer Hinweis:</strong> Alle Befehle müssen vor Veröffentlichung gegen die genutzte Headscale-Version getestet werden. Geprüft gegen Dokumentation v0.29.2.
+<strong>Cover-Bild:</strong> Wird vor Freigabe generiert.</p></blockquote>
+<hr>
+<h1 id="headscale-clients-verbinden-und-acls-setzen">Headscale Clients verbinden und ACLs setzen<a hidden class="anchor" aria-hidden="true" href="#headscale-clients-verbinden-und-acls-setzen">#</a></h1>
+<p><strong>Aktualisiert: Juli 2026 | Lesezeit: 8 Minuten</strong></p>
+<h2 id="tldr-so-kommen-deine-geräte-sauber-ins-headscale-netz">TL;DR: So kommen deine Geräte sauber ins Headscale-Netz<a hidden class="anchor" aria-hidden="true" href="#tldr-so-kommen-deine-geräte-sauber-ins-headscale-netz">#</a></h2>
+<p>Wenn Headscale läuft, verbindest du deine Geräte mit dem normalen Tailscale-Client und gibst als Login-Server deine Headscale-URL an. Für Linux-Server nimmst du einen kurz gültigen Pre-Auth-Key, für Laptop oder Desktop ist die Web-Freigabe übersichtlicher.</p>
+<p>ACLs empfehle ich danach, wenn nicht jedes Gerät jedes andere Gerät erreichen soll. Starte mit einer einfachen Regel: Admin-Geräte dürfen alles, normale Clients dürfen nur auf Homelab-Server, Server dürfen nicht ungefragt zurück auf deine privaten Geräte.</p>
+<h2 id="voraussetzungen">Voraussetzungen<a hidden class="anchor" aria-hidden="true" href="#voraussetzungen">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Punkt</th>
+          <th>Wert</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>⏱ Zeit</td>
+          <td>30–45 Minuten</td>
+      </tr>
+      <tr>
+          <td>💰 Kosten</td>
+          <td>0 €</td>
+      </tr>
+      <tr>
+          <td>📊 Schwierigkeit</td>
+          <td>⭐⭐⭐☆☆</td>
+      </tr>
+      <tr>
+          <td>🖥️ Benötigt</td>
+          <td>Laufender Headscale-Server, erreichbare HTTPS-URL, Tailscale-Client</td>
+      </tr>
+      <tr>
+          <td>🎯 Ziel</td>
+          <td>Clients verbinden und erste Zugriffsregeln setzen</td>
+      </tr>
+      <tr>
+          <td>✅ Geprüft gegen</td>
+          <td>Headscale-Dokumentation v0.29.2, Tailscale-Client-Befehle</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>Das ist der Anschlussartikel zu <a href="/posts/headscale-tailscale-alternative-selbst-hosten/">Headscale im Homelab – Tailscale-Alternative selbst hosten</a>. Dort geht es um Installation und Grundidee. Hier geht es um den Alltag danach: Geräte verbinden, prüfen, einschränken.</p></blockquote>
+<hr>
+<h2 id="für-wen-lohnt-sich-dieser-schritt">Für wen lohnt sich dieser Schritt?<a hidden class="anchor" aria-hidden="true" href="#für-wen-lohnt-sich-dieser-schritt">#</a></h2>
+<p>Richte Clients und ACLs ein, wenn du mehr als einen Server oder mehrere Geräte im Homelab hast:</p>
+<ul>
+<li>Proxmox-Node, NAS oder LXC sollen von unterwegs erreichbar sein</li>
+<li>Laptop und Handy sollen ins Homelab, aber nicht alles dürfen</li>
+<li>ein Server soll als Subnet-Router dein LAN erreichbar machen</li>
+<li>du willst nicht jedes Gerät per Portfreigabe ins Internet stellen</li>
+</ul>
+<p>Nicht einrichten, wenn du nur einen einzelnen Dienst zu Hause nutzt und schon mit WireGuard auf der FRITZ!Box zufrieden bist. Headscale lohnt sich erst, wenn mehrere Geräte und klare Zugriffsregeln ins Spiel kommen.</p>
+<hr>
+<h2 id="die-entscheidung-web-login-oder-pre-auth-key">Die Entscheidung: Web-Login oder Pre-Auth-Key?<a hidden class="anchor" aria-hidden="true" href="#die-entscheidung-web-login-oder-pre-auth-key">#</a></h2>
+<p>Headscale kennt zwei einfache Wege, um neue Geräte aufzunehmen.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Gerätetyp</th>
+          <th>Empfehlung</th>
+          <th>Warum</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Dein Laptop / Desktop</td>
+          <td>Web-Login</td>
+          <td>Du siehst bewusst, welches Gerät du freigibst</td>
+      </tr>
+      <tr>
+          <td>Server / LXC</td>
+          <td>Pre-Auth-Key</td>
+          <td>Einmaliger Befehl, gut für SSH und Automatisierung</td>
+      </tr>
+      <tr>
+          <td>Handy / Tablet</td>
+          <td>App mit alternativem Server</td>
+          <td>Kein Terminal nötig</td>
+      </tr>
+      <tr>
+          <td>Temporäres Testgerät</td>
+          <td>Kurz gültiger Pre-Auth-Key</td>
+          <td>Danach kann der Key nicht weitergegeben werden</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Meine Faustregel:</strong> Persönliche Geräte per Web-Login, Server per Pre-Auth-Key. So bleibt die Einrichtung einfach, ohne dass dauerhaft gültige Schlüssel herumliegen.</p>
+<hr>
+<h2 id="schritt-1-headscale-server-kurz-prüfen">Schritt 1: Headscale-Server kurz prüfen<a hidden class="anchor" aria-hidden="true" href="#schritt-1-headscale-server-kurz-prüfen">#</a></h2>
+<p>Bevor du Clients verbindest, prüfst du zwei Dinge: Ist Headscale erreichbar und gibt es einen Benutzer?</p>
+<p>Auf dem Headscale-Server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale users list
+</span></span></code></pre></div><p>Falls noch kein Benutzer existiert:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale users create homelab
+</span></span></code></pre></div><p>Prüfe außerdem den Health-Endpunkt im Browser oder per Terminal:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl https://headscale.deine-domain.de/health
+</span></span></code></pre></div><p>Wenn hier nichts zurückkommt, ist noch nicht der Client dein Problem. Dann stimmt meistens DNS, Reverse Proxy oder HTTPS nicht.</p>
+<hr>
+<h2 id="schritt-2-linux-client-per-web-login-verbinden">Schritt 2: Linux-Client per Web-Login verbinden<a hidden class="anchor" aria-hidden="true" href="#schritt-2-linux-client-per-web-login-verbinden">#</a></h2>
+<p>Auf dem Linux-Gerät installierst du den Tailscale-Client und verweist ihn auf deinen Headscale-Server.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -fsSL https://tailscale.com/install.sh <span class="p">|</span> sh
+</span></span><span class="line"><span class="cl">sudo tailscale up --login-server https://headscale.deine-domain.de
+</span></span></code></pre></div><p>Der Client zeigt dir danach eine URL oder eine Auth-ID an. Die Freigabe machst du auf dem Headscale-Server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale auth register --user homelab --auth-id &lt;AUTH_ID&gt;
+</span></span></code></pre></div><p>Danach prüfst du auf dem Client:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tailscale status
+</span></span></code></pre></div><p>Und auf dem Server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale nodes list
+</span></span></code></pre></div><p>Wenn das Gerät in beiden Listen auftaucht, ist die Verbindung hergestellt.</p>
+<blockquote>
+<p><strong>Wichtig:</strong> In aktuellen Headscale-Versionen läuft die Freigabe über <code>headscale auth register --user ... --auth-id ...</code>. Ältere Anleitungen nennen teilweise andere Befehle. Wenn ein Befehl nicht existiert, prüfe mit <code>headscale auth --help</code> und <code>headscale nodes --help</code>.</p></blockquote>
+<hr>
+<h2 id="schritt-3-server-oder-lxc-per-pre-auth-key-verbinden">Schritt 3: Server oder LXC per Pre-Auth-Key verbinden<a hidden class="anchor" aria-hidden="true" href="#schritt-3-server-oder-lxc-per-pre-auth-key-verbinden">#</a></h2>
+<p>Zuerst prüfst du, welche Benutzer existieren:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale users list
+</span></span></code></pre></div><p>Dann erstellst du den Pre-Auth-Key, optional mit Tags für Server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale preauthkeys create --user homelab
+</span></span></code></pre></div><p>Für einen Server, der automatisch bestimmte Tags bekommt:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale preauthkeys create --user homelab --tags tag:server
+</span></span></code></pre></div><p>Der Befehl gibt einen Schlüssel aus. Nutze ihn direkt auf dem Zielserver:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tailscale up <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --login-server https://headscale.deine-domain.de <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --authkey &lt;PRE_AUTH_KEY&gt;
+</span></span></code></pre></div><p>Nutze den <strong>Key mit Tags</strong> (zweite Variante), wenn der Server feste Tag-basierte Regeln bekommen soll. Den einfachen Key (erste Variante) für Geräte ohne spezielle Tags.</p>
+<p>Danach den Schlüssel nicht in Notizen, Skripten oder Chatverläufen speichern. Standardmäßig ist so ein Key nur begrenzt gültig und nicht für dauerhafte Geheimnisverwaltung gedacht.</p>
+<p>Für wiederholbare Server-Setups kannst du später mit Ablaufzeiten und wiederverwendbaren Keys arbeiten. Für den Einstieg reicht: Key erzeugen, Gerät verbinden, Key vergessen.</p>
+<hr>
+<h2 id="schritt-4-windows-macos-android-und-ios-verbinden">Schritt 4: Windows, macOS, Android und iOS verbinden<a hidden class="anchor" aria-hidden="true" href="#schritt-4-windows-macos-android-und-ios-verbinden">#</a></h2>
+<p>Du nutzt weiter die offiziellen Tailscale-Clients. Der Unterschied ist nur der Login-Server.</p>
+<table>
+  <thead>
+      <tr>
+          <th>System</th>
+          <th>Vorgehen</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Windows</td>
+          <td>Tailscale installieren, PowerShell öffnen, <code>tailscale login --login-server https://headscale.deine-domain.de</code> ausführen</td>
+      </tr>
+      <tr>
+          <td>macOS</td>
+          <td>Tailscale installieren, im Terminal denselben Login-Befehl nutzen oder im Menü einen Custom Login Server setzen</td>
+      </tr>
+      <tr>
+          <td>Android</td>
+          <td>Tailscale-App öffnen → Accounts → Drei-Punkte-Menü → Alternate Server / alternativer Server</td>
+      </tr>
+      <tr>
+          <td>iOS</td>
+          <td>Tailscale-App öffnen → Log in → Optionen → Custom Coordination Server</td>
+      </tr>
+  </tbody>
+</table>
+<p>Danach musst du das Gerät wie bei Linux auf dem Headscale-Server freigeben, sofern du keinen Pre-Auth-Key nutzt.</p>
+<hr>
+<h2 id="schritt-5-verbindungen-testen">Schritt 5: Verbindungen testen<a hidden class="anchor" aria-hidden="true" href="#schritt-5-verbindungen-testen">#</a></h2>
+<p>Nach zwei verbundenen Geräten sollte ein Ping über die Tailscale-IP funktionieren.</p>
+<p>Auf Gerät A:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tailscale status
+</span></span></code></pre></div><p>Suche die 100.x.x.x-Adresse von Gerät B und teste:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ping 100.x.x.x
+</span></span></code></pre></div><p>Falls MagicDNS aktiv ist, kannst du auch den Namen testen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ping servername
+</span></span></code></pre></div><p>Praktischer Test für dein Homelab:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@100.x.x.x
+</span></span></code></pre></div><p>Wenn SSH über die Tailscale-IP klappt, brauchst du für diesen Server keine öffentliche Portfreigabe mehr.</p>
+<hr>
+<h2 id="warum-acls-wichtig-sind">Warum ACLs wichtig sind<a hidden class="anchor" aria-hidden="true" href="#warum-acls-wichtig-sind">#</a></h2>
+<p>Ohne Policy-Datei gilt sinngemäß: Geräte im Tailnet dürfen miteinander sprechen. Für ein kleines Testnetz ist das okay. Für dein echtes Homelab ist das zu grob.</p>
+<p>Ein Beispiel:</p>
+<ul>
+<li>dein Laptop darf auf Proxmox, NAS und Uptime Kuma</li>
+<li>dein Handy darf vielleicht nur auf Home Assistant</li>
+<li>ein LXC für Monitoring muss nicht auf deinen privaten Laptop zugreifen</li>
+<li>ein Testserver soll nicht automatisch das ganze Netz sehen</li>
+</ul>
+<p>ACLs verhindern nicht jeden Fehler. Aber sie reduzieren den Schaden, wenn ein Gerät falsch konfiguriert ist oder ein Testdienst zu viel darf.</p>
+<h3 id="acls-oder-grants--was-ist-der-unterschied">ACLs oder Grants – was ist der Unterschied?<a hidden class="anchor" aria-hidden="true" href="#acls-oder-grants--was-ist-der-unterschied">#</a></h3>
+<p>Headscale unterstützt zwei Arten von Zugriffsregeln:</p>
+<p><strong>Grants (empfohlen)</strong> – das neuere Modell:</p>
+<ul>
+<li>Ersetzen das klassische ACL-System.</li>
+<li>Arbeiten mit Rollen und Capabilities.</li>
+<li>Werden von Headscale als Zukunft empfohlen.</li>
+<li>Sind flexibler bei wachsenden Netzen.</li>
+<li>Für den Einstieg etwas abstrakter, aber langfristig der bessere Weg.</li>
+</ul>
+<p><strong>ACLs (Access Control Lists)</strong> – das klassische, einfachere Modell:</p>
+<ul>
+<li>Arbeiten mit Tags (<code>tag:server</code>, <code>tag:nas</code>) und Benutzern.</li>
+<li>Jede Regel sagt explizit: „Wer darf was auf welchem Ziel?&quot;</li>
+<li>Leichter zu verstehen für den ersten Durchstieg.</li>
+<li>Gut geeignet, wenn du erstmal verstehen willst, wie Zugriffsregeln funktionieren.</li>
+</ul>
+<p><strong>Meine Empfehlung:</strong> Wenn du dich einarbeiten willst, starte mit Grants – das ist der von Headscale empfohlene Weg. Wenn dir die Syntax zu abstrakt ist, sind klassische ACLs ein bewusst einfacher Einstieg und für kleine Netze völlig ausreichend. Beide Wege sind valide – wichtig ist, dass du überhaupt Regeln setzt.</p>
+<hr>
+<h2 id="schritt-6-einfache-policy-datei-anlegen">Schritt 6: Einfache Policy-Datei anlegen<a hidden class="anchor" aria-hidden="true" href="#schritt-6-einfache-policy-datei-anlegen">#</a></h2>
+<p>Headscale nutzt das gleiche huJSON-Format wie Tailscale. In aktuellen Headscale-Versionen verweist du in der Konfiguration über <code>policy.path</code> auf diese Datei.</p>
+<p>Für Zugriffsregeln sind <strong>Tags</strong> praktischer als Gerätenamen. Ein Server bekommt zum Beispiel <code>tag:server</code>, dein NAS bekommt <code>tag:nas</code>. Dann bleibt die Regel stabil, auch wenn sich die Tailscale-IP ändert.</p>
+<p>Lege auf dem Headscale-Server eine Policy-Datei an:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/headscale/policy.hujson
+</span></span></code></pre></div><p>Ein einfacher Startpunkt:</p>
+<pre tabindex="0"><code class="language-json5" data-lang="json5">{
+  &#34;tagOwners&#34;: {
+    &#34;tag:server&#34;: [&#34;homelab&#34;],
+    &#34;tag:nas&#34;: [&#34;homelab&#34;],
+    &#34;tag:homeassistant&#34;: [&#34;homelab&#34;]
+  },
+
+  &#34;acls&#34;: [
+    {
+      // Persönliche Geräte des Benutzers homelab dürfen auf SSH/Webdienste
+      &#34;action&#34;: &#34;accept&#34;,
+      &#34;src&#34;: [&#34;homelab&#34;],
+      &#34;dst&#34;: [&#34;tag:server:22&#34;, &#34;tag:nas:443&#34;, &#34;tag:homeassistant:8123&#34;]
+    },
+    {
+      // Server dürfen nur gezielt zum NAS-Webdienst
+      &#34;action&#34;: &#34;accept&#34;,
+      &#34;src&#34;: [&#34;tag:server&#34;],
+      &#34;dst&#34;: [&#34;tag:nas:443&#34;]
+    }
+  ]
+}
+</code></pre><p>Das Beispiel ist bewusst klein. Es zeigt drei Dinge:</p>
+<ol>
+<li>Der Benutzer <code>homelab</code> darf Geräte mit diesen Tags registrieren (tagOwners).</li>
+<li>Persönliche Geräte dürfen nur auf konkrete Homelab-Dienste (ACLs).</li>
+<li>Server bekommen keine pauschale Freigabe auf alle anderen Geräte.</li>
+</ol>
+<p>Wenn du einen Server mit Tag versehen willst, nutze den Pre-Auth-Key mit <code>--tags</code> (siehe Schritt 3 oben). Dann verbindet sich der Server automatisch mit dem passenden Tag.</p>
+<hr>
+<h2 id="schritt-7-policy-in-headscale-aktivieren">Schritt 7: Policy in Headscale aktivieren<a hidden class="anchor" aria-hidden="true" href="#schritt-7-policy-in-headscale-aktivieren">#</a></h2>
+<p>Öffne die Headscale-Konfiguration:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/headscale/config.yaml
+</span></span></code></pre></div><p>Suche den Policy-Bereich und setze den Pfad:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">policy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/etc/headscale/policy.hujson</span><span class="w">
+</span></span></span></code></pre></div><p>Danach Headscale neu laden:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl reload headscale
+</span></span></code></pre></div><p>Falls Reload nicht funktioniert:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">systemctl restart headscale
+</span></span><span class="line"><span class="cl">journalctl -u headscale -n <span class="m">80</span> --no-pager
+</span></span></code></pre></div><p>Headscale schreibt beim Laden ins Log, ob die Policy verarbeitet werden konnte. Genau dort findest du Tippfehler in JSON, falsche Gruppen oder ungültige Ziele.</p>
+<hr>
+<h2 id="schritt-8-acls-wirklich-testen">Schritt 8: ACLs wirklich testen<a hidden class="anchor" aria-hidden="true" href="#schritt-8-acls-wirklich-testen">#</a></h2>
+<p>Teste nicht nur den erlaubten Fall. Teste auch, was blockiert sein soll.</p>
+<p>Vom Laptop:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@proxmox
+</span></span><span class="line"><span class="cl">curl -k https://nas
+</span></span><span class="line"><span class="cl">curl http://homeassistant:8123
+</span></span></code></pre></div><p>Danach ein absichtlich nicht erlaubtes Ziel testen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@homeassistant
+</span></span></code></pre></div><p>Wenn alles erreichbar ist, obwohl du es nicht erlaubt hast, greift deine Policy nicht oder die Regel ist zu breit.</p>
+<p>Typische Ursachen:</p>
+<ul>
+<li><code>policy.path</code> zeigt auf die falsche Datei</li>
+<li>Headscale wurde nach Änderung nicht neu geladen</li>
+<li>deine Gruppe enthält mehr Nutzer/Geräte als gedacht</li>
+<li><code>*:*</code> wurde zu früh als Bequemlichkeitsregel genutzt</li>
+</ul>
+<hr>
+<h2 id="optional-für-später-subnet-router-fürs-lan">Optional für später: Subnet-Router fürs LAN<a hidden class="anchor" aria-hidden="true" href="#optional-für-später-subnet-router-fürs-lan">#</a></h2>
+<blockquote>
+<p><strong>Das ist optional und kein Pflichtschritt.</strong> Verbinde erst zwei normale Clients, teste Ping und SSH, dann kommt Routing.</p></blockquote>
+<p>Ein Subnet-Router ist ein Gerät im Headscale-Netz, das zusätzlich dein normales LAN erreichbar macht. Das ist nützlich, wenn du Geräte erreichen willst, auf denen kein Tailscale läuft: Drucker, Switch, IP-Kamera oder ältere Weboberflächen.</p>
+<p>Auf dem Router-Gerät:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tailscale up <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --login-server https://headscale.deine-domain.de <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  --advertise-routes<span class="o">=</span>192.168.30.0/24
+</span></span></code></pre></div><p>Auf dem Headscale-Server anzeigen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale nodes list-routes
+</span></span></code></pre></div><p>Route freigeben:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale nodes approve-routes --identifier &lt;NODE_ID&gt; --routes 192.168.30.0/24
+</span></span></code></pre></div><p>Auf dem Client, der die Route nutzen soll:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tailscale <span class="nb">set</span> --accept-routes
+</span></span></code></pre></div><hr>
+<h2 id="troubleshooting">Troubleshooting<a hidden class="anchor" aria-hidden="true" href="#troubleshooting">#</a></h2>
+<h3 id="1-client-zeigt-login-link-aber-nichts-passiert">1. Client zeigt Login-Link, aber nichts passiert<a hidden class="anchor" aria-hidden="true" href="#1-client-zeigt-login-link-aber-nichts-passiert">#</a></h3>
+<p>Prüfe auf dem Headscale-Server:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl -u headscale -f
+</span></span></code></pre></div><p>Starte den Login auf dem Client neu und achte auf die Auth-ID. Danach:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">headscale auth register --user homelab --auth-id &lt;AUTH_ID&gt;
+</span></span></code></pre></div><h3 id="2-tailscale-status-zeigt-geräte-aber-ping-geht-nicht">2. <code>tailscale status</code> zeigt Geräte, aber Ping geht nicht<a hidden class="anchor" aria-hidden="true" href="#2-tailscale-status-zeigt-geräte-aber-ping-geht-nicht">#</a></h3>
+<p>Prüfe lokale Firewalls. Auf Linux blocken <code>ufw</code>, <code>firewalld</code> oder Container-Firewalls gerne ICMP oder SSH.</p>
+<p>Zum Testen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tailscale ping &lt;zielname-oder-ip&gt;
+</span></span></code></pre></div><p>Das testet die Tailscale-Verbindung direkter als ein normaler Ping.</p>
+<h3 id="3-policy-datei-lädt-nicht">3. Policy-Datei lädt nicht<a hidden class="anchor" aria-hidden="true" href="#3-policy-datei-lädt-nicht">#</a></h3>
+<p>Prüfe die letzten Logs:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">journalctl -u headscale -n <span class="m">100</span> --no-pager
+</span></span></code></pre></div><p>Häufige Fehler: fehlendes Komma, falsche Anführungszeichen, falscher Pfad in <code>config.yaml</code>.</p>
+<h3 id="4-nach-acl-aktivierung-geht-plötzlich-nichts-mehr">4. Nach ACL-Aktivierung geht plötzlich nichts mehr<a hidden class="anchor" aria-hidden="true" href="#4-nach-acl-aktivierung-geht-plötzlich-nichts-mehr">#</a></h3>
+<p>Dann hast du wahrscheinlich zu streng gestartet. Setze kurzfristig eine Admin-Regel für dein Hauptgerät und teste danach schrittweise enger.</p>
+<pre tabindex="0"><code class="language-json5" data-lang="json5">{
+  &#34;action&#34;: &#34;accept&#34;,
+  &#34;src&#34;: [&#34;group:admins&#34;],
+  &#34;dst&#34;: [&#34;*:*&#34;]
+}
+</code></pre><p>Diese Regel ist als Rettungsleine okay. Sie sollte nicht deine einzige Policy bleiben.</p>
+<h3 id="5-android-oder-ios-verbindet-sich-nicht">5. Android oder iOS verbindet sich nicht<a hidden class="anchor" aria-hidden="true" href="#5-android-oder-ios-verbindet-sich-nicht">#</a></h3>
+<p>Prüfe zuerst, ob die Headscale-URL im mobilen Browser erreichbar ist. Wenn schon die <code>/health</code>-URL nicht lädt, liegt es nicht an der App, sondern an DNS, HTTPS oder Erreichbarkeit.</p>
+<hr>
+<h2 id="faq">FAQ<a hidden class="anchor" aria-hidden="true" href="#faq">#</a></h2>
+<h3 id="brauche-ich-acls-sofort">Brauche ich ACLs sofort?<a hidden class="anchor" aria-hidden="true" href="#brauche-ich-acls-sofort">#</a></h3>
+<p>Für einen Test mit zwei Geräten nicht zwingend. Für ein echtes Homelab: ja. Ohne Regeln ist das Netz zu offen.</p>
+<h3 id="soll-ich-acls-oder-grants-verwenden">Soll ich ACLs oder Grants verwenden?<a hidden class="anchor" aria-hidden="true" href="#soll-ich-acls-oder-grants-verwenden">#</a></h3>
+<p>Headscale unterstützt beides. Klassische ACLs sind für Einsteiger leichter zu verstehen und reichen für den Start. Grants sind das neuere Modell, das mehr Flexibilität bietet, aber auch komplexer ist. Lies die detaillierte Erklärung im Abschnitt „Warum ACLs wichtig sind&quot; weiter oben.</p>
+<h3 id="kann-ich-headscale-ohne-öffentliche-domain-nutzen">Kann ich Headscale ohne öffentliche Domain nutzen?<a hidden class="anchor" aria-hidden="true" href="#kann-ich-headscale-ohne-öffentliche-domain-nutzen">#</a></h3>
+<p>Lokal ja, unterwegs nur eingeschränkt. Deine Clients müssen den Headscale-Server erreichen können. Für Handy und Laptop außerhalb deines LANs brauchst du eine erreichbare HTTPS-Adresse oder einen anderen sicheren Weg ins Heimnetz.</p>
+<h3 id="kann-ich-meine-normalen-tailscale-clients-weiterverwenden">Kann ich meine normalen Tailscale-Clients weiterverwenden?<a hidden class="anchor" aria-hidden="true" href="#kann-ich-meine-normalen-tailscale-clients-weiterverwenden">#</a></h3>
+<p>Ja. Du nutzt die offiziellen Tailscale-Clients, stellst aber einen eigenen Login-Server ein. Genau das macht Headscale für Homelabs attraktiv.</p>
+<hr>
+<h2 id="nächster-schritt">Nächster Schritt<a hidden class="anchor" aria-hidden="true" href="#nächster-schritt">#</a></h2>
+<p>Wenn Clients und ACLs laufen, lohnt sich als nächstes ein sauberer Subnet-Router-Artikel: Ein Gerät im Headscale-Netz macht ein ganzes VLAN erreichbar, ohne dass du Tailscale auf jedem einzelnen Gerät installieren musst.</p>
+<p>Bis dahin reicht diese Reihenfolge:</p>
+<ol>
+<li>zwei Clients verbinden</li>
+<li>Ping und SSH testen</li>
+<li>einfache Policy aktivieren</li>
+<li>blockierte Zugriffe bewusst testen</li>
+<li>erst danach Subnet-Router oder Exit-Node einrichten</li>
+</ol>
+<hr>
+<h2 id="-das-solltest-du-jetzt-können">✅ Das solltest du jetzt können<a hidden class="anchor" aria-hidden="true" href="#-das-solltest-du-jetzt-können">#</a></h2>
+<ul>
+<li><input disabled="" type="checkbox"> Headscale-Benutzer prüfen oder anlegen</li>
+<li><input disabled="" type="checkbox"> Linux-Client per Web-Login verbinden</li>
+<li><input disabled="" type="checkbox"> Server oder LXC per Pre-Auth-Key verbinden</li>
+<li><input disabled="" type="checkbox"> Windows, macOS, Android oder iOS mit eigenem Login-Server einordnen</li>
+<li><input disabled="" type="checkbox"> Geräte mit <code>tailscale status</code> und <code>headscale nodes list</code> prüfen</li>
+<li><input disabled="" type="checkbox"> einfache Policy-Datei anlegen</li>
+<li><input disabled="" type="checkbox"> <code>policy.path</code> in Headscale setzen</li>
+<li><input disabled="" type="checkbox"> erlaubte und blockierte Zugriffe testen</li>
+</ul>
+<hr>
+<p><strong>Einrichten wenn:</strong> du mehrere Homelab-Geräte sicher verbinden willst und bereit bist, die Zugriffsregeln selbst zu pflegen.
+<strong>Nicht einrichten wenn:</strong> du nur einen einzelnen Dienst erreichen willst und eine einfache WireGuard-Verbindung bereits zuverlässig läuft.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+  </footer>
+</article>
+    </main>
+    <footer class="footer-custom">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h3>Homelab Guide</h3>
+            <p>Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern.</p>
+            <p style="font-size: 12px; margin-top: 12px; color: #718096;">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Kategorien</h3>
+            <ul>
+                <li><a href="/categories/hardware/">Hardware</a></li>
+                <li><a href="/categories/homelab/">Homelab</a></li>
+                <li><a href="/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/categories/software/">Software</a></li>
+                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Folgen</h3>
+            <ul>
+                <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener">GitHub</a></li>
+                <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>
+            Powered by
+            <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;
+            <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+        </span>
+    </div>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+    var toplink = document.getElementById("top-link");
+    if (toplink) {
+        window.onscroll = function () {
+            const scrollThreshold = window.innerHeight;
+            if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+                toplink.classList.remove("hidden");
+            } else {
+                toplink.classList.add("hidden");
+            }
+        };
+    }
+
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+</script>
+</body>
+
+</html>
