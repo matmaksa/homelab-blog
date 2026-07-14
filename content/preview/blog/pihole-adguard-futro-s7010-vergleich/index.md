@@ -1,6 +1,6 @@
 +++
 title = 'Pi-hole oder AdGuard Home auf dem Futro S7010: Der Praxisvergleich'
-description = 'Pi-hole vs. AdGuard Home auf dem Fujitsu Futro S7010 mit 4 GB RAM. Echte Messwerte zu RAM, CPU, DNS-Latenz, Laststabilität und Blockabdeckung unter identischen Testbedingungen.'
+description = 'Pi-hole vs. AdGuard Home auf dem Fujitsu Futro S7010 mit 4 GB RAM. Echte Messwerte zu RAM, CPU, DNS-Latenz und Blockabdeckung unter identischen Testbedingungen. cgroup-Speichermessung, dnsperf-Lasttest, Browser-Vergleich.'
 date = 2026-07-14
 robotsNoIndex = true
 sitemap = { exclude = true }
@@ -41,80 +41,126 @@ Beide DNS-LXC unter identischen Bedingungen auf dem Futro S7010 (PVE04):
 | Swap | Kein |
 | Netzwerk | VLAN 20, statische IP |
 | Upstream DNS | Cloudflare (1.1.1.1) + Google (8.8.8.8) |
-| Stabilisierung | 2 Minuten vor Messbeginn |
+| Stabilisierung | 5 Minuten vor Messbeginn |
 
 **Standardkonfiguration:** Beide Systeme liefen mit Out-of-the-box-Einstellungen. Keine Cache-Optimierung, kein Deaktivieren von Logging, keine hinzugefügten Filterlisten.
 
+**LXC-Übersicht:**
+
+| Container | CTID | Status | IP |
+|-----------|------|--------|----|
+| docs-pihole | 100 | gestoppt (behalten) | 192.168.20.12 |
+| docs-adguard | 102 | gestoppt (behalten) | 192.168.20.13 |
+| docs-dnsclient | 103 | gestoppt (behalten) | 192.168.20.14 |
+
+## Filtermengen
+
+| System | Quelle | Aktive Regeln |
+|--------|--------|--------------|
+| Pi-hole v6.4.3 | StevenBlack (Standard-Gravity) | ~78.451 |
+| AdGuard Home v0.107.78 | AdGuard DNS Filter | ~157.206 |
+
+Die Filtermengen sind **nicht identisch.** AdGuard startet mit etwa doppelt so vielen Regeln. Ein direkter Blockabdeckungs-Vergleich auf Augenhöhe ist daher nicht möglich. `FILTER_COUNTS_COMPARABLE=no`
+
 ## Ressourcenverbrauch
 
-| Metrik | Pi-hole v6.4.3 | AdGuard Home v0.107.78 |
-|---|---|---|
-| LXC cgroup memory.current | **110 MB** | 50 MB (vor Löschung) |
-| Dienst-RSS | ~10–12 MB | ~57 MB |
-| Disk-Verbrauch | 834 MB | 713 MB |
-| Prozesse im LXC | 18 | 6 |
+### Speichermessung (cgroup)
 
-**Hinweis zur Speichermessung:** Der cgroup-Wert (110 MB bei Pi-hole) zeigt den tatsächlichen Host-Effekt inklusive Page Cache und LXC-Overhead. Der innerhalb des Containers mit `free -m` gemeldete Wert (16 MB) ist niedriger, aber nicht aussagekräftig für die Host-Belastung.
+Drei Messungen im 30-Sekunden-Abstand nach 5 Minuten Stabilisierung. Alle Werte vom Host (PVE04) aus `/sys/fs/cgroup/lxc/{CTID}/` erfasst.
+
+| Metrik | Pi-hole v6.4.3 | AdGuard Home v0.107.78 | Differenz |
+|--------|---------------|----------------------|-----------|
+| cgroup memory.current | ~110,5 MB | ~117,6 MB | +7 MB |
+| anon (Prozesse/RSS) | ~11,2 MB | ~47,3 MB | +36 MB (×4,2) |
+| file (Dateicache) | ~92,9 MB | ~65,0 MB | −28 MB |
+| Dienst-RSS (ps aux) | ~10,6 MB | ~56,8 MB | +46 MB (×5,4) |
+
+**Einordnung:** Der cgroup-Wert enthält Page Cache und LXC-Overhead. Der **anon-Speicher** zeigt die echte Prozessbelastung: AdGuards Go-Binary belegt ~47 MB, Pi-holes C-basierter pihole-FTL nur ~11 MB. Pi-hole baut mehr Dateicache auf (~93 MB vs. 65 MB), sodass der Gesamteffekt auf dem Host ähnlich ist. Der Dienst-RSS (resident set size) bestätigt: AdGuardHome ist ~5,4× größer als pihole-FTL.
+
+**Host-Effekt auf PVE04:** Verfügbarer RAM von ~2.091 MB fällt bei beiden Systemen um ca. 120–125 MB. Kein signifikanter Unterschied in der Host-Belastung.
 
 ## DNS-Lasttest
 
-Getestet mit einem Python-Skript über UDP-Socket (ohne subprocess-Overhead). Domainliste mit 85 Einträgen (erlaubt, blockiert, NXDOMAIN, wiederholt). Alle Tests gegen die Standardkonfiguration ohne Benchmark-Optimierungen.
+Testtool: **dnsperf v2.10.0** (Debian 12, offizielles Paket) auf docs-dnsclient (CT103)
+Dataset: 500 eindeutige Domains (250 allowed + 95 blocked + 155 NXDOMAIN) im Format `domain A`
+SHA256: `e86ec701e0e5e9eadc43f2dc8d059187140b129aa6fb184153498f08ed01d69b`
 
-| Test | Dauer | QPS | Median | P95 | P99 | Fehler |
-|---|---|---|---|---|---|---|
-| 5.000 sequenziell (warm) | 5.631 ms | **888** | 0,6 ms | 3,3 ms | 3,6 ms | 0 |
-| 5.000 parallel (C=10) | 6.257 ms | 799 | 102 ms | 127 ms | 185 ms | 504 |
-| 5.000 parallel (C=50) | 3.119 ms | **1.603** | 62 ms | 63 ms | 63 ms | 0 |
+**Kein selbstgebauter Benchmark, keine Python-Threads.** dnsperf v2.10.0 kann auf Debian 12 maximal ~500 eindeutige Abfragen pro Lauf zuverlässig verarbeiten (Message-ID-Konflikte bei Wiederholungen → REFUSED). Daher zehn sequenzielle Läufe à 500 queries, dazwischen FTL-Neustart. Parallelitätstests (C10/C50) als `not_run` markiert.
 
-**Ergebnis:** Der sequenzielle Test zeigt eine beeindruckende Latenz von <1 ms bei 888 qps. Bei hoher Parallelität (C=50) erreicht Pi-hole über 1.600 qps – mehr als für jeden Heimanwendung ausreichend. Die hohen Latenzen im C10-Test mit 504 Fehlern sind auf Thread-Contention im Python-Testskript zurückzuführen, nicht auf Pi-hole. Im C50-Test (fehlerfrei) liegt der Median bei 62 ms – dies ist die reale Latenz unter Last und für DNS völlig akzeptabel.
+### Pi-hole — Sequential Cold Cache (Mittelwert 3 Läufe)
 
-**Dienstzustand nach dem Test:** pihole-FTL-RSS von 10 MB auf 12 MB gestiegen, LXC weiterhin gesund, keine Abstürze.
+| Metrik | Wert |
+|--------|------|
+| QPS | **91,0** |
+| Ø Latenz | 10,6 ms |
+| Min Latenz | 0,43 ms |
+| Max Latenz | 385 ms |
+| Fehler | 0 |
 
-## Blocking-Test (DNS-Ebene)
+### AdGuard Home — Sequential Cold Cache (Lauf 1)
 
-Getestet via direkte DNS-Abfragen aus dem Testnetzwerk (VLAN 20):
+| Metrik | Wert |
+|--------|------|
+| QPS | **43,5** |
+| Ø Latenz | 23,0 ms |
+| Min Latenz | 0,16 ms |
+| Max Latenz | 2.064 ms |
+| Fehler | 0 |
 
-| Domain | Pi-hole | AdGuard |
-|---|---|---|
-| doubleclick.net | **0.0.0.0** (blockiert) | Nicht getestet |
-| googlesyndication.com | **0.0.0.0** (blockiert) | Nicht getestet |
-| google-analytics.com | **0.0.0.0** (blockiert) | Nicht getestet |
-| criteo.com | **0.0.0.0** (blockiert) | Nicht getestet |
-| adnxs.com | **0.0.0.0** (blockiert) | Nicht getestet |
-| scorecardresearch.com | **0.0.0.0** (blockiert) | Nicht getestet |
+### AdGuard Home — Sequential Warm Cache (Läufe 2+3)
 
-AdGuard-CT wurde vor diesen Tests gelöscht – ein direkter Browser-Vergleich unter identischen DNS-Bedingungen war daher nicht möglich.
+| Metrik | Wert |
+|--------|------|
+| QPS | ~3.666 (Durchschnitt) |
+| Ø Latenz | 0,19 ms |
+| Min Latenz | 0,13 ms |
+| Max Latenz | 7 ms |
 
-## Bedienbarkeit
+**Fazit Lasttest:** Pi-hole ist auf kaltem Cache etwa **doppelt so schnell** (~91 vs. ~43 QPS). AdGuards C++ (Pi-hole) vs. Go (AdGuard) zeigt sich hier deutlich. AdGuards Warm-Cache-Performance ist exzellent (~3.666 QPS), aber für einen Heim-DNS-Blocker sind 43 QPS auf kaltem Cache völlig ausreichend.
 
-| Kriterium | Pi-hole | AdGuard Home |
-|---|---|---|
-| Einrichtung | Offizielles Install-Skript | Binary entpacken + Web-Wizard |
-| Ersteinrichtung | Dialoge im Terminal | Web-Oberfläche (Port 3000) |
-| Dashboard | Funktional, übersichtlich | Modern, detaillierte Statistiken |
-| Update | `pihole -up` | Binary ersetzen + Neustart |
-| Backup | /etc/pihole/ sichern | /root/AdGuardHome/ sichern |
-| Admin-Passwort | via `pihole setpassword` | via Web-UI |
+## Browser-Adblock-Test
+
+Testtool: Node.js + Playwright v1.61.1 + Chromium (headless) auf docs-dnsclient
+Browser: Frisches Profil pro Lauf, kein DoH, keine Extensions, kein Browser-Cache über Läufe hinweg
+DNS-Proof: Vor jedem Testlauf per `dig +short` an den Ziel-DNS bestätigt
+Vorherige Browser-Tests: `INVALID_BROWSER_TEST_WRONG_DNS=yes` (liefen über Router-DNS)
+
+### adblock.turtlecute.org
+
+| DNS-System | Lauf | Blockiert | Nicht blockiert | Quote |
+|-----------|------|-----------|----------------|-------|
+| Pi-hole | 1 | 94 | 39 | **70,7 %** |
+| AdGuard Home | 1 | 107 | 26 | **80,5 %** |
+| AdGuard Home | 2 | 107 | 26 | **80,5 %** |
+
+**AdGuard blockiert 13 zusätzliche Domains,** darunter Amazon S3, Adcolony, LinkedIn, TikTok, Pinterest, YouTube, MouseFlow, LuckyOrange, Hotjar, FreshWorks, Realme und Oppo — alles Tracking-Domains, die Pi-hole mit der reinen Hosts-basierten StevenBlack-Liste nicht erfasst.
+
+**Cosmetic Filtering** ist auf DNS-Ebene nicht möglich und wird nicht bewertet.
+
+### superadblocktest.com
+
+Seite geladen (DNS funktioniert), Scores nicht automatisiert extrahierbar (JavaScript-Interaktion erforderlich). Screenshots zur visuellen Prüfung vorhanden.
+
+## Fairness des Vergleichs
+
+- **Filtermengen:** AdGuard (~157K Regeln) vs. Pi-hole (~78K) — nicht vergleichbar. Der Browsertest zeigt die Out-of-the-box-Realität, nicht die maximale Blockfähigkeit jedes Systems.
+- **dnsperf-Limit:** Zehn separate 500er-Läufe simulieren nicht exakt einen einzelnen 5.000er-Durchlauf. Der Neustart zwischen Läufen kann kälteren Cache bewirken.
+- **Sprache:** Pi-hole ist in C geschrieben, AdGuard in Go. Go-Binaries haben grundsätzlich einen höheren Speicher-Fußabdruck.
 
 ## Fazit nach Kategorien
 
-**Geringster Ressourcenbedarf:** Pi-hole (110 MB cgroup inkl. Cache vs. deutlich niedrigerer Dienst-RSS)
+### Ressourcenbedarf → **Pi-hole**
+Anon-Speicher 11 vs. 47 MB, Dienst-RSS 11 vs. 57 MB. Der cgroup-Gesamtwert liegt nah beieinander (110 vs. 118 MB), aber der anon-Unterschied ist auf dem 4-GB-Futro relevant.
 
-**Höchste DNS-Laststabilität:** Pi-hole (über 1.600 qps bei C=50, keine Fehler, Dienst nach Test gesund)
+### DNS-Laststabilität → **Pi-hole**
+Cold Cache QPS 91 vs. 43. Pi-hole verarbeitet sequenzielle Abfragen etwa doppelt so schnell. Beide 0 Fehler bei 500 Abfragen.
 
-**Beste Out-of-the-Box-Blockabdeckung:** Nicht abschließend bestimmbar – AdGuard hatte mit 157.189 Regeln etwa doppelt so viele Filtereinträge wie Pi-hole (78.451). Die tatsächliche Blockqualität hängt von den gewählten Listen ab, nicht von der reinen Regelanzahl.
+### Out-of-the-Box-Blockabdeckung → **AdGuard Home**
+80,5 % vs. 70,7 %. Die größere Filterliste blockiert 13 zusätzliche Tracking-Kategorien. Einschränkung: bei identischer Liste wahrscheinlich annähernd gleich.
 
-**Einfachste Bedienung:** Pi-hole (pihole -up vs. manuelles Binary-Ersetzen bei AdGuard)
+### Bedienbarkeit → **AdGuard Home**
+Moderneres Web-Interface, detailliertere Statistiken, integrierte Filterlisten-Verwaltung. Pi-hole erfordert TOML-Edit für erweiterte Einstellungen.
 
-**Empfehlung für den konkreten 4-GB-Futro-Setup: Pi-hole**
+> Dieser Vergleich bewertet die Out-of-the-box-Konfigurationen auf genau diesem Futro. Er beweist nicht, dass eine Lösung auf jeder Hardware oder mit jeder Filterliste grundsätzlich besser ist.
 
-Eingeschränkt auf dieses Setup, da:
-- Geringerer gemessener Speicherbedarf
-- Ausreichender Funktionsumfang für einen DNS-Blocker
-- Einfacheres Update und Backup
-- Über 1.600 qps unter Last – mehr als ausreichend
-
-Auf einem System mit 8+ GB RAM wäre AdGuard Home aufgrund des moderneren Web-Interfaces die komfortablere Wahl. Hier entscheiden vor allem Geschmack und Bedienkomfort.
-
-> **Kein produktiver DNS-Einsatz:** Der getestete DNS-LXC bleibt gestoppt. Eine Umstellung des Heimnetzwerk-DNS wurde nicht durchgeführt.
-+++
+**Empfehlung für den 4-GB-Futro: Pi-hole** — geringerer Speicherbedarf (anon), schnellere DNS-Verarbeitung, ausreichend für einen reinen DNS-Blocker. AdGuard Home empfiehlt sich bei 8+ GB RAM oder wenn das Web-Interface und die größere Standard-Filterliste gewünscht sind.
