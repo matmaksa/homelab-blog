@@ -12,7 +12,7 @@ buildDrafts = false
   [params.analytics.google]
     SiteVerificationTag = "google09a060456df1ed16.html"
 
-  # Label / Branding (raspberry.tips-style Header)
+  # Label / Branding
   [params.label]
     tagline = "Praxis-Guides für dein Homelab-Rechenzentrum"
 
@@ -40,6 +40,9 @@ buildDrafts = false
   # Search page exists
   searchPage = true
 
+  # Disable default PaperMod theme toggle (we use our own)
+  disableThemeToggle = false
+
 [[params.socialIcons]]
   name = "github"
   url = "https://github.com/matmaksa/homelab-blog"
@@ -47,31 +50,48 @@ buildDrafts = false
   name = "instagram"
   url = "https://instagram.com/matmaksa"
 
+# Hauptnavigation – angepasst an vorhandene Inhalte
 [[menu.main]]
-  identifier = "categories"
-  name = "Kategorien"
-  url = "/categories/"
+  identifier = "einsteiger"
+  name = "Einsteiger"
+  url = "/categories/homelab/"
   weight = 10
+
 [[menu.main]]
-  identifier = "tags"
-  name = "Tags"
-  url = "/tags/"
+  identifier = "hardware"
+  name = "Hardware"
+  url = "/categories/hardware/"
   weight = 20
+
 [[menu.main]]
-  identifier = "suche"
-  name = "🔍 Suche"
-  url = "/search/"
+  identifier = "virtualisierung"
+  name = "Proxmox & Virtualisierung"
+  url = "/categories/virtualisierung/"
   weight = 30
+
 [[menu.main]]
-  identifier = "about"
-  name = "Über"
-  url = "/about/"
+  identifier = "software"
+  name = "Software"
+  url = "/categories/software/"
   weight = 40
+
+[[menu.main]]
+  identifier = "smarthome"
+  name = "Smart Home"
+  url = "/categories/smarthome/"
+  weight = 50
+
 [[menu.main]]
   identifier = "empfehlungen"
-  name = "⭐ Empfehlungen"
+  name = "Empfehlungen"
   url = "/links/"
-  weight = 50
+  weight = 60
+
+[[menu.main]]
+  identifier = "suche"
+  name = "Suche"
+  url = "/search/"
+  weight = 70
 
 [markup]
   [markup.goldmark]

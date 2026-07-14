@@ -6,140 +6,212 @@
 {{- $pages = where $pages "Section" "in" (slice "posts") }}
 {{- $published := sort $pages "Date" "desc" }}
 
-<div class="home-layout">
-  <div class="home-content">
+{{- /* Uses layouts/partials/resolve-image.html for image resolution */}}
 
-    {{- /* === HERO: Neuester Artikel (große Karte) === */}}
-    {{- range first 1 $published }}
-    {{- $cat := index .Params.categories 0 | default "" }}
-    {{- $img := "" }}
-    {{- if .Params.cover.image }}
-      {{- if or .Params.cover.relative (not (or (hasPrefix .Params.cover.image "/") (hasPrefix .Params.cover.image "http"))) }}
-        {{- $img = path.Join .RelPermalink .Params.cover.image }}
-      {{- else }}
-        {{- $img = .Params.cover.image | absURL }}
-      {{- end }}
-    {{- else if (index .Params.images 0) }}
-      {{- $img = index .Params.images 0 | absURL }}
-    {{- end }}
-    <article class="hero-card">
-      <a href="{{ .Permalink }}" class="entry-link" style="position:absolute;inset:0;z-index:1;border-radius:inherit;"></a>
-      <div class="hero-card-inner">
+<main id="main-content" class="main-content" role="main">
+<div class="home-layout">
+  <div class="home-main">
+
+    {{- /* ================================================================
+        HERO: Featured Article
+        ================================================================ */}}
+    {{- $featured := where $published "Params.featured" true }}
+    {{- $hero := index $featured 0 | default (index $published 0) }}
+    {{- if $hero }}
+    {{- $heroCat := index $hero.Params.categories 0 | default "" }}
+    {{- $heroImg := partial "resolve-image.html" $hero }}
+    <article class="hero-card" aria-label="Leitartikel: {{ $hero.Title }}">
+      <a href="{{ $hero.Permalink }}" class="hero-card-link" aria-label="{{ $hero.Title }}">
         <div class="hero-card-image">
-          {{- if $img }}
-          <img src="{{ $img }}" alt="{{ .Title | plainify }}" loading="eager" decoding="async">
+          {{- if $heroImg }}
+          <img src="{{ $heroImg }}" alt="{{ $hero.Title | plainify }}" loading="eager" decoding="async" width="600" height="340">
           {{- else }}
-          <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--hl-primary-light);color:var(--hl-primary);font-size:56px;">🏠</div>
+          <div class="card-img-fallback" aria-hidden="true">⚡</div>
           {{- end }}
         </div>
         <div class="hero-card-body">
-          {{- if $cat }}
-          <div class="hero-card-category">{{ $cat }}</div>
+          {{- if $heroCat }}
+          <span class="hero-card-category">{{ $heroCat }}</span>
           {{- end }}
-          <h1 class="hero-card-title">{{ .Title }}</h1>
-          <div class="hero-card-excerpt">{{ .Summary | plainify | htmlUnescape | truncate 200 }}</div>
-          <div class="hero-card-meta">
-            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+          <h1 class="hero-card-title">{{ $hero.Title }}</h1>
+          <p class="hero-card-excerpt">{{ $hero.Summary | plainify | htmlUnescape | truncate 200 }}</p>
+          <span class="hero-card-meta">
+            <time datetime="{{ $hero.Date.Format "2006-01-02" }}">{{ $hero.Date.Format "02.01.2006" }}</time>
             {{- if (.Param "ShowReadingTime") }}
-            <span>·</span>
-            <span>{{ .ReadingTime }} Min. Lesezeit</span>
+            <span aria-hidden="true">·</span>
+            <span>{{ $hero.ReadingTime }} Min. Lesezeit</span>
             {{- end }}
-          </div>
+          </span>
         </div>
-      </div>
+      </a>
     </article>
     {{- end }}
 
-    {{- /* === AKTUELLE ARTIKEL === */}}
-    {{- $recent := after 1 $published }}
+    {{- /* ================================================================
+        AKTUELLE ARTIKEL
+        ================================================================ */}}
+    {{- $recent := where $published "Permalink" "ne" $hero.Permalink }}
+    {{- $recent = first 4 $recent }}
     {{- if $recent }}
-    <div class="section-wrapper">
+    <section class="section-wrapper" aria-labelledby="recent-heading">
       <div class="section-header">
-        <h2><span class="section-emoji">📰</span> Aktuelle Artikel</h2>
-        <a href="{{ "posts/" | absLangURL }}">Alle Artikel →</a>
+        <h2 id="recent-heading"><span class="section-icon" aria-hidden="true">📰</span> Aktuelle Artikel</h2>
+        <a href="{{ "posts/" | absLangURL }}" class="section-link">Alle Artikel →</a>
       </div>
       <div class="article-grid">
-        {{- range first 4 $recent }}
+        {{- range $recent }}
         {{- partial "article-card.html" . }}
         {{- end }}
       </div>
-    </div>
+    </section>
     {{- end }}
 
-    {{- /* === KATEGORIE-BLÖCKE === */}}
-    {{- range $catName, $catPages := $.Site.Taxonomies.categories }}
-    {{- $catSlug := $catName | urlize }}
-    {{- $catEmoji := "📌" }}
-    {{- $catLabel := $catName }}
+    {{- /* ================================================================
+        THEMATISCHE BEREICHE (Kategorien-basiert)
+        Konfigurierbare Reihenfolge und Mapping
+        ================================================================ */}}
+    {{- $catOrder := slice
+      (dict "slug" "homelab" "label" "Einsteiger & Low Budget" "icon" "🚀")
+      (dict "slug" "hardware" "label" "Hardware & Geräte" "icon" "🔧")
+      (dict "slug" "virtualisierung" "label" "Proxmox & Virtualisierung" "icon" "🖥️")
+      (dict "slug" "software" "label" "Software & Selfhosting" "icon" "💻")
+      (dict "slug" "smarthome" "label" "Smart Home" "icon" "🏠")
+    }}
 
-    {{- if eq $catSlug "hardware" }}{{ $catEmoji = "🔧" }}{{ $catLabel = "Hardware & Geräte" }}
-    {{- else if eq $catSlug "software" }}{{ $catEmoji = "💻" }}{{ $catLabel = "Software & Tools" }}
-    {{- else if eq $catSlug "smarthome" }}{{ $catEmoji = "🏠" }}{{ $catLabel = "Smart Home" }}
-    {{- else if eq $catSlug "homelab" }}{{ $catEmoji = "⚡" }}{{ $catLabel = "Homelab Starter" }}
-    {{- else if eq $catSlug "virtualisierung" }}{{ $catEmoji = "🖥️" }}{{ $catLabel = "Virtualisierung" }}
-    {{- end }}
-
-    {{- $catArticles := where $catPages.Pages "Params.preview" "!=" true }}
-    {{- $catArticles = sort $catArticles "Date" "desc" }}
-    {{- $catArticles = where $catArticles "Permalink" "ne" ((index $published 0).Permalink | default "") }}
-    {{- if $catArticles }}
-    <div class="section-wrapper">
+    {{- $usedPermalinks := slice $hero.Permalink }}
+    {{- range $catOrder }}
+    {{- $catSlug := .slug }}
+    {{- $catLabel := .label }}
+    {{- $catIcon := .icon }}
+    {{- $catPages := index $.Site.Taxonomies.categories $catSlug }}
+    {{- if $catPages }}
+      {{- $catArticles := where $catPages.Pages "Params.preview" "!=" true }}
+      {{- $catArticles = sort $catArticles "Date" "desc" }}
+      {{- /* Exclude articles already shown in hero or recent */}}
+      {{- $catArticles = where $catArticles "Permalink" "not in" $usedPermalinks }}
+      {{- if $catArticles }}
+        {{- /* Track used permalinks */}}
+        {{- range $catArticles }}{{ $usedPermalinks = $usedPermalinks | append .Permalink }}{{ end }}
+    <section class="section-wrapper cat-section-{{ $catSlug }}" aria-label="{{ $catLabel }}">
       <div class="section-header">
-        <h2><span class="section-emoji">{{ $catEmoji }}</span> {{ $catLabel }}</h2>
-        <a href="{{ $catPages.Page.RelPermalink }}">Alle anzeigen →</a>
+        <h2><span class="section-icon" aria-hidden="true">{{ $catIcon }}</span> {{ $catLabel }}</h2>
+        <a href="{{ $catPages.Page.RelPermalink }}" class="section-link">Alle anzeigen →</a>
       </div>
       <div class="article-grid">
         {{- range first 3 $catArticles }}
         {{- partial "article-card.html" . }}
         {{- end }}
       </div>
-    </div>
+    </section>
+      {{- end }}
     {{- end }}
     {{- end }}
 
-  </div>
+    {{- /* ================================================================
+        EMPFOHLENE GUIDES (redaktionelle Auswahl)
+        ================================================================ */}}
+    {{- $popular := where $published "Params.popular" true }}
+    {{- if not $popular }}
+      {{- /* Fallback: neueste Evergreen-Artikel (nicht bereits gezeigt) */}}
+      {{- $popular = where $published "Permalink" "not in" $usedPermalinks }}
+      {{- $popular = first 3 $popular }}
+    {{- else }}
+      {{- $popular = where $popular "Permalink" "not in" $usedPermalinks }}
+      {{- $popular = first 3 $popular }}
+    {{- end }}
+    {{- if $popular }}
+    <section class="section-wrapper" aria-labelledby="picks-heading">
+      <div class="section-header">
+        <h2 id="picks-heading"><span class="section-icon" aria-hidden="true">⭐</span> Empfohlene Guides</h2>
+      </div>
+      <div class="article-grid">
+        {{- range $popular }}
+        {{- partial "article-card.html" . }}
+        {{- end }}
+      </div>
+    </section>
+    {{- end }}
 
-  {{- /* === SIDEBAR === */}}
-  <aside class="home-sidebar">
-    {{- /* Neueste Artikel */}}
+  </div>{{- /* end .home-main */}}
+
+  {{- /* ================================================================
+      SIDEBAR
+      ================================================================ */}}
+  <aside class="home-sidebar" aria-label="Seitenleiste">
+
+    <!-- Neueste Beiträge -->
     <div class="sidebar-widget">
-      <div class="sidebar-widget-title">Neueste Beiträge</div>
-      <ul class="sidebar-post-list">
+      <h3 class="sidebar-title">Neueste Beiträge</h3>
+      <ul class="sidebar-list">
         {{- range first 5 $published }}
-        <li class="sidebar-post-item">
+        <li>
           <a href="{{ .Permalink }}">{{ .Title }}</a>
-          <div class="sidebar-post-date">{{ .Date.Format "02.01.2006" }}</div>
+          <div class="sidebar-date">{{ .Date.Format "02.01.2006" }}</div>
         </li>
         {{- end }}
       </ul>
     </div>
 
-    {{- /* Kategorien */}}
+    <!-- Kategorien -->
     <div class="sidebar-widget">
-      <div class="sidebar-widget-title">Kategorien</div>
-      <ul class="sidebar-post-list">
+      <h3 class="sidebar-title">Kategorien</h3>
+      <ul class="sidebar-list">
         {{- range site.Taxonomies.categories.ByCount }}
-        <li class="sidebar-post-item" style="display:flex;justify-content:space-between;align-items:center;">
+        <li class="sidebar-cat-item">
           <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
-          <span style="font-size:12px;color:var(--hl-text-light);background:var(--hl-primary-light);padding:2px 8px;border-radius:10px;">{{ .Count }}</span>
+          <span class="sidebar-cat-count">{{ .Count }}</span>
         </li>
         {{- end }}
       </ul>
     </div>
 
-    {{- /* Tags */}}
+    <!-- Tags -->
     {{- $tags := site.Taxonomies.tags }}
     {{- if $tags }}
     <div class="sidebar-widget">
-      <div class="sidebar-widget-title">Tags</div>
-      <div class="sidebar-tag-cloud">
+      <h3 class="sidebar-title">Tags</h3>
+      <div class="sidebar-tags">
         {{- range $tags.ByCount | first 20 }}
         <a href="{{ .Page.RelPermalink }}" class="sidebar-tag">{{ .Page.Title }}</a>
         {{- end }}
       </div>
     </div>
     {{- end }}
+
+    <!-- Instagram -->
+    <div class="sidebar-widget">
+      <h3 class="sidebar-title">Folgen</h3>
+      <div class="sidebar-social">
+        <a href="https://instagram.com/matmaksa" target="_blank" rel="noopener noreferrer" aria-label="Instagram @matmaksa">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          @matmaksa auf Instagram
+        </a>
+      </div>
+    </div>
+
+    <!-- Affiliate-Hinweis -->
+    <div class="sidebar-widget">
+      <h3 class="sidebar-title">Affiliate-Hinweis</h3>
+      <p class="sidebar-affiliate">
+        <strong>Transparenz:</strong> {{ site.Params.footer.text | default "Einige Links auf dieser Seite sind Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich eine kleine Provision. Für dich entstehen keine zusätzlichen Kosten." }}
+      </p>
+    </div>
+
+    <!-- Einsteiger-CTA -->
+    <div class="sidebar-widget">
+      <h3 class="sidebar-title">Homelab Starter</h3>
+      <p class="sidebar-affiliate" style="margin-bottom:8px;">
+        Neu im Homelab? Starte hier:
+      </p>
+      <a href="{{ "categories/homelab/" | absLangURL }}" class="sidebar-tag" style="display:inline-block;">🚀 Einsteiger-Guides</a>
+    </div>
+
   </aside>
-</div>
+</div>{{- /* end .home-layout */}}
+</main>
 
 {{- end }}{{/* end main */}}

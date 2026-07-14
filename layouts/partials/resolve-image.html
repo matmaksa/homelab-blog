@@ -1,0 +1,11 @@
+{{- $img := "" }}
+{{- if .Params.cover.image }}
+  {{- if or .Params.cover.relative (not (or (hasPrefix .Params.cover.image "/") (hasPrefix .Params.cover.image "http"))) }}
+    {{- $img = path.Join .RelPermalink .Params.cover.image }}
+  {{- else }}
+    {{- $img = .Params.cover.image | absURL }}
+  {{- end }}
+{{- else if (index .Params.images 0) }}
+  {{- $img = index .Params.images 0 | absURL }}
+{{- end }}
+{{- return $img }}
