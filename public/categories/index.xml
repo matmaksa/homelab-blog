@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories | Homelab Guide</title>
-    <link>https://matmaksa.de/categories/</link>
+    <link>https://matmaksa.github.io/homelab-blog/categories/</link>
     <description>Recent content in Categories on Homelab Guide</description>
     <generator>Hugo</generator>
     <language>de-de</language>
     <lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://matmaksa.de/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://matmaksa.github.io/homelab-blog/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homelab</title>
-      <link>https://matmaksa.de/categories/homelab/</link>
+      <link>https://matmaksa.github.io/homelab-blog/categories/homelab/</link>
       <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/categories/homelab/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/categories/homelab/</guid>
       <description></description>
     </item>
     <item>
       <title>Software</title>
-      <link>https://matmaksa.de/categories/software/</link>
+      <link>https://matmaksa.github.io/homelab-blog/categories/software/</link>
       <pubDate>Mon, 29 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/categories/software/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/categories/software/</guid>
       <description></description>
     </item>
     <item>
       <title>Smarthome</title>
-      <link>https://matmaksa.de/categories/smarthome/</link>
+      <link>https://matmaksa.github.io/homelab-blog/categories/smarthome/</link>
       <pubDate>Wed, 24 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/categories/smarthome/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/categories/smarthome/</guid>
       <description></description>
     </item>
     <item>
       <title>Hardware</title>
-      <link>https://matmaksa.de/categories/hardware/</link>
+      <link>https://matmaksa.github.io/homelab-blog/categories/hardware/</link>
       <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/categories/hardware/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/categories/hardware/</guid>
       <description></description>
     </item>
     <item>
       <title>Virtualisierung</title>
-      <link>https://matmaksa.de/categories/virtualisierung/</link>
+      <link>https://matmaksa.github.io/homelab-blog/categories/virtualisierung/</link>
       <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/categories/virtualisierung/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/categories/virtualisierung/</guid>
       <description></description>
     </item>
   </channel>

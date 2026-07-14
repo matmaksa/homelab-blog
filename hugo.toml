@@ -1,4 +1,4 @@
-baseURL = 'https://matmaksa.de/'
+baseURL = 'https://matmaksa.github.io/homelab-blog/'
 title = 'Homelab Guide'
 languageCode = 'de-de'
 theme = 'PaperMod'
@@ -24,7 +24,7 @@ buildDrafts = false
   ShowToc = true
   description = "Homelab, Virtualisierung & KI Modelle – Praxis-Guides für dein Zuhause-Rechenzentrum"
   keywords = ["Homelab", "Proxmox", "Virtualisierung", "KI Modelle", "Docker", "Server", "Selbsthosten"]
-  images = ["/og-image.png"]
+  images = ["/homelab-blog/og-image.png"]
 
   [params.editPost]
     URL = "https://github.com/matmaksa/homelab-blog/content"

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Smarthome | Homelab Guide</title>
-    <link>https://matmaksa.de/categories/smarthome/</link>
+    <link>https://matmaksa.github.io/homelab-blog/categories/smarthome/</link>
     <description>Recent content in Smarthome on Homelab Guide</description>
     <generator>Hugo</generator>
     <language>de-de</language>
     <lastBuildDate>Wed, 24 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://matmaksa.de/categories/smarthome/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://matmaksa.github.io/homelab-blog/categories/smarthome/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€</title>
-      <link>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</link>
       <pubDate>Wed, 24 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
 &lt;p&gt;Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.&lt;/p&gt;

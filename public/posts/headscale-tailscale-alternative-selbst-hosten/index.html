@@ -9,17 +9,17 @@
 <meta name="keywords" content="software, headscale, tailscale, mesh-vpn, wireguard, proxmox, lxc, selfhosting, netzwerk">
 <meta name="description" content="Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten">
 <meta name="author" content="">
-<link rel="canonical" href="https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/">
+<link rel="canonical" href="https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/">
 <meta name="google-site-verification" content="google09a060456df1ed16.html">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://matmaksa.de/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
-<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<link crossorigin="anonymous" href="/homelab-blog/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.github.io/homelab-blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.github.io/homelab-blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.github.io/homelab-blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.github.io/homelab-blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.github.io/homelab-blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="de" href="https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/">
+<link rel="alternate" hreflang="de" href="https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/">
 <noscript>
     <style>
         #theme-toggle,
@@ -65,7 +65,7 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/">
+</script><meta property="og:url" content="https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/">
   <meta property="og:site_name" content="Homelab Guide">
   <meta property="og:title" content="Headscale im Homelab – Tailscale-Alternative selbst hosten">
   <meta property="og:description" content="Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten">
@@ -80,9 +80,9 @@
     <meta property="article:tag" content="Mesh-Vpn">
     <meta property="article:tag" content="Wireguard">
     <meta property="article:tag" content="Proxmox">
-    <meta property="og:image" content="https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg">
+    <meta property="og:image" content="https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg">
+<meta name="twitter:image" content="https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg">
   <meta name="twitter:title" content="Headscale im Homelab – Tailscale-Alternative selbst hosten">
   <meta name="twitter:description" content="Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten">
 
@@ -96,13 +96,13 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://matmaksa.de/posts/"
+      "item": "https://matmaksa.github.io/homelab-blog/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Headscale im Homelab – Tailscale-Alternative selbst hosten",
-      "item": "https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/"
+      "item": "https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/"
     }
   ]
 }
@@ -120,18 +120,18 @@
   "articleBody": "Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten\nWas ist Headscale? (In zwei Sätzen) Headscale ist ein Open-Source-Server (MIT-Lizenz), der den gleichen Dienst bereitstellt wie die Tailscale-Cloud – nur dass du ihn auf deiner eigenen Hardware betreibst. Deine Geräte verbinden sich direkt per Wireguard-Verschlüsselung, ohne dass ein zentraler Cloud-Server die Kontrolle hat.\nWenn du noch keinen Proxmox-Server hast: Im Mini-PC-Vergleich findest du passende Hardware ab 40 €. Und falls du Proxmox noch nicht kennst: Der Artikel zur kostenlosen Virtualisierung mit Proxmox zeigt dir den Einstieg.\nWarum Headscale statt Tailscale-Cloud? Tailscale ist extrem einfach einzurichten. Aber mit der Entscheidung gibst du die Kontrolle über dein eigenes Netzwerk aus der Hand:\nNachteile der Tailscale-Cloud:\nTailscale sieht, welche Geräte du verbindest (auch wenn sie die Daten nicht sehen können, wissen sie wer wer ist) Tailscale entscheidet über die Infrastruktur – Ausfall der Cloud = kein Mesh-VPN Tailscale schränkt die Anzahl der Nutzer ein (Personal-Plan: 3 Nutzer / 100 Geräte) Du musst einem US-Unternehmen vertrauen, dass der Dienst nicht eingestellt oder kostenpflichtig wird Vorteile von Headscale:\nDein Netzwerk, deine Regeln – Kein externer Dienst weiss, welche Geräte du verbindest Unabhängig von Internet-Ausfällen – solange deine Geräte im selben Netzwerk sind oder dich via DynDNS/Domain erreichen, läuft es Kein Limit – Unbegrenzte Geräte und Nutzer Open Source – voller Zugriff auf den Code, keine bösen Überraschungen Eigene ACLs – du definierst genau, wer auf wen zugreifen darf (nicht Tailscale) Alternativen im Vergleich Lösung Kosten Cloud nötig? Einrichtung Besonderheit Headscale (Empfohlen)) 0 € ❌ Nein Mittel Du hostest selbst, volle Kontrolle Tailscale-Cloud 0–6 €/Monat ✅ Ja Sehr einfach Kein eigener Server nötig Netbird 0–8 €/Monat Teilweise (kostenloser Plan: Cloud-Management) Mittel Open Source, ähnliches Konzept ZeroTier 0–5 €/Monat Teilweise (Basis-Koordination via Cloud) Einfach Älter, breite Unterstützung Manuelles Wireguard 0 € ❌ Nein Aufwändig Volle Kontrolle, aber jede Verbindung manuell Fazit zum Vergleich: Tailscale ist am einfachsten, Headscale bietet die meiste Kontrolle. Wenn du bereits einen Proxmox-Server hast (wie die meisten Leser hier), ist Headscale der logische nächste Schritt – du hast die Hardware ja schon.\nHeadscale installieren (Proxmox LXC) Du brauchst: Einen Proxmox-Server, ein LXC-Container (Debian/Ubuntu), und eine Domain oder DynDNS-Adresse.\n⚠️ Wichtige Hürde: Headscale muss von deinen Clients erreichbar sein. Das bedeutet: Du brauchst entweder eine öffentliche Domain mit DynDNS, einen Reverse Proxy mit HTTPS-Zertifikat oder zumindest eine VPN-Verbindung zwischen allen Geräten und dem LXC. Für FRITZ!Box-Nutzer ohne DynDNS ist das eine echte Hürde – du kannst entweder eine DDNS-Domain bei einem kostenlosen Anbieter (dyn.com, duckdns.org) einrichten oder zunächst im lokalen Netzwerk testen.\n1. LXC-Container vorbereiten Erstelle einen unprivilegierten LXC mit Debian 12 (oder Ubuntu 24.04), mindestens 1 CPU-Kern, 1 GB RAM, 8 GB Speicher.\nNach dem Erstellen:\napt update \u0026\u0026 apt upgrade -y 2. Headscale installieren Lade das aktuelle .deb-Paket direkt von GitHub:\n# Beispiel für Version 0.23.0 – aktuelle Version auf # https://github.com/juanfont/headscale/releases prüfen! wget https://github.com/juanfont/headscale/releases/latest/download/headscale_0.23.0_linux_amd64.deb dpkg -i headscale_0.23.0_linux_amd64.deb Wichtig: Prüf vor der Installation die aktuellste Version auf GitHub und ersetze 0.23.0 durch die tatsächliche Versionsnummer.\n3. Konfiguration anpassen Öffne die Konfiguration:\nnano /etc/headscale/config.yaml Wichtige Einstellungen:\nserver_url: https://headscale.deine-domain.de:443 # Deine Domain listen_addr: 0.0.0.0:8080 metrics_listen_addr: 127.0.0.1:9090 grpc_listen_addr: 127.0.0.1:50443 # Magst du ändern: dns: magic_dns: true base_domain: headscale.local nameservers: - 1.1.1.1 - 9.9.9.9 Für den öffentlichen Zugriff richtest du am besten einen Reverse Proxy (Nginx, Caddy) oder eine Cloudflare-Tunnel ein. Der Einfachheit halber reicht erstmal ein lokaler Zugriff – deine Clients müssen den Server dann per LAN-IP erreichen können.\n4. Headscale starten systemctl enable --now headscale Prüfen ob es läuft:\nsystemctl status headscale journalctl -u headscale -f 5. Ersten Nutzer anlegen headscale users create homelab Clients mit Headscale verbinden Auf Linux (CLI) # Tailscale-Client installieren curl -fsSL https://tailscale.com/install.sh | sh # Mit Headscale verbinden tailscale up --login-server https://headscale.deine-domain.de Ein Link für die Authentifizierung wird ausgegeben. Kopiere ihn, öffne ihn im Browser oder gib ihn auf dem Headscale-Server ein:\nheadscale nodes register --key Auf Windows / macOS Lade den Tailscale-Client von tailscale.com/download herunter. Bei der Installation wählst du nicht “Login with Google”, sondern klickst auf das Tailscale-Icon in der Taskleiste → “Use a different server” → gib deine Headscale-URL ein.\nVerbindung prüfen tailscale status # Ausgabe: # 100.x.x.x homelab-server headscale homelab linux active # 100.x.x.x desktop headscale homelab windows active Deine Geräte sind jetzt per Mesh-VPN verbunden. Du erreichst jedes Gerät über seine Tailscale-IP (100.x.x.x).\nGrundlegende ACLs (Access Control Lists) Ohne ACLs kann jedes deiner Geräte jedes andere erreichen – das kannst du mit einer kleinen Regel einschränken.\nErstelle /etc/headscale/acl.hujson:\n{ \"groups\": { \"group:admin\": [\"dein-user@domain\"], \"group:server\": [\"homelab-server\", \"nas\"], \"group:client\": [\"desktop\", \"laptop\"] }, \"acls\": [ // Admins dürfen auf alles { \"action\": \"accept\", \"src\": [\"group:admin\"], \"dst\": [\"*:*\"] }, // Server dürfen sich untereinander sprechen { \"action\": \"accept\", \"src\": [\"group:server\"], \"dst\": [\"group:server:*\"] }, // Clients dürfen nur Server erreichen (nicht andere Clients) { \"action\": \"accept\", \"src\": [\"group:client\"], \"dst\": [\"group:server:*\"] } ] } Aktiviere die ACLs in config.yaml:\nacl_policy_path: /etc/headscale/acl.hujson Dann Headscale neustarten:\nsystemctl restart headscale Vorteile \u0026 Nachteile Vorteile Nachteile Volle Kontrolle über dein VPN Einrichtung aufwändiger als Tailscale-Cloud Kein externer Dienst im Spiel Du brauchst einen öffentlich erreichbaren Server (LXC, VPS) Unbegrenzte Geräte + Nutzer Kein offizielles Web-GUI (nur CLI + Drittanbieter) Open Source (MIT) Updates musst du selbst einspielen Funktioniert an jeder FRITZ!Box, kein Port-Forwarding Reverse Proxy für HTTPS nötig Wireguard-Verschlüsselung (schnell, sicher) Für wen geeignet? Du hast bereits einen Proxmox-Server und suchst nach einer echten Alternative zur Tailscale-Cloud Du hostest mehrere Dienste und willst sie per Mesh-VPN verbinden, ohne Ports in der FRITZ!Box freizugeben Du möchtest verstehen, wie dein Mesh-VPN funktioniert auf TCP/IP-Ebene und nicht nur “es läuft” Tailscale-Nutzer, die mehr Kontrolle wollen Für wen ungeeignet? Du willst einfach nur schnell zwei Geräte verbinden – dann installier Tailscale, Headscale ist overkill Du hast nur ein Gerät im Homelab – ein Mesh-VPN lohnt sich erst ab 2-3 Geräten Du möchtest keine Kommandozeile sehen – Headscale hat kein einfaches Web-GUI Du hast keinen öffentlich erreichbaren Server (oder willst keinen DynDNS/RP einrichten) Fazit Headscale ist die richtige Lösung wenn du Tailscale kennst aber die Cloud-Komponente nicht magst. Der Aufwand für die Einrichtung ist überschaubar (~30 Minuten) und die Vorteile sind klar: Dein Netzwerk, deine Regeln, kein externer Dienst.\nKosten: 0 € (Headscale läuft in einem LXC auf deinem bestehenden Proxmox-Server)\nEinrichten wenn: Du bereits mehrere Geräte in deinem Homelab hast und den nächsten Schritt in Richtung Selfhosting machen willst – nicht nur Dienste, sondern auch die Netzwerk-Infrastruktur selbst betreiben willst.\nNicht einrichten wenn: Tailscale-Cloud für dich völlig ausreicht und du keinen Grund siehst, etwas zu ändern. Tailscale ist ein gutes Produkt – Headscale ist nur die Antwort auf die Frage “Was, wenn ich es selbst hosten will?”\n",
   "wordCount" : "1088",
   "inLanguage": "de",
-  "image":"https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg","datePublished": "2026-06-29T00:00:00Z",
+  "image":"https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg","datePublished": "2026-06-29T00:00:00Z",
   "dateModified": "2026-06-29T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/"
+    "@id": "https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Homelab Guide",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://matmaksa.de/favicon.ico"
+      "url": "https://matmaksa.github.io/homelab-blog/favicon.ico"
     }
   }
 }
@@ -141,7 +141,7 @@
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+            <a href="https://matmaksa.github.io/homelab-blog/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
                     <span class="brand-title">Homelab Guide</span>
                     <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
                 </span>
@@ -149,27 +149,27 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                <a href="https://matmaksa.github.io/homelab-blog/categories/" title="Kategorien">
                     <span>Kategorien</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/tags/" title="Tags">
+                <a href="https://matmaksa.github.io/homelab-blog/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                <a href="https://matmaksa.github.io/homelab-blog/search/" title="🔍 Suche">
                     <span>🔍 Suche</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/about/" title="Über">
+                <a href="https://matmaksa.github.io/homelab-blog/about/" title="Über">
                     <span>Über</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                <a href="https://matmaksa.github.io/homelab-blog/links/" title="⭐ Empfehlungen">
                     <span>⭐ Empfehlungen</span>
                 </a>
             </li>
@@ -207,7 +207,7 @@
       Headscale im Homelab – Tailscale-Alternative selbst hosten
     </h1>
     <div class="post-meta">
-        <a href="https://matmaksa.de/categories/software/" class="post-cat">Software</a>
+        <a href="https://matmaksa.github.io/categories/software/" class="post-cat">Software</a>
         <span>·</span>
 
 <span title='2026-06-29 00:00:00 +0000 UTC'>29. Juni 2026</span>&nbsp;|&nbsp;<span>
@@ -217,7 +217,7 @@
 </div>
   </header>
     <div class="post-cover">
-      <img src="/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg" alt="Headscale im Homelab – Tailscale-Alternative selbst hosten" loading="eager">
+      <img src="/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/featured.jpg" alt="Headscale im Homelab – Tailscale-Alternative selbst hosten" loading="eager">
     </div>
   <div class="post-content md-content"><p><strong>Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten</strong></p>
 <h2 id="was-ist-headscale-in-zwei-sätzen">Was ist Headscale? (In zwei Sätzen)<a hidden class="anchor" aria-hidden="true" href="#was-ist-headscale-in-zwei-sätzen">#</a></h2>
@@ -437,15 +437,15 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://matmaksa.de/tags/software/">Software</a></li>
-      <li><a href="https://matmaksa.de/tags/headscale/">Headscale</a></li>
-      <li><a href="https://matmaksa.de/tags/tailscale/">Tailscale</a></li>
-      <li><a href="https://matmaksa.de/tags/mesh-vpn/">Mesh-Vpn</a></li>
-      <li><a href="https://matmaksa.de/tags/wireguard/">Wireguard</a></li>
-      <li><a href="https://matmaksa.de/tags/proxmox/">Proxmox</a></li>
-      <li><a href="https://matmaksa.de/tags/lxc/">Lxc</a></li>
-      <li><a href="https://matmaksa.de/tags/selfhosting/">Selfhosting</a></li>
-      <li><a href="https://matmaksa.de/tags/netzwerk/">Netzwerk</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/software/">Software</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/headscale/">Headscale</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/tailscale/">Tailscale</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/mesh-vpn/">Mesh-Vpn</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/wireguard/">Wireguard</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/proxmox/">Proxmox</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/lxc/">Lxc</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/selfhosting/">Selfhosting</a></li>
+      <li><a href="https://matmaksa.github.io/homelab-blog/tags/netzwerk/">Netzwerk</a></li>
     </ul>
   </footer>
 </article>
@@ -460,21 +460,21 @@
         <div class="footer-col">
             <h3>Kategorien</h3>
             <ul>
-                <li><a href="/categories/hardware/">Hardware</a></li>
-                <li><a href="/categories/homelab/">Homelab</a></li>
-                <li><a href="/categories/smarthome/">Smarthome</a></li>
-                <li><a href="/categories/software/">Software</a></li>
-                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+                <li><a href="/homelab-blog/categories/hardware/">Hardware</a></li>
+                <li><a href="/homelab-blog/categories/homelab/">Homelab</a></li>
+                <li><a href="/homelab-blog/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/homelab-blog/categories/software/">Software</a></li>
+                <li><a href="/homelab-blog/categories/virtualisierung/">Virtualisierung</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h3>Links</h3>
             <ul>
-                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
-                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
-                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
-                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
-                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/links/">⭐ Empfehlungen</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -486,7 +486,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>&copy; 2026 <a href="https://matmaksa.github.io/homelab-blog/">Homelab Guide</a></span>
         <span>
             Powered by
             <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;

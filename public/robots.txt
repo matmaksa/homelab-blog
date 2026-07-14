@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: /preview/
 
-Sitemap: https://matmaksa.de/sitemap.xml
+Sitemap: https://matmaksa.github.io/homelab-blog/sitemap.xml

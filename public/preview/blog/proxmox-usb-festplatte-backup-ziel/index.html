@@ -9,17 +9,17 @@
 <meta name="keywords" content="">
 <meta name="description" content="Proxmox Backup auf eine USB-Festplatte: Schritt für Schritt eine externe HDD identifizieren, als Proxmox-Storage einrichten und das erste Backup erstellen.">
 <meta name="author" content="">
-<link rel="canonical" href="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/">
+<link rel="canonical" href="https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/">
 <meta name="google-site-verification" content="google09a060456df1ed16.html">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://matmaksa.de/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.de/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.de/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://matmaksa.de/apple-touch-icon.png">
-<link rel="mask-icon" href="https://matmaksa.de/safari-pinned-tab.svg">
+<link crossorigin="anonymous" href="/homelab-blog/assets/css/stylesheet.c8964240f397070f8b2b5ab6e73f7061ad3d367e81dfb558b94262d77259ffa3.css" integrity="sha256-yJZCQPOXBw&#43;LK1q25z9wYa09Nn6B37VYuUJi13JZ/6M=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://matmaksa.github.io/homelab-blog/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://matmaksa.github.io/homelab-blog/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://matmaksa.github.io/homelab-blog/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://matmaksa.github.io/homelab-blog/apple-touch-icon.png">
+<link rel="mask-icon" href="https://matmaksa.github.io/homelab-blog/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="de" href="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/">
+<link rel="alternate" hreflang="de" href="https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/">
 <noscript>
     <style>
         #theme-toggle,
@@ -65,7 +65,7 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
-</script><meta property="og:url" content="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/">
+</script><meta property="og:url" content="https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/">
   <meta property="og:site_name" content="Homelab Guide">
   <meta property="og:title" content="USB-Festplatte als Proxmox-Backup-Ziel einrichten">
   <meta property="og:description" content="Proxmox Backup auf eine USB-Festplatte: Schritt für Schritt eine externe HDD identifizieren, als Proxmox-Storage einrichten und das erste Backup erstellen.">
@@ -74,9 +74,9 @@
     <meta property="article:section" content="preview">
     <meta property="article:published_time" content="2026-07-14T00:00:00+00:00">
     <meta property="article:modified_time" content="2026-07-14T00:00:00+00:00">
-    <meta property="og:image" content="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg">
+    <meta property="og:image" content="https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg">
+<meta name="twitter:image" content="https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg">
   <meta name="twitter:title" content="USB-Festplatte als Proxmox-Backup-Ziel einrichten">
   <meta name="twitter:description" content="Proxmox Backup auf eine USB-Festplatte: Schritt für Schritt eine externe HDD identifizieren, als Proxmox-Storage einrichten und das erste Backup erstellen.">
 
@@ -90,19 +90,19 @@
       "@type": "ListItem",
       "position":  1 ,
       "name": "Preview – Entwürfe",
-      "item": "https://matmaksa.de/preview/"
+      "item": "https://matmaksa.github.io/homelab-blog/preview/"
     }, 
     {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Blog-Preview – unveröffentlichte Entwürfe",
-      "item": "https://matmaksa.de/preview/blog/"
+      "item": "https://matmaksa.github.io/homelab-blog/preview/blog/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "USB-Festplatte als Proxmox-Backup-Ziel einrichten",
-      "item": "https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/"
+      "item": "https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/"
     }
   ]
 }
@@ -120,18 +120,18 @@
   "articleBody": "⚠️ Interner Review-Hinweis: Dieser Artikel ist ein Preview-Entwurf. Screenshots fehlen noch.\n👉 Nächster Schritt: Screenshots über die Proxmox-WebGUI ergänzen, dann USER_VISUAL_APPROVAL vor Publish einholen.\nUSB-Festplatte als Proxmox-Backup-Ziel einrichten TL;DR: Eine USB-Festplatte ist die einfachste Möglichkeit, ein externes Backup-Ziel für Proxmox einzurichten. Du identifizierst die Platte über ihre UUID, mountest sie per fstab dauerhaft und bindest sie als Directory Storage ein. Ein Backup eines Containers und ein Restore-Test bestätigen die Funktion. Eine einzelne USB-HDD ist besser als kein externes Backup, ersetzt aber keine vollständige 3-2-1-Strategie.\n⏱ Zeit 15–20 Minuten 💰 Kosten ca. 30–50 € (gebrauchte 1-TB-USB-HDD) oder vorhandene Platte 📊 Schwierigkeit ⭐⭐☆☆☆ (Einsteiger) 🖥️ Benötigt Proxmox-Host, eine USB-Festplatte (min. 500 GB empfohlen) 🎯 Ziel Externes Backup-Ziel für Proxmox-VMs und -LXCs ✅ Getestet mit Proxmox VE 9.2.4, HGST HTS721010A9E630 (1 TB, ext4) 1. Warum eine separate USB-HDD? Proxmox speichert Backups standardmäßig auf dem lokalen Storage (local). Das ist praktisch, aber kein echtes Backup:\nSnapshot ≠ Backup: Ein Snapshot liegt auf demselben Speicher wie das Original. Wenn die SSD ausfällt, sind Snapshot und Original weg. Lokaler Speicher ist begrenzt: Die System-SSD hat oft nur 64–128 GB – zu wenig für regelmäßige Backups mehrerer VMs/LXCs. USB-HDD als externes Ziel: Eine separate Platte, die nicht dauerhaft am System hängt, schützt vor gleichzeitigem Ausfall. Die USB-HDD ist nicht die perfekte Backup-Lösung – aber sie ist besser als gar kein externes Backup. Eine vollständige 3-2-1-Strategie (3 Kopien, 2 Medien, 1 extern) sieht anders aus.\n2. Die richtige USB-Festplatte auswählen Grundsätzlich eignet sich jede externe USB-Festplatte ab etwa 500 GB. Wichtiger als die Marke ist die Zuverlässigkeit:\nGröße: Für ein Homelab mit 2–3 VMs/LXCs reichen 500 GB. 1 TB gibt Luft für Snapshots und mehrere Backup-Generationen. Anschluss: USB 3.0 (reicht für Gigabit-Netzwerk-Speed). Empfehlung: Eine gebrauchte 2,5-Zoll-USB-HDD von einer bekannten Marke (HGST, Western Digital, Seagate). Neuware ist oft überteuert für diesen Zweck. Mein Setup: HGST HTS721010A9E630 (1 TB) als 2,5-Zoll-USB-HDD – leise, stromsparend (ca. 2–3 W) und völlig ausreichend für ein Einsteiger-Homelab.\n3. Die USB-HDD eindeutig identifizieren Stecke die USB-HDD ein und prüfe mit lsblk, ob sie erkannt wird:\npve04:~# lsblk -o NAME,SIZE,MODEL,SERIAL,UUID,LABEL,MOUNTPOINT,FSTYPE NAME SIZE MODEL SERIAL UUID LABEL MOUNTPOINT FSTYPE sda 59.6G TS64GMTS552T-FTS H476410269 └─sda3 58.5G LVM2_member sdb 931.5G HGST HTS721010A9E630 JR1020D33XHUKE └─sdb1 931.5G 0fe4e784-...-f4c0bc4041d7 Backup /mnt/pve/Backup ext4 ⚠️ Wichtig: Niemals allein anhand von /dev/sdX auswählen. Der Device-Name kann sich nach einem Neustart ändern (z. B. von /dev/sdb zu /dev/sdc). Verwende stattdessen Modell, Seriennummer und UUID gemeinsam zur Identifikation.\nIdentifikations-Checkliste: Das Gerät hat eine Größe von ~1 TB (oder deiner erwarteten Größe) Es ist eine USB-HDD (Transporttyp USB, erkennbar an Modellbezeichnung oder lsblk -t) Es ist nicht das Systemlaufwerk (das ist /dev/sda – eine 64-GB-SSD im Beispiel) Die UUID ist eindeutig – notiere sie dir für den späteren Mount 4. Partitionieren und formatieren (nur bei neuer/roher Platte nötig) Falls die USB-HDD noch kein passendes Dateisystem hat, erstellst du eine Partition und formatierst sie als ext4 mit dem Label Backup.\nGefahr! Die folgenden Befehle löschen ALLE Daten auf der identifizierten Platte. Prüfe vorher dreimal, ob du das richtige Gerät erwischt hast.\n# Alle alten Partitionen und Signaturen entfernen wipefs -af /dev/sdX # Neue GPT-Partitionstabelle parted /dev/sdX mklabel gpt # Eine primäre Partition parted /dev/sdX mkpart primary ext4 0% 100% # ext4-Dateisystem mit Label Backup mkfs.ext4 -L Backup /dev/sdX1 Nach der Formatierung sollte die Partition in lsblk mit dem Label Backup erscheinen.\n5. UUID-basiert mounten (fstab) Ein Mount über /dev/sdX1 ist unsicher, weil sich der Device-Name ändern kann. Daher verwendest du die UUID:\n# UUID auslesen blkid /dev/sdX1 -s UUID -o value # Ausgabe: 0fe4e784-f034-41ae-b47f-f4c0bc4041d7 Dann trägst du den Mount in /etc/fstab ein. Wichtig: Der Eintrag nofail sorgt dafür, dass der Server auch bootet, wenn die USB-HDD nicht angeschlossen ist:\nUUID=0fe4e784-f034-41ae-b47f-f4c0bc4041d7 /mnt/pve/Backup ext4 defaults,nofail,noatime 0 2 Mount ausführen und prüfen:\nmkdir -p /mnt/pve/Backup mount UUID=0fe4e784-f034-41ae-b47f-f4c0bc4041d7 /mnt/pve/Backup df -h /mnt/pve/Backup Erwartete Ausgabe:\nFilesystem Size Used Avail Use% Mounted on /dev/sdb1 916G 2.1M 870G 1% /mnt/pve/Backup 6. Proxmox Directory Storage einrichten Jetzt wird die USB-HDD als offizieller Proxmox-Storage eingerichtet:\npvesh create /storage --type dir --storage Backup --path /mnt/pve/Backup --content backup Mit pvesm status prüfst du, ob der Storage aktiv ist:\nroot@pve04:~# pvesm status Name Type Status Total (KiB) Used (KiB) Available (KiB) % Backup dir active 960302096 159300 911288372 0.02% local dir active 25429000 5616260 18495672 22.09% local-lvm lvmthin active 18018304 648658 17369645 3.60% Der Storage Backup ist jetzt sichtbar und aktiv. Der Inhaltstyp ist auf VZDump backup files beschränkt, sodass keine ISO-Dateien oder Container-Rootfs auf der USB-HDD landen.\n7. Backup eines Containers testen Erstelle ein Backup auf den neuen Storage:\nvzdump 101 --storage Backup --compress zstd --mode stop Auszug aus dem Backup-Log:\nINFO: Starting Backup of VM 101 (lxc) INFO: status = stopped INFO: backup mode: stop INFO: CT Name: docs-lxc01 INFO: creating vzdump archive '/mnt/pve/Backup/dump/vzdump-lxc-101-2026_07_14-08_39_49.tar.zst' INFO: Total bytes written: 554536960 (529MiB, 58MiB/s) INFO: archive file size: 153MB INFO: Backup finished at 2026-07-14 08:39:59 (00:00:10) Prüfe die Backup-Datei:\npve04:~# ls -la /mnt/pve/Backup/dump/ total 157220 -rw-r--r-- 1 root root 612 vzdump-lxc-101-2026_07_14-08_39_49.log -rw-r--r-- 1 root root 160977318 vzdump-lxc-101-2026_07_14-08_39_49.tar.zst 8. Restore-Test (Pflicht!) Ein Backup ist erst dann ein Backup, wenn du den Restore getestet hast. Proxmox kann ein Backup mit einer neuen CTID wiederherstellen:\n# Backup als neuen Container mit CTID 102 wiederherstellen pct restore 102 /mnt/pve/Backup/dump/vzdump-lxc-101-2026_07_14-08_39_49.tar.zst \\ --storage local-lvm --hostname docs-restore01 # Container starten und prüfen pct start 102 pct exec 102 -- cat /home/pve04_lab_testfile.txt Wenn die Testdatei aus dem Original-Container vorhanden ist, war der Restore erfolgreich.\nWichtig: Beim ersten Start nach dem Restore sollte der Container kein Netzwerk haben, um IP-Kollisionen mit dem Original zu vermeiden. Entweder du startest ohne Netzwerk oder entfernst die Netzwerkkonfiguration vor dem Start.\nNach erfolgreichem Test kannst du den wiederhergestellten Container löschen:\npct stop 102 pct destroy 102 9. Verhalten bei nicht angeschlossener Platte Dank der Option nofail in /etc/fstab bootet Proxmox auch ohne die USB-HDD problemlos – der Mount wird dann übersprungen:\nOhne USB-HDD: Proxmox startet normal, der Storage Backup wird in der WebGUI als inaktiv/fehlend angezeigt. Mit USB-HDD: Wird automatisch gemountet, wenn die Platte beim Booten angeschlossen ist. Hotplug: Die USB-HDD kann während des Betriebs eingesteckt werden (mount -a nach Einstecken). 10. Grenzen einer einzelnen USB-HDD Eine USB-HDD ist besser als kein externes Backup, aber kein Ersatz für eine professionelle Backup-Strategie:\nAspekt USB-HDD Empfohlen (3-2-1) Redundanz ❌ Single Point of Failure ✅ Mindestens 2 Kopien Off-Site ❌ Steckt meist am Server ✅ Eine Kopie extern Geschwindigkeit ⚠️ USB 3.0 (ca. 100–150 MB/s) ✅ NAS über Gigabit-LAN (ca. 110 MB/s) Haltbarkeit ⚠️ Mechanische HDD ✅ Je nach Strategie ✅ Das solltest du jetzt können Eine USB-HDD eindeutig über Modell, Seriennummer und UUID identifizieren Die HDD per fstab UUID-basiert mounten Einen Proxmox Directory Storage anlegen Ein Backup auf die USB-HDD erstellen Einen Restore-Test mit neuer CTID durchführen Die Grenzen einer einzelnen USB-HDD einordnen FAQ F: Kann ich die USB-HDD auch für ISO-Dateien oder Container-Templates nutzen?\nA: Technisch ja, aber empfohlen wird, sie ausschließlich für VZDump-Backups zu nutzen. Der Inhaltstyp wird bei der Storage-Konfiguration auf backup beschränkt.\nF: Was passiert, wenn die USB-HDD ausfällt?\nA: Dann ist das Backup weg. Daher: Eine USB-HDD ist nur ein Baustein. Für wichtige Daten zusätzlich ein zweites Backup auf einem anderen Medium (z. B. NAS) einplanen.\nF: Kann ich die USB-HDD auch per SATA anschließen?\nA: Ja, wenn dein Server einen freien SATA-Port hat. Der Vorteil: kein USB-Adapter als zusätzliche Fehlerquelle. Der Nachteil: Die Platte ist dann fest eingebaut und nicht mehr mobil.\nF: Wie viele Backup-Generationen sollte ich behalten?\nA: Für ein Homelab reichen 2–3 Generationen. Bei vzdump kannst du das mit --maxfiles 3 begrenzen.\nNächster Schritt Nachdem das Backup-Ziel steht, geht es an die automatische Backup-Planung in Proxmox oder die Einrichtung eines zweiten Backup-Ziels für die 3-2-1-Strategie.\n",
   "wordCount" : "1267",
   "inLanguage": "de",
-  "image":"https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg","datePublished": "2026-07-14T00:00:00Z",
+  "image":"https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/featured.jpg","datePublished": "2026-07-14T00:00:00Z",
   "dateModified": "2026-07-14T00:00:00Z",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://matmaksa.de/preview/blog/proxmox-usb-festplatte-backup-ziel/"
+    "@id": "https://matmaksa.github.io/homelab-blog/preview/blog/proxmox-usb-festplatte-backup-ziel/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Homelab Guide",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://matmaksa.de/favicon.ico"
+      "url": "https://matmaksa.github.io/homelab-blog/favicon.ico"
     }
   }
 }
@@ -141,7 +141,7 @@
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="https://matmaksa.de/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
+            <a href="https://matmaksa.github.io/homelab-blog/" class="brand-link" accesskey="h" title="Homelab Guide (Alt + H)"><span class="brand-text">
                     <span class="brand-title">Homelab Guide</span>
                     <span class="brand-tagline">Praxis-Guides für dein Homelab-Rechenzentrum</span>
                 </span>
@@ -149,27 +149,27 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="https://matmaksa.de/categories/" title="Kategorien">
+                <a href="https://matmaksa.github.io/homelab-blog/categories/" title="Kategorien">
                     <span>Kategorien</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/tags/" title="Tags">
+                <a href="https://matmaksa.github.io/homelab-blog/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/search/" title="🔍 Suche">
+                <a href="https://matmaksa.github.io/homelab-blog/search/" title="🔍 Suche">
                     <span>🔍 Suche</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/about/" title="Über">
+                <a href="https://matmaksa.github.io/homelab-blog/about/" title="Über">
                     <span>Über</span>
                 </a>
             </li>
             <li>
-                <a href="https://matmaksa.de/links/" title="⭐ Empfehlungen">
+                <a href="https://matmaksa.github.io/homelab-blog/links/" title="⭐ Empfehlungen">
                     <span>⭐ Empfehlungen</span>
                 </a>
             </li>
@@ -218,7 +218,7 @@
     </div>
   </header> 
 <figure class="entry-cover">
-        <img loading="eager" src="https://matmaksa.de/featured.jpg" alt="Proxmox WebGUI: Storage Backup aktiv mit USB-Festplatte">
+        <img loading="eager" src="https://matmaksa.github.io/homelab-blog/featured.jpg" alt="Proxmox WebGUI: Storage Backup aktiv mit USB-Festplatte">
         
 </figure>
   <div class="post-content md-content"><p>⚠️ <strong>Interner Review-Hinweis:</strong> Dieser Artikel ist ein Preview-Entwurf. Screenshots fehlen noch.<br>
@@ -457,21 +457,21 @@ A: Für ein Homelab reichen 2–3 Generationen. Bei <code>vzdump</code> kannst d
         <div class="footer-col">
             <h3>Kategorien</h3>
             <ul>
-                <li><a href="/categories/hardware/">Hardware</a></li>
-                <li><a href="/categories/homelab/">Homelab</a></li>
-                <li><a href="/categories/smarthome/">Smarthome</a></li>
-                <li><a href="/categories/software/">Software</a></li>
-                <li><a href="/categories/virtualisierung/">Virtualisierung</a></li>
+                <li><a href="/homelab-blog/categories/hardware/">Hardware</a></li>
+                <li><a href="/homelab-blog/categories/homelab/">Homelab</a></li>
+                <li><a href="/homelab-blog/categories/smarthome/">Smarthome</a></li>
+                <li><a href="/homelab-blog/categories/software/">Software</a></li>
+                <li><a href="/homelab-blog/categories/virtualisierung/">Virtualisierung</a></li>
             </ul>
         </div>
         <div class="footer-col">
             <h3>Links</h3>
             <ul>
-                <li><a href="https://matmaksa.de/about/">Über mich</a></li>
-                <li><a href="https://matmaksa.de/search/">🔍 Suche</a></li>
-                <li><a href="https://matmaksa.de/categories/">Kategorien</a></li>
-                <li><a href="https://matmaksa.de/tags/">Tags</a></li>
-                <li><a href="https://matmaksa.de/links/">⭐ Empfehlungen</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/about/">Über mich</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/search/">🔍 Suche</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/categories/">Kategorien</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/tags/">Tags</a></li>
+                <li><a href="https://matmaksa.github.io/homelab-blog/links/">⭐ Empfehlungen</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -483,7 +483,7 @@ A: Für ein Homelab reichen 2–3 Generationen. Bei <code>vzdump</code> kannst d
         </div>
     </div>
     <div class="footer-bottom">
-        <span>&copy; 2026 <a href="https://matmaksa.de/">Homelab Guide</a></span>
+        <span>&copy; 2026 <a href="https://matmaksa.github.io/homelab-blog/">Homelab Guide</a></span>
         <span>
             Powered by
             <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp;

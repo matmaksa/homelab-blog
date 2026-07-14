@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Hardware | Homelab Guide</title>
-    <link>https://matmaksa.de/tags/hardware/</link>
+    <link>https://matmaksa.github.io/homelab-blog/tags/hardware/</link>
     <description>Recent content in Hardware on Homelab Guide</description>
     <generator>Hugo</generator>
     <language>de-de</language>
     <lastBuildDate>Fri, 19 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://matmaksa.de/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://matmaksa.github.io/homelab-blog/tags/hardware/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mini PC fürs Homelab nach Budget: Von 40€ bis 300€ – welcher passt zu dir?</title>
-      <link>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</link>
       <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
 &lt;p&gt;Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und erste KI-Experimente. Aber welches Modell lohnt sich wirklich für dein Budget?&lt;/p&gt;

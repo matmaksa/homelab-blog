@@ -1,174 +1,174 @@
 &lt;?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://matmaksa.de/categories/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/categories/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/docker/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/docker/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/einsteiger/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/einsteiger/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/categories/homelab/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/categories/homelab/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/homelab/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/homelab/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/homelab-unter-100-euro-was-du-brauchst/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/homelab-unter-100-euro-was-du-brauchst/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/proxmox/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/proxmox/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/sparen/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/sparen/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/thin-client/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/thin-client/</loc>
     <lastmod>2026-07-06T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/headscale/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/headscale/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/headscale-tailscale-alternative-selbst-hosten/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/headscale-tailscale-alternative-selbst-hosten/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/lxc/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/lxc/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/mesh-vpn/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/mesh-vpn/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/netzwerk/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/netzwerk/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/selfhosting/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/selfhosting/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/categories/software/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/categories/software/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/software/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/software/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/tailscale/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/tailscale/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/wireguard/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/wireguard/</loc>
     <lastmod>2026-06-29T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/home-assistant/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/home-assistant/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/low-budget/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/low-budget/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/mini-pc/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/mini-pc/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/smart-home/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/smart-home/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/categories/smarthome/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/categories/smarthome/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/zigbee/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/zigbee/</loc>
     <lastmod>2026-06-24T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/fujitsu/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/fujitsu/</loc>
     <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/fujitsu-futro-s7010-homelab-einstieg/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/fujitsu-futro-s7010-homelab-einstieg/</loc>
     <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/futro/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/futro/</loc>
     <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/categories/hardware/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/categories/hardware/</loc>
     <lastmod>2026-06-22T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/budget/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/budget/</loc>
     <lastmod>2026-06-19T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/hardware/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/hardware/</loc>
     <lastmod>2026-06-19T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/kaufberatung/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/kaufberatung/</loc>
     <lastmod>2026-06-19T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</loc>
     <lastmod>2026-06-19T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/about/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/about/</loc>
     <lastmod>2026-06-18T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/open-source/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/open-source/</loc>
     <lastmod>2026-06-17T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/categories/virtualisierung/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/categories/virtualisierung/</loc>
     <lastmod>2026-06-17T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/virtualisierung/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/virtualisierung/</loc>
     <lastmod>2026-06-17T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</loc>
     <lastmod>2026-06-17T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/tags/vmware-alternative/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/tags/vmware-alternative/</loc>
     <lastmod>2026-06-17T00:00:00+00:00</lastmod>
   </url>
   <url>
-    <loc>https://matmaksa.de/search/</loc>
+    <loc>https://matmaksa.github.io/homelab-blog/search/</loc>
   </url>
 </urlset>

@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Homelab | Homelab Guide</title>
-    <link>https://matmaksa.de/tags/homelab/</link>
+    <link>https://matmaksa.github.io/homelab-blog/tags/homelab/</link>
     <description>Recent content in Homelab on Homelab Guide</description>
     <generator>Hugo</generator>
     <language>de-de</language>
     <lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://matmaksa.de/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://matmaksa.github.io/homelab-blog/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homelab unter 100€: Was du wirklich brauchst</title>
-      <link>https://matmaksa.de/posts/homelab-unter-100-euro-was-du-brauchst/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/homelab-unter-100-euro-was-du-brauchst/</link>
       <pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/homelab-unter-100-euro-was-du-brauchst/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/homelab-unter-100-euro-was-du-brauchst/</guid>
       <description>Ein Homelab muss nicht teuer sein. Wer mit gebrauchter Business-Hardware startet, kommt schon für unter 100€ zu einem voll funktionsfähigen Server für Docker, Proxmox oder Pi-hole.</description>
     </item>
     <item>
       <title>Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€</title>
-      <link>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</link>
       <pubDate>Wed, 24 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/home-assistant-gebrauchter-mini-pc-2026/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/home-assistant-gebrauchter-mini-pc-2026/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 6 Minuten&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
 &lt;p&gt;Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.&lt;/p&gt;
@@ -28,9 +28,9 @@
     </item>
     <item>
       <title>Fujitsu Futro S7010 als Homelab-Einstieg 2026: Der 40€-Server</title>
-      <link>https://matmaksa.de/posts/fujitsu-futro-s7010-homelab-einstieg/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/fujitsu-futro-s7010-homelab-einstieg/</link>
       <pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/fujitsu-futro-s7010-homelab-einstieg/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/fujitsu-futro-s7010-homelab-einstieg/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 9 Minuten&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
 &lt;p&gt;Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Dann ist der &lt;strong&gt;Fujitsu Futro S7010&lt;/strong&gt; genau das richtige Gerät für dich. Für gerade einmal &lt;strong&gt;30 bis 50 Euro&lt;/strong&gt; bekommst du einen lüfterlosen, extrem stromsparenden Server, der sich perfekt für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container eignet.&lt;/p&gt;
@@ -39,9 +39,9 @@
     </item>
     <item>
       <title>Mini PC fürs Homelab nach Budget: Von 40€ bis 300€ – welcher passt zu dir?</title>
-      <link>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</link>
       <pubDate>Fri, 19 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/mini-pc-homelab-vergleich/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/mini-pc-homelab-vergleich/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
 &lt;p&gt;Ein Mini-PC ist die ideale Grundlage für dein Homelab – leise, stromsparend und leistungsstark genug für Proxmox, Docker und erste KI-Experimente. Aber welches Modell lohnt sich wirklich für dein Budget?&lt;/p&gt;
@@ -49,9 +49,9 @@
     </item>
     <item>
       <title>Virtualisierung kostenlos 2026: Proxmox VE als VMware-Alternative im Homelab</title>
-      <link>https://matmaksa.de/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</link>
+      <link>https://matmaksa.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</link>
       <pubDate>Wed, 17 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>https://matmaksa.de/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</guid>
+      <guid>https://matmaksa.github.io/homelab-blog/posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Aktualisiert: Juni 2026 | Lesezeit: 8 Minuten&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.&lt;/p&gt;
 &lt;p&gt;Stell dir vor, du hast zu Hause einen kleinen Server – einen Mini-PC, der leise in der Ecke steht und Tag und Nacht läuft. Darauf sollen mehrere Dienste gleichzeitig laufen: Pi-hole (ein Werbeblocker fürs ganze Heimnetz), Jellyfin (ein Medienserver für Filme und Serien), Nextcloud (eine private Cloud für deine Fotos und Dokumente) und vielleicht noch ein Game-Server für dich und deine Freunde.&lt;/p&gt;
