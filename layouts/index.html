@@ -2,25 +2,25 @@
 
 <div class="content-with-sidebar">
 
-{{- $pages := site.RegularPages }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
-{{- $pages = where $pages "Params.preview" "!=" true }}
-{{- $pages = where $pages "Section" "in" (slice "posts") }}
-{{- $published := sort $pages "Date" "desc" }}
+{{- $posts := where site.RegularPages "Section" "in" (slice "posts") }}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" "true" }}
+{{- $posts = where $posts "Params.preview" "!=" true }}
+{{- $published := sort $posts "Date" "desc" }}
 
 {{- /* ================================================================
-    HERO: Featured Article / Latest
+    HERO: Featured Article (volle Breite)
     ================================================================ */}}
 {{- $featured := where $published "Params.featured" true }}
 {{- $hero := index $featured 0 | default (index $published 0) }}
+{{- $usedPermalinks := slice }}
 {{- if $hero }}
 {{- $heroCat := index $hero.Params.categories 0 | default "" }}
 {{- $heroImg := partial "resolve-image.html" $hero }}
-<article class="hero-card featured-post" aria-label="Leitartikel: {{ $hero.Title }}">
+<article class="hero-card" aria-label="Leitartikel: {{ $hero.Title }}">
   <a href="{{ $hero.Permalink }}" class="hero-card-link" aria-label="{{ $hero.Title }}">
     <div class="hero-card-image">
       {{- if $heroImg }}
-      <img src="{{ $heroImg }}" alt="{{ $hero.Title | plainify }}" loading="eager" decoding="async" width="660" height="370">
+      <img src="{{ $heroImg }}" alt="{{ $hero.Title | plainify }}" loading="eager" decoding="async" width="800" height="400">
       {{- else }}
       <div class="card-img-fallback" aria-hidden="true">⚡</div>
       {{- end }}
@@ -42,28 +42,33 @@
     </div>
   </a>
 </article>
+{{- $usedPermalinks = $usedPermalinks | append $hero.Permalink }}
 {{- end }}
 
-{{- /* ---------------------------------------------------------------
-    AKTUELLE ARTIKEL
-    --------------------------------------------------------------- */}}
-{{- $usedPermalinks := slice }}
-{{- if $hero }}{{ $usedPermalinks = $usedPermalinks | append $hero.Permalink }}{{ end }}
-{{- $recent := where $published "Permalink" "not in" $usedPermalinks }}
-{{- $recent = first 5 $recent }}
-{{- if $recent }}
-<section class="section-wrapper" aria-labelledby="recent-heading">
+{{- /* ================================================================
+    KATEGORIE-GRIDS – 3 Beiträge pro Kategorie
+    ================================================================ */}}
+{{- $categories := slice "Homelab" "Hardware" "Virtualisierung" "Software" "Smarthome" }}
+{{- $categoryLabels := dict "Homelab" "Einsteiger & Low Budget" "Hardware" "Hardware & Geräte" "Virtualisierung" "Proxmox & Virtualisierung" "Software" "Software & Selfhosting" "Smarthome" "Smart Home" }}
+
+{{- range $cat := $categories }}
+{{- $catPosts := where $published "Params.categories" "intersect" (slice $cat) }}
+{{- $catPosts := where $catPosts "Permalink" "not in" $usedPermalinks }}
+{{- $catPosts = first 3 $catPosts }}
+{{- if $catPosts }}
+<section class="cat-section" aria-labelledby="cat-{{ $cat | urlize }}">
   <div class="section-header">
-    <h2 id="recent-heading">Aktuelle Artikel</h2>
-    <a href="{{ "posts/" | absLangURL }}" class="section-link">Alle Artikel →</a>
+    <h2 id="cat-{{ $cat | urlize }}">{{ index $categoryLabels $cat | default (humanize $cat) }}</h2>
+    <a href="{{ printf "/categories/%s/" ($cat | urlize) | absLangURL }}" class="section-link">Alle anzeigen →</a>
   </div>
-  <div class="article-grid article-grid-home">
-    {{- range $recent }}
+  <div class="cat-grid">
+    {{- range $catPosts }}
     {{- $usedPermalinks = $usedPermalinks | append .Permalink }}
     {{- partial "article-card.html" . }}
     {{- end }}
   </div>
 </section>
+{{- end }}
 {{- end }}
 
 {{/* SIDEBAR */}}

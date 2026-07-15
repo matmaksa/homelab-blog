@@ -1,12 +1,12 @@
 /* ============================================================
-   DESIGN TOKENS – Homelab Guide (Raspberry.tips-Inspiriert)
+   DESIGN TOKENS – Homelab Guide (Modernes Blue-Magazin)
    ============================================================ */
 
 :root {
   /* --- Brand Colors --- */
-  --hl-primary:       #c0392b;   /* Raspberry-Rot */
-  --hl-primary-dark:  #a93226;   /* Dunkler für Hover */
-  --hl-primary-light: #fdf2f2;   /* Hell für Hintergründe */
+  --hl-primary:       #007acc;   /* Modernes Homelab-Blau */
+  --hl-primary-dark:  #005999;   /* Dunkler für Hover */
+  --hl-primary-light: #e8f4fd;   /* Hell für Hintergründe */
   --hl-accent:        #2c3e50;   /* Dunkelblau/Anthrazit */
   --hl-accent-soft:   #eef2f7;   /* Heller Akzent-Hintergrund */
 
@@ -25,15 +25,15 @@
   /* --- Borders & Shadows --- */
   --hl-border:        #e0e0e0;
   --hl-border-light:  #eeeeee;
-  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.1);
-  --hl-shadow:        0 2px 8px rgba(0,0,0,0.1);
-  --hl-shadow-md:     0 4px 16px rgba(0,0,0,0.15);
-  --hl-shadow-lg:     0 8px 24px rgba(0,0,0,0.12);
-  --hl-shadow-hover:  0 4px 16px rgba(0,0,0,0.15);
+  --hl-shadow-sm:     0 4px 20px rgba(0,0,0,0.05);
+  --hl-shadow:        0 4px 20px rgba(0,0,0,0.05);
+  --hl-shadow-md:     0 8px 30px rgba(0,0,0,0.08);
+  --hl-shadow-lg:     0 12px 40px rgba(0,0,0,0.1);
+  --hl-shadow-hover:  0 8px 30px rgba(0,0,0,0.12);
 
   /* --- Radius --- */
-  --hl-radius:        8px;
-  --hl-radius-sm:     4px;
+  --hl-radius:        12px;
+  --hl-radius-sm:     6px;
   --hl-radius-pill:   9999px;
 
   /* --- Spacing --- */
@@ -46,10 +46,9 @@
   --hl-space-3xl:     64px;
 
   /* --- Layout --- */
-  --hl-content-width:  1200px;
+  --hl-content-width:  1280px;
   --hl-content-narrow: 740px;
   --hl-content-padding: 1.5rem;
-  --hl-sidebar-width:  280px;
   --hl-header-height:  60px;
 
   /* --- Typography (System-Font-Stack) --- */
@@ -72,7 +71,7 @@
   --hl-leading-relaxed: 1.8;
 
   /* --- Focus States --- */
-  --hl-focus-ring: 0 0 0 3px rgba(192, 57, 43, 0.3);
+  --hl-focus-ring: 0 0 0 3px rgba(0, 122, 204, 0.3);
 
   /* --- Transitions --- */
   --hl-transition: 0.2s ease;
@@ -82,9 +81,9 @@
    DARK MODE
    ============================================================ */
 [data-theme="dark"] {
-  --hl-primary:       #e74c3c;
-  --hl-primary-dark:  #c0392b;
-  --hl-primary-light: #2d1b1a;
+  --hl-primary:       #4db8ff;
+  --hl-primary-dark:  #007acc;
+  --hl-primary-light: #0a1a2e;
   --hl-accent:        #34495e;
   --hl-accent-soft:   #1a1a2e;
 
@@ -101,20 +100,20 @@
   --hl-border:        #333355;
   --hl-border-light:  #2a2a44;
 
-  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.3);
-  --hl-shadow:        0 2px 8px rgba(0,0,0,0.3);
-  --hl-shadow-md:     0 4px 16px rgba(0,0,0,0.4);
-  --hl-shadow-lg:     0 8px 24px rgba(0,0,0,0.4);
-  --hl-shadow-hover:  0 4px 16px rgba(0,0,0,0.5);
+  --hl-shadow-sm:     0 4px 20px rgba(0,0,0,0.3);
+  --hl-shadow:        0 4px 20px rgba(0,0,0,0.3);
+  --hl-shadow-md:     0 8px 30px rgba(0,0,0,0.35);
+  --hl-shadow-lg:     0 12px 40px rgba(0,0,0,0.4);
+  --hl-shadow-hover:  0 8px 30px rgba(0,0,0,0.4);
 }
 
 /* ============================================================
-   KATEGORIE-FARBEN (angepasst an rotes Schema)
+   KATEGORIE-FARBEN (angepasst an blaues Schema)
    ============================================================ */
 :root {
-  --cat-hardware:         #c0392b;   /* Raspberry-Rot */
+  --cat-hardware:         #007acc;   /* Homelab-Blau */
   --cat-software:         #2c3e50;   /* Dunkelblau */
   --cat-smarthome:        #27ae60;   /* Grün */
   --cat-virtualisierung:  #8e44ad;   /* Violett */
-  --cat-homelab:          #c0392b;   /* Raspberry-Rot */
+  --cat-homelab:          #007acc;   /* Homelab-Blau */
 }
