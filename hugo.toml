@@ -15,9 +15,10 @@ buildDrafts = false
   [params.analytics.google]
     SiteVerificationTag = "google09a060456df1ed16.html"
 
-  # Label / Branding
-  [params.label]
-    tagline = "Praxis-Guides für dein Homelab-Rechenzentrum"
+  # Branding
+  description = "Praxis-Guides für dein Homelab – Mini-PCs, Proxmox, Docker, Selfhosting und Backups. Leise, sparsam und selbst getestet."
+  keywords = ["Homelab", "Proxmox", "Mini-PC", "Docker", "Selfhosting", "Homelab Einsteiger", "Server"]
+  images = ["/homelab-blog/og-image.png"]
 
   ShowShareButtons = true
   ShowReadingTime = true
@@ -25,22 +26,18 @@ buildDrafts = false
   ShowCodeCopyButtons = true
   ShowPostNavLinks = true
   ShowToc = true
-  description = "Homelab, Virtualisierung & KI Modelle – Praxis-Guides für dein Zuhause-Rechenzentrum"
-  keywords = ["Homelab", "Proxmox", "Virtualisierung", "KI Modelle", "Docker", "Server", "Selbsthosten"]
-  images = ["/homelab-blog/og-image.png"]
 
   [params.editPost]
-    URL = "https://github.com/matmaksa/homelab-blog/content"
-    Text = "Bearbeiten"
+    URL = "https://github.com/matmaksa/homelab-blog/blob/main/content"
+    Text = "Verbessern"
 
   [params.footer]
     text = "Als Amazon-Partner verdiene ich an qualifizierten Verkäufen."
 
   [params.homeInfoParams]
     Title = "Homelab Guide"
-    Content = "Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern."
+    Content = "Praxis-Guides für dein Homelab – Virtualisierung, Docker, Selfhosting und mehr. Betrieben mit Leidenschaft und Kabelbindern."
 
-  # Disable default PaperMod theme toggle (we use our own)
   disableThemeToggle = false
 
 [[params.socialIcons]]
@@ -50,85 +47,36 @@ buildDrafts = false
   name = "instagram"
   url = "https://instagram.com/matmaksa"
 
-# Hauptnavigation – angepasst an vorhandene Inhalte
+# Navigation – vereinfacht, aufgabenorientiert
 [[menu.main]]
-  identifier = "einsteiger"
-  name = "Einsteiger"
-  url = "/categories/homelab/"
+  identifier = "start"
+  name = "Start hier"
+  url = "/"
   weight = 10
+
+[[menu.main]]
+  identifier = "projekte"
+  name = "Projekte"
+  url = "/posts/"
+  weight = 20
 
 [[menu.main]]
   identifier = "hardware"
   name = "Hardware"
   url = "/categories/hardware/"
-  weight = 20
-
-[[menu.main]]
-  identifier = "virtualisierung"
-  name = "Proxmox & Virtualisierung"
-  url = "/categories/virtualisierung/"
   weight = 30
 
 [[menu.main]]
-  identifier = "software"
-  name = "Software"
-  url = "/categories/software/"
+  identifier = "proxmox-docker"
+  name = "Proxmox & Docker"
+  url = "/categories/virtualisierung/"
   weight = 40
-
-[[menu.main]]
-  identifier = "smarthome"
-  name = "Smart Home"
-  url = "/categories/smarthome/"
-  weight = 50
-
-[[menu.main]]
-  identifier = "empfehlungen"
-  name = "Empfehlungen"
-  url = "/links/"
-  weight = 60
 
 [[menu.main]]
   identifier = "suche"
   name = "Suche"
   url = "/search/"
-  weight = 70
-
-# --- Dropdown Children ---
-[[menu.main]]
-  parent = "hardware"
-  name = "Mini-PC"
-  url = "/tags/mini-pc/"
-  weight = 1
-
-[[menu.main]]
-  parent = "hardware"
-  name = "Fujitsu"
-  url = "/tags/fujitsu/"
-  weight = 2
-
-[[menu.main]]
-  parent = "software"
-  name = "Headscale"
-  url = "/tags/headscale/"
-  weight = 1
-
-[[menu.main]]
-  parent = "software"
-  name = "Software"
-  url = "/tags/software/"
-  weight = 2
-
-[[menu.main]]
-  parent = "virtualisierung"
-  name = "Proxmox"
-  url = "/tags/proxmox/"
-  weight = 1
-
-[[menu.main]]
-  parent = "virtualisierung"
-  name = "Virtualisierung"
-  url = "/tags/virtualisierung/"
-  weight = 2
+  weight = 60
 
 [markup]
   [markup.goldmark]

@@ -1,6 +1,7 @@
 <aside class="sidebar-wrapper" role="complementary" aria-label="Sidebar">
 
-  {{/* Search Widget */}}
+  {{/* Search Widget – only if not using search overlay */}}
+  {{- if not site.Params.searchpage }}
   <div class="sidebar-widget sidebar-search">
     <h3>Suche</h3>
     <form action="{{ "search/" | absLangURL }}" method="get" role="search">
@@ -12,6 +13,15 @@
       </button>
     </form>
   </div>
+  {{- end }}
+
+  {{/* Table of Contents (on single pages) */}}
+  {{- if and .IsPage (.Param "ShowToc") }}
+  <div class="sidebar-widget sidebar-toc">
+    <h3>Inhalt</h3>
+    {{- partial "toc.html" . }}
+  </div>
+  {{- end }}
 
   {{/* Categories Widget */}}
   <div class="sidebar-widget sidebar-categories">
@@ -26,7 +36,7 @@
     </ul>
   </div>
 
-  {{/* Recent Posts Widget */}}
+  {{/* Neueste Beiträge */}}
   <div class="sidebar-widget sidebar-popular">
     <h3>Neueste Beiträge</h3>
     <ul class="sidebar-popular-list">
@@ -34,41 +44,21 @@
       {{- $recent = first 5 (sort $recent "Date" "desc") }}
       {{- range $recent }}
       <li class="sidebar-popular-item">
-        {{- $img := "" }}
-        {{- if .Params.cover.image }}
-          {{- if or .Params.cover.relative (not (or (hasPrefix .Params.cover.image "/") (hasPrefix .Params.cover.image "http"))) }}
-            {{- $img = path.Join .RelPermalink .Params.cover.image }}
-          {{- else }}
-            {{- $img = .Params.cover.image | absURL }}
-          {{- end }}
-        {{- end }}
-        {{- if $img }}
-        <img src="{{ $img }}" alt="" class="sidebar-popular-thumb" loading="lazy" width="60" height="60">
-        {{- else }}
-        <div class="sidebar-popular-thumb-placeholder" aria-hidden="true">📄</div>
-        {{- end }}
         <div class="sidebar-popular-title"><a href="{{ .Permalink }}">{{ .Title }}</a></div>
+        <div class="sidebar-popular-meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01.2006" }}</time>
+        </div>
       </li>
       {{- end }}
     </ul>
   </div>
 
-  {{/* About Widget */}}
-  <div class="sidebar-widget sidebar-about">
-    <h3>👤 Über mich</h3>
-    <p>Homelab-Enthusiast, Proxmox-Betreiber und Selfhosting-Fan. Ich zeige dir, wie du dein eigenes Rechenzentrum zu Hause aufbaust.</p>
-    <a href="{{ "about/" | absLangURL }}" class="sidebar-about-link">Mehr erfahren →</a>
+  {{/* Hardware / Verwendete Komponenten (on article pages) */}}
+  {{- if and .IsPage .Params.testedWith }}
+  <div class="sidebar-widget sidebar-hardware">
+    <h3>Verwendete Hardware</h3>
+    <p>{{ .Params.testedWith }}</p>
   </div>
-
-  {{/* Instagram Widget */}}
-  <div class="sidebar-widget sidebar-instagram">
-    <h3>📸 Folgen</h3>
-    <p>Folge mir auf <a href="https://instagram.com/matmaksa" target="_blank" rel="noopener noreferrer">Instagram @matmaksa</a> für aktuelle Updates aus meinem Homelab.</p>
-  </div>
-
-  {{/* Affiliate Disclosure Widget */}}
-  <div class="sidebar-widget sidebar-affiliate">
-    <p><strong>Affiliate-Hinweis:</strong> Einige Links auf dieser Seite sind Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich eine kleine Provision – für dich entstehen keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
-  </div>
+  {{- end }}
 
 </aside>

@@ -1,42 +1,27 @@
 <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
 <div class="top-bar">
-  🔧 Homelab-Ideen &amp; Tutorials für Einsteiger – <a href="{{ "about/" | absLangURL }}">Mehr erfahren →</a>
+  🔧 Praxis-Guides für dein Homelab – leise, sparsam &amp; selbst getestet –
+  <a href="{{ "posts/" | absLangURL }}">Jetzt starten →</a>
 </div>
 
 <header class="site-header" role="banner">
   <div class="header-inner">
-    {{- $label_text := (site.Params.label.text | default site.Title) }}
-
-    <!-- Brand / Logo -->
-    <a href="{{ "" | absLangURL }}" class="header-brand" accesskey="h" title="{{ $label_text }} (Alt + H)" aria-label="{{ $label_text }}">
-      {{- if site.Params.label.icon }}
-        {{- $img := resources.Get site.Params.label.icon }}
-        {{- if $img }}
-          {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
-          {{- if hugo.IsExtended -}}
-            {{- $processableFormats = $processableFormats | append "webp" -}}
-          {{- end -}}
-          {{- $prod := (hugo.IsProduction | or (eq site.Params.env "production")) }}
-          {{- if and (in $processableFormats $img.MediaType.SubType) (eq $prod true)}}
-            {{- if site.Params.label.iconHeight }}
-              {{- $img = $img.Resize (printf "x%d" site.Params.label.iconHeight) }}
-            {{ else }}
-              {{- $img = $img.Resize "x36" }}
-            {{- end }}
-          {{- end }}
-          <span class="header-brand-icon"><img src="{{ $img.Permalink }}" alt="" height="{{ site.Params.label.iconHeight | default "36" }}" width="auto"></span>
-        {{- else }}
-          <span class="header-brand-icon"><img src="{{- site.Params.label.icon | absURL -}}" alt="" height="{{ site.Params.label.iconHeight | default "36" }}" width="auto"></span>
-        {{- end -}}
-      {{- else if hasPrefix site.Params.label.iconSVG "<svg" }}
-        <span class="header-brand-icon">{{ site.Params.label.iconSVG | safeHTML }}</span>
-      {{- end }}
+    <!-- Brand: MATMAKSA Homelab Guide -->
+    <a href="{{ "" | absLangURL }}" class="header-brand" accesskey="h" title="Homelab Guide (Alt + H)" aria-label="Homelab Guide">
+      <span class="header-brand-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+          <path d="M6 6h.01M18 6h.01"></path>
+          <circle cx="6" cy="6" r="1"></circle>
+          <circle cx="18" cy="6" r="1"></circle>
+        </svg>
+      </span>
       <span class="header-brand-text">
-        <span class="header-brand-name">{{ $label_text }}</span>
-        {{- with site.Params.label.tagline }}
-        <span class="header-brand-tagline">{{ . }}</span>
-        {{- end }}
+        <span class="header-brand-name">MATMAKSA</span>
+        <span class="header-brand-tagline">Homelab Guide</span>
       </span>
     </a>
 
@@ -44,42 +29,31 @@
     {{- $currentPage := . }}
     <nav class="main-nav" aria-label="Hauptnavigation">
       <ul class="main-nav-list">
-        {{- range site.Menus.main }}
-        {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
-        {{- $page_url:= $currentPage.Permalink | absLangURL }}
-        {{- if .HasChildren }}
-        {{- /* Parent with mega-dropdown */}}
-        <li class="has-mega-dropdown">
-          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
-            <span{{ if eq $menu_item_url $page_url }} class="active"{{ end }}>
-              {{- .Pre }}{{ .Name -}}{{ .Post -}}
-            </span>
-          </a>
-          <div class="mega-dropdown" role="menu">
-            <div class="mega-grid">
-              {{- range .Children }}
-              <div class="mega-col">
-                <a href="{{ .URL | absLangURL }}" class="mega-link" role="menuitem">
-                  <span class="mega-link-title">{{ .Name }}</span>
-                </a>
-              </div>
-              {{- end }}
-            </div>
-          </div>
-        </li>
-        {{- else }}
-        {{- /* Leaf item – skip "Suche" in nav, handled by search-toggle button */}}
-        {{- if ne .Identifier "suche" }}
         <li>
-          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
-            <span{{ if eq $menu_item_url $page_url }} class="active"{{ end }}>
-              {{- .Pre }}{{ .Name -}}{{ .Post -}}
-            </span>
+          <a href="{{ "" | absLangURL }}" title="Startseite">
+            <span{{ if .IsHome }} class="active"{{ end }}>Start hier</span>
           </a>
         </li>
-        {{- end }}
-        {{- end }}
-        {{- end }}
+        <li>
+          <a href="{{ "posts/" | absLangURL }}" title="Projekte">
+            <span{{ if eq .Section "posts" }}{{ if not .IsHome }} class="active"{{ end }}{{ end }}>Projekte</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ "categories/hardware/" | absLangURL }}" title="Hardware">
+            <span{{ if eq .Section "hardware" }} class="active"{{ end }}>Hardware</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ "categories/virtualisierung/" | absLangURL }}" title="Proxmox und Docker">
+            <span{{ if eq .Section "virtualisierung" }} class="active"{{ end }}>Proxmox &amp; Docker</span>
+          </a>
+        </li>
+        <li>
+          <a href="{{ "about/" | absLangURL }}" title="Über mich">
+            <span{{ if eq .Section "about" }} class="active"{{ end }}>Über mich</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
@@ -124,7 +98,7 @@
     </div>
   </div>
 
-  <!-- Search Overlay (Slide-In wie raspberry.tips) -->
+  <!-- Search Overlay -->
   <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Suche">
     <div class="search-overlay-inner">
       <form action="{{ "search/" | absLangURL }}" method="get" role="search" class="search-overlay-form">
@@ -147,10 +121,8 @@
   <div id="search-overlay-backdrop" class="search-overlay-backdrop" aria-hidden="true"></div>
 </header>
 
-<!-- Mobile Menu Overlay -->
-<div id="mobile-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
-
 <!-- Mobile Menu -->
+<div id="mobile-overlay" class="mobile-menu-overlay" aria-hidden="true"></div>
 <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation">
   <div class="mobile-menu-header">
     <span class="mobile-menu-title">Menü</span>
@@ -161,35 +133,29 @@
       </svg>
     </button>
   </div>
-
   <nav aria-label="Mobile Navigation">
     <ul class="mobile-menu-list">
-      {{- range site.Menus.main }}
-      {{- if .HasChildren }}
+      <li><a href="{{ "" | absLangURL }}">Start hier</a></li>
+      <li><a href="{{ "posts/" | absLangURL }}">Projekte</a></li>
       <li>
-        <a href="{{ .URL | absLangURL }}"><strong>{{ .Name }}</strong></a>
+        <a href="{{ "categories/hardware/" | absLangURL }}"><strong>Hardware</strong></a>
         <ul>
-          {{- range .Children }}
-          <li><a href="{{ .URL | absLangURL }}">{{ .Name }}</a></li>
-          {{- end }}
+          <li><a href="{{ "tags/mini-pc/" | absLangURL }}">Mini-PC</a></li>
         </ul>
       </li>
-      {{- else }}
-      {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
-      {{- $page_url:= $currentPage.Permalink | absLangURL }}
       <li>
-        <a href="{{ .URL | absLangURL }}"{{ if eq $menu_item_url $page_url }} class="active"{{ end }}>
-          {{- .Pre }}{{ .Name -}}{{ .Post -}}
-        </a>
+        <a href="{{ "categories/" | absLangURL }}"><strong>Mehr</strong></a>
+        <ul>
+          <li><a href="{{ "categories/virtualisierung/" | absLangURL }}">Virtualisierung</a></li>
+          <li><a href="{{ "categories/software/" | absLangURL }}">Software</a></li>
+          <li><a href="{{ "categories/smarthome/" | absLangURL }}">Smart Home</a></li>
+        </ul>
       </li>
-      {{- end }}
-      {{- end }}
+      <li><a href="{{ "about/" | absLangURL }}">Über mich</a></li>
     </ul>
   </nav>
-
   <div class="mobile-menu-footer">
-    <a href="{{ "about/" | absLangURL }}">Über mich</a>
     <a href="{{ "links/" | absLangURL }}">Empfehlungen</a>
-    <a href="{{ "categories/" | absLangURL }}">Kategorien</a>
+    <a href="{{ "search/" | absLangURL }}">Suche</a>
   </div>
 </div>

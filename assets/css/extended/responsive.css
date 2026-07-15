@@ -1,51 +1,50 @@
 /* ============================================================
-   RESPONSIVE – Viewport-übergreifende Anpassungen (raspberry.tips)
+   RESPONSIVE – Viewport-übergreifende Anpassungen
    ============================================================ */
 
-/* --- 320px - 359px (Kleinste Geräte) --- */
+/* --- 320px - 359px --- */
 @media (max-width: 359px) {
   .header-brand-tagline { display: none; }
-  .hero-content h2 { font-size: 1.1rem; }
   .post-single .post-header h1 { font-size: 1.25rem; }
-  .tags-bar { gap: 4px; }
-  .tag { font-size: 0.7rem; padding: 3px 10px; }
+  .section-header-alt h2 { font-size: 1.15rem; }
 }
 
 /* --- 360px - 767px (Mobile) --- */
 @media (max-width: 767px) {
   .main { padding: 1rem; }
-  .hero-image img { height: 180px; }
   .post-single .post-header h1 { font-size: 1.5rem; }
   .post-single .post-content { padding: 1rem; }
-  .cat-grid { grid-template-columns: 1fr; }
-  .section-header { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-  .tags-bar { margin-bottom: 1rem; }
+  .section-header-alt { margin-bottom: 1rem; }
+  .project-card { padding: 1.25rem; }
+  .path-step { padding: 1rem; }
 }
 
-/* --- 768px - 1023px (Tablet, zweispaltig) --- */
+/* --- 768px - 1023px (Tablet) --- */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .guides-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* --- 1024px+ (Desktop, Sidebar aktiv) --- */
+/* --- 1024px+ (Desktop) --- */
 @media (min-width: 1024px) {
-  .hero-article { gap: 2.5rem; }
+  .post-content { font-size: 1.05rem; }
 }
 
 /* --- 1440px+ --- */
 @media (min-width: 1440px) {
-  :root { --hl-content-width: 1320px; }
+  :root { --hl-content-width: 1260px; }
 }
 
 /* --- 1920px+ --- */
 @media (min-width: 1920px) {
-  :root { --hl-content-width: 1400px; }
+  :root { --hl-content-width: 1320px; }
 }
 
-/* --- Druckansicht --- */
+/* --- Print --- */
 @media print {
   .site-header, .site-footer, .top-link, .share-buttons, .post-nav-links,
-  .sidebar-wrapper, .tags-bar { display: none !important; }
+  .sidebar-wrapper, .hero-section, .trust-bar, .projects-section,
+  .path-section, .starter-section, .top-bar { display: none !important; }
   .post-single { box-shadow: none; border: none; padding: 0; max-width: 100%; }
   body { background: #fff; color: #000; }
 }

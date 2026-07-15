@@ -81,8 +81,8 @@
     {{- end }}
   </div>
 
-  {{/* Sidebar – only on non-home pages */}}
-  {{- if not .IsHome }}
+  {{/* Sidebar – only on non-home pages and non-posts listing pages */}}
+  {{- if and (not .IsHome) (ne .Section "posts") }}
   {{- partial "sidebar.html" . }}
   {{- end }}
 </div>
