@@ -1,31 +1,39 @@
 /* ============================================================
-   DESIGN TOKENS – raspberry.tips-inspiriertes Grün-Schema
+   DESIGN TOKENS – „matmaksa Homelab Guide" Blue/Anthracite
    ============================================================ */
 
 :root {
-  /* --- Brand Colors (Green wie raspberry.tips) --- */
-  --hl-primary:       #2e7d32;   /* raspberry.tips-Grün */
-  --hl-primary-dark:  #1b5e20;   /* Dunkler für Hover */
-  --hl-primary-light: #e8f5e9;   /* Hell für Hintergründe */
-  --hl-accent:        #1a1a2e;   /* Dunkel für Überschriften */
-  --hl-accent-soft:   #f0f4f8;   /* Heller Akzent-Hintergrund */
+  /* --- Brand Colors (Blau für Navigation/Aktionen) --- */
+  --hl-primary:       #2563eb;   /* Blau primär */
+  --hl-primary-dark:  #1d4ed8;   /* Dunkler für Hover */
+  --hl-primary-light: #eff6ff;   /* Hell für Hintergründe */
+  --hl-accent:        #1e293b;   /* Anthrazit für Überschriften/Technik */
+  --hl-accent-soft:   #f1f5f9;   /* Heller Anthrazit-Hintergrund */
+
+  /* --- Green (Empfehlungen, Status) --- */
+  --hl-green:         #16a34a;
+  --hl-green-light:   #f0fdf4;
+
+  /* --- Amber / Orange (Hinweise, Warnungen) --- */
+  --hl-amber:         #d97706;
+  --hl-orange:        #ea580c;
 
   /* --- Text Colors --- */
-  --hl-text:          #1a1a2e;   /* Haupttext */
-  --hl-text-body:     #333333;   /* Fließtext */
-  --hl-text-muted:    #666666;   /* Meta-Infos */
-  --hl-text-light:    #999999;   /* Sehr dezent */
+  --hl-text:          #1e293b;   /* Haupttext (Anthrazit) */
+  --hl-text-body:     #334155;   /* Fließtext */
+  --hl-text-muted:    #64748b;   /* Meta-Infos */
+  --hl-text-light:    #94a3b8;   /* Sehr dezent */
 
   /* --- Backgrounds --- */
-  --hl-bg-body:       #f4f5f7;   /* Heller Seitenhintergrund */
+  --hl-bg-body:       #f8fafc;   /* Heller Seitenhintergrund (warmes Grau) */
   --hl-bg-card:       #ffffff;   /* Weiße Inhaltsflächen */
-  --hl-bg-alt:        #f0f4f8;   /* Alternativer Hintergrund */
-  --hl-bg-code:       #f4f4f6;   /* Codeblock-Hintergrund */
+  --hl-bg-alt:        #f1f5f9;   /* Alternativer Hintergrund */
+  --hl-bg-code:       #f1f5f9;   /* Codeblock-Hintergrund */
 
   /* --- Borders & Shadows --- */
-  --hl-border:        #e2e4e9;
-  --hl-border-light:  #eef0f4;
-  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.06);
+  --hl-border:        #e2e8f0;
+  --hl-border-light:  #f1f5f9;
+  --hl-shadow-sm:     0 1px 3px rgba(0,0,0,0.06);
   --hl-shadow:        0 4px 16px rgba(0,0,0,0.06);
   --hl-shadow-md:     0 8px 24px rgba(0,0,0,0.08);
   --hl-shadow-lg:     0 12px 40px rgba(0,0,0,0.1);
@@ -33,7 +41,7 @@
 
   /* --- Radius --- */
   --hl-radius:        12px;
-  --hl-radius-sm:     6px;
+  --hl-radius-sm:     8px;
   --hl-radius-pill:   9999px;
 
   /* --- Spacing --- */
@@ -46,10 +54,10 @@
   --hl-space-3xl:     64px;
 
   /* --- Layout --- */
-  --hl-content-width:  1280px;
-  --hl-content-narrow: 740px;
+  --hl-content-width:  1200px;
+  --hl-content-narrow: 720px;
   --hl-content-padding: 1.5rem;
-  --hl-header-height:  68px;
+  --hl-header-height:  64px;
 
   /* --- Typography (System-Font-Stack) --- */
   --hl-font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
@@ -57,21 +65,21 @@
 
   /* --- Font Sizes --- */
   --hl-text-xs:       0.75rem;   /* 12px */
-  --hl-text-sm:       0.8rem;    /* ~13px */
+  --hl-text-sm:       0.8125rem; /* 13px */
   --hl-text-base:     1rem;      /* 16px */
-  --hl-text-lg:       0.95rem;   /* ~15px */
-  --hl-text-xl:       1.15rem;   /* ~18px */
-  --hl-text-2xl:      1.35rem;   /* ~22px */
-  --hl-text-3xl:      2rem;      /* 32px */
-  --hl-text-4xl:      2.5rem;
+  --hl-text-lg:       0.9375rem; /* 15px */
+  --hl-text-xl:       1.125rem;  /* 18px */
+  --hl-text-2xl:      1.375rem;  /* 22px */
+  --hl-text-3xl:      1.75rem;   /* 28px */
+  --hl-text-4xl:      2.25rem;   /* 36px */
 
   /* --- Line Heights --- */
   --hl-leading-tight: 1.25;
-  --hl-leading-normal: 1.7;
-  --hl-leading-relaxed: 1.8;
+  --hl-leading-normal: 1.65;
+  --hl-leading-relaxed: 1.75;
 
   /* --- Focus States --- */
-  --hl-focus-ring: 0 0 0 3px rgba(46, 125, 50, 0.3);
+  --hl-focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.3);
 
   /* --- Transitions --- */
   --hl-transition: 0.2s ease;
@@ -81,24 +89,29 @@
    DARK MODE
    ============================================================ */
 [data-theme="dark"] {
-  --hl-primary:       #66bb6a;
-  --hl-primary-dark:  #2e7d32;
-  --hl-primary-light: #1a3a1a;
-  --hl-accent:        #e0e0e0;
-  --hl-accent-soft:   #1e1e32;
+  --hl-primary:       #60a5fa;
+  --hl-primary-dark:  #3b82f6;
+  --hl-primary-light: #1e293b;
+  --hl-accent:        #e2e8f0;
+  --hl-accent-soft:   #1e293b;
 
-  --hl-text:          #e0e0e0;
-  --hl-text-body:     #c8c8cc;
-  --hl-text-muted:    #888899;
-  --hl-text-light:    #666677;
+  --hl-green:         #4ade80;
+  --hl-green-light:   #14532d;
+  --hl-amber:         #fbbf24;
+  --hl-orange:        #fb923c;
 
-  --hl-bg-body:       #111122;
-  --hl-bg-card:       #1a1a2e;
-  --hl-bg-alt:        #222238;
-  --hl-bg-code:       #1a1a2e;
+  --hl-text:          #e2e8f0;
+  --hl-text-body:     #cbd5e1;
+  --hl-text-muted:    #94a3b8;
+  --hl-text-light:    #64748b;
 
-  --hl-border:        #2a2a44;
-  --hl-border-light:  #222238;
+  --hl-bg-body:       #0f172a;
+  --hl-bg-card:       #1e293b;
+  --hl-bg-alt:        #1e293b;
+  --hl-bg-code:       #1e293b;
+
+  --hl-border:        #334155;
+  --hl-border-light:  #1e293b;
 
   --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.3);
   --hl-shadow:        0 4px 16px rgba(0,0,0,0.3);
@@ -108,12 +121,12 @@
 }
 
 /* ============================================================
-   KATEGORIE-FARBEN (Grünes Schema)
+   CATEGORY BADGE COLORS
    ============================================================ */
 :root {
-  --cat-hardware:         #f59e0b;   /* Amber/Gold */
-  --cat-software:         #8b5cf6;   /* Violett */
-  --cat-smarthome:        #2e7d32;   /* Grün */
-  --cat-virtualisierung:  #06b6d4;   /* Cyan */
-  --cat-homelab:          #2e7d32;   /* Grün */
+  --cat-hardware:         #2563eb;   /* Blau */
+  --cat-software:         #7c3aed;   /* Violett */
+  --cat-smarthome:        #16a34a;   /* Grün */
+  --cat-virtualisierung:  #0891b2;   /* Cyan */
+  --cat-homelab:          #2563eb;   /* Blau */
 }
