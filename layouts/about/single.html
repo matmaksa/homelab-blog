@@ -15,7 +15,7 @@
   {{- $restParts := after 1 $parts }}{{ $rest := delimit $restParts "<hr>" }}
 
   <div class="about-content">
-    {{- $intro }}
+    {{- $intro | safeHTML }}
   </div>
 
   {{- /* Values Cards – positioned after personal intro */}}
@@ -38,7 +38,7 @@
   </div>
 
   <div class="about-content">
-    {{- $rest }}
+    {{- $rest | safeHTML }}
   </div>
 
   {{- /* Edit Link */}}
