@@ -93,6 +93,43 @@ buildDrafts = false
   url = "/search/"
   weight = 70
 
+# --- Dropdown Children ---
+[[menu.main]]
+  parent = "hardware"
+  name = "Mini-PC"
+  url = "/tags/mini-pc/"
+  weight = 1
+
+[[menu.main]]
+  parent = "hardware"
+  name = "Fujitsu"
+  url = "/tags/fujitsu/"
+  weight = 2
+
+[[menu.main]]
+  parent = "software"
+  name = "Headscale"
+  url = "/tags/headscale/"
+  weight = 1
+
+[[menu.main]]
+  parent = "software"
+  name = "Software"
+  url = "/tags/software/"
+  weight = 2
+
+[[menu.main]]
+  parent = "virtualisierung"
+  name = "Proxmox"
+  url = "/tags/proxmox/"
+  weight = 1
+
+[[menu.main]]
+  parent = "virtualisierung"
+  name = "Virtualisierung"
+  url = "/tags/virtualisierung/"
+  weight = 2
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

@@ -41,6 +41,31 @@
     <nav class="main-nav" aria-label="Hauptnavigation">
       <ul class="main-nav-list">
         {{- range site.Menus.main }}
+        {{- if .HasChildren }}
+        {{- /* Parent with dropdown */}}
+        {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
+        {{- $page_url:= $currentPage.Permalink | absLangURL }}
+        {{- $is_search := eq .Identifier "suche" }}
+        <li class="has-dropdown">
+          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}{{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
+            {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+            <span{{ if eq $menu_item_url $page_url }} class="active"{{ end }}>
+              {{- .Pre }}{{ .Name -}}{{ .Post -}}
+            </span>
+          </a>
+          <ul class="dropdown-menu">
+            {{- range .Children }}
+            {{- $child_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
+            <li>
+              <a href="{{ .URL | absLangURL }}"{{ if eq $child_url $page_url }} class="active"{{ end }}>
+                {{- .Pre }}{{ .Name -}}{{ .Post -}}
+              </a>
+            </li>
+            {{- end }}
+          </ul>
+        </li>
+        {{- else }}
+        {{- /* Leaf item */}}
         {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
         {{- $page_url:= $currentPage.Permalink | absLangURL }}
         {{- $is_search := eq .Identifier "suche" }}
@@ -52,6 +77,7 @@
             </span>
           </a>
         </li>
+        {{- end }}
         {{- end }}
       </ul>
     </nav>
@@ -116,6 +142,16 @@
   <nav aria-label="Mobile Navigation">
     <ul class="mobile-menu-list">
       {{- range site.Menus.main }}
+      {{- if .HasChildren }}
+      <li>
+        <a href="{{ .URL | absLangURL }}"><strong>{{ .Name }}</strong></a>
+        <ul>
+          {{- range .Children }}
+          <li><a href="{{ .URL | absLangURL }}">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+      </li>
+      {{- else }}
       {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
       {{- $page_url:= $currentPage.Permalink | absLangURL }}
       <li>
@@ -123,6 +159,7 @@
           {{- .Pre }}{{ .Name -}}{{ .Post -}}
         </a>
       </li>
+      {{- end }}
       {{- end }}
     </ul>
   </nav>

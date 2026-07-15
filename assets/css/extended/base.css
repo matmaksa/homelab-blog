@@ -1,40 +1,35 @@
 /* ============================================================
-   BASE – Layout, Grid, Typography
+   LAYOUT – Max-width 1280px, 70/30 Sidebar ab 1024px
    ============================================================ */
 
-/* --- 2-Spalten-Grid für Seiten mit Sidebar --- */
 .main {
-  max-width: var(--hl-content-width, 1200px);
+  max-width: var(--hl-content-width, 1280px);
   margin: 0 auto;
   padding: 1.5rem;
 }
 
+/* --- 2-Spalten-Grid ab 1024px --- */
 .content-with-sidebar {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
   align-items: start;
 }
 
-.content-with-sidebar > .sidebar-wrapper {
-  position: sticky;
-  top: 80px;
+@media (min-width: 1024px) {
+  .content-with-sidebar {
+    grid-template-columns: 1fr 300px;
+  }
 }
 
-/* Mobile: Einspaltig */
-@media (max-width: 767px) {
-  .main {
-    padding: 1rem;
-  }
-  .content-with-sidebar {
-    grid-template-columns: 1fr;
-  }
+.content-with-sidebar > .sidebar-wrapper {
+  position: static;
+}
+
+@media (min-width: 1024px) {
   .content-with-sidebar > .sidebar-wrapper {
-    position: static;
-    order: 2;
-  }
-  .content-with-sidebar > :first-child {
-    order: 1;
+    position: sticky;
+    top: 80px;
   }
 }
 
@@ -50,15 +45,14 @@ body {
 h1 { font-size: var(--hl-text-3xl, 2rem); font-weight: 700; color: var(--hl-accent, #2c3e50); }
 h2 { font-size: var(--hl-text-2xl, 1.35rem); font-weight: 700; color: var(--hl-accent, #2c3e50); }
 h3 { font-size: var(--hl-text-xl, 1.15rem); font-weight: 600; color: var(--hl-accent, #2c3e50); }
-h4 { font-size: 1rem; font-weight: 600; color: var(--hl-accent, #2c3e50); }
 
 /* --- Links --- */
 a {
-  color: var(--hl-primary, #c0392b);
+  color: var(--hl-primary, #007acc);
   transition: color var(--hl-transition, 0.2s ease);
 }
 a:hover {
-  color: var(--hl-primary-dark, #a93226);
+  color: var(--hl-primary-dark, #005999);
 }
 
 /* --- Breadcrumbs --- */
@@ -68,7 +62,7 @@ a:hover {
   margin-bottom: 0.75rem;
 }
 .breadcrumbs a {
-  color: var(--hl-primary, #c0392b);
+  color: var(--hl-primary, #007acc);
   text-decoration: none;
 }
 .breadcrumbs a:hover {
@@ -86,7 +80,7 @@ a:hover {
   left: 0;
   z-index: 9999;
   padding: 0.5rem 1rem;
-  background: var(--hl-primary, #c0392b);
+  background: var(--hl-primary, #007acc);
   color: white;
   text-decoration: none;
 }
@@ -94,7 +88,7 @@ a:hover {
   top: 0;
 }
 
-/* --- Page Header (Titles) --- */
+/* --- Page Header --- */
 .page-header {
   margin-bottom: 1.5rem;
 }
@@ -110,51 +104,57 @@ a:hover {
   line-height: 1.6;
 }
 
-/* --- Page Footer (Pagination) --- */
+/* --- Pagination --- */
 .page-footer {
   margin-top: 2rem;
 }
-.pagination {
+.pagination-nav {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
 }
-.pagination a,
-.pagination span {
+.pagination-nav a,
+.pagination-nav .page-number {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 40px;
-  padding: 0.5rem 1rem;
+  height: 40px;
+  padding: 0 0.75rem;
   border: 1px solid var(--hl-border, #ddd);
-  border-radius: var(--hl-radius-sm, 4px);
+  border-radius: var(--hl-radius-sm, 6px);
   color: var(--hl-accent, #2c3e50);
   text-decoration: none;
   font-size: 0.9rem;
   transition: background var(--hl-transition, 0.2s ease), color var(--hl-transition, 0.2s ease);
 }
-.pagination a:hover,
-.pagination .active {
-  background: var(--hl-primary, #c0392b);
+.pagination-nav a:hover {
+  background: var(--hl-primary, #007acc);
   color: #fff;
-  border-color: var(--hl-primary, #c0392b);
+  border-color: var(--hl-primary, #007acc);
 }
-.pagination .active {
+.pagination-nav .page-number.active {
+  background: var(--hl-primary, #007acc);
+  color: #fff;
+  border-color: var(--hl-primary, #007acc);
   font-weight: 600;
-  cursor: default;
 }
 
 /* --- Images --- */
 img {
   max-width: 100%;
-  border-radius: var(--hl-radius-sm, 4px);
+  border-radius: var(--hl-radius-sm, 6px);
   height: auto;
 }
 
-/* --- Utility --- */
+/* --- Post Content --- */
 .post-content {
   line-height: var(--hl-leading-relaxed, 1.8);
+}
+
+/* --- Mobile --- */
+@media (max-width: 767px) {
+  .main {
+    padding: 1rem;
+  }
 }
