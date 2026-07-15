@@ -269,6 +269,23 @@
   margin-top: 0.75rem;
 }
 
+/* Placeholder cards (Guides in Vorbereitung) */
+.card-placeholder {
+  cursor: default;
+  opacity: 0.85;
+}
+.card-placeholder:hover {
+  border-color: var(--hl-border, #e2e8f0);
+  box-shadow: none;
+}
+.card-placeholder .step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--hl-amber, #d97706);
+  display: inline-block;
+  margin-top: 0.75rem;
+}
+
 /* ============================================================
    EINSTEIGERPFAD
    ============================================================ */
