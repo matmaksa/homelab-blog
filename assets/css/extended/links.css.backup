@@ -1,0 +1,213 @@
+/* ============================================================
+   LINKS PAGE – Produktkarten + Sektionen
+   Läuft innerhalb PaperMod, kein Reset/Theme/Layout nötig.
+   ============================================================ */
+
+/* --- CTA ZURÜCK ZUM BLOG --- */
+.links-page .ll-cta-secondary {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+.links-page .ll-cta-secondary:hover {
+  text-decoration: underline;
+}
+
+/* --- AFFILIATE-BOX --- */
+.links-page .ll-disclosure {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  margin: 12px 0 16px;
+  background: var(--hl-disclosure-bg, #eef2ff);
+  border: 1px solid var(--hl-disclosure-border, #c7d2fe);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--content);
+}
+.links-page .ll-disclosure svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--primary);
+  width: 18px;
+  height: 18px;
+}
+.links-page .ll-disclosure p {
+  margin: 0;
+  color: inherit;
+}
+html[data-theme="dark"] .links-page .ll-disclosure {
+  background: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+
+/* --- KURATIERUNG --- */
+.links-page .ll-curation {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0 0 28px;
+}
+
+/* --- SEKTIONEN (KATEGORIEN) --- */
+.links-page .ll-section {
+  margin-bottom: 28px;
+}
+.links-page .ll-section + .ll-section {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.links-page .ll-section-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.links-page .ll-section-head svg {
+  flex-shrink: 0;
+  color: var(--primary);
+}
+.links-page .ll-section-head h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+}
+.links-page .ll-section-desc {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0 0 14px 28px;
+  color: var(--secondary);
+}
+
+/* --- PRODUKTKARTEN --- */
+.links-page .ll-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.links-page .ll-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: var(--hl-bg-card, #ffffff);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--content);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+  min-height: 52px;
+}
+@media (hover: hover) {
+  .links-page .ll-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transform: translateY(-1px);
+  }
+}
+.links-page .ll-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-color: var(--primary);
+}
+.links-page .ll-card-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--hl-bg-alt, #f3f4f6);
+  color: var(--primary);
+}
+.links-page .ll-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.links-page .ll-card-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 3px;
+}
+.links-page .ll-card-title {
+  font-weight: 650;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.links-page .ll-card-badge {
+  font-size: 0.75rem;
+  font-weight: 650;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  line-height: 1.3;
+  white-space: nowrap;
+  border: 1px solid;
+}
+.links-page .badge-in-use {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+.links-page .badge-rec {
+  background: #e8f0fe;
+  color: #1e40af;
+  border-color: #c7d2fe;
+}
+.links-page .ll-card-desc {
+  font-size: 0.875rem;
+  color: var(--secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+.links-page .ll-card-arrow {
+  flex-shrink: 0;
+  color: var(--secondary);
+  transition: color 200ms ease, transform 200ms ease;
+}
+@media (hover: hover) {
+  .links-page .ll-card:hover .ll-card-arrow {
+    color: var(--primary);
+    transform: translateX(2px);
+  }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+  .links-page .ll-card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+  .links-page .ll-card-desc {
+    font-size: 0.8125rem;
+  }
+  .links-page .ll-disclosure {
+    padding: 12px;
+  }
+  .links-page .ll-section-desc {
+    margin-left: 0;
+  }
+}
+
+/* --- REDUCED MOTION --- */
+@media (prefers-reduced-motion: reduce) {
+  .links-page .ll-card,
+  .links-page .ll-card-arrow {
+    transition: none;
+  }
+  @media (hover: hover) {
+    .links-page .ll-card:hover { transform: none; }
+    .links-page .ll-card:hover .ll-card-arrow { transform: none; }
+  }
+}
