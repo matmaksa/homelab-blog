@@ -1,141 +1,140 @@
 /* ============================================================
-   ARTICLE CARDS – Wiederverwendbare Karten-Komponente
+   POST CARDS – Blog-Übersicht mit Hover-Effekt
    ============================================================ */
 
-.article-card {
-  background: var(--hl-bg-card);
-  border-radius: var(--hl-radius);
+.post-entry {
+  background: var(--hl-bg-card, #fff);
+  border-radius: var(--hl-radius, 8px);
+  box-shadow: var(--hl-shadow-sm, 0 2px 8px rgba(0,0,0,0.1));
   overflow: hidden;
-  box-shadow: var(--hl-shadow);
-  transition: box-shadow var(--hl-transition), transform var(--hl-transition);
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--hl-border);
+  margin-bottom: 1.5rem;
+  transition: transform var(--hl-transition, 0.2s ease), box-shadow var(--hl-transition, 0.2s ease);
   position: relative;
 }
 
-.article-card:hover {
-  box-shadow: var(--hl-shadow-md);
-  transform: translateY(-2px);
+.post-entry:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--hl-shadow-hover, 0 4px 16px rgba(0,0,0,0.15));
 }
 
-@media (hover: none) {
-  .article-card:hover {
-    transform: none;
-    box-shadow: var(--hl-shadow);
-  }
-}
-
-/* --- Card Image --- */
-.article-card-image {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  background: var(--hl-bg-body);
-}
-
-.article-card-image img {
+/* --- Featured Image --- */
+.post-entry .entry-cover {
   width: 100%;
-  height: 100%;
+  max-height: 220px;
+  overflow: hidden;
+}
+
+.post-entry .entry-cover img {
+  width: 100%;
+  height: 220px;
   object-fit: cover;
-  position: absolute;
-  inset: 0;
+  border-radius: 0;
+  display: block;
 }
 
-/* Fallback wenn kein Bild */
-.article-card-image .card-img-fallback {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--hl-primary-light);
-  color: var(--hl-primary);
-  font-size: 2rem;
+/* --- Entry Content --- */
+.post-entry .entry-content-inner {
+  padding: 1.5rem;
 }
 
-/* --- Card Body --- */
-.article-card-body {
-  padding: var(--hl-space-md) var(--hl-space-lg) var(--hl-space-lg);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* --- Card Category --- */
-.article-card-category {
-  font-size: var(--hl-text-xs);
+/* --- Category Tag --- */
+.post-entry .entry-category {
+  display: inline-block;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--hl-primary);
-  margin-bottom: var(--hl-space-sm);
+  color: var(--hl-primary, #c0392b);
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.3px;
 }
 
-/* Kategorie-Farben */
-.cat-hardware .article-card-category { color: var(--cat-hardware); }
-.cat-software .article-card-category { color: var(--cat-software); }
-.cat-smarthome .article-card-category { color: var(--cat-smarthome); }
-.cat-virtualisierung .article-card-category { color: var(--cat-virtualisierung); }
-.cat-homelab .article-card-category { color: var(--cat-homelab); }
-
-/* --- Card Title --- */
-.article-card-title {
-  font-size: var(--hl-text-lg);
+/* --- Title --- */
+.post-entry .entry-header h2 {
+  font-size: var(--hl-text-2xl, 1.35rem);
   font-weight: 700;
-  line-height: 1.35;
-  color: var(--hl-text);
-  margin: 0 0 var(--hl-space-sm);
+  color: var(--hl-accent, #2c3e50);
+  margin: 0.5rem 0;
+  line-height: var(--hl-leading-tight, 1.25);
 }
 
-.article-card-title a {
-  color: inherit;
+.post-entry .entry-header h2 a {
+  color: var(--hl-accent, #2c3e50);
   text-decoration: none;
-  transition: color var(--hl-transition);
 }
 
-.article-card-title a::after {
-  content: '';
+.post-entry .entry-header h2 a:hover {
+  color: var(--hl-primary, #c0392b);
+}
+
+/* --- Meta --- */
+.post-entry .entry-meta {
+  font-size: 0.8rem;
+  color: var(--hl-text-muted, #888);
+  margin-bottom: 0.5rem;
+}
+
+.post-entry .entry-meta span + span::before {
+  content: " · ";
+}
+
+/* --- Excerpt --- */
+.post-entry .entry-content p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.7;
+  margin: 0.5rem 0 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* --- Read More --- */
+.post-entry .entry-footer {
+  margin-top: 0.75rem;
+}
+
+.post-entry .entry-footer .read-more {
+  color: var(--hl-primary, #c0392b);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.post-entry .entry-footer .read-more:hover {
+  text-decoration: underline;
+}
+
+/* --- Entry Link (Full Card Click) --- */
+.post-entry .entry-link {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-.article-card-title a:hover {
-  color: var(--hl-primary);
-}
-
-/* --- Card Excerpt --- */
-.article-card-excerpt {
-  font-size: var(--hl-text-sm);
-  line-height: 1.55;
-  color: var(--hl-text-body);
-  flex: 1;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: var(--hl-space-md);
-}
-
-/* --- Card Meta --- */
-.article-card-meta {
-  font-size: var(--hl-text-xs);
-  color: var(--hl-text-light);
-  display: flex;
-  align-items: center;
-  gap: var(--hl-space-sm);
-  margin-top: auto;
-  padding-top: var(--hl-space-sm);
-  border-top: 1px solid var(--hl-border-light);
+/* --- First Entry (Hero) --- */
+.first-entry {
   position: relative;
-  z-index: 2;
+  min-height: auto;
+  margin-bottom: 1.5rem;
 }
 
-.article-card-meta time {
-  white-space: nowrap;
+/* --- Compact / No Image Cards --- */
+.post-entry.no-image .entry-content-inner {
+  padding: 1.5rem;
 }
 
-.article-card-meta .reading-time {
-  white-space: nowrap;
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .post-entry .entry-content-inner {
+    padding: 1rem;
+  }
+
+  .post-entry .entry-cover img {
+    height: 160px;
+  }
+
+  .post-entry .entry-header h2 {
+    font-size: 1.15rem;
+  }
 }

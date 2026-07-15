@@ -1,4 +1,4 @@
-{{/* Article card – called with a page context directly */}}
+{{/* Article card – post-entry style for raspberry.tips look */}}
 {{- $p := . }}
 {{- $cat := index $p.Params.categories 0 | default "" }}
 {{- $img := "" }}
@@ -12,30 +12,35 @@
   {{- $img = index $p.Params.images 0 | absURL }}
 {{- end }}
 {{- $excerpt := partial "clean-excerpt.html" $p }}
-<article class="article-card{{ if $cat }} cat-{{ $cat | urlize }}{{ end }}">
-  <div class="article-card-image">
-    {{- if $img }}
+<article class="post-entry{{ if not $img }} no-image{{ end }}">
+  {{- if $img }}
+  <div class="entry-cover">
     <img src="{{ $img }}" alt="{{ $p.Title | plainify }}" loading="lazy" decoding="async" width="400" height="225">
-    {{- else }}
-    <div class="card-img-fallback" aria-hidden="true">⚡</div>
-    {{- end }}
   </div>
-  <div class="article-card-body">
-    {{- if $cat }}
-    <div class="article-card-category">{{ $cat }}</div>
-    {{- end }}
-    <h3 class="article-card-title">
-      <a href="{{ $p.Permalink }}" aria-label="{{ $p.Title | plainify }}">{{ $p.Title }}</a>
-    </h3>
-    {{- if $excerpt }}
-    <p class="article-card-excerpt">{{ $excerpt }}</p>
-    {{- end }}
-    <div class="article-card-meta">
+  {{- end }}
+  <div class="entry-content-inner">
+    <header class="entry-header">
+      {{- if $cat }}
+      <div class="entry-category">{{ $cat }}</div>
+      {{- end }}
+      <h2>
+        <a href="{{ $p.Permalink }}" aria-label="{{ $p.Title | plainify }}">{{ $p.Title }}</a>
+      </h2>
+    </header>
+    <div class="entry-meta">
       <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02.01.2006" }}</time>
       {{- if ($p.Param "ShowReadingTime") }}
-      <span aria-hidden="true">·</span>
-      <span class="reading-time">{{ $p.ReadingTime }} Min.</span>
+      <span>{{ $p.ReadingTime }} Min. Lesezeit</span>
       {{- end }}
     </div>
+    {{- if $excerpt }}
+    <div class="entry-content">
+      <p>{{ $excerpt }}</p>
+    </div>
+    {{- end }}
+    <footer class="entry-footer">
+      <span class="read-more">Weiterlesen →</span>
+    </footer>
   </div>
+  <a class="entry-link" aria-label="post link to {{ $p.Title | plainify }}" href="{{ $p.Permalink }}"></a>
 </article>

@@ -1,66 +1,47 @@
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
-    <!-- About Column -->
-    <div class="footer-col">
-      <h3>{{ site.Title }}</h3>
-      <p>{{ site.Params.description | default "Praxis-Guides für dein Homelab – Virtualisierung, Docker, Selfhosting und mehr." }}</p>
-      <p class="footer-affiliate">
-        {{- with site.Params.footer.text }}
-        {{ . | markdownify }}
-        {{- else }}
-        Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Einige Links sind Affiliate-Links – für dich entstehen keine Mehrkosten.
-        {{- end }}
-      </p>
+    <div class="footer-grid">
+      <!-- About Column -->
+      <div class="footer-col">
+        <h3>{{ site.Title }}</h3>
+        <p>{{ site.Params.description | default "Praxis-Guides für dein Homelab – Virtualisierung, Docker, Selfhosting und mehr." }}</p>
+        <p>{{- with site.Params.footer.text }}{{ . | markdownify }}{{ else }}Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Einige Links sind Affiliate-Links – für dich entstehen keine Mehrkosten.{{- end }}</p>
+      </div>
+
+      <!-- Categories Column -->
+      <div class="footer-col">
+        <h3>Kategorien</h3>
+        <ul>
+          {{- range site.Taxonomies.categories.ByCount }}
+          <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+
+      <!-- Links Column -->
+      <div class="footer-col">
+        <h3>Links</h3>
+        <ul>
+          <li><a href="{{ "about/" | absLangURL }}">Über mich</a></li>
+          <li><a href="{{ "search/" | absLangURL }}">Suche</a></li>
+          <li><a href="{{ "categories/" | absLangURL }}">Kategorien</a></li>
+          <li><a href="{{ "links/" | absLangURL }}">Empfehlungen</a></li>
+          <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="{{ "posts/index.xml" | absLangURL }}">RSS Feed</a></li>
+        </ul>
+      </div>
     </div>
 
-    <!-- Categories Column -->
-    <div class="footer-col">
-      <h3>Kategorien</h3>
-      <ul>
-        {{- range site.Taxonomies.categories.ByCount }}
-        <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
-        {{- end }}
-      </ul>
-    </div>
-
-    <!-- Links Column -->
-    <div class="footer-col">
-      <h3>Links</h3>
-      <ul>
-        <li><a href="{{ "about/" | absLangURL }}">Über mich</a></li>
-        <li><a href="{{ "search/" | absLangURL }}">Suche</a></li>
-        <li><a href="{{ "categories/" | absLangURL }}">Kategorien</a></li>
-        <li><a href="{{ "links/" | absLangURL }}">Empfehlungen</a></li>
-      </ul>
-    </div>
-
-    <!-- Social Column -->
-    <div class="footer-col">
-      <h3>Folgen</h3>
-      <ul>
-        <li><a href="https://github.com/matmaksa" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://instagram.com/matmaksa" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="{{ "posts/index.xml" | absLangURL }}">RSS Feed</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
+    <div class="footer-bottom">
+      &copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a>
       {{- if (fileExists "content/impressum/index.md") }}
-      <span aria-hidden="true">·</span>
-      <a href="{{ "impressum/" | absLangURL }}">Impressum</a>
+      · <a href="{{ "impressum/" | absLangURL }}">Impressum</a>
       {{- end }}
       {{- if (fileExists "content/datenschutz/index.md") }}
-      <span aria-hidden="true">·</span>
-      <a href="{{ "datenschutz/" | absLangURL }}">Datenschutz</a>
+      · <a href="{{ "datenschutz/" | absLangURL }}">Datenschutz</a>
       {{- end }}
-    </div>
-    <div class="footer-bottom-right">
-      <span class="footer-technical">
-        Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp; <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-      </span>
+      · <span>Powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a> &amp; <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a></span>
     </div>
   </div>
 </footer>
