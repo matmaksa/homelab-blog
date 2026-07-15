@@ -83,6 +83,9 @@
     </div>
   </section>
 
+  {{- /* Track latest articles so they don't duplicate in category sections */}}
+  {{- range $latest }}{{ $usedPermalinks = $usedPermalinks | append .Permalink }}{{ end }}
+
   {{- /* ================================================================
       KATEGORIE-GRIDS – Dynamisch aus vorhandenen Kategorien
       ================================================================ */}}
