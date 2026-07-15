@@ -161,35 +161,42 @@
   </section>
 
   {{- /* ================================================================
-      STARTER-SETUP
+      HARDWARE-GRUNDLAGEN – „Was du für den Einstieg wirklich brauchst"
       ================================================================ */}}
-  {{- with site.GetPage "/posts/homelab-unter-100-euro-was-du-brauchst" }}
-  <section class="starter-section" aria-labelledby="starter-heading">
-    <div class="starter-card">
-      <div class="starter-content">
-        <div class="starter-badge">💡 Starter-Kit</div>
-        <h2 id="starter-heading">Starter-Setup unter 100 €</h2>
-        <p>So startest du dein Homelab, ohne dein Budget zu sprengen. Ein gebrauchter Thin Client reicht völlig – leise, sparsam und praktisch.</p>
-        <ul class="starter-list">
-          <li><span aria-hidden="true">✅</span> Mini-PC oder Thin Client (z. B. Fujitsu Futro S7010)</li>
-          <li><span aria-hidden="true">✅</span> Mindestens 8 GB RAM</li>
-          <li><span aria-hidden="true">✅</span> SSD (120 GB oder mehr)</li>
-          <li><span aria-hidden="true">✅</span> Optionale USB-HDD oder NAS für Backups</li>
-          <li><span aria-hidden="true">✅</span> Gigabit-LAN</li>
-          <li><span aria-hidden="true">✅</span> Proxmox VE oder Ubuntu Server</li>
-        </ul>
-        <a href="{{ .RelPermalink }}" class="btn btn-primary">Zum Komplett-Guide →</a>
+  <section class="entry-hw-section" aria-labelledby="entry-hw-heading">
+    <div class="section-header-alt">
+      <h2 id="entry-hw-heading">Was du für den Einstieg wirklich brauchst</h2>
+      <p class="section-subtitle">Vier Grundlagen – einfach erklärt, ohne Verkaufsdruck</p>
+    </div>
+    <div class="entry-hw-grid">
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">⚙️</div>
+        <h3 class="entry-hw-title">Rechenleistung</h3>
+        <p class="entry-hw-text">Ein gebrauchter Mini-PC oder Thin Client mit Intel-Core-i5 der 6.–8. Generation reicht völlig. Die CPUs sind leise, sparsam und für Einsteiger-Projekte mehr als ausreichend.</p>
       </div>
-      <div class="starter-visual" aria-hidden="true">
-        <div class="starter-price">
-          <span class="starter-price-label">ab</span>
-          <span class="starter-price-value">40 €</span>
-        </div>
-        <p class="starter-price-note">Gebrauchte Business-Hardware<br>(Richtwert, Stand 2026)</p>
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">🧠</div>
+        <h3 class="entry-hw-title">Arbeitsspeicher</h3>
+        <p class="entry-hw-text">Mindestens 8 GB RAM, besser 16 GB. Damit laufen Proxmox, ein paar Container und erste Dienste gleichzeitig. DDR4-Speicher ist gebraucht günstig zu bekommen.</p>
+      </div>
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">💾</div>
+        <h3 class="entry-hw-title">Speicher</h3>
+        <p class="entry-hw-text">Eine 120–240 GB SSD reicht für Betriebssystem und erste Container. Für Backups und größere Datenmengen kommt später eine externe USB-Festplatte oder ein NAS dazu.</p>
+      </div>
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">🌐</div>
+        <h3 class="entry-hw-title">Netzwerk</h3>
+        <p class="entry-hw-text">Gigabit-Ethernet ist Pflicht. WLAN ist für einen Server weniger geeignet. Ein einfacher Router mit LAN-Anschluss genügt – extra Hardware ist nicht nötig.</p>
       </div>
     </div>
+    <div class="entry-hw-cta">
+      <a href="{{ "posts/homelab-unter-100-euro-was-du-brauchst/" | absLangURL }}" class="entry-hw-guide-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Ausführlichen Einsteiger-Guide lesen
+      </a>
+    </div>
   </section>
-  {{- end }}
 
   {{- /* ================================================================
       AKTUELLE GUIDES
