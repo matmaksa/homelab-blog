@@ -1,20 +1,19 @@
 /* ============================================================
-   FOOTER – Multi-Column Grid (4 Spalten wie raspberry.tips)
+   FOOTER
    ============================================================ */
 
 .site-footer {
-  background: var(--hl-accent, #1a1a2e);
+  background: #1e293b;
   color: #fff;
   padding: 3rem 1.5rem 1.5rem;
   margin-top: 3rem;
 }
 
 .footer-inner {
-  max-width: var(--hl-content-width, 1280px);
+  max-width: var(--hl-content-width, 1200px);
   margin: 0 auto;
 }
 
-/* --- Footer Grid (4 Spalten auf Desktop) --- */
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -23,37 +22,30 @@
 }
 
 @media (min-width: 600px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
-
 @media (min-width: 900px) {
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  .footer-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* --- Footer Columns --- */
 .footer-col-title {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   color: #fff;
   margin: 0 0 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(255,255,255,0.15);
+  border-bottom: 2px solid rgba(255,255,255,0.1);
 }
 
 .footer-brand-text {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   line-height: 1.6;
   color: rgba(255,255,255,0.6);
   margin: 0 0 1rem;
 }
 
-/* --- Social Icons --- */
 .footer-social {
   display: flex;
   gap: 0.75rem;
@@ -66,17 +58,16 @@
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   color: rgba(255,255,255,0.7);
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .footer-social-link:hover {
-  background: var(--hl-primary, #2e7d32);
+  background: var(--hl-primary, #2563eb);
   color: #fff;
 }
 
-/* --- Link Lists --- */
 .footer-link-list {
   list-style: none;
   padding: 0;
@@ -90,22 +81,21 @@
 .footer-link-list a {
   color: rgba(255,255,255,0.6);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   transition: color 0.2s ease;
 }
 
 .footer-link-list a:hover {
-  color: var(--hl-primary, #66bb6a);
+  color: var(--hl-primary, #60a5fa);
 }
 
-/* --- Footer Bottom (Copyright + Affiliate) --- */
 .footer-bottom {
   text-align: center;
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.5);
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.45);
   line-height: 1.8;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .footer-bottom a {
@@ -114,9 +104,7 @@
   transition: color 0.2s ease;
 }
 
-.footer-bottom a:hover {
-  color: #fff;
-}
+.footer-bottom a:hover { color: #fff; }
 
 /* --- Scroll to Top --- */
 .top-link {
@@ -130,9 +118,9 @@
   width: 40px;
   height: 40px;
   background: var(--hl-bg-card, #fff);
-  color: var(--hl-primary, #0073e6);
+  color: var(--hl-primary, #2563eb);
   border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  box-shadow: var(--hl-shadow, 0 4px 16px rgba(0,0,0,0.06));
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
@@ -146,40 +134,26 @@
 }
 
 .top-link:hover {
-  background: var(--hl-primary, #0073e6);
+  background: var(--hl-primary, #2563eb);
   color: #fff;
 }
 
-/* Dark mode overrides for top-link */
 [data-theme="dark"] .top-link {
-  background: var(--hl-bg-card, #1a1a2e);
+  background: var(--hl-bg-card, #1e293b);
   box-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
 
 [data-theme="dark"] .top-link:hover {
-  background: var(--hl-primary, #4db8ff);
+  background: var(--hl-primary, #60a5fa);
 }
 
 /* --- Responsive Footer --- */
 @media (max-width: 599px) {
-  .site-footer {
-    padding: 2rem 1rem 1rem;
-  }
-
-  .footer-col-title {
-    margin-bottom: 0.75rem;
-  }
+  .site-footer { padding: 2rem 1rem 1rem; }
+  .footer-col-title { margin-bottom: 0.75rem; }
 }
 
 /* --- Dark Mode Footer --- */
-[data-theme="dark"] .site-footer {
-  background: #0d0d1a;
-}
-
-[data-theme="dark"] .footer-link-list a {
-  color: rgba(255,255,255,0.5);
-}
-
-[data-theme="dark"] .footer-link-list a:hover {
-  color: var(--hl-primary, #66bb6a);
-}
+[data-theme="dark"] .site-footer { background: #0f172a; }
+[data-theme="dark"] .footer-link-list a { color: rgba(255,255,255,0.5); }
+[data-theme="dark"] .footer-link-list a:hover { color: var(--hl-primary, #60a5fa); }
