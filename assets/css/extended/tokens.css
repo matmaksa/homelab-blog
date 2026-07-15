@@ -1,39 +1,39 @@
 /* ============================================================
-   DESIGN TOKENS – Homelab Guide (Magazin-Stil)
-   Inspiriert von raspberry.tips, aber eigenständige Marke
+   DESIGN TOKENS – Homelab Guide (Raspberry.tips-Inspiriert)
    ============================================================ */
 
 :root {
   /* --- Brand Colors --- */
-  --hl-primary:       #1a56db;   /* Kräftiges Homelab-Blau */
-  --hl-primary-dark:  #1341b0;   /* Dunkler für Hover */
-  --hl-primary-light: #e8f0fe;   /* Hell für Hintergründe */
-  --hl-accent:        #059669;   /* Technischer Akzent (Grün) */
-  --hl-accent-soft:   #d1fae5;   /* Heller Akzent-Hintergrund */
+  --hl-primary:       #c0392b;   /* Raspberry-Rot */
+  --hl-primary-dark:  #a93226;   /* Dunkler für Hover */
+  --hl-primary-light: #fdf2f2;   /* Hell für Hintergründe */
+  --hl-accent:        #2c3e50;   /* Dunkelblau/Anthrazit */
+  --hl-accent-soft:   #eef2f7;   /* Heller Akzent-Hintergrund */
 
   /* --- Text Colors --- */
-  --hl-text:          #111827;   /* Sehr dunkel – fast schwarz */
-  --hl-text-body:     #374151;   /* Fließtext */
-  --hl-text-muted:    #6b7280;   /* Meta-Infos */
-  --hl-text-light:    #9ca3af;   /* Sehr dezent */
+  --hl-text:          #333333;   /* Haupttext */
+  --hl-text-body:     #333333;   /* Fließtext */
+  --hl-text-muted:    #888888;   /* Meta-Infos */
+  --hl-text-light:    #aaaaaa;   /* Sehr dezent */
 
   /* --- Backgrounds --- */
-  --hl-bg-body:       #f3f4f6;   /* Heller grau-blauer Seitenhintergrund */
+  --hl-bg-body:       #f5f5f5;   /* Heller Seitenhintergrund */
   --hl-bg-card:       #ffffff;   /* Weiße Inhaltsflächen */
-  --hl-bg-alt:        #e5e7eb;   /* Alternativer Hintergrund */
-  --hl-bg-code:       #1f2937;   /* Codeblock-Hintergrund */
+  --hl-bg-alt:        #f0f0f0;   /* Alternativer Hintergrund */
+  --hl-bg-code:       #f8f8f8;   /* Codeblock-Hintergrund */
 
   /* --- Borders & Shadows --- */
-  --hl-border:        #e5e7eb;
-  --hl-border-light:  #f3f4f6;
-  --hl-shadow-sm:     0 1px 2px rgba(0,0,0,0.04);
-  --hl-shadow:        0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --hl-shadow-md:     0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
-  --hl-shadow-lg:     0 10px 25px -5px rgba(0,0,0,0.08), 0 4px 10px -5px rgba(0,0,0,0.04);
+  --hl-border:        #e0e0e0;
+  --hl-border-light:  #eeeeee;
+  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.1);
+  --hl-shadow:        0 2px 8px rgba(0,0,0,0.1);
+  --hl-shadow-md:     0 4px 16px rgba(0,0,0,0.15);
+  --hl-shadow-lg:     0 8px 24px rgba(0,0,0,0.12);
+  --hl-shadow-hover:  0 4px 16px rgba(0,0,0,0.15);
 
   /* --- Radius --- */
-  --hl-radius:        10px;
-  --hl-radius-sm:     6px;
+  --hl-radius:        8px;
+  --hl-radius-sm:     4px;
   --hl-radius-pill:   9999px;
 
   /* --- Spacing --- */
@@ -46,77 +46,75 @@
   --hl-space-3xl:     64px;
 
   /* --- Layout --- */
-  --hl-content-width:  1260px;
+  --hl-content-width:  1200px;
   --hl-content-narrow: 740px;
+  --hl-content-padding: 1.5rem;
   --hl-sidebar-width:  280px;
-  --hl-header-height:  72px;
+  --hl-header-height:  60px;
 
   /* --- Typography (System-Font-Stack) --- */
   --hl-font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
-  --hl-font-mono:  'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Fira Code', 'Consolas', 'Courier New', monospace;
+  --hl-font-mono:  'Fira Code', 'SF Mono', 'Cascadia Code', 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
 
   /* --- Font Sizes --- */
   --hl-text-xs:       0.75rem;   /* 12px */
-  --hl-text-sm:       0.875rem;  /* 14px */
+  --hl-text-sm:       0.8rem;    /* ~13px */
   --hl-text-base:     1rem;      /* 16px */
-  --hl-text-lg:       1.125rem;  /* 18px */
-  --hl-text-xl:       1.25rem;   /* 20px */
-  --hl-text-2xl:      1.5rem;    /* 24px */
-  --hl-text-3xl:      1.875rem;  /* 30px */
-  --hl-text-4xl:      2.25rem;   /* 36px */
+  --hl-text-lg:       0.95rem;   /* ~15px */
+  --hl-text-xl:       1.15rem;   /* ~18px */
+  --hl-text-2xl:      1.35rem;   /* ~22px */
+  --hl-text-3xl:      2rem;      /* 32px */
+  --hl-text-4xl:      2.5rem;
 
   /* --- Line Heights --- */
   --hl-leading-tight: 1.25;
-  --hl-leading-normal: 1.5;
-  --hl-leading-relaxed: 1.7;
-
-  /* --- Breakpoints (für Media Queries) --- */
-  /* Mobile first */
-  /* sm: 640px, md: 768px, lg: 1024px, xl: 1280px, 2xl: 1440px */
+  --hl-leading-normal: 1.7;
+  --hl-leading-relaxed: 1.8;
 
   /* --- Focus States --- */
-  --hl-focus-ring: 0 0 0 3px rgba(26, 86, 219, 0.35);
+  --hl-focus-ring: 0 0 0 3px rgba(192, 57, 43, 0.3);
 
   /* --- Transitions --- */
-  --hl-transition: 200ms ease;
+  --hl-transition: 0.2s ease;
 }
 
 /* ============================================================
-   DARK MODE – Bewusst gestaltet, nicht invertiert
+   DARK MODE
    ============================================================ */
 [data-theme="dark"] {
-  --hl-primary:       #60a5fa;
-  --hl-primary-dark:  #93bbfc;
-  --hl-primary-light: #1e293b;
-  --hl-accent:        #34d399;
-  --hl-accent-soft:   #064e3b;
+  --hl-primary:       #e74c3c;
+  --hl-primary-dark:  #c0392b;
+  --hl-primary-light: #2d1b1a;
+  --hl-accent:        #34495e;
+  --hl-accent-soft:   #1a1a2e;
 
-  --hl-text:          #f1f5f9;
-  --hl-text-body:     #cbd5e1;
-  --hl-text-muted:    #94a3b8;
-  --hl-text-light:    #64748b;
+  --hl-text:          #e0e0e0;
+  --hl-text-body:     #cccccc;
+  --hl-text-muted:    #999999;
+  --hl-text-light:    #777777;
 
-  --hl-bg-body:       #0b1120;
-  --hl-bg-card:       #111827;
-  --hl-bg-alt:        #1e293b;
-  --hl-bg-code:       #0f172a;
+  --hl-bg-body:       #1a1a2e;
+  --hl-bg-card:       #222244;
+  --hl-bg-alt:        #2a2a4e;
+  --hl-bg-code:       #1e1e3a;
 
-  --hl-border:        #1e293b;
-  --hl-border-light:  #1e293b;
+  --hl-border:        #333355;
+  --hl-border-light:  #2a2a44;
 
-  --hl-shadow-sm:     0 1px 2px rgba(0,0,0,0.2);
-  --hl-shadow:        0 1px 3px rgba(0,0,0,0.3);
-  --hl-shadow-md:     0 4px 6px rgba(0,0,0,0.3);
-  --hl-shadow-lg:     0 10px 25px -5px rgba(0,0,0,0.4);
+  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.3);
+  --hl-shadow:        0 2px 8px rgba(0,0,0,0.3);
+  --hl-shadow-md:     0 4px 16px rgba(0,0,0,0.4);
+  --hl-shadow-lg:     0 8px 24px rgba(0,0,0,0.4);
+  --hl-shadow-hover:  0 4px 16px rgba(0,0,0,0.5);
 }
 
 /* ============================================================
-   KATEGORIE-FARBEN
+   KATEGORIE-FARBEN (angepasst an rotes Schema)
    ============================================================ */
 :root {
-  --cat-hardware:         #ea580c;   /* Orange */
-  --cat-software:         var(--hl-primary);
-  --cat-smarthome:        #059669;   /* Grün */
-  --cat-virtualisierung:  #7c3aed;   /* Violett */
-  --cat-homelab:          #2563eb;   /* Blau */
+  --cat-hardware:         #c0392b;   /* Raspberry-Rot */
+  --cat-software:         #2c3e50;   /* Dunkelblau */
+  --cat-smarthome:        #27ae60;   /* Grün */
+  --cat-virtualisierung:  #8e44ad;   /* Violett */
+  --cat-homelab:          #c0392b;   /* Raspberry-Rot */
 }

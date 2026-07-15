@@ -1,118 +1,74 @@
 {{- define "main" }}
 
+<div class="content-with-sidebar">
+
 {{- $pages := site.RegularPages }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
 {{- $pages = where $pages "Params.preview" "!=" true }}
 {{- $pages = where $pages "Section" "in" (slice "posts") }}
 {{- $published := sort $pages "Date" "desc" }}
 
-<main id="main-content" class="main-content home-page" role="main">
-
-  {{- /* ================================================================
-      INTRO
-      ================================================================ */}}
-  <div class="home-intro">
-    <h1 class="home-intro-title">Homelab Guide</h1>
-    <p class="home-intro-text">Praxisnahe Anleitungen für dein eigenes Homelab – von günstiger Hardware über Proxmox bis Selfhosting.</p>
-    <nav class="home-intro-links" aria-label="Schnellzugriff">
-      <a href="{{ "categories/homelab/" | absLangURL }}" class="home-intro-cta">Für Einsteiger starten →</a>
-      <a href="{{ "posts/" | absLangURL }}" class="home-intro-link">Alle Artikel</a>
-    </nav>
-  </div>
-
-  {{- /* ================================================================
-      HERO: Featured Article
-      ================================================================ */}}
-  {{- $featured := where $published "Params.featured" true }}
-  {{- $hero := index $featured 0 | default (index $published 0) }}
-  {{- if $hero }}
-  {{- $heroCat := index $hero.Params.categories 0 | default "" }}
-  {{- $heroImg := partial "resolve-image.html" $hero }}
-  <article class="hero-card" aria-label="Leitartikel: {{ $hero.Title }}">
-    <a href="{{ $hero.Permalink }}" class="hero-card-link" aria-label="{{ $hero.Title }}">
-      <div class="hero-card-image">
-        {{- if $heroImg }}
-        <img src="{{ $heroImg }}" alt="{{ $hero.Title | plainify }}" loading="eager" decoding="async" width="660" height="370">
-        {{- else }}
-        <div class="card-img-fallback" aria-hidden="true">⚡</div>
-        {{- end }}
-      </div>
-      <div class="hero-card-body">
-        {{- if $heroCat }}
-        <span class="hero-card-category">{{ $heroCat }}</span>
-        {{- end }}
-        <h2 class="hero-card-title">{{ $hero.Title }}</h2>
-        <p class="hero-card-excerpt">{{ partial "clean-excerpt.html" $hero }}</p>
-        <span class="hero-card-meta">
-          <time datetime="{{ $hero.Date.Format "2006-01-02" }}">{{ $hero.Date.Format "02.01.2006" }}</time>
-          {{- if (.Param "ShowReadingTime") }}
-          <span aria-hidden="true">·</span>
-          <span>{{ $hero.ReadingTime }} Min. Lesezeit</span>
-          {{- end }}
-          <span class="hero-card-cta">Artikel lesen →</span>
-        </span>
-      </div>
-    </a>
-  </article>
-  {{- end }}
-
-  {{- /* ================================================================
-      AKTUELLE ARTIKEL (max 5)
-      ================================================================ */}}
-  {{- $usedPermalinks := slice }}
-  {{- if $hero }}{{ $usedPermalinks = $usedPermalinks | append $hero.Permalink }}{{ end }}
-  {{- $recent := where $published "Permalink" "not in" $usedPermalinks }}
-  {{- $recent = first 5 $recent }}
-  {{- if $recent }}
-  <section class="section-wrapper" aria-labelledby="recent-heading">
-    <div class="section-header">
-      <h2 id="recent-heading">Aktuelle Artikel</h2>
-      <a href="{{ "posts/" | absLangURL }}" class="section-link">Alle Artikel →</a>
-    </div>
-    <div class="article-grid article-grid-home">
-      {{- range $recent }}
-      {{- $usedPermalinks = $usedPermalinks | append .Permalink }}
-      {{- partial "article-card.html" . }}
+{{- /* ================================================================
+    HERO: Featured Article / Latest
+    ================================================================ */}}
+{{- $featured := where $published "Params.featured" true }}
+{{- $hero := index $featured 0 | default (index $published 0) }}
+{{- if $hero }}
+{{- $heroCat := index $hero.Params.categories 0 | default "" }}
+{{- $heroImg := partial "resolve-image.html" $hero }}
+<article class="hero-card featured-post" aria-label="Leitartikel: {{ $hero.Title }}">
+  <a href="{{ $hero.Permalink }}" class="hero-card-link" aria-label="{{ $hero.Title }}">
+    <div class="hero-card-image">
+      {{- if $heroImg }}
+      <img src="{{ $heroImg }}" alt="{{ $hero.Title | plainify }}" loading="eager" decoding="async" width="660" height="370">
+      {{- else }}
+      <div class="card-img-fallback" aria-hidden="true">⚡</div>
       {{- end }}
     </div>
-  </section>
-  {{- end }}
-
-  {{- /* ================================================================
-      THEMATISCHE EINSTIEGE (3 topic cards)
-      ================================================================ */}}
-  <section class="section-wrapper topic-section" aria-labelledby="topics-heading">
-    <div class="section-header">
-      <h2 id="topics-heading">Themen</h2>
+    <div class="hero-card-body">
+      {{- if $heroCat }}
+      <span class="hero-card-category">{{ $heroCat }}</span>
+      {{- end }}
+      <h2 class="hero-card-title">{{ $hero.Title }}</h2>
+      <p class="hero-card-excerpt">{{ partial "clean-excerpt.html" $hero }}</p>
+      <span class="hero-card-meta">
+        <time datetime="{{ $hero.Date.Format "2006-01-02" }}">{{ $hero.Date.Format "02.01.2006" }}</time>
+        {{- if (.Param "ShowReadingTime") }}
+        <span aria-hidden="true">·</span>
+        <span>{{ $hero.ReadingTime }} Min. Lesezeit</span>
+        {{- end }}
+        <span class="hero-card-cta">Artikel lesen →</span>
+      </span>
     </div>
-    <div class="topic-grid">
-      <div class="topic-card">
-        <div class="topic-card-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
-        </div>
-        <h3 class="topic-card-title">Homelab für Einsteiger</h3>
-        <p class="topic-card-text">Günstige Hardware auswählen und das erste eigene Homelab aufbauen.</p>
-        <a href="{{ "categories/homelab/" | absLangURL }}" class="topic-card-link">Einsteiger-Guides →</a>
-      </div>
-      <div class="topic-card">
-        <div class="topic-card-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><box x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
-        </div>
-        <h3 class="topic-card-title">Proxmox &amp; Virtualisierung</h3>
-        <p class="topic-card-text">Virtuelle Maschinen, LXC-Container, Backups und praktische Proxmox-Anleitungen.</p>
-        <a href="{{ "categories/virtualisierung/" | absLangURL }}" class="topic-card-link">Proxmox-Guides →</a>
-      </div>
-      <div class="topic-card">
-        <div class="topic-card-icon" aria-hidden="true">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 6v7"/><path d="M9 9h6"/></svg>
-        </div>
-        <h3 class="topic-card-title">Selfhosting &amp; Software</h3>
-        <p class="topic-card-text">Eigene Dienste betreiben und wichtige Anwendungen sicher selbst hosten.</p>
-        <a href="{{ "categories/software/" | absLangURL }}" class="topic-card-link">Selfhosting-Guides →</a>
-      </div>
-    </div>
-  </section>
+  </a>
+</article>
+{{- end }}
 
-</main>
+{{- /* ---------------------------------------------------------------
+    AKTUELLE ARTIKEL
+    --------------------------------------------------------------- */}}
+{{- $usedPermalinks := slice }}
+{{- if $hero }}{{ $usedPermalinks = $usedPermalinks | append $hero.Permalink }}{{ end }}
+{{- $recent := where $published "Permalink" "not in" $usedPermalinks }}
+{{- $recent = first 5 $recent }}
+{{- if $recent }}
+<section class="section-wrapper" aria-labelledby="recent-heading">
+  <div class="section-header">
+    <h2 id="recent-heading">Aktuelle Artikel</h2>
+    <a href="{{ "posts/" | absLangURL }}" class="section-link">Alle Artikel →</a>
+  </div>
+  <div class="article-grid article-grid-home">
+    {{- range $recent }}
+    {{- $usedPermalinks = $usedPermalinks | append .Permalink }}
+    {{- partial "article-card.html" . }}
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{/* SIDEBAR */}}
+{{- partial "sidebar.html" . }}
+
+</div>{{/* end .content-with-sidebar */}}
 
 {{- end }}{{/* end main */}}

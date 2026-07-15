@@ -1,36 +1,39 @@
 /* ============================================================
-   FOOTER – Magazin-Footer
+   FOOTER – 3-Spaltig, Dunkles Design
    ============================================================ */
 
 .site-footer {
-  background: var(--hl-text);
-  color: #cbd5e1;
-  margin-top: var(--hl-space-3xl);
+  background: var(--hl-accent, #2c3e50);
+  color: #fff;
+  padding: 2.5rem 1.5rem 1.5rem;
+  margin-top: 3rem;
 }
 
 .footer-inner {
-  max-width: var(--hl-content-width);
+  max-width: var(--hl-content-width, 1200px);
   margin: 0 auto;
-  padding: var(--hl-space-2xl) var(--hl-space-lg) var(--hl-space-xl);
+}
+
+.footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: var(--hl-space-xl);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
 }
 
 .footer-col h3 {
-  font-size: var(--hl-text-sm);
+  font-size: 1rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
   color: #fff;
-  margin-bottom: var(--hl-space-md);
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .footer-col p {
-  font-size: var(--hl-text-sm);
+  font-size: 0.85rem;
+  color: #ccc;
   line-height: 1.6;
-  color: #94a3b8;
-  margin: 0 0 var(--hl-space-md);
+  margin: 0;
 }
 
 .footer-col ul {
@@ -39,124 +42,61 @@
   margin: 0;
 }
 
-.footer-col ul li {
-  margin-bottom: var(--hl-space-sm);
+.footer-col li {
+  margin-bottom: 0.5rem;
 }
 
-.footer-col ul li a {
-  font-size: var(--hl-text-sm);
-  color: #94a3b8;
+.footer-col a {
+  color: #ccc;
   text-decoration: none;
-  transition: color var(--hl-transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  font-size: 0.85rem;
+  transition: color var(--hl-transition, 0.2s ease);
 }
 
-.footer-col ul li a:hover {
+.footer-col a:hover {
   color: #fff;
-}
-
-.footer-affiliate {
-  font-size: var(--hl-text-xs);
-  color: #64748b;
-  margin-top: var(--hl-space-md);
-  line-height: 1.5;
 }
 
 /* --- Footer Bottom --- */
 .footer-bottom {
-  max-width: var(--hl-content-width);
-  margin: 0 auto;
-  padding: var(--hl-space-md) var(--hl-space-lg) var(--hl-space-lg);
-  border-top: 1px solid #334155;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: var(--hl-space-md);
-  font-size: var(--hl-text-sm);
-  color: #64748b;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
 }
 
 .footer-bottom a {
-  color: #94a3b8;
+  color: rgba(255,255,255,0.6);
   text-decoration: none;
-  transition: color var(--hl-transition);
 }
 
 .footer-bottom a:hover {
   color: #fff;
 }
 
-.footer-bottom-left {
+/* --- Footer Social Icons --- */
+.footer-social {
   display: flex;
-  align-items: center;
-  gap: var(--hl-space-sm);
-  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
-.footer-bottom-right {
-  display: flex;
-  align-items: center;
-  gap: var(--hl-space-sm);
-  flex-wrap: wrap;
-}
-
-.footer-technical {
-  font-size: var(--hl-text-xs);
-  color: #475569;
-}
-
-/* --- Scroll-to-Top --- */
-.top-link {
-  position: fixed;
-  bottom: var(--hl-space-xl);
-  right: var(--hl-space-xl);
-  z-index: 100;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--hl-primary);
-  color: #fff;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--hl-transition), visibility var(--hl-transition), transform var(--hl-transition);
+.footer-social a {
+  color: #ccc;
   text-decoration: none;
+  font-size: 0.85rem;
 }
 
-.top-link.visible {
-  opacity: 1;
-  visibility: visible;
+.footer-social a:hover {
+  color: #fff;
 }
 
-.top-link:hover {
-  background: var(--hl-primary-dark);
-  transform: translateY(-2px);
-}
-
-.top-link svg {
-  width: 22px;
-  height: 22px;
-}
-
-/* --- Footer Responsive --- */
-@media (max-width: 1024px) {
-  .footer-inner {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 640px) {
-  .footer-inner {
+/* --- Responsive --- */
+@media (max-width: 767px) {
+  .footer-grid {
     grid-template-columns: 1fr;
-  }
-  .footer-bottom {
-    flex-direction: column;
-    text-align: center;
+    gap: 1.5rem;
   }
 }

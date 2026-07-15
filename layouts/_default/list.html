@@ -4,8 +4,6 @@
 {{- partial "index_profile.html" . }}
 {{- else }}
 
-<main id="main-content" class="main-content" role="main">
-
 {{- if and .Title (not .IsHome) }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
@@ -33,7 +31,7 @@
 {{- end }}
 
 {{- if .Content }}
-<div class="post-content" style="max-width:var(--hl-content-narrow);margin:0 auto;background:var(--hl-bg-card);padding:var(--hl-space-xl);border-radius:var(--hl-radius);box-shadow:var(--hl-shadow);border:1px solid var(--hl-border);">
+<div class="post-content" style="max-width:var(--hl-content-narrow);margin:0 auto 2rem;background:var(--hl-bg-card);padding:var(--hl-space-xl);border-radius:var(--hl-radius);box-shadow:var(--hl-shadow);border:1px solid var(--hl-border);">
   {{- if not (.Param "disableAnchoredHeadings") }}
   {{- partial "anchored_headings.html" .Content -}}
   {{- else }}{{ .Content }}{{ end }}
@@ -52,38 +50,42 @@
 
 {{- $paginator := .Paginate $pages }}
 
-{{- if $pages }}
-<div class="article-grid" style="margin-top:var(--hl-space-xl);">
-  {{- range $paginator.Pages }}
-  {{- partial "article-card.html" . }}
+<div class="content-with-sidebar">
+  <div class="posts-container">
+    {{- if $pages }}
+    <div class="article-grid">
+      {{- range $paginator.Pages }}
+      {{- partial "article-card.html" . }}
+      {{- end }}
+    </div>
+    {{- end }}
+
+    {{- if gt $paginator.TotalPages 1 }}
+    <footer class="page-footer">
+      <nav class="pagination-nav" aria-label="Seitennavigation">
+        {{- if $paginator.HasPrev }}
+        <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
+          <span aria-hidden="true">«</span>
+        </a>
+        {{- end }}
+        {{- range $paginator.Pagers }}
+        <a class="page-number{{ if eq . $paginator }} active{{ end }}" href="{{ .URL | absURL }}">{{ .PageNumber }}</a>
+        {{- end }}
+        {{- if $paginator.HasNext }}
+        <a class="next" href="{{ $paginator.Next.URL | absURL }}">
+          <span aria-hidden="true">»</span>
+        </a>
+        {{- end }}
+      </nav>
+    </footer>
+    {{- end }}
+  </div>
+
+  {{/* Sidebar – only on non-home pages */}}
+  {{- if not .IsHome }}
+  {{- partial "sidebar.html" . }}
   {{- end }}
 </div>
-{{- end }}
-
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer">
-  <nav class="pagination" aria-label="Seitennavigation">
-    {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
-      <span aria-hidden="true">«</span>&nbsp;{{ i18n "prev_page" | default "Vorherige" }}
-      {{- if (.Param "ShowPageNums") }}
-      <span class="sr-only">Seite </span>{{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
-      {{- end }}
-    </a>
-    {{- end }}
-    {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
-      {{ i18n "next_page" | default "Nächste" }}&nbsp;<span aria-hidden="true">»</span>
-      {{- if (.Param "ShowPageNums") }}
-      <span class="sr-only">Seite </span>{{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
-      {{- end }}
-    </a>
-    {{- end }}
-  </nav>
-</footer>
-{{- end }}
-
-</main>
 
 {{- end }}{{/* end profileMode */}}
 {{- end }}{{/* end main */}}
