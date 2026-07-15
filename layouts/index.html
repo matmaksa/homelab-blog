@@ -5,131 +5,210 @@
 {{- $posts = where $posts "Params.preview" "!=" true }}
 {{- $published := sort $posts "Date" "desc" }}
 
-{{- /* ================================================================
-    HERO: Featured Article (horizontal split wie raspberry.tips)
-    ================================================================ */}}
-{{- $featured := where $published "Params.featured" true }}
-{{- $hero := index $featured 0 | default (index $published 0) }}
-{{- $usedPermalinks := slice }}
-
 <div class="home-content">
 
-{{- if $hero }}
-{{- $usedPermalinks = $usedPermalinks | append $hero.Permalink }}
-{{- $heroImg := partial "resolve-image.html" $hero }}
-<article class="hero-article" aria-label="Leitartikel: {{ $hero.Title }}">
-  <div class="hero-image">
-    {{- if $heroImg }}
-    <img src="{{ $heroImg }}" alt="{{ $hero.Title | plainify }}" loading="eager" decoding="async" width="640" height="360">
-    {{- else }}
-    <div class="card-img-fallback" aria-hidden="true">⚡</div>
-    {{- end }}
-  </div>
-  <div class="hero-content">
-    <h2><a href="{{ $hero.Permalink }}">{{ $hero.Title }}</a></h2>
-    <p>{{ partial "clean-excerpt.html" $hero }}</p>
-    <div class="hero-meta">
-      <span class="hero-badge">Aktualisiert</span>
-      <time datetime="{{ $hero.Date.Format "2006-01-02" }}">📅 {{ $hero.Date.Format "02.01.2006" }}</time>
-      {{- if (.Param "ShowReadingTime") }}
-      <span>⏱️ {{ $hero.ReadingTime }} Min. Lesezeit</span>
-      {{- end }}
+  {{- /* ================================================================
+      HERO – Website-Einstieg (dunkler Bereich)
+      ================================================================ */}}
+  <section class="hero-section" aria-label="Homelab-Einstieg">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-headline">
+          Dein eigenes Homelab –<br>
+          <span class="hero-accent">leise, sparsam und bezahlbar</span>
+        </h1>
+        <p class="hero-subline">
+          Praxis-Guides für Mini-PCs, Proxmox, Docker, Backups und Selfhosting –<br>
+          ohne Serverrack und ohne riesige Stromrechnung.
+        </p>
+        <div class="hero-ctas">
+          <a href="{{ "posts/homelab-unter-100-euro-was-du-brauchst/" | absLangURL }}" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Homelab starten
+          </a>
+          <a href="{{ "categories/hardware/" | absLangURL }}" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Hardware auswählen
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-diagram">
+          <div class="diagram-node diagram-internet">🌐 Internet</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node diagram-router">📡 Router (OPNsense)</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node diagram-proxmox">🖥️ Mini-PC mit Proxmox</div>
+          <div class="diagram-services">
+            <span class="diagram-service">🛡️ AdGuard</span>
+            <span class="diagram-service">🏠 Home Assistant</span>
+            <span class="diagram-service">🐳 Docker</span>
+            <span class="diagram-service">💾 Backup</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</article>
-{{- end }}
 
-{{- /* ================================================================
-    TAGS BAR
-    ================================================================ */}}
-{{- $allTags := slice }}
-{{- range $posts }}
-  {{- range .Params.tags }}
-    {{- $allTags = $allTags | append . }}
-  {{- end }}
-{{- end }}
-{{- $allTags = uniq $allTags | first 10 }}
-{{- if $allTags }}
-<div class="tags-bar">
-  {{- range $allTags }}
-  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
-  {{- end }}
-</div>
-{{- end }}
-
-{{- /* ================================================================
-    MAIN LAYOUT – left content + right sidebar
-    ================================================================ */}}
-<div class="home-layout-main">
-
-<div class="home-main-content">
+    {{- /* Trust Signals */}}
+    <div class="trust-bar">
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">🔧</span>
+        <span class="trust-text">Reale Hardware &amp; Praxiserfahrung</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">⚡</span>
+        <span class="trust-text">Fokus auf niedrigen Stromverbrauch</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">🎯</span>
+        <span class="trust-text">Verständlich für Homelab-Einsteiger</span>
+      </div>
+    </div>
+  </section>
 
   {{- /* ================================================================
-      AKTUELLE TUTORIALS & NEWS (Latest 4 like raspberry.tips)
+      BEREICH: „Was möchtest du bauen?" – Projektkarten
       ================================================================ */}}
-  {{- $latest := first 4 $published }}
-  <section class="cat-section" aria-labelledby="cat-aktuelles">
-    <div class="section-header">
-      <div class="section-header-text">
-        <h2 id="cat-aktuelles">📰 Aktuelle Tutorials &amp; News</h2>
-        <p class="section-sub">Neueste Beiträge</p>
-      </div>
-      <a href="{{ "posts/" | absLangURL }}" class="section-link">Alle Artikel →</a>
+  <section class="projects-section" aria-labelledby="projects-heading">
+    <div class="section-header-alt">
+      <h2 id="projects-heading">Was möchtest du bauen?</h2>
+      <p class="section-subtitle">Wähle dein Projekt – ich zeige dir den Weg</p>
     </div>
-    <div class="cat-grid">
+    <div class="projects-grid">
+      <a href="{{ "posts/home-assistant-gebrauchter-mini-pc-2026/" | absLangURL }}" class="project-card card-werbung">
+        <div class="project-card-icon" aria-hidden="true">🛡️</div>
+        <h3 class="project-card-title">Werbung &amp; Tracking blockieren</h3>
+        <p class="project-card-desc">AdGuard oder Pi-hole auf dem Mini-PC – blockiert Werbung im gesamten Heimnetzwerk, schützt die Privatsphäre und entlastet deine Geräte.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+      <a href="{{ "posts/home-assistant-gebrauchter-mini-pc-2026/" | absLangURL }}" class="project-card card-smarthome">
+        <div class="project-card-icon" aria-hidden="true">🏠</div>
+        <h3 class="project-card-title">Smart Home lokal betreiben</h3>
+        <p class="project-card-desc">Home Assistant auf einem gebrauchten Mini-PC – steuere Lampen, Sensoren und Heizung, ohne Cloud-Zwang und ohne monatliche Gebühren.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+      <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="project-card card-docker">
+        <div class="project-card-icon" aria-hidden="true">🐳</div>
+        <h3 class="project-card-title">Docker &amp; Selfhosting lernen</h3>
+        <p class="project-card-desc">Dienste wie Headscale, Vaultwarden, Nextcloud oder Plex selbst hosten – lerne Docker Schritt für Schritt an echten Projekten.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+      <a href="{{ "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/" | absLangURL }}" class="project-card card-proxmox">
+        <div class="project-card-icon" aria-hidden="true">🖥️</div>
+        <h3 class="project-card-title">Mit Proxmox starten</h3>
+        <p class="project-card-desc">Proxmox VE als kostenlose Virtualisierungsplattform – betreibe VMs und LXC-Container, lerne Cluster-Betrieb und integrierte Backups.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+      <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="project-card card-vpn">
+        <div class="project-card-icon" aria-hidden="true">🔒</div>
+        <h3 class="project-card-title">Sicher von unterwegs zugreifen</h3>
+        <p class="project-card-desc">Headscale als selbst gehostetes Mesh-VPN – greife sicher auf dein Homelab zu, ohne Port-Forwardings und ohne teure VPN-Dienste.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+    </div>
+  </section>
+
+  {{- /* ================================================================
+      EINSTEIGERPFAD
+      ================================================================ */}}
+  <section class="path-section" aria-labelledby="path-heading">
+    <div class="section-header-alt">
+      <h2 id="path-heading">Dein Weg zum ersten Homelab</h2>
+      <p class="section-subtitle">Fünf Schritte – von der ersten Idee bis zum laufenden Server</p>
+    </div>
+    <div class="path-steps">
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">1</div>
+        <div class="step-content">
+          <h3>Hardware auswählen</h3>
+          <p>Gebrauchter Mini-PC oder Thin Client ab 40€</p>
+          <a href="{{ "categories/hardware/" | absLangURL }}" class="step-link">Hardware-Guides →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">2</div>
+        <div class="step-content">
+          <h3>Proxmox oder Linux installieren</h3>
+          <p>Dein erster Hypervisor oder Server</p>
+          <a href="{{ "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/" | absLangURL }}" class="step-link">Zu Proxmox →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">3</div>
+        <div class="step-content">
+          <h3>Ersten Dienst starten</h3>
+          <p>AdGuard, Pi-hole oder Home Assistant in 15 Minuten</p>
+          <span class="step-label">Guide in Vorbereitung</span>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">4</div>
+        <div class="step-content">
+          <h3>Backup einrichten</h3>
+          <p>Deine Daten sicher ablegen – lokale und externe Wege</p>
+          <span class="step-label">Guide in Vorbereitung</span>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">5</div>
+        <div class="step-content">
+          <h3>Fernzugriff absichern</h3>
+          <p>Mit WireGuard oder Headscale von unterwegs verbinden</p>
+          <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="step-link">Zu Headscale →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{- /* ================================================================
+      STARTER-SETUP
+      ================================================================ */}}
+  {{- with site.GetPage "/posts/homelab-unter-100-euro-was-du-brauchst" }}
+  <section class="starter-section" aria-labelledby="starter-heading">
+    <div class="starter-card">
+      <div class="starter-content">
+        <div class="starter-badge">💡 Starter-Kit</div>
+        <h2 id="starter-heading">Starter-Setup unter 100 €</h2>
+        <p>So startest du dein Homelab, ohne dein Budget zu sprengen. Ein gebrauchter Thin Client reicht völlig – leise, sparsam und praktisch.</p>
+        <ul class="starter-list">
+          <li><span aria-hidden="true">✅</span> Mini-PC oder Thin Client (z. B. Fujitsu Futro S7010)</li>
+          <li><span aria-hidden="true">✅</span> Mindestens 8 GB RAM</li>
+          <li><span aria-hidden="true">✅</span> SSD (120 GB oder mehr)</li>
+          <li><span aria-hidden="true">✅</span> Optionale USB-HDD oder NAS für Backups</li>
+          <li><span aria-hidden="true">✅</span> Gigabit-LAN</li>
+          <li><span aria-hidden="true">✅</span> Proxmox VE oder Ubuntu Server</li>
+        </ul>
+        <a href="{{ .RelPermalink }}" class="btn btn-primary">Zum Komplett-Guide →</a>
+      </div>
+      <div class="starter-visual" aria-hidden="true">
+        <div class="starter-price">
+          <span class="starter-price-label">ab</span>
+          <span class="starter-price-value">40 €</span>
+        </div>
+        <p class="starter-price-note">Gebrauchte Business-Hardware<br>(Richtwert, Stand 2026)</p>
+      </div>
+    </div>
+  </section>
+  {{- end }}
+
+  {{- /* ================================================================
+      AKTUELLE GUIDES
+      ================================================================ */}}
+  {{- $latest := first 6 $published }}
+  <section class="guides-section" aria-labelledby="guides-heading">
+    <div class="section-header-with-link">
+      <div class="section-header-alt">
+        <h2 id="guides-heading">Aktuelle Guides</h2>
+        <p class="section-subtitle">Praxisnah, selbst getestet, verständlich</p>
+      </div>
+      <a href="{{ "posts/" | absLangURL }}" class="section-link-large">Alle Artikel anzeigen →</a>
+    </div>
+    <div class="guides-grid">
       {{- range $latest }}
       {{- partial "article-card.html" . }}
       {{- end }}
     </div>
   </section>
-
-  {{- /* Track latest articles so they don't duplicate in category sections */}}
-  {{- range $latest }}{{ $usedPermalinks = $usedPermalinks | append .Permalink }}{{ end }}
-
-  {{- /* ================================================================
-      KATEGORIE-GRIDS – Dynamisch aus vorhandenen Kategorien
-      ================================================================ */}}
-  {{- $categoryOrder := slice "Homelab" "Hardware" "Virtualisierung" "Software" "Smarthome" }}
-  {{- $categoryLabels := dict 
-    "Homelab"         (dict "label" "🚀 Einsteiger &amp; Grundlagen" "sub" "Neu im Homelab? Hier starten.")
-    "Hardware"        (dict "label" "⚙️ Hardware &amp; Geräte" "sub" "Die beste Hardware für dein Homelab")
-    "Virtualisierung" (dict "label" "🖥️ Proxmox &amp; Virtualisierung" "sub" "VMs, LXC, Cluster – virtuell aufgerüstet")
-    "Software"        (dict "label" "📦 Software &amp; Selfhosting" "sub" "Dienste selbst hosten und verwalten")
-    "Smarthome"       (dict "label" "🏠 Smart Home &amp; Hausautomatisierung" "sub" "Home Assistant, Sensoren, Automationen")
-  }}
-
-  {{- range $cat := $categoryOrder }}
-  {{- $catPosts := where $published "Params.categories" "intersect" (slice $cat) }}
-  {{- $catPosts := where $catPosts "Permalink" "not in" $usedPermalinks }}
-  {{- $catPosts = first 3 $catPosts }}
-  {{- if $catPosts }}
-  {{- range $catPosts }}{{ $usedPermalinks = $usedPermalinks | append .Permalink }}{{ end }}
-  {{- $catData := index $categoryLabels $cat | default (dict "label" (humanize $cat) "sub" "") }}
-  <section class="cat-section" aria-labelledby="cat-{{ $cat | urlize }}">
-    <div class="section-header">
-      <div class="section-header-text">
-        <h2 id="cat-{{ $cat | urlize }}">{{ $catData.label | safeHTML }}</h2>
-        {{- if $catData.sub }}
-        <p class="section-sub">{{ $catData.sub }}</p>
-        {{- end }}
-      </div>
-      <a href="{{ printf "/categories/%s/" ($cat | urlize) | absLangURL }}" class="section-link">Alle anzeigen →</a>
-    </div>
-    <div class="cat-grid">
-      {{- range $catPosts }}
-      {{- partial "article-card.html" . }}
-      {{- end }}
-    </div>
-  </section>
-  {{- end }}
-  {{- end }}
-
-</div>{{- /* end .home-main-content */}}
-
-{{- /* SIDEBAR */}}
-{{- partial "sidebar.html" . }}
-
-</div>{{- /* end .home-layout-main */}}
 
 </div>{{- /* end .home-content */}}
 

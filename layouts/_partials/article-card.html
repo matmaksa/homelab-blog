@@ -1,4 +1,4 @@
-{{/* Article card – raspberry.tips-style post card */}}
+{{/* Article card – with optional metadata badges */}}
 {{- $p := . }}
 {{- $cat := index $p.Params.categories 0 | default "" }}
 {{- $img := "" }}
@@ -29,6 +29,14 @@
     </header>
     <div class="entry-meta">
       <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02.01.2006" }}</time>
+      {{- if (.Param "ShowReadingTime") }}
+      <span class="entry-meta-sep" aria-hidden="true">·</span>
+      <span>{{ $p.ReadingTime }} Min.</span>
+      {{- end }}
+      {{- if $p.Params.difficulty }}
+      <span class="entry-meta-sep" aria-hidden="true">·</span>
+      <span class="entry-badge badge-{{ $p.Params.difficulty }}">{{ $p.Params.difficulty }}</span>
+      {{- end }}
     </div>
     {{- if $excerpt }}
     <div class="entry-content">
@@ -36,7 +44,9 @@
     </div>
     {{- end }}
     <footer class="entry-footer">
-      <span class="read-more">Weiterlesen →</span>
+      <span class="read-more">Weiterlesen
+        <svg class="read-more-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </span>
     </footer>
   </div>
   <a class="entry-link" aria-label="post link to {{ $p.Title | plainify }}" href="{{ $p.Permalink }}"></a>
