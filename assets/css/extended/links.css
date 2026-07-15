@@ -469,19 +469,33 @@ body.links-page {
 
 /* --- Light Mode Variablen (Standard) --- */
 .links-page {
-  --ll-heading-color: #0f172a;
-  --ll-description-color: #334155;
+  --ll-heading-color: #020617;
+  --ll-description-color: #1e293b;
   --ll-disclosure-text: #1e293b;
 }
 
-/* Apply to elements */
-.links-page .ll-section-head h2 {
+/* Apply to elements – Light Mode explizit via html:not Selector */
+html:not([data-theme="dark"]) .links-page .ll-section-head h2 {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--ll-heading-color);
 }
 
-.links-page .ll-section-desc {
+html:not([data-theme="dark"]) .links-page .ll-section-desc {
+  font-size: 0.9375rem;
+  font-weight: 450;
+  line-height: 1.5;
+  color: var(--ll-description-color);
+}
+
+/* Dark Mode – gleiche Struktur, andere Variablenwerte */
+html[data-theme="dark"] .links-page .ll-section-head h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ll-heading-color);
+}
+
+html[data-theme="dark"] .links-page .ll-section-desc {
   font-size: 0.9375rem;
   font-weight: 450;
   line-height: 1.5;
