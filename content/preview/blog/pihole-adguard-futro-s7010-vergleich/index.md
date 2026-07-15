@@ -2,6 +2,8 @@
 title = 'Pi-hole oder AdGuard Home auf einem Futro S7010: Was läuft mit 256 MB RAM?'
 description = 'Pi-hole und AdGuard Home im Vergleich auf dem Fujitsu Futro S7010 mit 4 GB RAM. Getestet mit 256 und 512 MB – echte Messwerte zu Speicher, DNS-Latenz, WebUI und Blockabdeckung.'
 date = 2026-07-14
+image = "featured.png"
+cover = { image = "featured.png" }
 robotsNoIndex = true
 sitemap = { exclude = true }
 preview = true
