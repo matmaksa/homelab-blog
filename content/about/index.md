@@ -47,11 +47,11 @@ Die Inhalte sind deutsch, verständlich und immer an echten Projekten orientiert
 
 ## Wie die Inhalte entstehen
 
-Jeder Guide auf diesem Blog basiert auf einem echten Aufbau, den ich selbst betreibe. Ich baue nichts auf, nur um darüber zu schreiben. Ich schreibe über das, was bei mir läuft.
+Meine Guides basieren nach Möglichkeit auf eigenen Aufbauten und praktischen Tests. Wo ich mich auf Recherche, Herstellerangaben oder externe Messwerte stütze, kennzeichne ich das transparent.
 
 Das bedeutet:
 
-- Hardware-Empfehlungen sind mit realen Geräten getestet
+- Hardware-Empfehlungen sind nach Möglichkeit mit realen Geräten getestet
 - Anleitungen folgen dem genauen Ablauf, den ich selbst durchgehe
 - Preisangaben und Verbrauchswerte sind recherchiert oder gemessen
 - Wenn etwas nicht funktioniert hat, steht es auch so im Artikel

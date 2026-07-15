@@ -75,24 +75,24 @@
       <p class="section-subtitle">Wähle dein Projekt – ich zeige dir den Weg</p>
     </div>
     <div class="projects-grid">
-      <a href="{{ "posts/home-assistant-gebrauchter-mini-pc-2026/" | absLangURL }}" class="project-card card-werbung">
+      <div class="project-card card-werbung card-placeholder">
         <div class="project-card-icon" aria-hidden="true">🛡️</div>
         <h3 class="project-card-title">Werbung &amp; Tracking blockieren</h3>
         <p class="project-card-desc">AdGuard oder Pi-hole auf dem Mini-PC – blockiert Werbung im gesamten Heimnetzwerk, schützt die Privatsphäre und entlastet deine Geräte.</p>
-        <span class="project-card-link">Anleitung lesen →</span>
-      </a>
+        <span class="step-label">Guide in Vorbereitung</span>
+      </div>
       <a href="{{ "posts/home-assistant-gebrauchter-mini-pc-2026/" | absLangURL }}" class="project-card card-smarthome">
         <div class="project-card-icon" aria-hidden="true">🏠</div>
         <h3 class="project-card-title">Smart Home lokal betreiben</h3>
         <p class="project-card-desc">Home Assistant auf einem gebrauchten Mini-PC – steuere Lampen, Sensoren und Heizung, ohne Cloud-Zwang und ohne monatliche Gebühren.</p>
         <span class="project-card-link">Anleitung lesen →</span>
       </a>
-      <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="project-card card-docker">
+      <div class="project-card card-docker card-placeholder">
         <div class="project-card-icon" aria-hidden="true">🐳</div>
         <h3 class="project-card-title">Docker &amp; Selfhosting lernen</h3>
-        <p class="project-card-desc">Dienste wie Headscale, Vaultwarden, Nextcloud oder Plex selbst hosten – lerne Docker Schritt für Schritt an echten Projekten.</p>
-        <span class="project-card-link">Anleitung lesen →</span>
-      </a>
+        <p class="project-card-desc">Eigene Dienste betreiben – von Cloud-Alternativen bis zu Medienservern. Lerne Docker Schritt für Schritt an echten Projekten.</p>
+        <span class="step-label">Guide in Vorbereitung</span>
+      </div>
       <a href="{{ "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/" | absLangURL }}" class="project-card card-proxmox">
         <div class="project-card-icon" aria-hidden="true">🖥️</div>
         <h3 class="project-card-title">Mit Proxmox starten</h3>
@@ -102,7 +102,7 @@
       <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="project-card card-vpn">
         <div class="project-card-icon" aria-hidden="true">🔒</div>
         <h3 class="project-card-title">Sicher von unterwegs zugreifen</h3>
-        <p class="project-card-desc">Headscale als selbst gehostetes Mesh-VPN – greife sicher auf dein Homelab zu, ohne Port-Forwardings und ohne teure VPN-Dienste.</p>
+        <p class="project-card-desc">Greife mit Tailscale, WireGuard oder einer selbst gehosteten Lösung sicher auf dein Homelab zu. Headscale ist eine fortgeschrittene Alternative für erfahrene Nutzer.</p>
         <span class="project-card-link">Anleitung lesen →</span>
       </a>
     </div>
@@ -152,9 +152,9 @@
       <div class="path-step">
         <div class="step-number" aria-hidden="true">5</div>
         <div class="step-content">
-          <h3>Fernzugriff absichern</h3>
-          <p>Mit WireGuard oder Headscale von unterwegs verbinden</p>
-          <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="step-link">Zu Headscale →</a>
+          <h3>Fernzugriff sicher einrichten</h3>
+          <p>Starte mit einer einfachen VPN-Lösung und beschäftige dich später bei Bedarf mit selbst gehosteten Alternativen.</p>
+          <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="step-link">Fortgeschritten: Headscale selbst hosten →</a>
         </div>
       </div>
     </div>
@@ -172,7 +172,7 @@
       <div class="entry-hw-card">
         <div class="entry-hw-icon" aria-hidden="true">⚙️</div>
         <h3 class="entry-hw-title">Rechenleistung</h3>
-        <p class="entry-hw-text">Ein gebrauchter Mini-PC oder Thin Client mit Intel-Core-i5 der 6.–8. Generation reicht völlig. Die CPUs sind leise, sparsam und für Einsteiger-Projekte mehr als ausreichend.</p>
+        <p class="entry-hw-text">Ein sparsamer Mini-PC oder Thin Client reicht für viele erste Dienste aus. Entscheidend ist weniger der Modellname als die Frage, welche Anwendungen darauf laufen sollen. Für AdGuard, Home Assistant und kleine Docker-Dienste genügt häufig bereits ein moderner Vierkern-Thin-Client. Für mehrere virtuelle Maschinen oder anspruchsvollere Dienste ist ein Business-Mini-PC mit Core i5 sinnvoller.</p>
       </div>
       <div class="entry-hw-card">
         <div class="entry-hw-icon" aria-hidden="true">🧠</div>
@@ -187,7 +187,7 @@
       <div class="entry-hw-card">
         <div class="entry-hw-icon" aria-hidden="true">🌐</div>
         <h3 class="entry-hw-title">Netzwerk</h3>
-        <p class="entry-hw-text">Gigabit-Ethernet ist Pflicht. WLAN ist für einen Server weniger geeignet. Ein einfacher Router mit LAN-Anschluss genügt – extra Hardware ist nicht nötig.</p>
+        <p class="entry-hw-text">Gigabit-LAN ist sinnvoll und bei den meisten Geräten heute Standard. Für einen zuverlässig laufenden Server ist eine Kabelverbindung in der Regel besser geeignet als WLAN.</p>
       </div>
     </div>
     <div class="entry-hw-cta">
