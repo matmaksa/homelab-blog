@@ -37,8 +37,6 @@ instagram_derivatives_status = "ready_for_review"
   caption = "Ein Homelab muss nicht groß und teuer sein – ein gebrauchter Thin Client reicht für den Start."
 +++
 
-# Homelab unter 100€: Was du wirklich brauchst
-
 Viele denken bei einem Homelab sofort an teure Server-Racks, laute Lüfter und eine dreistellige Stromrechnung.  
 Die Wahrheit: Für die ersten Schritte reichen oft **unter 100 Euro** – wenn man weiß, worauf es ankommt.
 
