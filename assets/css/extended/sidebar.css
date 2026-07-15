@@ -19,7 +19,7 @@
   font-size: var(--hl-text-xl, 1.1rem);
   font-weight: 700;
   color: var(--hl-accent, #2c3e50);
-  border-bottom: 2px solid var(--hl-primary, #007acc);
+  border-bottom: 2px solid var(--hl-primary, #2e7d32);
   padding-bottom: 0.75rem;
   margin: 0 0 1rem;
 }
@@ -42,7 +42,7 @@
 }
 
 .sidebar-search input[type="search"]:focus {
-  border-color: var(--hl-primary, #007acc);
+  border-color: var(--hl-primary, #2e7d32);
 }
 
 .sidebar-search button {
@@ -50,16 +50,16 @@
   align-items: center;
   justify-content: center;
   padding: 0.75rem 1rem;
-  background: var(--hl-primary, #007acc);
+  background: var(--hl-primary, #2e7d32);
   color: #fff;
-  border: 1px solid var(--hl-primary, #007acc);
+  border: 1px solid var(--hl-primary, #2e7d32);
   border-radius: 0 var(--hl-radius-sm, 6px) var(--hl-radius-sm, 6px) 0;
   cursor: pointer;
   transition: background var(--hl-transition, 0.2s ease);
 }
 
 .sidebar-search button:hover {
-  background: var(--hl-primary-dark, #005999);
+  background: var(--hl-primary-dark, #1b5e20);
 }
 
 /* --- Popular Posts Widget --- */
@@ -120,7 +120,7 @@
 }
 
 .sidebar-popular-title a:hover {
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #2e7d32);
 }
 
 /* --- Categories Widget --- */
@@ -150,7 +150,7 @@
 }
 
 .sidebar-categories-item a:hover {
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #2e7d32);
 }
 
 .sidebar-categories-count {
@@ -169,7 +169,7 @@
 }
 
 .sidebar-instagram a {
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #2e7d32);
   font-weight: 600;
   text-decoration: none;
 }
@@ -209,7 +209,7 @@
   gap: 0.5rem;
   padding: 0.65rem 0.85rem;
   background: var(--hl-primary-light, #e6f0ff);
-  color: var(--hl-primary, #0073e6);
+  color: var(--hl-primary, #2e7d32);
   border-radius: var(--hl-radius-sm, 6px);
   text-decoration: none;
   font-weight: 600;
@@ -218,7 +218,7 @@
 }
 
 .sidebar-tools-list a:hover {
-  background: var(--hl-primary, #0073e6);
+  background: var(--hl-primary, #2e7d32);
   color: #fff;
   transform: translateY(-1px);
 }
@@ -229,8 +229,8 @@
 }
 
 .sidebar-tools-list a[title="Coming Soon"]:hover {
-  background: var(--hl-primary-light, #e6f0ff);
-  color: var(--hl-primary, #0073e6);
+  background: var(--hl-primary-light, #e8f5e9);
+  color: var(--hl-primary, #2e7d32);
   transform: none;
 }
 
@@ -245,14 +245,14 @@
 .sidebar-about-link {
   display: inline-block;
   font-weight: 600;
-  color: var(--hl-primary, #0073e6);
+  color: var(--hl-primary, #2e7d32);
   text-decoration: none;
   font-size: 0.85rem;
   transition: color 0.2s ease;
 }
 
 .sidebar-about-link:hover {
-  color: var(--hl-primary-dark, #005bb5);
+  color: var(--hl-primary-dark, #1b5e20);
   text-decoration: underline;
 }
 

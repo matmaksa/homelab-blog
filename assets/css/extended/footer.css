@@ -72,7 +72,7 @@
 }
 
 .footer-social-link:hover {
-  background: var(--hl-primary, #0073e6);
+  background: var(--hl-primary, #2e7d32);
   color: #fff;
 }
 
@@ -95,7 +95,7 @@
 }
 
 .footer-link-list a:hover {
-  color: var(--hl-primary, #4db8ff);
+  color: var(--hl-primary, #66bb6a);
 }
 
 /* --- Footer Bottom (Copyright + Affiliate) --- */
@@ -181,5 +181,5 @@
 }
 
 [data-theme="dark"] .footer-link-list a:hover {
-  color: var(--hl-primary, #4db8ff);
+  color: var(--hl-primary, #66bb6a);
 }

@@ -1,5 +1,5 @@
 /* ============================================================
-   POST CARDS – Modernes Card-Design mit Hover-Effekt
+   POST CARDS – Card-Design (raspberry.tips-Stil)
    ============================================================ */
 
 .post-entry {
@@ -7,27 +7,27 @@
   border-radius: var(--hl-radius, 12px);
   box-shadow: var(--hl-shadow-sm, 0 4px 20px rgba(0,0,0,0.05));
   overflow: hidden;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   transition: transform var(--hl-transition, 0.2s ease), box-shadow var(--hl-transition, 0.2s ease);
   position: relative;
-  border: none;
+  border: 1px solid var(--hl-border, #e8e8e8);
 }
 
 .post-entry:hover {
-  transform: translateY(-4px);
+  transform: translateY(-3px);
   box-shadow: var(--hl-shadow-hover, 0 8px 30px rgba(0,0,0,0.12));
 }
 
-/* --- Featured Image --- */
+/* --- Featured Image (Thumbnail) --- */
 .post-entry .entry-cover {
   width: 100%;
-  max-height: 200px;
+  max-height: 170px;
   overflow: hidden;
 }
 
 .post-entry .entry-cover img {
   width: 100%;
-  height: 200px;
+  height: 170px;
   object-fit: cover;
   border-radius: 0;
   display: block;
@@ -35,89 +35,85 @@
 
 /* --- Entry Content --- */
 .post-entry .entry-content-inner {
-  padding: 1.25rem;
+  padding: 1rem 1.25rem 1.25rem;
 }
 
-/* --- Category Badge (farbiger Pill-Tag) --- */
+/* --- Category Badge (grüner Pill-Tag) --- */
 .post-entry .entry-category {
   display: inline-block;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  padding: 0.2rem 0.7rem;
+  padding: 0.15rem 0.6rem;
   border-radius: 9999px;
   color: #fff;
   background: var(--cat-badge, var(--hl-primary));
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   line-height: 1.4;
 }
 
-/* --- Title --- */
-.post-entry .entry-header h2 {
-  font-size: var(--hl-text-2xl, 1.35rem);
+/* --- Title (h3 wie raspberry.tips) --- */
+.post-entry .entry-header h3 {
+  font-size: 1rem;
   font-weight: 700;
   color: var(--hl-accent, #2c3e50);
-  margin: 0.4rem 0;
-  line-height: var(--hl-leading-tight, 1.25);
+  margin: 0.3rem 0;
+  line-height: 1.35;
 }
 
-.post-entry .entry-header h2 a {
+.post-entry .entry-header h3 a {
   color: var(--hl-accent, #2c3e50);
   text-decoration: none;
 }
 
-.post-entry .entry-header h2 a:hover {
-  color: var(--hl-primary, #007acc);
+.post-entry .entry-header h3 a:hover {
+  color: var(--hl-primary, #2e7d32);
 }
 
-/* --- Meta --- */
+/* --- Meta (Datum) --- */
 .post-entry .entry-meta {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--hl-text-muted, #888);
-  margin-bottom: 0.4rem;
-}
-
-.post-entry .entry-meta span + span::before {
-  content: " · ";
+  margin-bottom: 0.3rem;
 }
 
 /* --- Excerpt --- */
 .post-entry .entry-content p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #555;
-  line-height: 1.6;
-  margin: 0.5rem 0 0;
+  line-height: 1.55;
+  margin: 0.4rem 0 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* --- Read More --- */
+/* --- Read More Link --- */
 .post-entry .entry-footer {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
 }
 
 .post-entry .entry-footer .read-more {
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #2e7d32);
   font-weight: 600;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 
 .post-entry .entry-footer .read-more:hover {
   text-decoration: underline;
 }
 
-/* --- Entry Link (Full Card Click) --- */
+/* --- Full Card Click Link --- */
 .post-entry .entry-link {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-/* --- First Entry (Hero) --- */
+/* --- First Entry (Hero override) --- */
 .first-entry {
   position: relative;
   min-height: auto;
@@ -132,12 +128,12 @@
 /* --- Responsive --- */
 @media (max-width: 480px) {
   .post-entry .entry-content-inner {
-    padding: 1rem;
+    padding: 0.85rem 1rem 1rem;
   }
   .post-entry .entry-cover img {
-    height: 160px;
+    height: 140px;
   }
-  .post-entry .entry-header h2 {
-    font-size: 1.15rem;
+  .post-entry .entry-header h3 {
+    font-size: 0.9rem;
   }
 }

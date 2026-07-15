@@ -1,14 +1,26 @@
 /* ============================================================
-   HEADER & MEGA-MENU – Sticky, Grid-Dropdown, Search-Overlay
+   HEADER – Dark Sticky Header (raspberry.tips-Stil)
    ============================================================ */
 
-/* --- Site Header --- */
+/* --- Top Announcement Bar --- */
+.top-bar {
+  background: #1a1a2e;
+  color: #ccc;
+  padding: 8px 0;
+  font-size: 0.82rem;
+  text-align: center;
+  border-bottom: 3px solid var(--hl-primary, #2e7d32);
+}
+.top-bar a { color: #81c784; font-weight: 500; }
+.top-bar a:hover { color: #a5d6a7; text-decoration: underline; }
+
+/* --- Site Header (Dark) --- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--hl-bg-card, #fff);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  background: var(--hl-accent, #1a1a2e);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   padding: 0 1.5rem;
 }
 
@@ -18,50 +30,48 @@
   justify-content: space-between;
   max-width: var(--hl-content-width, 1280px);
   margin: 0 auto;
-  height: var(--hl-header-height, 60px);
+  height: var(--hl-header-height, 68px);
 }
 
+/* --- Brand / Logo --- */
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   text-decoration: none;
-  color: var(--hl-accent, #1a1a2e);
-  font-size: 1.1rem;
-  font-weight: 700;
   flex-shrink: 0;
 }
-
-.header-brand:hover {
-  color: var(--hl-accent, #1a1a2e);
-}
+.header-brand:hover { opacity: 0.9; }
 
 .header-brand-icon {
   display: flex;
   align-items: center;
 }
-
 .header-brand-icon img {
   border-radius: 0;
-  max-height: 36px;
+  max-height: 32px;
   width: auto;
+  filter: brightness(0) invert(1);
+}
+
+.header-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .header-brand-name {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--hl-accent, #1a1a2e);
-  text-transform: uppercase;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
   letter-spacing: 0.5px;
 }
 
 .header-brand-tagline {
-  font-size: 0.68rem;
-  color: var(--hl-text-muted, #666);
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.6);
   font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: block;
+  letter-spacing: 0.3px;
 }
 
 /* --- Desktop Navigation --- */
@@ -78,18 +88,17 @@
   gap: 0;
 }
 
-/* --- Top-Level Links --- */
+/* --- Top-Level Links (white text on dark bg) --- */
 .main-nav-list > li > a {
   display: flex;
   align-items: center;
-  padding: 0 0.9rem;
-  height: var(--hl-header-height, 60px);
+  padding: 0 0.8rem;
+  height: var(--hl-header-height, 68px);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  text-transform: uppercase;
-  color: var(--hl-accent, #1a1a2e);
-  letter-spacing: 0.4px;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.3px;
   transition: color 0.2s ease;
   border-bottom: 3px solid transparent;
   white-space: nowrap;
@@ -99,15 +108,15 @@
 .main-nav-list > li > a:hover,
 .main-nav-list > li > a:focus-visible,
 .main-nav-list > li > a span.active {
-  color: var(--hl-primary, #0073e6);
-  border-bottom-color: var(--hl-primary, #0073e6);
+  color: #fff;
+  border-bottom-color: var(--hl-primary, #2e7d32);
 }
 
 .main-nav-list > li > a span.active {
   font-weight: 700;
 }
 
-/* --- Dropdown Arrow --- */
+/* --- Dropdown Arrow (light) --- */
 .main-nav-list > li.has-mega-dropdown > a::after {
   content: "";
   display: inline-block;
@@ -115,7 +124,7 @@
   height: 0;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
-  border-top: 4px solid currentColor;
+  border-top: 4px solid rgba(255,255,255,0.6);
   margin-left: 6px;
   vertical-align: middle;
   transition: transform 0.2s ease;
@@ -130,7 +139,7 @@
    ============================================================ */
 
 .main-nav-list > li.has-mega-dropdown {
-  position: static; /* Allows full-width dropdown */
+  position: static;
 }
 
 .mega-dropdown {
@@ -140,7 +149,7 @@
   left: 0;
   right: 0;
   background: var(--hl-bg-card, #fff);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.15);
   border-radius: 0 0 12px 12px;
   padding: 1.5rem 2rem;
   z-index: 200;
@@ -148,7 +157,6 @@
   margin: 0 auto;
 }
 
-/* Center the mega-dropdown relative to the viewport */
 .site-header .header-inner {
   position: relative;
 }
@@ -183,8 +191,8 @@
 
 .mega-link:hover,
 .mega-link:focus-visible {
-  background: var(--hl-primary-light, #e6f0ff);
-  color: var(--hl-primary, #0073e6);
+  background: var(--hl-primary-light, #e8f5e9);
+  color: var(--hl-primary, #2e7d32);
 }
 
 .mega-link-title {
@@ -192,7 +200,7 @@
 }
 
 /* ============================================================
-   SEARCH OVERLAY – Slide-In Panel (wie raspberry.tips)
+   SEARCH OVERLAY – Slide-In Panel
    ============================================================ */
 
 .search-overlay {
@@ -248,19 +256,19 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
-  border: 2px solid var(--hl-primary, #0073e6);
+  border: 2px solid var(--hl-primary, #2e7d32);
   border-radius: 8px;
   background: var(--hl-bg-alt, #f0f4f8);
   transition: border-color 0.2s ease;
 }
 
 .search-overlay-input-wrap:focus-within {
-  border-color: var(--hl-primary-dark, #005bb5);
-  box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.15);
+  border-color: var(--hl-primary-dark, #1b5e20);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
 }
 
 .search-overlay-icon {
-  color: var(--hl-primary, #0073e6);
+  color: var(--hl-primary, #2e7d32);
   flex-shrink: 0;
 }
 
@@ -298,7 +306,7 @@
   color: var(--hl-accent, #1a1a2e);
 }
 
-/* --- Header Actions --- */
+/* --- Header Actions (white icons on dark bg) --- */
 .header-actions {
   display: flex;
   align-items: center;
@@ -316,13 +324,13 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  color: var(--hl-accent, #1a1a2e);
+  color: rgba(255,255,255,0.7);
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .icon-btn:hover {
-  background: var(--hl-bg-alt, #f0f4f8);
-  color: var(--hl-primary, #0073e6);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
 }
 
 /* Theme Toggle – hide inactive icon */
@@ -354,7 +362,7 @@
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  color: var(--hl-accent, #1a1a2e);
+  color: rgba(255,255,255,0.7);
 }
 
 /* ============================================================
@@ -465,8 +473,8 @@
 
 .mobile-menu-list li a:hover,
 .mobile-menu-list li a.active {
-  background: var(--hl-primary-light, #e6f0ff);
-  color: var(--hl-primary, #0073e6);
+  background: var(--hl-primary-light, #e8f5e9);
+  color: var(--hl-primary, #2e7d32);
 }
 
 .mobile-menu-list li a strong {
@@ -498,26 +506,4 @@
 .mobile-menu-footer a {
   font-size: 0.85rem;
   color: var(--hl-text-muted, #666);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.mobile-menu-footer a:hover {
-  color: var(--hl-primary, #0073e6);
-}
-
-/* ============================================================
-   EXTRA SMALL – 480px und darunter
-   ============================================================ */
-
-@media (max-width: 480px) {
-  .header-brand-tagline {
-    display: none;
-  }
-  .header-brand-name {
-    font-size: 1rem;
-  }
-  .site-header {
-    padding: 0 1rem;
-  }
 }

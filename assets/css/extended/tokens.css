@@ -1,13 +1,12 @@
 /* ============================================================
-   DESIGN TOKENS – Homelab Guide (Modernes Blue-Magazin)
+   DESIGN TOKENS – raspberry.tips-inspiriertes Grün-Schema
    ============================================================ */
 
 :root {
-  /* --- Brand Colors --- */
-  /* --- Brand Colors (raspberry.tips-inspiriert) --- */
-  --hl-primary:       #0073e6;   /* raspberry.tips-Blau */
-  --hl-primary-dark:  #005bb5;   /* Dunkler für Hover */
-  --hl-primary-light: #e6f0ff;   /* Hell für Hintergründe */
+  /* --- Brand Colors (Green wie raspberry.tips) --- */
+  --hl-primary:       #2e7d32;   /* raspberry.tips-Grün */
+  --hl-primary-dark:  #1b5e20;   /* Dunkler für Hover */
+  --hl-primary-light: #e8f5e9;   /* Hell für Hintergründe */
   --hl-accent:        #1a1a2e;   /* Dunkel für Überschriften */
   --hl-accent-soft:   #f0f4f8;   /* Heller Akzent-Hintergrund */
 
@@ -18,7 +17,7 @@
   --hl-text-light:    #999999;   /* Sehr dezent */
 
   /* --- Backgrounds --- */
-  --hl-bg-body:       #f8f9fa;   /* Heller Seitenhintergrund */
+  --hl-bg-body:       #f4f5f7;   /* Heller Seitenhintergrund */
   --hl-bg-card:       #ffffff;   /* Weiße Inhaltsflächen */
   --hl-bg-alt:        #f0f4f8;   /* Alternativer Hintergrund */
   --hl-bg-code:       #f4f4f6;   /* Codeblock-Hintergrund */
@@ -50,7 +49,7 @@
   --hl-content-width:  1280px;
   --hl-content-narrow: 740px;
   --hl-content-padding: 1.5rem;
-  --hl-header-height:  60px;
+  --hl-header-height:  68px;
 
   /* --- Typography (System-Font-Stack) --- */
   --hl-font-sans:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
@@ -72,7 +71,7 @@
   --hl-leading-relaxed: 1.8;
 
   /* --- Focus States --- */
-  --hl-focus-ring: 0 0 0 3px rgba(0, 122, 204, 0.3);
+  --hl-focus-ring: 0 0 0 3px rgba(46, 125, 50, 0.3);
 
   /* --- Transitions --- */
   --hl-transition: 0.2s ease;
@@ -82,9 +81,9 @@
    DARK MODE
    ============================================================ */
 [data-theme="dark"] {
-  --hl-primary:       #4db8ff;
-  --hl-primary-dark:  #0073e6;
-  --hl-primary-light: #0a1a2e;
+  --hl-primary:       #66bb6a;
+  --hl-primary-dark:  #2e7d32;
+  --hl-primary-light: #1a3a1a;
   --hl-accent:        #e0e0e0;
   --hl-accent-soft:   #1e1e32;
 
@@ -109,12 +108,12 @@
 }
 
 /* ============================================================
-   KATEGORIE-FARBEN (angepasst an blaues Schema)
+   KATEGORIE-FARBEN (Grünes Schema)
    ============================================================ */
 :root {
   --cat-hardware:         #f59e0b;   /* Amber/Gold */
   --cat-software:         #8b5cf6;   /* Violett */
-  --cat-smarthome:        #22c55e;   /* Grün */
+  --cat-smarthome:        #2e7d32;   /* Grün */
   --cat-virtualisierung:  #06b6d4;   /* Cyan */
-  --cat-homelab:          #0073e6;   /* Homelab-Blau */
+  --cat-homelab:          #2e7d32;   /* Grün */
 }

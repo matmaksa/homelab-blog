@@ -48,11 +48,11 @@ h3 { font-size: var(--hl-text-xl, 1.15rem); font-weight: 600; color: var(--hl-ac
 
 /* --- Links --- */
 a {
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #2e7d32);
   transition: color var(--hl-transition, 0.2s ease);
 }
 a:hover {
-  color: var(--hl-primary-dark, #005999);
+  color: var(--hl-primary-dark, #1b5e20);
 }
 
 /* --- Breadcrumbs --- */
@@ -62,7 +62,7 @@ a:hover {
   margin-bottom: 0.75rem;
 }
 .breadcrumbs a {
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #2e7d32);
   text-decoration: none;
 }
 .breadcrumbs a:hover {
@@ -80,7 +80,7 @@ a:hover {
   left: 0;
   z-index: 9999;
   padding: 0.5rem 1rem;
-  background: var(--hl-primary, #007acc);
+  background: var(--hl-primary, #2e7d32);
   color: white;
   text-decoration: none;
 }
@@ -129,12 +129,12 @@ a:hover {
   transition: background var(--hl-transition, 0.2s ease), color var(--hl-transition, 0.2s ease);
 }
 .pagination-nav a:hover {
-  background: var(--hl-primary, #007acc);
+  background: var(--hl-primary, #2e7d32);
   color: #fff;
-  border-color: var(--hl-primary, #007acc);
+  border-color: var(--hl-primary, #2e7d32);
 }
 .pagination-nav .page-number.active {
-  background: var(--hl-primary, #007acc);
+  background: var(--hl-primary, #2e7d32);
   color: #fff;
   border-color: var(--hl-primary, #007acc);
   font-weight: 600;

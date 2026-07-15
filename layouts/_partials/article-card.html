@@ -1,4 +1,4 @@
-{{/* Article card – post-entry style for raspberry.tips look */}}
+{{/* Article card – raspberry.tips-style post card */}}
 {{- $p := . }}
 {{- $cat := index $p.Params.categories 0 | default "" }}
 {{- $img := "" }}
@@ -23,15 +23,12 @@
       {{- if $cat }}
       <div class="entry-category" style="--cat-badge: var(--cat-{{ $cat | urlize }}, var(--hl-primary))">{{ $cat }}</div>
       {{- end }}
-      <h2>
+      <h3>
         <a href="{{ $p.Permalink }}" aria-label="{{ $p.Title | plainify }}">{{ $p.Title }}</a>
-      </h2>
+      </h3>
     </header>
     <div class="entry-meta">
       <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02.01.2006" }}</time>
-      {{- if ($p.Param "ShowReadingTime") }}
-      <span>{{ $p.ReadingTime }} Min. Lesezeit</span>
-      {{- end }}
     </div>
     {{- if $excerpt }}
     <div class="entry-content">
