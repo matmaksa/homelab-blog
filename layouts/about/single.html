@@ -12,7 +12,7 @@
   {{- /* Split content at first <hr> to insert values between personal intro and next section */}}
   {{- $parts := split .Content "<hr>" }}
   {{- $intro := index $parts 0 }}
-  {{- $rest := after 1 $parts | delimit "<hr>" }}
+  {{- $restParts := after 1 $parts }}{{ $rest := delimit $restParts "<hr>" }}
 
   <div class="about-content">
     {{- $intro }}
