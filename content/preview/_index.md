@@ -1,35 +1,90 @@
 +++
-title = "Preview – Entwürfe"
-description = "Nicht veröffentlichte Vorschau-Artikel und Instagram-Beiträge"
+title = "Preview: Lesbarkeitsverbesserungen"
+description = "Zentrale Übersicht aller Preview-Inhalte mit Lesbarkeitsverbesserungen"
 robotsNoIndex = true
 sitemap = { exclude = true }
-
-[cascade]
-  robotsNoIndex = true
-  
-  [cascade.sitemap]
-    exclude = true
-  
-  preview = true
-  draft_banner = true
-  hideMeta = true
-  ShowShareButtons = false
-  ShowPostNavLinks = false
-  comments = false
-  editPost = []
+preview = true
+draft_banner = true
+hideMeta = true
+ShowShareButtons = false
+ShowPostNavLinks = false
+comments = false
 +++
 
-# Preview – was als Nächstes kommt
+<div class="preview-overview">
 
-Diese Seite bündelt nicht veröffentlichte Vorschauen zur Prüfung.  
-Sie sind nicht für die Veröffentlichung freigegeben und werden von Suchmaschinen ausgeschlossen.
+## 📐 Lesbarkeit & Layout
 
-## Bereiche
+Diese Preview zeigt Verbesserungen der Lesbarkeit des Blogs **matmaksa.de** – isoliert, ohne die öffentliche Website zu verändern.
 
-- [Blog-Entwürfe und Review-Drafts](/homelab-blog/preview/blog/)
-- [Instagram-Preview-Beiträge](/homelab-blog/preview/insta/)
+<div class="preview-meta">
+  <strong>Erstellt:</strong> 15. Juli 2026 &nbsp;·&nbsp;
+  <strong>Status:</strong> ⚠️ Preview – nicht öffentlich &nbsp;·&nbsp;
+  <strong>Benötigt:</strong> Deine visuelle Freigabe
+</div>
 
-## Direkte Struktur
+### Was wurde verbessert?
 
-- `/preview/blog/<artikel>/` – lesbare Blog-Entwürfe mit Text, Format und ggf. Bildern
-- `/preview/insta/<beitrag>/` – Instagram-Carousels/Reels als visuelle Vorschau
+| Bereich | Änderung |
+|---|---|
+| **Fließtext** | Textbreite auf ~760 px begrenzt, Schrift 18 px, Zeilenhöhe 1,75, mehr Absatzabstand |
+| **Überschriften** | Deutlich mehr Abstand vor H2/H3, klarere Größenhierarchie |
+| **Tabellen** | Horizontal scrollbar auf Mobil, mehr Innenabstand, einklappbar bei langen Tabellen |
+| **Info-Boxen** | Wiederkehrende Boxen („Zu wissen", „Meine Erfahrung", „Wichtig", „Technische Details") mit farbiger linker Kante |
+| **Inhaltsverzeichnis** | Auf Mobil standardmäßig eingeklappt, keine Doppelanzeige |
+| **Artikelabsätze** | Auf 3–4 Sätze begrenzt (redaktioneller Hinweis); technische Details in aufklappbaren Bereichen |
+
+### Beispiel-Seiten
+
+<div class="preview-card">
+  <span class="preview-badge modified">verbessert</span>
+  <h3><a href="/preview/blog/pihole-adguard-futro-s7010-vergleich/">🔍 Pi-hole vs. AdGuard Home auf Futro S7010</a></h3>
+  <p class="preview-desc">Vollständiger Artikel mit allen Lesbarkeitsverbesserungen: schmalere Textbreite, größere Schrift, optimierte Tabellen, Info-Boxen, einklappbares TOC.</p>
+</div>
+
+<div class="preview-card">
+  <span class="preview-badge modified">verbessert</span>
+  <h3><a href="/preview/blog/home-assistant-gebrauchter-mini-pc/">🏠 Home Assistant auf gebrauchtem Mini-PC</a></h3>
+  <p class="preview-desc">Zweiter Beispiel-Artikel mit denselben Layout-Verbesserungen – zeigt Konsistenz über verschiedene Artikel hinweg.</p>
+</div>
+
+<div class="preview-card">
+  <span class="preview-badge modified">visuell</span>
+  <h3>🏠 Startseite (matmaksa.de)</h3>
+  <p class="preview-desc">Die Startseite wird durch die Preview-Änderungen nicht beeinflusst – sie hat kein <code>preview = true</code>. Die Lesbarkeitsverbesserungen greifen nur auf Artikelseiten. Die Startseite bleibt im aktuellen Layout sichtbar.</p>
+</div>
+
+### Vorher / Nachher
+
+| Bereich | Vorher | Nachher |
+|---|---|---|
+| **Textbreite** | Volle Breite (~900 px+) | ~760 px, zentriert |
+| **Schriftgröße** | ~16 px (Browser-Standard) | **18 px** |
+| **Zeilenhöhe** | ~1,6 | **1,75** |
+| **Absatzabstand** | ~1em | **1,6em** |
+| **Überschrift H2** | ~1,5em Abstand | **2,4em** Abstand |
+| **Tabellen** | Standard-Abstand, Überlauf | **10 px 14 px** Innenabstand, horizontal scrollbar |
+| **Info-Boxen** | Keine speziellen Formate | **4 farbige Typen** mit Rand links |
+| **TOC mobil** | Immer sichtbar | **Eingeklappt**, auf Klick ausklappbar |
+
+### Technische Details
+
+<details class="tech-detail">
+<summary>📋 Wie wurde das umgesetzt?</summary>
+
+- **Keine öffentliche CSS geändert** – Alle Preview-Styles sind in `extend_head.html` innerhalb von `{{- if .Params.preview }}` gekapselt
+- **Alle Regeln** sind mit `.preview-mode` als Parent-Selektor geschützt – nur Seiten mit `preview = true` im Frontmatter erhalten die Klasse
+- **baseof.html** wurde lokal überschrieben, um `preview-mode` ans `<body>` zu hängen
+- **Keine Shortcodes, keine neuen JavaScript-Abhängigkeiten** – reines CSS
+- **Preview-Übersicht** unter `/preview/` erreichbar
+</details>
+
+<details class="tech-detail">
+<summary>🔧 Blocker / Einschränkungen</summary>
+
+- **Startseiten-Preview** nicht als separate Seite umsetzbar, da `index.html` kein Frontmatter hat. Die CSS wäre auf der echten Startseite nicht aktiv.
+- **Artikelabsatz-Begrenzung** (3–4 Sätze) ist ein redaktioneller Hinweis, kein automatischer Zwang – müsste pro Artikel manuell umgesetzt werden.
+- Bei sehr langen Tabellen müssten Autoren manuell `details.table-toggle` um die Tabelle legen.
+</details>
+
+</div>
