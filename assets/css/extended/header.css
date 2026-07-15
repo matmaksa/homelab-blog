@@ -29,6 +29,13 @@
   text-decoration: none;
   flex-shrink: 0;
 }
+
+.header-logo-img {
+  display: block;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
 .header-brand:hover { opacity: 0.9; }
 
 .header-brand-icon {
