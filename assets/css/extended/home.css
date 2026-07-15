@@ -331,86 +331,93 @@
 .step-label { color: var(--hl-amber, #d97706); }
 
 /* ============================================================
-   STARTER-SETUP
+   HARDWARE-GRUNDLAGEN – „Was du für den Einstieg wirklich brauchst"
    ============================================================ */
-.starter-section {
+.entry-hw-section {
   margin: 3rem 0;
 }
-.starter-card {
-  background: linear-gradient(135deg, var(--hl-primary-light, #eff6ff) 0%, #fff 100%);
-  border: 2px solid var(--hl-primary, #2563eb);
-  border-radius: var(--hl-radius, 12px);
-  padding: 2rem;
+
+.entry-hw-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
-@media (min-width: 768px) {
-  .starter-card {
-    grid-template-columns: 2fr 1fr;
-  }
+
+.entry-hw-card {
+  background: var(--hl-bg-card, #fff);
+  border: 1px solid var(--hl-border, #e2e8f0);
+  border-radius: var(--hl-radius, 12px);
+  padding: 1.5rem;
+  transition: border-color var(--hl-transition, 0.2s ease);
 }
-.starter-badge {
-  display: inline-block;
-  background: var(--hl-primary, #2563eb);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--hl-radius-pill, 9999px);
+
+.entry-hw-card:hover {
+  border-color: var(--hl-primary, #2563eb);
+}
+
+.entry-hw-icon {
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
-}
-.starter-content h2 {
-  font-size: var(--hl-text-2xl, 1.375rem);
-  font-weight: 700;
-  color: var(--hl-accent, #1e293b);
-  margin: 0 0 0.75rem;
-}
-.starter-content p {
-  color: var(--hl-text-body, #334155);
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin: 0 0 1rem;
-}
-.starter-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.25rem;
-}
-.starter-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: var(--hl-text-body, #334155);
-  padding: 0.35rem 0;
-}
-.starter-visual {
-  text-align: center;
-}
-.starter-price {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.starter-price-label {
-  font-size: 0.8rem;
-  color: var(--hl-text-muted, #64748b);
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.starter-price-value {
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--hl-primary, #2563eb);
   line-height: 1;
 }
-.starter-price-note {
-  font-size: 0.78rem;
-  color: var(--hl-text-light, #94a3b8);
-  margin-top: 0.5rem;
+
+.entry-hw-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--hl-accent, #1e293b);
+  margin: 0 0 0.5rem;
+}
+
+.entry-hw-text {
+  font-size: 0.85rem;
+  color: var(--hl-text-body, #334155);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.entry-hw-cta {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.entry-hw-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--hl-primary, #2563eb);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--hl-radius-sm, 8px);
+  text-decoration: none;
+  transition: background var(--hl-transition, 0.2s ease), transform var(--hl-transition, 0.2s ease);
+}
+
+.entry-hw-guide-link:hover {
+  background: var(--hl-primary-dark, #1d4ed8);
+  transform: translateY(-1px);
+}
+
+.entry-hw-guide-link:focus-visible {
+  outline: 2px solid var(--hl-primary, #2563eb);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .entry-hw-grid {
+    grid-template-columns: 1fr;
+  }
+  .entry-hw-card {
+    padding: 1rem;
+  }
+  .entry-hw-cta {
+    text-align: center;
+  }
+  .entry-hw-guide-link {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ============================================================
@@ -441,8 +448,6 @@
   .hero-ctas { flex-direction: column; }
   .btn { justify-content: center; }
   .trust-bar { flex-direction: column; align-items: center; gap: 0.75rem; }
-  .starter-card { padding: 1.25rem; }
-  .starter-price-value { font-size: 2.25rem; }
 }
 
 @media (max-width: 359px) {
