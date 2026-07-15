@@ -87,7 +87,7 @@ Ein Barebone ist ein PC, bei dem **Arbeitsspeicher (RAM) und Festplatte (SSD) fe
 
 ## 💰 Bis 50 €: Fujitsu Futro S7010 – Der 40-Euro-Server
 
-{{< figure src="/homelab-blog/images/products/fujitsu-s7010.jpg" alt="Fujitsu Futro S7010 Thin Client" width="400" >}}
+{{< figure src="/images/products/fujitsu-s7010.jpg" alt="Fujitsu Futro S7010 Thin Client" width="400" >}}
 
 Der Fujitsu Futro S7010 ist der absolute Budget-Champion. Gebraucht bekommst du ihn mit 8 GB RAM und 64 GB SSD bereits ab **30–50 €** – und er ist erstaunlich brauchbar für seinen Preis.
 
@@ -158,7 +158,7 @@ Die direkte Konkurrenz zu HP. Identisches Preisniveau, ähnliche Specs. Der **30
 
 ## 💰 150–200 €: Lenovo ThinkCentre M720q Tiny – Der Erweiterbare
 
-{{< figure src="/homelab-blog/images/products/lenovo-m720q-tiny.jpg" alt="Lenovo ThinkCentre M720q Tiny" width="400" >}}
+{{< figure src="/images/products/lenovo-m720q-tiny.jpg" alt="Lenovo ThinkCentre M720q Tiny" width="400" >}}
 
 Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, die mehr wollen: **Er verfügt über einen PCIe-Slot im Innern.** Das bedeutet, du kannst eine 10-Gigabit-Netzwerkkarte, eine SATA-Erweiterungskarte oder sogar eine kompakte Grafikkarte nachrüsten – eine Möglichkeit, die kaum ein anderer Mini-PC dieser Preisklasse bietet.
 
@@ -179,7 +179,7 @@ Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, di
 
 ## 💰 200–300 €: GMKtec G3S – Neugerät mit Garantie
 
-{{< figure src="/homelab-blog/images/products/gmktec-g3s.jpg" alt="GMKtec G3S Intel N95 Mini PC" width="400" >}}
+{{< figure src="/images/products/gmktec-g3s.jpg" alt="GMKtec G3S Intel N95 Mini PC" width="400" >}}
 
 Der GMKtec G3S ist die beste Wahl, wenn du ein **Neugerät mit Garantie** möchtest und nicht auf dem Gebrauchtmarkt suchen willst.
 
