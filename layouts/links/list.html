@@ -13,13 +13,25 @@
 <meta name="theme-color" content="#1a56db">
 {{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | absURL }}">{{ end }}
 
-{{/* DARK MODE – frühe Initialisierung vor Rendering, exakt Blog-Schlüssel */}}
+{{/* DARK/LIGHT MODE – frühe Initialisierung vor Rendering, data-theme immer explizit */}}
 <script>
-(function(){
-  var p=new URLSearchParams(window.location.search),t=p.get('mode');
-  if(!t)t=localStorage.getItem('pref-theme');
-  if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
-  if(t==='dark')document.documentElement.setAttribute('data-theme','dark');
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const forcedMode = params.get("mode");
+  const storedMode = localStorage.getItem("pref-theme");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const theme =
+    forcedMode === "light" || forcedMode === "dark"
+      ? forcedMode
+      : storedMode === "light" || storedMode === "dark"
+        ? storedMode
+        : systemDark
+          ? "dark"
+          : "light";
+
+  document.documentElement.dataset.theme = theme;
+  document.documentElement.style.colorScheme = theme;
 })();
 </script>
 
