@@ -9,6 +9,9 @@ pygmentsUseClasses = true
 buildDrafts = false
 
 [params]
+  # Search page exists
+  searchPage = true
+
   [params.analytics.google]
     SiteVerificationTag = "google09a060456df1ed16.html"
 
@@ -36,9 +39,6 @@ buildDrafts = false
   [params.homeInfoParams]
     Title = "Homelab Guide"
     Content = "Praxis-Guides für dein Homelab – Virtualisierung, Docker, KI Modelle und mehr. Betrieben mit Leidenschaft und Kabelbindern."
-
-  # Search page exists
-  searchPage = true
 
   # Disable default PaperMod theme toggle (we use our own)
   disableThemeToggle = false

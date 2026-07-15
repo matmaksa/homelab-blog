@@ -52,14 +52,18 @@
   padding: 1.5rem;
 }
 
+/* --- Hero Category Badge (farbiger Pill-Tag) --- */
 .hero-card-category {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--hl-primary, #007acc);
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  padding: 0.2rem 0.7rem;
+  border-radius: 9999px;
+  color: #fff;
+  background: var(--cat-badge, var(--hl-primary));
+  margin-bottom: 0.5rem;
 }
 
 .hero-card-title {
@@ -100,19 +104,21 @@
 .section-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 2px solid var(--hl-primary, #007acc);
+  align-items: flex-end;
+  border-bottom: 2px solid var(--hl-primary, #0073e6);
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
+  gap: 1rem;
 }
 
 .section-header h2 {
-  font-size: var(--hl-text-xl, 1.15rem);
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--hl-accent, #2c3e50);
+  color: var(--hl-accent, #1a1a2e);
   margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.3;
 }
 
 .section-link {
@@ -120,6 +126,15 @@
   color: var(--hl-primary, #007acc);
   font-weight: 600;
   text-decoration: none;
+}
+
+.section-sub {
+  font-size: 0.82rem;
+  color: var(--hl-text-muted, #666);
+  margin: 0.1rem 0 0;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .section-link:hover {

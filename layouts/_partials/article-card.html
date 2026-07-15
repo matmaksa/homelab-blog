@@ -21,7 +21,7 @@
   <div class="entry-content-inner">
     <header class="entry-header">
       {{- if $cat }}
-      <div class="entry-category">{{ $cat }}</div>
+      <div class="entry-category" style="--cat-badge: var(--cat-{{ $cat | urlize }}, var(--hl-primary))">{{ $cat }}</div>
       {{- end }}
       <h2>
         <a href="{{ $p.Permalink }}" aria-label="{{ $p.Title | plainify }}">{{ $p.Title }}</a>

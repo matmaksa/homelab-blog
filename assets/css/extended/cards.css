@@ -38,15 +38,19 @@
   padding: 1.25rem;
 }
 
-/* --- Category Tag --- */
+/* --- Category Badge (farbiger Pill-Tag) --- */
 .post-entry .entry-category {
   display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: var(--hl-primary, #007acc);
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  padding: 0.2rem 0.7rem;
+  border-radius: 9999px;
+  color: #fff;
+  background: var(--cat-badge, var(--hl-primary));
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
 }
 
 /* --- Title --- */

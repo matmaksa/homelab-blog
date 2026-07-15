@@ -27,7 +27,7 @@
     </div>
     <div class="hero-card-body">
       {{- if $heroCat }}
-      <span class="hero-card-category">{{ $heroCat }}</span>
+      <span class="hero-card-category" style="--cat-badge: var(--cat-{{ $heroCat | urlize }}, var(--hl-primary))">{{ $heroCat }}</span>
       {{- end }}
       <h2 class="hero-card-title">{{ $hero.Title }}</h2>
       <p class="hero-card-excerpt">{{ partial "clean-excerpt.html" $hero }}</p>
@@ -49,16 +49,28 @@
     KATEGORIE-GRIDS – 3 Beiträge pro Kategorie
     ================================================================ */}}
 {{- $categories := slice "Homelab" "Hardware" "Virtualisierung" "Software" "Smarthome" }}
-{{- $categoryLabels := dict "Homelab" "Einsteiger & Low Budget" "Hardware" "Hardware & Geräte" "Virtualisierung" "Proxmox & Virtualisierung" "Software" "Software & Selfhosting" "Smarthome" "Smart Home" }}
+{{- $categoryLabels := dict 
+  "Homelab"         (dict "label" "🚀 Einsteiger & Low Budget" "sub" "Neu beim Homelab? Hier starten.")
+  "Hardware"        (dict "label" "⚙️ Hardware & Geräte" "sub" "Die beste Hardware für dein Homelab")
+  "Virtualisierung" (dict "label" "🖥️ Proxmox & Virtualisierung" "sub" "VMs, LXC, Cluster – virtuell aufgerüstet")
+  "Software"        (dict "label" "📦 Software & Selfhosting" "sub" "Dienste selbst hosten und verwalten")
+  "Smarthome"       (dict "label" "🏠 Smart Home" "sub" "Home Assistant, Sensoren, Automationen")
+}}
 
 {{- range $cat := $categories }}
 {{- $catPosts := where $published "Params.categories" "intersect" (slice $cat) }}
 {{- $catPosts := where $catPosts "Permalink" "not in" $usedPermalinks }}
 {{- $catPosts = first 3 $catPosts }}
 {{- if $catPosts }}
+{{- $catData := index $categoryLabels $cat | default (dict "label" (humanize $cat) "sub" "") }}
 <section class="cat-section" aria-labelledby="cat-{{ $cat | urlize }}">
   <div class="section-header">
-    <h2 id="cat-{{ $cat | urlize }}">{{ index $categoryLabels $cat | default (humanize $cat) }}</h2>
+    <div class="section-header-text">
+      <h2 id="cat-{{ $cat | urlize }}">{{ $catData.label }}</h2>
+      {{- if $catData.sub }}
+      <p class="section-sub">{{ $catData.sub }}</p>
+      {{- end }}
+    </div>
     <a href="{{ printf "/categories/%s/" ($cat | urlize) | absLangURL }}" class="section-link">Alle anzeigen →</a>
   </div>
   <div class="cat-grid">

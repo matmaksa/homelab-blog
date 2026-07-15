@@ -41,42 +41,39 @@
     <nav class="main-nav" aria-label="Hauptnavigation">
       <ul class="main-nav-list">
         {{- range site.Menus.main }}
-        {{- if .HasChildren }}
-        {{- /* Parent with dropdown */}}
         {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
         {{- $page_url:= $currentPage.Permalink | absLangURL }}
-        {{- $is_search := eq .Identifier "suche" }}
-        <li class="has-dropdown">
-          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}{{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-            {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+        {{- if .HasChildren }}
+        {{- /* Parent with mega-dropdown */}}
+        <li class="has-mega-dropdown">
+          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
             <span{{ if eq $menu_item_url $page_url }} class="active"{{ end }}>
               {{- .Pre }}{{ .Name -}}{{ .Post -}}
             </span>
           </a>
-          <ul class="dropdown-menu">
-            {{- range .Children }}
-            {{- $child_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
-            <li>
-              <a href="{{ .URL | absLangURL }}"{{ if eq $child_url $page_url }} class="active"{{ end }}>
-                {{- .Pre }}{{ .Name -}}{{ .Post -}}
-              </a>
-            </li>
-            {{- end }}
-          </ul>
+          <div class="mega-dropdown" role="menu">
+            <div class="mega-grid">
+              {{- range .Children }}
+              <div class="mega-col">
+                <a href="{{ .URL | absLangURL }}" class="mega-link" role="menuitem">
+                  <span class="mega-link-title">{{ .Name }}</span>
+                </a>
+              </div>
+              {{- end }}
+            </div>
+          </div>
         </li>
         {{- else }}
-        {{- /* Leaf item */}}
-        {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
-        {{- $page_url:= $currentPage.Permalink | absLangURL }}
-        {{- $is_search := eq .Identifier "suche" }}
+        {{- /* Leaf item – skip "Suche" in nav, handled by search-toggle button */}}
+        {{- if ne .Identifier "suche" }}
         <li>
-          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}{{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-            {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+          <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
             <span{{ if eq $menu_item_url $page_url }} class="active"{{ end }}>
               {{- .Pre }}{{ .Name -}}{{ .Post -}}
             </span>
           </a>
         </li>
+        {{- end }}
         {{- end }}
         {{- end }}
       </ul>
@@ -84,13 +81,13 @@
 
     <!-- Header Actions -->
     <div class="header-actions">
-      {{- if site.Params.searchPage }}
-      <a href="{{ "search/" | absLangURL }}" class="icon-btn" title="Suche (Alt + /)" accesskey="/" aria-label="Suche öffnen">
+      {{- if site.Params.searchpage }}
+      <button class="icon-btn search-toggle" id="search-toggle" title="Suche öffnen (Alt + /)" aria-label="Suche öffnen" accesskey="/">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
-      </a>
+      </button>
       {{- end }}
 
       {{- if (not site.Params.disableThemeToggle) }}
@@ -122,6 +119,28 @@
       </button>
     </div>
   </div>
+
+  <!-- Search Overlay (Slide-In wie raspberry.tips) -->
+  <div id="search-overlay" class="search-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Suche">
+    <div class="search-overlay-inner">
+      <form action="{{ "search/" | absLangURL }}" method="get" role="search" class="search-overlay-form">
+        <div class="search-overlay-input-wrap">
+          <svg class="search-overlay-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="search" id="search-input" name="q" placeholder="Suche nach Artikeln..." autocomplete="off" aria-label="Suchbegriff eingeben">
+        </div>
+        <button type="button" class="search-overlay-close" id="search-overlay-close" aria-label="Suche schließen">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div id="search-overlay-backdrop" class="search-overlay-backdrop" aria-hidden="true"></div>
 </header>
 
 <!-- Mobile Menu Overlay -->

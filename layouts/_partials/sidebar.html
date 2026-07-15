@@ -13,6 +13,16 @@
     </form>
   </div>
 
+  {{/* Tools Widget – interaktive Helfer (wie raspberry.tips) */}}
+  <div class="sidebar-widget sidebar-tools">
+    <h3>🔧 Tools</h3>
+    <ul class="sidebar-tools-list">
+      <li><a href="#" class="tool-placeholder" title="Coming Soon">🔌 GPIO Pin-Übersicht</a></li>
+      <li><a href="#" class="tool-placeholder" title="Coming Soon">⚡ Stromkosten-Rechner</a></li>
+      <li><a href="#" class="tool-placeholder" title="Coming Soon">📡 Subnetz-Rechner</a></li>
+    </ul>
+  </div>
+
   {{/* Categories Widget */}}
   <div class="sidebar-widget sidebar-categories">
     <h3>Kategorien</h3>
@@ -53,9 +63,16 @@
     </ul>
   </div>
 
+  {{/* About Widget */}}
+  <div class="sidebar-widget sidebar-about">
+    <h3>👤 Über mich</h3>
+    <p>Homelab-Enthusiast, Proxmox-Betreiber und Selfhosting-Fan. Ich zeige dir, wie du dein eigenes Rechenzentrum zu Hause aufbaust.</p>
+    <a href="{{ "about/" | absLangURL }}" class="sidebar-about-link">Mehr erfahren →</a>
+  </div>
+
   {{/* Instagram Widget */}}
   <div class="sidebar-widget sidebar-instagram">
-    <h3>Folgen</h3>
+    <h3>📸 Folgen</h3>
     <p>Folge mir auf <a href="https://instagram.com/matmaksa" target="_blank" rel="noopener noreferrer">Instagram @matmaksa</a> für aktuelle Updates aus meinem Homelab.</p>
   </div>
 

@@ -189,20 +189,71 @@
   color: var(--hl-text-body, #333);
 }
 
-/* --- Über mich Widget --- */
+/* --- Tools Widget (interaktive Helfer) --- */
+.sidebar-tools-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-tools-list li {
+  margin: 0;
+}
+
+.sidebar-tools-list a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--hl-primary-light, #e6f0ff);
+  color: var(--hl-primary, #0073e6);
+  border-radius: var(--hl-radius-sm, 6px);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-tools-list a:hover {
+  background: var(--hl-primary, #0073e6);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.sidebar-tools-list a[title="Coming Soon"] {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.sidebar-tools-list a[title="Coming Soon"]:hover {
+  background: var(--hl-primary-light, #e6f0ff);
+  color: var(--hl-primary, #0073e6);
+  transform: none;
+}
+
+/* --- About Widget --- */
 .sidebar-about p {
   font-size: 0.85rem;
-  color: #555;
+  color: var(--hl-text-body, #333);
   line-height: 1.6;
   margin: 0 0 0.75rem;
 }
 
-.sidebar-about a {
+.sidebar-about-link {
+  display: inline-block;
   font-weight: 600;
-  color: var(--hl-primary, #007acc);
+  color: var(--hl-primary, #0073e6);
   text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
 }
 
-.sidebar-about a:hover {
+.sidebar-about-link:hover {
+  color: var(--hl-primary-dark, #005bb5);
   text-decoration: underline;
 }
+
+/* --- Über mich Widget (alte Klasse, Kompatibilität) --- */

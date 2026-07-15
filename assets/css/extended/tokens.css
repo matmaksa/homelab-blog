@@ -4,32 +4,33 @@
 
 :root {
   /* --- Brand Colors --- */
-  --hl-primary:       #007acc;   /* Modernes Homelab-Blau */
-  --hl-primary-dark:  #005999;   /* Dunkler für Hover */
-  --hl-primary-light: #e8f4fd;   /* Hell für Hintergründe */
-  --hl-accent:        #2c3e50;   /* Dunkelblau/Anthrazit */
-  --hl-accent-soft:   #eef2f7;   /* Heller Akzent-Hintergrund */
+  /* --- Brand Colors (raspberry.tips-inspiriert) --- */
+  --hl-primary:       #0073e6;   /* raspberry.tips-Blau */
+  --hl-primary-dark:  #005bb5;   /* Dunkler für Hover */
+  --hl-primary-light: #e6f0ff;   /* Hell für Hintergründe */
+  --hl-accent:        #1a1a2e;   /* Dunkel für Überschriften */
+  --hl-accent-soft:   #f0f4f8;   /* Heller Akzent-Hintergrund */
 
   /* --- Text Colors --- */
-  --hl-text:          #333333;   /* Haupttext */
+  --hl-text:          #1a1a2e;   /* Haupttext */
   --hl-text-body:     #333333;   /* Fließtext */
-  --hl-text-muted:    #888888;   /* Meta-Infos */
-  --hl-text-light:    #aaaaaa;   /* Sehr dezent */
+  --hl-text-muted:    #666666;   /* Meta-Infos */
+  --hl-text-light:    #999999;   /* Sehr dezent */
 
   /* --- Backgrounds --- */
-  --hl-bg-body:       #f5f5f5;   /* Heller Seitenhintergrund */
+  --hl-bg-body:       #f8f9fa;   /* Heller Seitenhintergrund */
   --hl-bg-card:       #ffffff;   /* Weiße Inhaltsflächen */
-  --hl-bg-alt:        #f0f0f0;   /* Alternativer Hintergrund */
-  --hl-bg-code:       #f8f8f8;   /* Codeblock-Hintergrund */
+  --hl-bg-alt:        #f0f4f8;   /* Alternativer Hintergrund */
+  --hl-bg-code:       #f4f4f6;   /* Codeblock-Hintergrund */
 
   /* --- Borders & Shadows --- */
-  --hl-border:        #e0e0e0;
-  --hl-border-light:  #eeeeee;
-  --hl-shadow-sm:     0 4px 20px rgba(0,0,0,0.05);
-  --hl-shadow:        0 4px 20px rgba(0,0,0,0.05);
-  --hl-shadow-md:     0 8px 30px rgba(0,0,0,0.08);
+  --hl-border:        #e2e4e9;
+  --hl-border-light:  #eef0f4;
+  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.06);
+  --hl-shadow:        0 4px 16px rgba(0,0,0,0.06);
+  --hl-shadow-md:     0 8px 24px rgba(0,0,0,0.08);
   --hl-shadow-lg:     0 12px 40px rgba(0,0,0,0.1);
-  --hl-shadow-hover:  0 8px 30px rgba(0,0,0,0.12);
+  --hl-shadow-hover:  0 8px 28px rgba(0,0,0,0.1);
 
   /* --- Radius --- */
   --hl-radius:        12px;
@@ -82,38 +83,38 @@
    ============================================================ */
 [data-theme="dark"] {
   --hl-primary:       #4db8ff;
-  --hl-primary-dark:  #007acc;
+  --hl-primary-dark:  #0073e6;
   --hl-primary-light: #0a1a2e;
-  --hl-accent:        #34495e;
-  --hl-accent-soft:   #1a1a2e;
+  --hl-accent:        #e0e0e0;
+  --hl-accent-soft:   #1e1e32;
 
   --hl-text:          #e0e0e0;
-  --hl-text-body:     #cccccc;
-  --hl-text-muted:    #999999;
-  --hl-text-light:    #777777;
+  --hl-text-body:     #c8c8cc;
+  --hl-text-muted:    #888899;
+  --hl-text-light:    #666677;
 
-  --hl-bg-body:       #1a1a2e;
-  --hl-bg-card:       #222244;
-  --hl-bg-alt:        #2a2a4e;
-  --hl-bg-code:       #1e1e3a;
+  --hl-bg-body:       #111122;
+  --hl-bg-card:       #1a1a2e;
+  --hl-bg-alt:        #222238;
+  --hl-bg-code:       #1a1a2e;
 
-  --hl-border:        #333355;
-  --hl-border-light:  #2a2a44;
+  --hl-border:        #2a2a44;
+  --hl-border-light:  #222238;
 
-  --hl-shadow-sm:     0 4px 20px rgba(0,0,0,0.3);
-  --hl-shadow:        0 4px 20px rgba(0,0,0,0.3);
-  --hl-shadow-md:     0 8px 30px rgba(0,0,0,0.35);
+  --hl-shadow-sm:     0 2px 8px rgba(0,0,0,0.3);
+  --hl-shadow:        0 4px 16px rgba(0,0,0,0.3);
+  --hl-shadow-md:     0 8px 24px rgba(0,0,0,0.35);
   --hl-shadow-lg:     0 12px 40px rgba(0,0,0,0.4);
-  --hl-shadow-hover:  0 8px 30px rgba(0,0,0,0.4);
+  --hl-shadow-hover:  0 8px 28px rgba(0,0,0,0.4);
 }
 
 /* ============================================================
    KATEGORIE-FARBEN (angepasst an blaues Schema)
    ============================================================ */
 :root {
-  --cat-hardware:         #007acc;   /* Homelab-Blau */
-  --cat-software:         #2c3e50;   /* Dunkelblau */
-  --cat-smarthome:        #27ae60;   /* Grün */
-  --cat-virtualisierung:  #8e44ad;   /* Violett */
-  --cat-homelab:          #007acc;   /* Homelab-Blau */
+  --cat-hardware:         #f59e0b;   /* Amber/Gold */
+  --cat-software:         #8b5cf6;   /* Violett */
+  --cat-smarthome:        #22c55e;   /* Grün */
+  --cat-virtualisierung:  #06b6d4;   /* Cyan */
+  --cat-homelab:          #0073e6;   /* Homelab-Blau */
 }

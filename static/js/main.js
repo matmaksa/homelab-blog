@@ -1,6 +1,6 @@
 /* ============================================================
    Homelab Guide – Main JavaScript
-   Theme-Toggle, Mobile-Menü, Code-Copy, Scroll-to-Top
+   Theme-Toggle, Mobile-Menü, Search-Overlay, Code-Copy, Scroll-to-Top
    ============================================================ */
 
 (function() {
@@ -65,6 +65,74 @@
     window.addEventListener('resize', function() {
       if (window.innerWidth >= 1024 && menu.classList.contains('open')) {
         closeMenu();
+      }
+    });
+  })();
+
+  /* --- Search Overlay (wie raspberry.tips) --- */
+  (function searchOverlay() {
+    const toggle = document.getElementById('search-toggle');
+    const overlay = document.getElementById('search-overlay');
+    const backdrop = document.getElementById('search-overlay-backdrop');
+    const closeBtn = document.getElementById('search-overlay-close');
+    const input = document.getElementById('search-input');
+
+    if (!toggle || !overlay || !backdrop || !closeBtn || !input) return;
+
+    function openSearch() {
+      overlay.classList.add('open');
+      backdrop.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      backdrop.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Focus the input after a brief delay for the transition
+      setTimeout(function() { input.focus(); }, 100);
+    }
+
+    function closeSearch() {
+      overlay.classList.remove('open');
+      backdrop.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      backdrop.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      toggle.focus();
+    }
+
+    toggle.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+    backdrop.addEventListener('click', closeSearch);
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) {
+        closeSearch();
+      }
+    });
+
+    // Close on resize from mobile to desktop
+    window.addEventListener('resize', function() {
+      if (overlay.classList.contains('open') && window.innerWidth >= 1024) {
+        // Keep open on desktop too – user might want search
+      }
+    });
+
+    // Keyboard shortcut: "/" opens search
+    document.addEventListener('keydown', function(e) {
+      // Don't trigger if user is typing in an input/textarea
+      if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+        const tag = document.activeElement ? document.activeElement.tagName : '';
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+          e.preventDefault();
+          openSearch();
+        }
+      }
+    });
+
+    // Submit form on Enter
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && input.value.trim()) {
+        // Let the native form submission handle the redirect
+        return;
       }
     });
   })();
@@ -159,6 +227,35 @@
 
         // Update URL without jumping
         history.pushState(null, null, href);
+      });
+    });
+  })();
+
+  /* --- Mega-Menu: Close on Escape (Desktop) --- */
+  (function megaMenuKeyboard() {
+    const megaItems = document.querySelectorAll('.has-mega-dropdown');
+    megaItems.forEach(function(item) {
+      const link = item.querySelector('a');
+      const dropdown = item.querySelector('.mega-dropdown');
+
+      if (!link || !dropdown) return;
+
+      item.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          // Close the dropdown, focus back to the nav link
+          // CSS hover handles visibility, so we just need to move focus
+          link.focus();
+        }
+      });
+
+      // Close mega-menu when focus leaves the entire dropdown area
+      dropdown.addEventListener('focusout', function(e) {
+        // If the newly focused element is outside the mega-dropdown item
+        setTimeout(function() {
+          if (!item.contains(document.activeElement)) {
+            // Do nothing special – CSS handles the hide on non-hover
+          }
+        }, 0);
       });
     });
   })();
