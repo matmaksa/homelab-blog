@@ -1,339 +1,269 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ .Title }}</title>
-<meta name="description" content="{{ .Description }}">
-<link rel="canonical" href="{{ .Permalink }}">
-<meta property="og:title" content="{{ .Title }}">
-<meta property="og:description" content="{{ .Description }}">
-<meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#1a56db">
-{{ with .Site.Params.favicon }}<link rel="icon" href="{{ . | absURL }}">{{ end }}
+{{- define "main" }}
+{{- $linksPage := . }}
 
-{{/* DARK/LIGHT MODE – frühe Initialisierung vor Rendering, data-theme immer explizit */}}
-<script>
-(function () {
-  const params = new URLSearchParams(window.location.search);
-  const forcedMode = params.get("mode");
-  const storedMode = localStorage.getItem("pref-theme");
-  const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  const theme =
-    forcedMode === "light" || forcedMode === "dark"
-      ? forcedMode
-      : storedMode === "light" || storedMode === "dark"
-        ? storedMode
-        : systemDark
-          ? "dark"
-          : "light";
-
-  document.documentElement.dataset.theme = theme;
-  document.documentElement.style.colorScheme = theme;
-})();
-</script>
-
-{{/* Import blog design tokens + links page component CSS */}}
-{{ $tokens := resources.Get "css/extended/tokens.css" | resources.Minify | resources.Fingerprint }}
-{{ $linksCSS := resources.Get "css/extended/links.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $tokens.RelPermalink }}">
-<link rel="stylesheet" href="{{ $linksCSS.RelPermalink }}">
-</head>
-<body class="links-page">
-<div class="ll-page">
-  <div class="ll-content-area">
-    <div class="ll-container" role="main">
-  {{/* MARKENKOPF */}}
-  <header class="ll-brand">
-    <div class="ll-brand-icon" aria-hidden="true">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="4" y="8" width="24" height="18" rx="2"/>
-        <path d="M8 4v4M16 4v4M24 4v4"/>
-        <circle cx="10" cy="17" r="1.5" fill="currentColor" stroke="none"/>
-        <circle cx="22" cy="17" r="1.5" fill="currentColor" stroke="none"/>
-        <path d="M13 20c1 1.33 5 1.33 6 0" stroke-width="1.5"/>
-      </svg>
+<article class="post-single links-page">
+  <header class="post-header">
+    {{- partial "breadcrumbs.html" . }}
+    <h1 class="post-title">
+      {{ .Title }}
+    </h1>
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description | $.RenderString }}
     </div>
-    <span class="ll-handle">@matmaksa</span>
-    <h1 class="ll-site-name">Homelab Guide</h1>
-    <p class="ll-tagline">Praxisnahe Homelab-Empfehlungen aus meinem eigenen Setup.</p>
-    <p class="ll-topics">Proxmox · Netzwerk · Selfhosting · Smart Home</p>
+    {{- end }}
   </header>
 
-  {{/* BLOG-CTA */}}
-  <a href="{{ "" | absLangURL }}" class="ll-cta" rel="noopener">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-    </svg>
-    <span>Zum Homelab Guide</span>
-  </a>
-  <a href="{{ "posts/" | absURL }}" class="ll-cta-secondary">Neueste Artikel ansehen →</a>
+  <div class="post-content">
+    {{/* BLOG-CTA */}}
+    <a href="{{ "posts/" | absURL }}" class="ll-cta-secondary">Neueste Artikel ansehen →</a>
 
-  {{/* AFFILIATE-HINWEIS */}}
-  <aside class="ll-disclosure" aria-label="Affiliate-Hinweis">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="10"/>
-      <line x1="12" y1="16" x2="12" y2="12"/>
-      <line x1="12" y1="8" x2="12.01" y2="8"/>
-    </svg>
-    <p>Diese Seite enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
-  </aside>
-
-  {{/* KURATIERUNGS-HINWEIS */}}
-  <p class="ll-curation">Eine kuratierte Auswahl aus meinem Homelab und sinnvolle Empfehlungen für Einsteiger – keine vollständige Einkaufsliste.</p>
-
-  {{/* KATEGORIE: HOMELAB-SERVER */}}
-  <section class="ll-section" aria-labelledby="cat-server">
-    <div class="ll-section-head">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
-        <line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
+    {{/* AFFILIATE-HINWEIS */}}
+    <aside class="ll-disclosure" aria-label="Affiliate-Hinweis">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
       </svg>
-      <h2 id="cat-server">Homelab-Server</h2>
-    </div>
-    <p class="ll-section-desc">Kompakte Systeme für Proxmox, Firewall und leichte Dienste.</p>
+      <p>Diese Seite enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+    </aside>
 
-    <div class="ll-card-list">
-      {{/* HP ProDesk 400 G4 Mini */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B0FPCDJJ72?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 12h8"/><path d="M8 8h8"/>
-          </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">HP ProDesk 400 G4 Mini</span>
-            <span class="ll-card-badge badge-in-use">Im Einsatz</span>
-          </div>
-          <p class="ll-card-desc">Proxmox-Host mit i5-8500T und 32 GB RAM</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+    {{/* KURATIERUNGS-HINWEIS */}}
+    <p class="ll-curation">Eine kuratierte Auswahl aus meinem Homelab und sinnvolle Empfehlungen für Einsteiger – keine vollständige Einkaufsliste.</p>
+
+    {{/* KATEGORIE: HOMELAB-SERVER */}}
+    <section class="ll-section" aria-labelledby="cat-server">
+      <div class="ll-section-head">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+          <line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
         </svg>
-      </a>
+        <h2 id="cat-server">Homelab-Server</h2>
+      </div>
+      <p class="ll-section-desc">Kompakte Systeme für Proxmox, Firewall und leichte Dienste.</p>
 
-      {{/* Dell OptiPlex 3070 Micro */}}
-      <a class="ll-card" href="https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M12 12v4"/>
-          </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">Dell OptiPlex 3070 Micro</span>
-            <span class="ll-card-badge badge-in-use">Im Einsatz</span>
+      <div class="ll-card-list">
+        {{/* HP ProDesk 400 G4 Mini */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B0FPCDJJ72?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 12h8"/><path d="M8 8h8"/>
+            </svg>
           </div>
-          <p class="ll-card-desc">2. Proxmox-Node (i5-9500T, 32 GB RAM)</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
-
-      {{/* Fujitsu Futro S7010 */}}
-      <a class="ll-card" href="https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">Fujitsu Futro S7010</span>
-            <span class="ll-card-badge badge-in-use">Im Einsatz</span>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">HP ProDesk 400 G4 Mini</span>
+              <span class="ll-card-badge badge-in-use">Im Einsatz</span>
+            </div>
+            <p class="ll-card-desc">Proxmox-Host mit i5-8500T und 32 GB RAM</p>
           </div>
-          <p class="ll-card-desc">Firewall und leichte Dienste – nicht für lokale KI-Modelle</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
-    </div>
-  </section>
-
-  {{/* KATEGORIE: NETZWERK */}}
-  <section class="ll-section" aria-labelledby="cat-network">
-    <div class="ll-section-head">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-      </svg>
-      <h2 id="cat-network">Netzwerk</h2>
-    </div>
-    <p class="ll-section-desc">Switches, Access Points und Router für ein stabiles Heimnetz.</p>
-
-    <div class="ll-card-list">
-      {{/* TP-Link TL-SG1016PE */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B0722XW4PD?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="10" width="20" height="4" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/>
-            <line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="2" x2="12" y2="6"/>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">TP-Link TL-SG1016PE</span>
-            <span class="ll-card-badge badge-rec">Empfehlung</span>
-          </div>
-          <p class="ll-card-desc">16-Port PoE-Switch für Access Points und Kameras</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
+        </a>
 
-      {{/* TP-Link EAP653 */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B0B2X4GM2V?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 17a7 7 0 0 1 14 0"/><path d="M8 13a4 4 0 0 1 8 0"/>
-            <circle cx="12" cy="21" r="1.5" fill="currentColor" stroke="none"/>
+        {{/* Dell OptiPlex 3070 Micro */}}
+        <a class="ll-card" href="https://www.amazon.de/s?k=Dell+OptiPlex+3070+Micro&tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M12 12v4"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">Dell OptiPlex 3070 Micro</span>
+              <span class="ll-card-badge badge-in-use">Im Einsatz</span>
+            </div>
+            <p class="ll-card-desc">2. Proxmox-Node (i5-9500T, 32 GB RAM)</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">TP-Link EAP653 Access Point</span>
-            <span class="ll-card-badge badge-in-use">2× im Einsatz</span>
-          </div>
-          <p class="ll-card-desc">WiFi 6 Access Point – Omada-Steuerung</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
+        </a>
 
-      {{/* AVM Fritz!Box 7530 AX */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B08BZPXCKD?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82"/>
+        {{/* Fujitsu Futro S7010 */}}
+        <a class="ll-card" href="https://www.amazon.de/s?k=Fujitsu+Futro+S7010&tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">Fujitsu Futro S7010</span>
+              <span class="ll-card-badge badge-in-use">Im Einsatz</span>
+            </div>
+            <p class="ll-card-desc">Firewall und leichte Dienste – nicht für lokale KI-Modelle</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">AVM Fritz!Box 7530 AX</span>
-            <span class="ll-card-badge badge-rec">Empfehlung</span>
-          </div>
-          <p class="ll-card-desc">Router mit WLAN 6 und Telefonie</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </a>
+      </div>
+    </section>
+
+    {{/* KATEGORIE: NETZWERK */}}
+    <section class="ll-section" aria-labelledby="cat-network">
+      <div class="ll-section-head">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
         </svg>
-      </a>
-    </div>
-  </section>
+        <h2 id="cat-network">Netzwerk</h2>
+      </div>
+      <p class="ll-section-desc">Switches, Access Points und Router für ein stabiles Heimnetz.</p>
 
-  {{/* KATEGORIE: SMART HOME */}}
-  <section class="ll-section" aria-labelledby="cat-smarthome">
-    <div class="ll-section-head">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      <h2 id="cat-smarthome">Smart Home</h2>
-    </div>
-    <p class="ll-section-desc">Praktische Komponenten für Home Assistant und Automatisierungen.</p>
-
-    <div class="ll-card-list">
-      {{/* Reolink RLC-520A */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B0BRCSKL6V?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M23 7l-7 5-7-5v10l7 5 7-5z"/><rect x="1" y="7" width="8" height="10" rx="1"/>
+      <div class="ll-card-list">
+        {{/* TP-Link TL-SG1016PE */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B0722XW4PD?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="10" width="20" height="4" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/>
+              <line x1="10" y1="2" x2="14" y2="2"/><line x1="12" y1="2" x2="12" y2="6"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">TP-Link TL-SG1016PE</span>
+              <span class="ll-card-badge badge-rec">Empfehlung</span>
+            </div>
+            <p class="ll-card-desc">16-Port PoE-Switch für Access Points und Kameras</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
           </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">Reolink RLC-520A</span>
-            <span class="ll-card-badge badge-rec">Empfehlung</span>
-          </div>
-          <p class="ll-card-desc">5-MP-PoE-Kamera mit Nachtsicht</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
+        </a>
 
-      {{/* TP-Link Tapo Steckdose */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B09BFT7NZJ?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/>
-            <line x1="12" y1="17" x2="12" y2="18"/>
-          </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">TP-Link Tapo Steckdose</span>
-            <span class="ll-card-badge badge-rec">Empfehlung</span>
+        {{/* TP-Link EAP653 */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B0B2X4GM2V?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 17a7 7 0 0 1 14 0"/><path d="M8 13a4 4 0 0 1 8 0"/>
+              <circle cx="12" cy="21" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
           </div>
-          <p class="ll-card-desc">Smarte WLAN-Steckdose für Home Assistant</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">TP-Link EAP653 Access Point</span>
+              <span class="ll-card-badge badge-in-use">2× im Einsatz</span>
+            </div>
+            <p class="ll-card-desc">WiFi 6 Access Point – Omada-Steuerung</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
 
-      {{/* Sonoff Zigbee USB Stick */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B09KXTCMSC?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/>
-            <circle cx="12" cy="12" r="8" fill="none"/>
-          </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">Sonoff Zigbee USB Stick</span>
-            <span class="ll-card-badge badge-rec">Empfehlung</span>
+        {{/* AVM Fritz!Box 7530 AX */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B08BZPXCKD?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82"/>
+            </svg>
           </div>
-          <p class="ll-card-desc">Zigbee-Gateway für Home Assistant (ZHA / Zigbee2MQTT)</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">AVM Fritz!Box 7530 AX</span>
+              <span class="ll-card-badge badge-rec">Empfehlung</span>
+            </div>
+            <p class="ll-card-desc">Router mit WLAN 6 und Telefonie</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </section>
 
-      {{/* Rolladen-Aktor */}}
-      <a class="ll-card" href="https://www.amazon.de/dp/B0FHQ7M41V?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
-        <div class="ll-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
-            <line x1="9" y1="9" x2="9" y2="21"/>
-          </svg>
-        </div>
-        <div class="ll-card-body">
-          <div class="ll-card-top">
-            <span class="ll-card-title">Rolladen-Aktor</span>
-            <span class="ll-card-badge badge-rec">Empfehlung</span>
-          </div>
-          <p class="ll-card-desc">Smarte Rolladensteuerung für Home Assistant</p>
-        </div>
-        <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+    {{/* KATEGORIE: SMART HOME */}}
+    <section class="ll-section" aria-labelledby="cat-smarthome">
+      <div class="ll-section-head">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
         </svg>
-      </a>
-    </div>
-  </section>
+        <h2 id="cat-smarthome">Smart Home</h2>
+      </div>
+      <p class="ll-section-desc">Praktische Komponenten für Home Assistant und Automatisierungen.</p>
+
+      <div class="ll-card-list">
+        {{/* Reolink RLC-520A */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B0BRCSKL6V?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 7l-7 5-7-5v10l7 5 7-5z"/><rect x="1" y="7" width="8" height="10" rx="1"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">Reolink RLC-520A</span>
+              <span class="ll-card-badge badge-rec">Empfehlung</span>
+            </div>
+            <p class="ll-card-desc">5-MP-PoE-Kamera mit Nachtsicht</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+
+        {{/* TP-Link Tapo Steckdose */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B09BFT7NZJ?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="15" r="1.5" fill="currentColor" stroke="none"/>
+              <line x1="12" y1="17" x2="12" y2="18"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">TP-Link Tapo Steckdose</span>
+              <span class="ll-card-badge badge-rec">Empfehlung</span>
+            </div>
+            <p class="ll-card-desc">Smarte WLAN-Steckdose für Home Assistant</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+
+        {{/* Sonoff Zigbee USB Stick */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B09KXTCMSC?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/>
+              <circle cx="12" cy="12" r="8" fill="none"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">Sonoff Zigbee USB Stick</span>
+              <span class="ll-card-badge badge-rec">Empfehlung</span>
+            </div>
+            <p class="ll-card-desc">Zigbee-Gateway für Home Assistant (ZHA / Zigbee2MQTT)</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+
+        {{/* Rolladen-Aktor */}}
+        <a class="ll-card" href="https://www.amazon.de/dp/B0FHQ7M41V?tag=matmaksa-homelab-21" target="_blank" rel="noopener noreferrer sponsored">
+          <div class="ll-card-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/>
+              <line x1="9" y1="9" x2="9" y2="21"/>
+            </svg>
+          </div>
+          <div class="ll-card-body">
+            <div class="ll-card-top">
+              <span class="ll-card-title">Rolladen-Aktor</span>
+              <span class="ll-card-badge badge-rec">Empfehlung</span>
+            </div>
+            <p class="ll-card-desc">Smarte Rolladensteuerung für Home Assistant</p>
+          </div>
+          <svg class="ll-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </section>
   </div>
-</div>
-</div>
+</article>
 
-{{/* COMPAKTER FOOTER */}}
-<footer class="ll-footer" role="contentinfo">
-  <div class="ll-footer-inner">
-    <div class="ll-footer-row">
-      <span class="ll-footer-handle">@matmaksa</span>
-      <a href="{{ "" | absLangURL }}" class="ll-footer-link">Homelab Guide</a>
-      <a href="https://instagram.com/matmaksa" target="_blank" rel="noopener noreferrer" class="ll-footer-link">Instagram</a>
-    </div>
-    <p class="ll-footer-disclosure">Affiliate-Links gekennzeichnet · Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
-    <p class="ll-footer-copy">&copy; {{ now.Format "2006" }} Homelab Guide</p>
-  </div>
-</footer>
-</body>
-</html>
+{{- end }}{{/* end main */}}
