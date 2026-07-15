@@ -62,7 +62,7 @@ Für die Planung und Recherche setze ich gelegentlich KI-Unterstützung ein. Jed
 
 ## Mein Homelab
 
-Mein Homelab ist dezentral aufgebaut: Drei Mini-PCs bilden ein Proxmox-Cluster. Dazu kommen eine OPNsense-Firewall und ein Synology-NAS reine für Backups.
+Mein Homelab ist dezentral aufgebaut: Drei Mini-PCs bilden ein Proxmox-Cluster. Dazu kommen eine OPNsense-Firewall und ein Synology-NAS für Backups.
 
 Kein Serverrack, keine GPU, keine Enterprise-Lösung. Alles läuft leise, stromsparend und auf gebrauchter Business-Hardware.
 
