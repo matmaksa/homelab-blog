@@ -1,5 +1,6 @@
 {{- define "main" }}
 
+<div class="content-with-sidebar">
 <main id="main-content" class="main-content" role="main">
 <article class="post-single">
   <header class="post-header">
@@ -27,10 +28,10 @@
         {{- end }}
         <span class="meta-sep" aria-hidden="true">·</span>
       {{- end }}
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-      {{- partial "post_canonical.html" . -}}
+      <time datetime="{{ .Date.Format "2006-01-02" }}">📅 {{ .Date.Format "02.01.2006" }}</time>
+      {{- if (.Param "ShowReadingTime") }}
+      <span>⏱️ {{ .ReadingTime }} Min. Lesezeit</span>
+      {{- end }}
     </div>
     {{- end }}
   </header>
@@ -55,7 +56,44 @@
     {{- end }}
   {{- end }}
 
-  {{- /* Affiliate Notice (check if article has affiliate links) */}}
+  {{- /* Fact Box – nur wenn Daten vorhanden */}}
+  {{- $hasFactBox := or .Params.difficulty .Params.cost .Params.powerUsage .Params.testedWith }}
+  {{- if $hasFactBox }}
+  <div class="fact-box">
+    <dl class="fact-box-grid">
+      {{- with .Params.difficulty }}
+      <div class="fact-item">
+        <dt>Schwierigkeit</dt>
+        <dd><span class="badge badge-{{ . }}">{{ . }}</span></dd>
+      </div>
+      {{- end }}
+      {{- with .Params.cost }}
+      <div class="fact-item">
+        <dt>Kosten</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{- end }}
+      {{- with .Params.powerUsage }}
+      <div class="fact-item">
+        <dt>Stromverbrauch</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{- end }}
+      {{- with .Params.testedWith }}
+      <div class="fact-item">
+        <dt>Getestet mit</dt>
+        <dd>{{ . }}</dd>
+      </div>
+      {{- end }}
+      <div class="fact-item">
+        <dt>Zuletzt aktualisiert</dt>
+        <dd>{{ .Lastmod.Format "02.01.2006" | default (.Date.Format "02.01.2006") }}</dd>
+      </div>
+    </dl>
+  </div>
+  {{- end }}
+
+  {{- /* Affiliate Notice */}}
   {{- if .Params.affiliateLinks | default false }}
   <div class="affiliate-notice" role="note">
     <span class="affiliate-notice-icon" aria-hidden="true">🔗</span>
@@ -96,6 +134,14 @@
       {{- partial "share_icons.html" . -}}
     </div>
     {{- end }}
+
+    {{- /* Edit link – moved to end of article */}}
+    <div class="post-improve">
+      <a href="{{ site.Params.editPost.URL }}/{{ .File.Path }}" target="_blank" rel="noopener noreferrer" class="improve-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Fehler melden oder Beitrag verbessern
+      </a>
+    </div>
   </footer>
 
   {{- if (.Param "comments") }}
@@ -103,5 +149,10 @@
   {{- end }}
 </article>
 </main>
+
+{{- /* Sidebar – nur auf Artikelseiten (nicht Home, nicht Posts-Listing) */}}
+{{- partial "sidebar.html" . }}
+
+</div>{{- /* end .content-with-sidebar */}}
 
 {{- end }}{{/* end main */}}
