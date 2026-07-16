@@ -1,0 +1,245 @@
+{{- define "main" }}
+
+<div class="PREVIEW_HOME_TEMPLATE" style="display:none;"></div>
+
+{{- $posts := where site.RegularPages "Section" "in" (slice "posts") }}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" "true" }}
+{{- $posts = where $posts "Params.preview" "!=" true }}
+{{- $published := sort $posts "Date" "desc" }}
+
+<div class="home-content">
+
+  {{- /* ================================================================
+      HERO
+      ================================================================ */}}
+  <section class="hero-section" aria-label="Homelab-Einstieg">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1 class="hero-headline">
+          Dein eigenes Homelab –<br>
+          <span class="hero-accent">leise, sparsam und bezahlbar</span>
+        </h1>
+        <p class="hero-subline">
+          Praxis-Guides für Mini-PCs, Proxmox, Docker, Backups und Selfhosting –<br>
+          ohne Serverrack und ohne riesige Stromrechnung.
+        </p>
+        <div class="hero-ctas">
+          <a href="{{ "posts/homelab-unter-100-euro-was-du-brauchst/" | absLangURL }}" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Homelab starten
+          </a>
+          <a href="{{ "categories/hardware/" | absLangURL }}" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Hardware auswählen
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-diagram">
+          <div class="diagram-node diagram-internet">🌐 Internet</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node diagram-router">📡 Router (OPNsense)</div>
+          <div class="diagram-arrow">↓</div>
+          <div class="diagram-node diagram-proxmox">🖥️ Mini-PC mit Proxmox</div>
+          <div class="diagram-services">
+            <span class="diagram-service">🛡️ AdGuard</span>
+            <span class="diagram-service">🏠 Home Assistant</span>
+            <span class="diagram-service">🐳 Docker</span>
+            <span class="diagram-service">💾 Backup</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-bar">
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">🔧</span>
+        <span class="trust-text">Reale Hardware &amp; Praxiserfahrung</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">⚡</span>
+        <span class="trust-text">Fokus auf niedrigen Stromverbrauch</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon" aria-hidden="true">🎯</span>
+        <span class="trust-text">Verständlich für Homelab-Einsteiger</span>
+      </div>
+    </div>
+  </section>
+
+  {{- /* PROJEKTKARTEN */}}
+  <section class="projects-section" aria-labelledby="projects-heading">
+    <div class="section-header-alt">
+      <h2 id="projects-heading">Was möchtest du bauen?</h2>
+      <p class="section-subtitle">Wähle dein Projekt – ich zeige dir den Weg</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card card-werbung card-placeholder">
+        <div class="project-card-icon" aria-hidden="true">🛡️</div>
+        <h3 class="project-card-title">Werbung &amp; Tracking blockieren</h3>
+        <p class="project-card-desc">AdGuard oder Pi-hole auf dem Mini-PC – viele bekannte Werbe- und Trackingdomains zentral blockieren, schützt die Privatsphäre und entlastet deine Geräte.</p>
+        <span class="step-label">Guide in Vorbereitung</span>
+      </div>
+      <a href="{{ "posts/home-assistant-gebrauchter-mini-pc-2026/" | absLangURL }}" class="project-card card-smarthome">
+        <div class="project-card-icon" aria-hidden="true">🏠</div>
+        <h3 class="project-card-title">Smart Home lokal betreiben</h3>
+        <p class="project-card-desc">Home Assistant auf einem gebrauchten Mini-PC – steuere Lampen, Sensoren und Heizung, ohne Cloud-Zwang und ohne monatliche Gebühren.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+      <div class="project-card card-docker card-placeholder">
+        <div class="project-card-icon" aria-hidden="true">🐳</div>
+        <h3 class="project-card-title">Docker &amp; Selfhosting lernen</h3>
+        <p class="project-card-desc">Eigene Dienste betreiben – von Cloud-Alternativen bis zu Medienservern. Lerne Docker Schritt für Schritt an echten Projekten.</p>
+        <span class="step-label">Guide in Vorbereitung</span>
+      </div>
+      <a href="{{ "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/" | absLangURL }}" class="project-card card-proxmox">
+        <div class="project-card-icon" aria-hidden="true">🖥️</div>
+        <h3 class="project-card-title">Mit Proxmox starten</h3>
+        <p class="project-card-desc">Proxmox VE als kostenlose Virtualisierungsplattform – betreibe VMs und LXC-Container, lerne Cluster-Betrieb und integrierte Backups.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+      <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="project-card card-vpn">
+        <div class="project-card-icon" aria-hidden="true">🔒</div>
+        <h3 class="project-card-title">Sicher von unterwegs zugreifen</h3>
+        <p class="project-card-desc">Greife mit Tailscale, WireGuard oder einer selbst gehosteten Lösung sicher auf dein Homelab zu. Headscale ist eine fortgeschrittene Alternative für erfahrene Nutzer.</p>
+        <span class="project-card-link">Anleitung lesen →</span>
+      </a>
+    </div>
+
+    {{- /* Als Nächstes geplant */}}
+    <details class="table-toggle" style="margin-top:2rem;">
+      <summary>📋 Als Nächstes geplant</summary>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+        <div class="project-card card-placeholder" style="border:1px dashed var(--border,#ddd);border-radius:8px;padding:1rem;">
+          <div class="project-card-icon" aria-hidden="true">📦</div>
+          <h3 class="project-card-title">Proxmox: Erster LXC &amp; VM</h3>
+          <p class="project-card-desc">Schritt-für-Schritt: Deinen ersten Container und deine erste VM in Proxmox anlegen und konfigurieren.</p>
+          <span class="step-label">In Planung</span>
+        </div>
+        <div class="project-card card-placeholder" style="border:1px dashed var(--border,#ddd);border-radius:8px;padding:1rem;">
+          <div class="project-card-icon" aria-hidden="true">💾</div>
+          <h3 class="project-card-title">Backup-Strategie fürs Homelab</h3>
+          <p class="project-card-desc">Lokale und externe Backups einrichten – von Proxmox Backup Server bis zu NAS-Lösungen.</p>
+          <span class="step-label">In Planung</span>
+        </div>
+        <div class="project-card card-placeholder" style="border:1px dashed var(--border,#ddd);border-radius:8px;padding:1rem;">
+          <div class="project-card-icon" aria-hidden="true">🌐</div>
+          <h3 class="project-card-title">Netzwerk-Grundlagen</h3>
+          <p class="project-card-desc">VLANs, Firewall-Regeln und sicheres Heimnetz – verständlich erklärt für Einsteiger.</p>
+          <span class="step-label">In Planung</span>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  {{- /* EINSTEIGERPFAD */}}
+  <section class="path-section" aria-labelledby="path-heading">
+    <div class="section-header-alt">
+      <h2 id="path-heading">Dein Weg zum ersten Homelab</h2>
+      <p class="section-subtitle">Fünf Schritte – von der ersten Idee bis zum laufenden Server</p>
+    </div>
+    <div class="path-steps">
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">1</div>
+        <div class="step-content">
+          <h3>Hardware auswählen</h3>
+          <p>Gebrauchter Mini-PC oder Thin Client ab 40€</p>
+          <a href="{{ "categories/hardware/" | absLangURL }}" class="step-link">Hardware-Guides →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">2</div>
+        <div class="step-content">
+          <h3>Proxmox oder Linux installieren</h3>
+          <p>Dein erster Hypervisor oder Server</p>
+          <a href="{{ "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/" | absLangURL }}" class="step-link">Zu Proxmox →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">3</div>
+        <div class="step-content">
+          <h3>Ersten Dienst starten</h3>
+          <p>Starte deinen ersten Dienst – zum Beispiel AdGuard, Pi-hole oder Home Assistant.</p>
+          <span class="step-label">Guide in Vorbereitung</span>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">4</div>
+        <div class="step-content">
+          <h3>Backup einrichten</h3>
+          <p>Deine Daten sicher ablegen – lokale und externe Wege</p>
+          <span class="step-label">Guide in Vorbereitung</span>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">5</div>
+        <div class="step-content">
+          <h3>Fernzugriff sicher einrichten</h3>
+          <p>Starte mit einer einfachen VPN-Lösung und beschäftige dich später bei Bedarf mit selbst gehosteten Alternativen.</p>
+          <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="step-link">Fortgeschritten: Headscale selbst hosten →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{- /* HARDWARE-GRUNDLAGEN */}}
+  <section class="entry-hw-section" aria-labelledby="entry-hw-heading">
+    <div class="section-header-alt">
+      <h2 id="entry-hw-heading">Was du für den Einstieg wirklich brauchst</h2>
+      <p class="section-subtitle">Vier Grundlagen – einfach erklärt, ohne Verkaufsdruck</p>
+    </div>
+    <div class="entry-hw-grid">
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">⚙️</div>
+        <h3 class="entry-hw-title">Rechenleistung</h3>
+        <p class="entry-hw-text">Ein sparsamer Mini-PC oder Thin Client reicht für viele erste Dienste aus. Entscheidend ist weniger der Modellname als die Frage, welche Anwendungen darauf laufen sollen. Für AdGuard, Home Assistant und kleine Docker-Dienste genügt häufig bereits ein moderner Vierkern-Thin-Client. Für mehrere virtuelle Maschinen oder anspruchsvollere Dienste ist ein Business-Mini-PC mit Core i5 sinnvoller.</p>
+      </div>
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">🧠</div>
+        <h3 class="entry-hw-title">Arbeitsspeicher</h3>
+        <p class="entry-hw-text">
+          <strong>4 GB</strong> – reichen für Proxmox plus einen kleinen Dienst (z.&thinsp;B. Pi-hole)<br>
+          <strong>8 GB</strong> – praxistauglicher Einstieg für Proxmox, ein paar Container und erste Dienste<br>
+          <strong>16 GB</strong> – zusätzliche Reserve für mehrere Dienste und angenehmeres Arbeiten<br>
+          DDR4-Speicher ist gebraucht günstig zu bekommen – aufrüsten lohnt sich.
+        </p>
+      </div>
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">💾</div>
+        <h3 class="entry-hw-title">Speicher</h3>
+        <p class="entry-hw-text">Eine 120–240 GB SSD reicht für Betriebssystem und erste Container. Für Backups und größere Datenmengen kommt später eine externe USB-Festplatte oder ein NAS dazu.</p>
+      </div>
+      <div class="entry-hw-card">
+        <div class="entry-hw-icon" aria-hidden="true">🌐</div>
+        <h3 class="entry-hw-title">Netzwerk</h3>
+        <p class="entry-hw-text">Gigabit-LAN ist sinnvoll und bei den meisten Geräten heute Standard. Für einen zuverlässig laufenden Server ist eine Kabelverbindung in der Regel besser geeignet als WLAN.</p>
+      </div>
+    </div>
+    <div class="entry-hw-cta">
+      <a href="{{ "posts/homelab-unter-100-euro-was-du-brauchst/" | absLangURL }}" class="entry-hw-guide-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Ausführlichen Einsteiger-Guide lesen
+      </a>
+    </div>
+  </section>
+
+  {{- /* AKTUELLE GUIDES */}}
+  {{- $latest := first 6 $published }}
+  <section class="guides-section" aria-labelledby="guides-heading">
+    <div class="section-header-with-link">
+      <div class="section-header-alt">
+        <h2 id="guides-heading">Aktuelle Guides</h2>
+        <p class="section-subtitle">Praxisnah, selbst getestet, verständlich</p>
+      </div>
+      <a href="{{ "posts/" | absLangURL }}" class="section-link-large">Alle Artikel anzeigen →</a>
+    </div>
+    <div class="guides-grid">
+      {{- range $latest }}
+      {{- partial "article-card.html" . }}
+      {{- end }}
+    </div>
+  </section>
+
+</div>
+
+{{- end }}{{/* end main */}}

@@ -1,0 +1,24 @@
+<!-- GoatCounter Analytics -->
+<script data-goatcounter="https://matmaksa.goatcounter.com/count"
+  async src="//gc.zgo.at/count.js"></script>
+
+<!-- Robots / Noindex -->
+{{- if .Params.noindex | default .Params.robotsNoIndex | default false }}
+<meta name="robots" content="noindex, nofollow">
+{{- end }}
+
+<!-- Favicon (SVG-based) -->
+<link rel="icon" href="{{ "safari-pinned-tab.svg" | relURL }}" type="image/svg+xml">
+<link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="#2563eb">
+
+<!-- Preview Styles (only on preview pages, via Hugo Asset Pipeline) -->
+{{- if .Params.preview }}
+{{- $previewCss := resources.Get "css/preview-readability.css" -}}
+{{- with $previewCss -}}
+{{- $processed := . | resources.Minify | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $processed.RelPermalink }}" integrity="{{ $processed.Data.Integrity }}">
+{{- end -}}
+{{- end }}
+
+<!-- Main JS -->
+<script src="{{ "/js/main.js" | relURL }}" defer></script>

@@ -32,8 +32,8 @@ Diese Preview-Entwürfe enthalten **redaktionelle Verbesserungen** der existiere
 | **<a href="/preview/blog/futro-s7010-preview/">🖥️ Futro S7010</a>** | ✅ überarbeitet | OPNsense braucht 2. NIC, PVE04-Werte, Preise datiert |
 | **<a href="/preview/blog/mini-pc-vergleich-preview/">📊 Mini-PC Vergleich</a>** | ✅ überarbeitet | Prozent entfernt, 'beste Wahl'→'passend wenn', KI reduziert |
 | **<a href="/preview/about/">👤 Über mich</a>** | ✅ überarbeitet | Alter entfernt, PVE04 als Test-Lab |
-| **🏠 Startseite** | ⬜ nicht umsetzbar | Layout-Template, müsste direkt editiert werden → blockiert |
-| **🔗 Empfehlungsseite** | ⬜ nicht umsetzbar | Layout-Template, bräuchte Preview-Variante → blockiert |
+|| **<a href="/preview/home/">🏠 Startseite (Preview)</a>** | ✅ erstellt | Werbung-Text moderiert, RAM-Empfehlung gestaffelt, geplante Guides gruppiert |
+|| **<a href="/preview/links/">🔗 Empfehlungen (Preview)</a>** | ✅ erstellt | Im Einsatz/Empfehlung getrennt, Einschränkungen ergänzt, geprüft Juli 2026 |
 
 ---
 
@@ -78,6 +78,18 @@ Diese Preview zeigt Verbesserungen der Lesbarkeit des Blogs **matmaksa.de** – 
   <p class="preview-desc">Die Startseite wird durch die Preview-Änderungen nicht beeinflusst – sie hat kein <code>preview = true</code>. Die Lesbarkeitsverbesserungen greifen nur auf Artikelseiten. Die Startseite bleibt im aktuellen Layout sichtbar.</p>
 </div>
 
+<div class="preview-card">
+  <span class="preview-badge new">neu</span>
+  <h3><a href="/preview/home/">🏠 Startseite (Preview)</a></h3>
+  <p class="preview-desc">Eigenständige Preview-Version der Startseite: Werbung-Text moderiert, RAM-Empfehlung in 4/8/16 GB gestaffelt, geplante Guides in eigenem Bereich gruppiert.</p>
+</div>
+
+<div class="preview-card">
+  <span class="preview-badge new">neu</span>
+  <h3><a href="/preview/links/">🔗 Empfehlungen (Preview)</a></h3>
+  <p class="preview-desc">Preview-Version der Empfehlungsseite: Kategorien getrennt nach „Im Einsatz" und „Empfehlung", Einschränkungen ergänzt, Prüfstand Juli 2026, Affiliate-Hinweis sichtbar.</p>
+</div>
+
 ### Vorher / Nachher
 
 | Bereich | Vorher | Nachher |
@@ -104,11 +116,11 @@ Diese Preview zeigt Verbesserungen der Lesbarkeit des Blogs **matmaksa.de** – 
 </details>
 
 <details class="tech-detail">
-<summary>🔧 Blocker / Einschränkungen</summary>
+<summary>🔧 Einschränkungen</summary>
 
-- **Startseiten-Preview** nicht als separate Seite umsetzbar, da `index.html` kein Frontmatter hat. Die CSS wäre auf der echten Startseite nicht aktiv.
 - **Artikelabsatz-Begrenzung** (3–4 Sätze) ist ein redaktioneller Hinweis, kein automatischer Zwang – müsste pro Artikel manuell umgesetzt werden.
 - Bei sehr langen Tabellen müssten Autoren manuell `details.table-toggle` um die Tabelle legen.
+- Startseiten-/Empfehlungs-Preview sind separate Preview-Seiten – das originale Layout bleibt auf der echten Startseite unverändert.
 </details>
 
 </div>
