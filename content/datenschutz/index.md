@@ -59,9 +59,15 @@ Auf dieser Website finden sich Links zu Produkten auf **Amazon** (Amazon EU S.à
 
 Weitere Informationen: [Amazon-Datenschutzerklärung](https://www.amazon.de/gp/help/customer/display.html?nodeId=201909010)
 
-## 7. Affiliate-Links (eBay) – geplant
+## 7. Affiliate-Links (eBay Partner Network)
 
-**[Derzeit nicht aktiv]** eBay-Partner-Links sind technisch vorbereitet, aber noch nicht auf dieser Website im Einsatz. Vor einer Aktivierung wird dieser Abschnitt ergänzt. eBay (eBay Marketplaces GmbH, Helvetiastraße 15–17, 3005 Bern, Schweiz) setzt bei Affiliate-Transaktionen Cookies zur Tracking-Verfolgung ein.
+Auf dieser Website finden sich Links zu Suchergebnissen auf **eBay** (eBay Marketplaces GmbH, Helvetiastraße 15–17, 3005 Bern, Schweiz). Wenn du über einen solchen Link einkaufst, erhalte ich eine kleine Provision. Der Preis ändert sich für dich nicht.
+
+Die Links enthalten Affiliate-Parameter wie die Campaign-ID und eine Custom-ID zur Zuordnung einer möglichen Vermittlung. Beim Anklicken eines Affiliate-Links wird die eBay-Website aufgerufen und eBay kann zu diesem Zweck Cookies setzen.
+
+Die MATMAKSA-Website selbst stellt beim bloßen Anzeigen der Seite keine Verbindung zu eBay her – es werden keine eBay-Skripte, Pixel, Widgets oder Bilder geladen. Die Datenverarbeitung beginnt erst mit dem bewussten Klick auf einen gekennzeichneten Link.
+
+Weitere Informationen: [eBay-Partnerprogramm-Datenschutz](https://www.ebaypartnernetwork.com)
 
 ## 8. MailerLite – geplant
 
@@ -81,6 +87,7 @@ Diese Website verwendet **keine eigenen Cookies** zu Analyse- oder Tracking-Zwec
 
 Drittanbieter-Cookies können gesetzt werden, wenn du:
 - einem Amazon-Partner-Link folgst
+- einem eBay-Partner-Link folgst
 
 ## 12. Ihre Rechte
 

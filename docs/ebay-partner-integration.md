@@ -1,132 +1,100 @@
 # eBay Partner Network – Integration
 
 **Stand:** Juli 2026  
-**Status:** Vorbereitet, aber noch nicht aktiv – benötigt Konfiguration aus dem eBay-Dashboard
-
-## Benötigte Angaben aus dem eBay-Partner-Dashboard
-
-1. **Registrierung** unter [https://www.ebaypartnernetwork.com](https://www.ebaypartnernetwork.com) (ePN, nicht partner.ebay.de)
-2. Nach der Anmeldung: **Simple Link Generator** öffnen
-3. Einen echten Partnerlink erzeugen, z. B. für `www.ebay.de/sch/i.html?_nkw=...`
-4. Die vollständige generierte URL kopieren (enthält **alle** erforderlichen Parameter)
-5. Aus dieser URL den `_nkw=`-Parameter entfernen (samt Wert)
-6. Die Rest-URL in `hugo.toml` unter `[params.ebay] baseUrl` eintragen
-
-### Erwartete Parameter in der generierten URL
-
-Die offizielle EPN-Linkstruktur enthält mindestens:
-- `mkevt=1`
-- `mkcid=1`
-- `mkrid=707-53477-19255-0` (eBay Deutschland)
-- `campid=DEINE_CAMPAIGN_ID`
-- `toolid=XXXXX`
-- Optional: `customid=...`
-
-**Keine dieser Werte schätzen oder manuell zusammensetzen.** Die Parameterwerte können sich ändern. Verwende ausschließlich den offiziellen Simple Link Generator.
+**Status:** ✅ Aktiv
 
 ## Konfiguration in `hugo.toml`
 
+Die eBay-Partner-Integration wird zentral in `hugo.toml` unter `[params.ebay]` konfiguriert:
+
 ```toml
 [params.ebay]
-  baseUrl = "https://www.ebay.de/sch/i.html?_sop=15&_LH_ItemCondition=3000&mkevt=1&mkcid=1&mkrid=707-53477-19255-0&campid=DEINE_ID&toolid=10001&"
+  active = true
+  marketplaceUrl = "https://www.ebay.de"
+  campaignId = "5339166386"
+  toolId = "10001"
+  rotationId = "707-53477-19255-0"
+  channelId = "1"
+  eventType = "1"
+  siteId = "77"
 ```
 
-Die baseUrl muss mit `&` oder `?` enden, da der Shortcode `_nkw=SUCHBEGRIFF` anhängt.
-
-Statt des `query`-Modus kann auch direkt eine vollständige URL über den `url`-Parameter übergeben werden:
-```
-{{< ebay-link url="https://www.ebay.de/sch/i.html?_nkw=..." text="Angebote" >}}
-```
+- **`active`** – `true` schaltet Affiliate-Links ein; `false` deaktiviert alle Links (nur Text)
+- **`campaignId`** – Die vom eBay Partner Network zugewiesene Campaign-ID
+- **`toolId`** – Tool-ID aus dem EPN-Dashboard
+- **`rotationId`** – eBay-Regions-ID (707-53477-19255-0 für eBay Deutschland)
+- **`channelId`** / **`eventType`** / **`siteId`** – EPN-Parameter aus dem Dashboard
 
 ## Shortcode-Verwendung
 
-### Variante 1: Suchbegriff (empfohlen)
+### Syntax
 
 ```
-{{< ebay-link query="Fujitsu Futro S7010" text="Gebrauchte Fujitsu Futro S7010 bei eBay ansehen" >}}
+{{< ebay-link query="SUCHBEGRIFF" text="LINKTEXT" >}}
+{{< ebay-link query="SUCHBEGRIFF" text="LINKTEXT" customid="CUSTOM-ID" >}}
 ```
 
-Erzeugt: `baseUrl + _nkw=Fujitsu+Futro+S7010`
+### Aktive Positionen
 
-### Variante 2: Direkte URL
+| Artikel | Suchbegriff | Custom-ID |
+|---|---|---|
+| Fujitsu Futro S7010 | Fujitsu Futro S7010 | `futro-s7010-preistabelle` |
+| Homelab unter 100€ | Thin Client Homelab | `homelab-100-thin-clients` |
+| Mini-PC-Vergleich | Fujitsu Futro S7010 | `mini-pc-vergleich-futro` |
 
-Für spezifische Suchergebnisseiten oder Filter:
+### Custom-IDs
 
-```
-{{< ebay-link url="https://www.ebay.de/sch/i.html?_nkw=Fujitsu+Futro+S7010&_sop=15" text="Angebote durchsuchen" >}}
-```
-
-### Variante 3: Mit Custom-ID (für Auswertung)
-
-```
-{{< ebay-link query="Fujitsu Futro S7010" text="Angebote" customid="futro-s7010-preistabelle" >}}
-```
-
-`customid` wird an die URL angehängt, damit im ePN-Dashboard nachvollziehbar ist, aus welchem Artikel und an welcher Position der Klick kam.  
-**Empfehlung:** Kurze, stabile IDs ohne personenbezogene Daten, z. B. `futro-preistabelle`, `100e-thin-clients`, `vergleich-futro`.
+Custom-IDs ermöglichen im EPN-Dashboard die Zuordnung von Klicks zu einzelnen Linkpositionen. Sie:
+- bestehen aus Kleinbuchstaben, Zahlen und Bindestrichen
+- enthalten keine personenbezogenen Daten
+- sind stabil (keine Jahreszahlen, keine Artikel-URLs)
 
 ### Alle Parameter
 
 | Parameter | Pflicht | Beschreibung |
-|-----------|---------|-------------|
-| `query` | ja (oder `url`) | Suchbegriff für eBay (wird URL-encodiert) |
-| `url` | ja (oder `query`) | Vollständige eBay-URL (Affiliate- oder Normal-Link) |
+|---|---|---|
+| `query` | ja | Suchbegriff (wird URL-encodiert) |
 | `text` | nein | Linktext (Standard: "Gebrauchte Angebote bei eBay ansehen") |
-| `customid` | nein | Für ePN-Auswertung – Position/Artikel-Identifikator |
+| `customid` | nein | Für EPN-Dashboard-Auswertung |
+
+## Generierte URL-Struktur (Beispiel)
+
+```
+https://www.ebay.de/sch/i.html?_nkw=Fujitsu+Futro+S7010&mkevt=1&mkcid=1&mkrid=707-53477-19255-0&campid=5339166386&toolid=10001&customid=futro-s7010-preistabelle&siteid=77
+```
 
 ## Affiliate-Kennzeichnung
 
 Alle Links enthalten automatisch:
 - `rel="sponsored nofollow noopener noreferrer"`
 - `target="_blank"`
+- Sichtbare Kennzeichnung im Linktext
 
-## Normaler vs. Affiliate-Link
+## Verhalten ohne oder mit unvollständiger Konfiguration
 
-| | Normaler eBay-Link | Affiliate-Link (Shortcode) |
-|---|---|---|
-| `rel` | keins oder `nofollow` | `sponsored nofollow noopener noreferrer` |
-| Ziel | `_blank` (optional) | `_blank` (Pflicht) |
-| Kennzeichnung | keine | ⓘ im Link |
-| Nutzung | Quellenangaben | Kaufempfehlungen |
-
-## Wo eBay-Links vorbereitet wurden
-
-1. **content/posts/fujitsu-futro-s7010-homelab-einstieg/index.md**
-   - Nach der Preistabelle
-2. **content/posts/homelab-unter-100-euro-was-du-brauchst/index.md**
-   - Nach dem Hinweis auf schwankende Preise
-3. **content/posts/mini-pc-homelab-vergleich/index.md**
-   - Im Abschnitt "Bis 50 €: Fujitsu Futro S7010"
-
-## Verhalten ohne Konfiguration
-
-Wenn `baseUrl` in `hugo.toml` nicht gesetzt oder leer ist:
-- **Im Hugo-Produktionsbuild** (`hugo`): gar kein Link – nur der Text wird als reiner Text ausgegeben
-- **Im lokalen Dev-Server** (`hugo server`): erscheint ein HTML-Kommentar als Entwicklerhinweis
-- **Keine gelben Warnboxen** im produktiven Build
-- **Keine scheinbar getrackten, tatsächlich aber nicht funktionierenden Links**
-
-Nach dem Eintragen der `baseUrl` werden automatisch echte Affiliate-Links generiert.
-
-## Test der Integration
-
-1. `baseUrl` in `hugo.toml` eintragen (vom Simple Link Generator)
-2. `hugo server` starten
-3. Einen der Artikel mit eBay-Shortcode öffnen
-4. Prüfen:
-   - Link sichtbar mit ⓘ?
-   - `rel="sponsored nofollow noopener noreferrer"` vorhanden?
-   - URL enthält `mkevt=1`, `mkcid=1`, `mkrid=707-53477-19255-0`, `campid=...`, `toolid=...`?
-   - Custom-ID (falls angegeben) in der URL sichtbar?
-5. Klick testen: landest du korrekt auf eBay?
-6. **Vergleiche mit dem ursprünglichen Link aus dem Simple Link Generator** – die URL-Struktur sollte identisch sein, nur `_nkw=` wird vom Shortcode hinzugefügt
+- **`active = false`** oder fehlende Campaign-ID: Shortcode gibt nur unverlinkten Text als `<span>` aus – keine Affiliate-Links
+- Keine gelben Warnboxen im Produktionsbuild
+- Keine scheinbar getrackten, nicht funktionierenden Links
 
 ## Zentrale Deaktivierung
 
 Sollen alle eBay-Links deaktiviert werden:
 1. `hugo.toml` öffnen
-2. `baseUrl` auskommentieren oder auf `""` setzen
+2. `active` auf `false` setzen
 3. Hugo-Build erneut ausführen
-4. Alle Shortcodes wechseln automatisch in den inaktiven Modus (kein Link)
+4. Alle Shortcodes wechseln automatisch in den inaktiven Modus
 
-Die Shortcodes selbst müssen nicht aus den Artikeln entfernt werden. Bestehende Amazon-Links bleiben unberührt.
+Die Shortcodes selbst müssen nicht aus den Artikeln entfernt werden. Amazon-Links bleiben unberührt.
+
+## Test der Integration
+
+1. `hugo server` starten
+2. Artikel mit eBay-Shortcode öffnen
+3. Prüfen:
+   - Link sichtbar?
+   - `rel="sponsored nofollow noopener noreferrer"` vorhanden?
+   - URL enthält: `mkevt`, `mkcid`, `mkrid`, `campid`, `toolid`, `_nkw`, `siteid`?
+   - Custom-ID in der URL sichtbar?
+   - Keine kurzlebigen Parameter (`itmmeta`, `itmprp`, `amdata`, `tkp`)?
+   - Keine einzelne Artikelnummer als Standardziel?
+4. Klick testen: Suchergebnisseite auf eBay.de erscheint?
