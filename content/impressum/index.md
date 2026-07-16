@@ -29,7 +29,3 @@ E-Mail: Matheus.Makiola@gmail.com
 Matheus Makiola  
 Haydnstr. 2  
 48291 Telgte
-
----
-
-> **Hinweis:** Dies ist ein prüfbarer Entwurf. Der Text wurde nicht anwaltlich geprüft und erhebt keinen Anspruch auf Rechtssicherheit. Bitte lasse die Angaben vor Veröffentlichung von einem Rechtsbeistand prüfen.

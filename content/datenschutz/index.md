@@ -10,10 +10,6 @@ disableShare: true
 searchHidden: true
 ---
 
-> **Hinweis:** Dies ist ein prüfbarer Entwurf, der auf den tatsächlich eingesetzten Funktionen dieser Website basiert. Der Text wurde nicht anwaltlich geprüft und erhebt keinen Anspruch auf Rechtssicherheit. Bitte lasse die Angaben vor Veröffentlichung von einem Rechtsbeistand prüfen.
-
----
-
 ## 1. Verantwortlicher
 
 **Betreiber der Website:**  
@@ -43,17 +39,19 @@ Diese Daten werden nur für die technische Bereitstellung und Sicherheit verarbe
 
 Diese Website verwendet **keine externen Schriftarten** von Google Fonts, Adobe Fonts oder ähnlichen Diensten. Schriftarten werden lokal ausgeliefert.
 
-## 5. Eingebettete Inhalte
+## 5. Besucherzählung (GoatCounter)
 
-### YouTube-Videos
+Diese Website verwendet **GoatCounter** ([goatcounter.com](https://www.goatcounter.com)) für eine datensparsame Besucherzählung. Erhoben werden:
 
-Auf dieser Website können YouTube-Videos eingebettet sein. Beim Abspielen wird eine Verbindung zu den Servern von YouTube (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) hergestellt. Dabei wird deine IP-Adresse an YouTube übermittelt. Wir nutzen den **erweiterten Datenschutzmodus** (nocookie-Domain), sodass YouTube keine Cookies auf deinem Gerät speichert, solange du das Video nicht abspielst.
+- aufgerufene URL
+- Referrer-Header (zuvor besuchte Seite)
+- Browserkennung (User-Agent)
+- Bildschirmgröße
+- Herkunftsland (aus der IP-Adresse)
 
-Weitere Informationen: [Google-Datenschutzerklärung](https://policies.google.com/privacy)
+GoatCounter wird ohne Cookies betrieben und speichert keine dauerhaften Identifikatoren. Die IP-Adresse wird nicht gespeichert. Eine Identifikation einzelner Besucher ist nicht möglich. Die Daten dienen ausschließlich der Ermittlung der Seitenaufrufe und der geografischen Verteilung.
 
-### Externe Bilder
-
-Einige Bilder auf dieser Website können von externen Quellen (z. B. Bilddiensten) eingebunden sein. In diesen Fällen kann der Drittanbieter deine IP-Adresse erfassen.
+Weitere Informationen: [GoatCounter-Datenschutzerklärung](https://www.goatcounter.com/privacy)
 
 ## 6. Affiliate-Links (Amazon)
 
@@ -82,7 +80,6 @@ Diese Website verlinkt auf externe Profile bei **GitHub** und **Instagram**. Bei
 Diese Website verwendet **keine eigenen Cookies** zu Analyse- oder Tracking-Zwecken. Technisch erforderliche Session-Daten (z. B. Theme-Präferenz) werden lokal im Browser gespeichert (localStorage) und nicht an Dritte übermittelt.
 
 Drittanbieter-Cookies können gesetzt werden, wenn du:
-- ein eingebettetes YouTube-Video abspielst
 - einem Amazon-Partner-Link folgst
 
 ## 12. Ihre Rechte
@@ -104,7 +101,3 @@ Du hast das Recht, dich bei einer Aufsichtsbehörde zu beschweren, wenn du der A
 ## 14. Änderungen
 
 Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Der aktuelle Stand ist Juli 2026.
-
----
-
-> **Hinweis:** Dies ist ein prüfbarer Entwurf. Der Text wurde nicht anwaltlich geprüft und erhebt keinen Anspruch auf Rechtssicherheit. Bitte lasse die Angaben vor Veröffentlichung von einem Rechtsbeistand prüfen.
