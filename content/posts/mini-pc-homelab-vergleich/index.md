@@ -53,7 +53,7 @@ Statt einer generischen Rangliste zeige ich dir hier die besten Optionen **nach 
 |-----------|-----------|
 | 🥇 Beste Preis-Leistung | HP ProDesk 400 G4 (~90 € gebraucht) |
 | 💰 Günstigster Einstieg | Fujitsu Futro S7010 (~40 € gebraucht) |
-| 🚀 Beste Wahl für lokale KI | Lenovo M720q (~150 €) + 32 GB RAM |
+| 🚀 Beste Wahl für maximale Erweiterbarkeit | Lenovo M720q (~150 €) + 32 GB RAM |
 | 🏠 Beste Wahl für Home Assistant | Fujitsu Futro S7010 (~40 €) |
 | 🔧 Beste Wahl für Proxmox Cluster | 2× Dell Optiplex 3070 (~100 €/Stück) |
 
@@ -64,7 +64,9 @@ Statt einer generischen Rangliste zeige ich dir hier die besten Optionen **nach 
 Bevor es zu den Modellen geht, kurz die drei Dinge, die Einsteiger am meisten verunsichern:
 
 ### "Reicht ein alter i5 gegen einen modernen N100/N95?"
-Die kurze Antwort: **Der alte i5 (8. Gen) ist meist stärker** – trotz des größeren Modellnamens. Ein i5-8500T (6 Kerne) aus 2018 hat rund **50 % mehr Rechenleistung** als ein aktueller Intel N95 (4 Kerne) aus 2023. Dafür verbraucht der N95 deutlich weniger Strom (~10 W vs. ~15-25 W im Leerlauf). **Faustregel:** Für viele gleichzeitige Dienste (Proxmox mit 5+ Containern) nimm den i5. Für einen einzelnen 24/7-Dauerläufer (Pi-hole, Home Assistant) reicht der N95/N100 völlig.
+Die kurze Antwort: **Der alte i5 (8. Gen) ist meist stärker** – trotz des größeren Modellnamens. Ein i5-8500T (6 Kerne) aus 2018 hat in der Regel mehr Rechenleistung als ein aktueller Intel N95 (4 Kerne) aus 2023. Dafür verbraucht der N95 deutlich weniger Strom (~10 W vs. ~15-25 W im Leerlauf). **Faustregel:** Für viele gleichzeitige Dienste (Proxmox mit 5+ Containern) nimm den i5. Für einen einzelnen 24/7-Dauerläufer (Pi-hole, Home Assistant) reicht der N95/N100 völlig.
+
+Der i5-8500T (älterer Sechskern) hat Reserven bei parallelen Diensten, der N95 ist häufig sparsamer und einfacher als Neugerät erhältlich.
 
 ### "Was ist ein Barebone? Muss ich löten?"
 Ein Barebone ist ein PC, bei dem **Arbeitsspeicher (RAM) und Festplatte (SSD) fehlen** – quasi ein Auto ohne Räder. Du musst nicht löten, sondern nur **zwei Teile einclipsen** (wie Lego): Die SSD wird in einen Schlitz gesteckt und festgeschraubt, der RAM wird in einen Steckplatz gedrückt, bis er einrastet. Das sind 5 Minuten Arbeit, kein Spezialwerkzeug nötig. **Kosten extra:** 32 GB DDR4 RAM (gebraucht) + 500 GB NVMe SSD = ca. 150–200 € zusätzlich. Achtung: Aktuell (2026) sind RAM-Preise stark gestiegen – ein neues 32-GB-Kit kostet schnell 200+ €. Auf dem Gebrauchtmarkt oder bei Refurbished-Händlern findest du oft günstigere Angebote.
@@ -76,7 +78,7 @@ Ein Barebone ist ein PC, bei dem **Arbeitsspeicher (RAM) und Festplatte (SSD) fe
 
 ## Auf einen Blick
 
-| Budget | Modell(e) | Zustand | Highlight |
+| Budget (Stand: Juli 2026) | Modell(e) | Zustand | Highlight |
 |--------|-----------|---------|-----------|
 | **Bis 50 €** | Fujitsu Futro S7010 | Gebraucht | **Günstigster Einstieg** – 4 Kerne, extrem sparsam |
 | **80–150 €** | HP ProDesk 400 G3/G4 Mini **oder** Dell OptiPlex 3060/3070 Micro | Gebraucht | **Freie Wahl** – was du günstiger findest |
@@ -160,7 +162,7 @@ Die direkte Konkurrenz zu HP. Identisches Preisniveau, ähnliche Specs. Der **30
 
 {{< figure src="/images/products/lenovo-m720q-tiny.jpg" alt="Lenovo ThinkCentre M720q Tiny" width="400" >}}
 
-Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, die mehr wollen: **Er verfügt über einen PCIe-Slot im Innern.** Das bedeutet, du kannst eine 10-Gigabit-Netzwerkkarte, eine SATA-Erweiterungskarte oder sogar eine kompakte Grafikkarte nachrüsten – eine Möglichkeit, die kaum ein anderer Mini-PC dieser Preisklasse bietet.
+Der Lenovo ThinkCentre M720q Tiny ist die Geheimwaffe für Homelab-Betreiber, die mehr wollen: **Er verfügt über einen PCIe-Slot im Innern.** Dafür wird allerdings eine PCIe-Riser-Karte (FRU 01AJ940) benötigt, die den Steckplatz bereitstellt – ohne diese Karte ist kein PCIe-Anschluss vorhanden. Das Gehäuse sollte entweder die Tiny-in-One-Variante sein oder der Standard-Tiny mit der passenden PCIe-Slot-Blende. Mit Riser-Karte kannst du dann eine 10-Gigabit-Netzwerkkarte, eine SATA-Erweiterungskarte oder sogar eine kompakte Grafikkarte nachrüsten – eine Möglichkeit, die kaum ein anderer Mini-PC dieser Preisklasse bietet.
 
 - **Prozessor (CPU):** Intel Core i5-8500T (6 Kerne) oder i7-8700T (6 Kerne, 12 Threads)
 - **Arbeitsspeicher (RAM):** Bis zu 32 GB DDR4 (64 GB inoffiziell getestet)
@@ -245,14 +247,7 @@ Die Mini-PCs haben oft nur Platz für 1–2 SSDs intern. Wenn du größere Daten
 
 ---
 
-## Mini-PC für KI-Modelle – Was ist in welcher Preisklasse möglich?
-
-| Budget | KI-Nutzung |
-|--------|------------|
-| **Bis 50 €** | ❌ Nicht geeignet – CPU zu schwach, RAM zu knapp |
-| **80–150 €** | ⚠️ Phi-3-mini (3,8B) läuft mit >10 Tok/s. Llama-3-8B langsam. 16+ GB RAM nötig. |
-| **150–200 €** | ✅ Phi-3-mini flüssig. Mit 32 GB RAM auch Llama-3-8B. GPU via PCIe-Riser (M720q). |
-| **200–300 €** | ⚠️ N95 für KI schwächer als i5-8500T, trotz neuerer Architektur. |
+> ⚠️ **Lokale KI ist auf diesen Geräten ohne dedizierte GPU nur eingeschränkt sinnvoll.** Kleinere Modelle wie Phi-3-mini laufen auf CPUs mit 16+ GB RAM, aber für größere Modelle oder flüssige Nutzung ist eine GPU nötig.
 
 ---
 
@@ -265,5 +260,5 @@ Die Mini-PCs haben oft nur Platz für 1–2 SSDs intern. Wenn du größere Daten
 | **150–200 €** | 👉 **Lenovo M720q Tiny** – PCIe macht den Unterschied |
 | **200–300 €** | 👉 **GMKtec G3S** – Neugerät mit Garantie (aber CPU-seitig schwächer als gebrauchte i5) |
 
-**Meine persönliche Empfehlung für Einsteiger:** Hol dir einen **HP ProDesk 400 G4** gebraucht für ~90 €. Dazu nachrüstbar: 16–32 GB RAM (gebraucht oft günstiger) und eine 500 GB NVMe-SSD. Der Rechner hat 6 Kerne, läuft leise und stromsparend – und du kannst später bei Bedarf die zweite SSD nachrüsten.
+**Passend für Einsteiger, wenn …:** Hol dir einen **HP ProDesk 400 G4** gebraucht für ~90 €. Dazu nachrüstbar: 16–32 GB RAM (gebraucht oft günstiger) und eine 500 GB NVMe-SSD. Der Rechner hat 6 Kerne, läuft leise und stromsparend – und du kannst später bei Bedarf die zweite SSD nachrüsten.
 

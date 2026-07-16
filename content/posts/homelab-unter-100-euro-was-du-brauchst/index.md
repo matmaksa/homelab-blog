@@ -40,7 +40,7 @@ instagram_derivatives_status = "ready_for_review"
 Viele denken bei einem Homelab sofort an teure Server-Racks, laute Lüfter und eine dreistellige Stromrechnung.  
 Die Wahrheit: Für die ersten Schritte reichen oft **unter 100 Euro** – wenn man weiß, worauf es ankommt.
 
-Dieser Artikel zeigt, was du wirklich brauchst, worauf du sparen kannst und wo sich ein geringerer Invest trotzdem lohnt.
+Dieser Artikel zeigt, was du wirklich brauchst, worauf du sparen kannst und wo sich eine etwas höhere Anfangsinvestition lohnt.
 
 ## Für wen ist dieser Artikel?
 
@@ -96,7 +96,8 @@ Manche Dinge klingen wichtig, sind aber für den Start überflüssig:
 - **Rack** – ein Mini-PC steht unsichtbar neben dem Router.
 - **Enterprise-Switch** – ein einfacher unmanaged Switch tut es.
 - **NAS** – für den Start reicht auch eine externe 2,5-Zoll-HDD, eine USB-SSD oder ein zweiter Mini-PC als Backup-Ziel. Wichtig ist nicht SSD um jeden Preis, sondern dass Backups regelmäßig erstellt und testweise wiederhergestellt werden. Für viele Homelab-Backups ist eine günstige HDD völlig ausreichend, weil Restore-Test und Regelmäßigkeit wichtiger sind als maximale Geschwindigkeit.
-- **Teure Domain- oder Hosting-Setups** brauchst du am Anfang nicht. Für die Lernphase reicht entweder lokaler Zugriff, Tailscale/Headscale oder eine kostenlose DynDNS-Adresse mit Let's Encrypt, wenn du bewusst mit HTTPS üben möchtest. Wichtig ist: keine Dienste unüberlegt offen ins Internet stellen.
+- **Tailscale** – einfacher Einstieg für den sicheren Fernzugriff von unterwegs. Für Einsteiger die richtige Wahl. **Headscale** (selbst gehostet) ist ein fortgeschrittenes Projekt für später.
+- **Teure Domain- oder Hosting-Setups** brauchst du am Anfang nicht. Für die Lernphase reicht entweder lokaler Zugriff, Tailscale (einfacher Einstieg) oder Headscale (fortgeschritten) oder eine kostenlose DynDNS-Adresse mit Let's Encrypt, wenn du bewusst mit HTTPS üben möchtest. Wichtig ist: keine Dienste unüberlegt offen ins Internet stellen.
 
 ## Beispiel-Setup unter 100€
 
@@ -114,7 +115,7 @@ Mit dem verbleibenden Budget lassen sich eine zweite HDD/SSD für Backups oder e
 
 ## Fazit
 
-Ein Homelab unter 100 Euro ist kein Kompromiss – es ist ein cleverer Einstieg.  
+Ein Homelab unter 100 Euro ist ein sinnvoller Einstieg mit klaren Grenzen.  
 Du lernst die gleichen Konzepte wie mit teurer Hardware, aber ohne finanzielles Risiko.
 
 Starte mit einem gebrauchten Thin Client, installiere [Proxmox]({{< relref "virtualisierung-kostenlos-2026-proxmox-vmware-alternative" >}}) oder Debian, und arbeite dich Schritt für Schritt vor.

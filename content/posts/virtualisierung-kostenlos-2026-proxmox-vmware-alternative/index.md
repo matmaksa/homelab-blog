@@ -57,7 +57,7 @@ Dieser Artikel richtet sich an **Homelab-Einsteiger ohne Vorkenntnisse**, die ei
 |-----------|-----------|
 | 🥇 Beste Preis-Leistung | Proxmox VE auf gebrauchtem HP ProDesk 400 G4 (~90 €) |
 | 💰 Günstigster Einstieg | Proxmox VE auf Fujitsu Futro S7010 (~40 €) |
-| 🚀 Beste Wahl für lokale KI | Proxmox auf Lenovo M720q (~120 €) + 32 GB RAM |
+| 🚀 Beste Wahl für maximale Erweiterbarkeit | Lenovo M720q (~120 €) + PCIe-Slot für 10GbE |
 | 🏠 Beste Wahl für Home Assistant | Proxmox LXC-Container (2 GB RAM reichen) |
 | 🔧 Beste Wahl für Proxmox Cluster | 2× Dell Optiplex 3070 Micro (~100 €/Stück) |
 
@@ -79,7 +79,7 @@ Proxmox VE ist ein **Typ-1-Hypervisor** – eine Spezial-Software, die direkt au
 ### Was bringt dir das konkret?
 
 - **Isolation:** Ein abgestürzter Dienst reißt die anderen nicht mit – dein Medienserver läuft weiter, auch wenn der Werbeblocker gerade neu startet
-- **Snapshots (Schnappschüsse):** Bevor du eine riskante Änderung machst, knipst du einen Schnappschuss. Läuft was schief? Ein Klick und alles ist wie vorher
+- **Snapshots (Schnappschüsse):** Bevor du eine riskante Änderung machst, knipst du einen Snapshot – das speichert den aktuellen Zustand deiner VM/ Containers. Wichtig: Ein Snapshot ist **kein Backup**, sondern eine differenzielle Momentaufnahme. Läuft was schief, stellst du den Zustand per Klick wieder her. Für echte Datensicherheit brauchst du zusätzlich regelmäßige Backups (siehe Proxmox Backup Server weiter unten).
 - **Kosteneffizienz:** Ein Server ersetzt fünf – weniger Strom, weniger Platz, weniger Lärm
 - **Flexibilität:** Linux für Docker, Windows für bestimmte Anwendungen – alles auf einem Rechner
 
@@ -126,11 +126,11 @@ Proxmox läuft auch auf älteren Rechnern und unterstützt praktisch jeden hande
 | Komponente | Minimal | Empfohlen |
 |-----------|---------|-----------|
 | **CPU (Prozessor)** | 4 Kerne (z. B. Intel Core i5-6500) | 8+ Kerne (Intel i7/i9 oder AMD Ryzen) |
-| **RAM (Arbeitsspeicher)** | 8 GB | 32–64 GB |
+| **RAM (Arbeitsspeicher)** | 8 GB | 16–32 GB |
 | **Festplatte (Storage)** | 256 GB SSD | 1 TB NVMe + HDD für Backups |
 | **Netzwerk** | 1 Gigabit-Anschluss | 2,5 oder 10 Gigabit |
 
-> **Gut zu wissen:** Zum Zeitpunkt dieses Artikels ist Proxmox VE 9.2 die aktuelle Version. Sie bringt einen automatischen Lastausgleich zwischen mehreren Servern, ein für Mobilgeräte optimiertes Web-Interface und aktuelle Versionen aller enthaltenen Komponenten. Wichtig für dich als Einsteiger: **Die Installation und Bedienung ändert sich kaum von Version zu Version** – du kannst diese Anleitung auch in zwei Jahren noch nutzen.
+> **Gut zu wissen:** Die jeweils aktuelle Proxmox-Version findest du auf der offiziellen Downloadseite unter [proxmox.com/downloads](https://www.proxmox.com/downloads). Wichtig für dich als Einsteiger: **Die Installation und Bedienung ändert sich kaum von Version zu Version** – du kannst diese Anleitung auch in zwei Jahren noch nutzen. Ein Tipp zur Live-Migration: Shared Storage (wie NFS oder Ceph) vereinfacht die Live-Migration. Mit lokalem Storage kann eine zusätzliche Übertragung der virtuellen Festplatten erforderlich sein.
 
 ---
 
@@ -144,9 +144,8 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 - **Arbeitsspeicher (RAM):** 8 GB offiziell, 16 GB getestet – ein einzelner Steckplatz
 - **Festplatte:** 64 GB M.2 SATA – austauschbar, aber **nur für SATA-SSDs** (kein NVMe, siehe SSD-Warnung unten)
 - **Netzwerk:** 1 Gigabit-Anschluss (GbE)
-- **Erweiterbarkeit:** ❌ Nur ein RAM-Steckplatz, kein zweiter SSD-Slot, kein PCIe-Slot für Zusatzkarten
-- **KI-Tauglichkeit:** ❌ Für lokale KI-Modelle (Ollama) nicht geeignet – Prozessor zu schwach, RAM zu knapp
-- **Stromverbrauch (Leerlauf):** ca. 6–8 Watt – günstiger als jede Glühbirne
+|- **Erweiterbarkeit:** ❌ Nur ein RAM-Steckplatz, kein zweiter SSD-Slot, kein PCIe-Slot für Zusatzkarten
+|- **Stromverbrauch (Leerlauf):** ca. 6–8 Watt – günstiger als jede Glühbirne
 - **USB-C?** Nein
 
 **Ideal für:** Erste Proxmox-Experimente, Pi-hole (Werbeblocker), AdGuard (DNS-Filter), Netzwerk-Monitoring
@@ -161,9 +160,8 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 - **Arbeitsspeicher (RAM):** Bis zu 32 GB DDR4 – **zwei Steckplätze, nicht fest verlötet**
 - **Festplatte:** 1× M.2 NVMe + 1× 2,5-Zoll-SATA – zwei Plätze, gut erweiterbar
 - **Netzwerk:** 1 Gigabit-Anschluss
-- **Erweiterbarkeit:** ✅ RAM nachrüstbar, zweiter SSD-Platz vorhanden. Kein PCIe-Slot im Innern.
-- **KI-Tauglichkeit:** ⚠️ Basis möglich. Phi-3-mini (ein kleines KI-Modell) läuft mit über 10 Tokens/s auf der CPU – flüssig für Texte. Größere Modelle (Llama-3-8B) werden langsamer. 16+ GB RAM empfohlen.
-- **Stromverbrauch (Leerlauf):** ca. 12–18 Watt
+| **Erweiterbarkeit:** ✅ RAM nachrüstbar, zweiter SSD-Platz vorhanden. Kein PCIe-Slot im Innern.
+| **Stromverbrauch (Leerlauf):** ca. 12–18 Watt
 - **USB-C?** Nein (nur USB-A, der rechteckige Standard-Anschluss)
 
 **Ideal für:** Einen vollwertigen Proxmox-Host für viele Container und 3–5 virtuelle Maschinen, Home Assistant (Smart Home), Jellyfin (Medienserver)
@@ -182,11 +180,10 @@ Was du auf dem Gebrauchtmarkt findest: meist mit 8 GB RAM und 64 GB SSD.
 - **Festplatte:** 1× M.2 NVMe + 1× 2,5-Zoll-SATA
 - **Netzwerk:** 1 Gigabit-Anschluss
 - **Erweiterbarkeit:** ✅ RAM und SSD nachrüstbar. **Pluspunkt:** Ein PCIe-Slot im Innern – damit kannst du eine 10-Gigabit-Netzwerkkarte oder eine kleine Grafikkarte einbauen. Das hat kein anderer Mini-PC in dieser Preisklasse.
-- **KI-Tauglichkeit:** ✅ Phi-3-mini läuft mit über 10 Tokens/s. Mit 32 GB RAM auch Llama-3-8B nutzbar.
 - **Stromverbrauch (Leerlauf):** ca. 12–20 Watt
 - **USB-C?** **Ja** – einmal USB-C. Das ist selten in dieser Klasse.
 
-**Ideal für:** KI-Spielereien (Ollama für lokale KI-Modelle), Cluster-Node mit PCIe-Erweiterung, Home Assistant + Nextcloud + KI alles in einem
+**Ideal für:** Cluster-Node mit PCIe-Erweiterung, Home Assistant + Nextcloud, erweiterbare Plattform für spätere Aufrüstung
 
 - 🔍 [Lenovo M720q Tiny bei Amazon suchen](https://www.amazon.de/s?k=Lenovo+M720q+Tiny&tag=matmaksa-homelab-21)
 
@@ -277,11 +274,9 @@ Bevor du Hardware kaufst, hier ein paar praktische Fallstricke aus meiner Erfahr
 
 Automatische, platzsparende Backups deiner VMs und Container. Ideal als zweite virtuelle Maschine auf demselben Host oder auf einem günstigen Zweit-Rechner.
 
-### 2. Ollama + Open WebUI für lokale KI
+### 2. Erweiterbare Systeme
 
-Ab 32 GB RAM kannst du kleine KI-Modelle direkt auf deinem Proxmox-Host laufen lassen – ohne Internet, ohne Abo, ohne dass deine Daten nach extern gehen. **Phi-3-mini** (ein kompaktes Sprachmodell von Microsoft) läuft mit über 10 Tokens/s auf der CPU – völlig flüssig für Chat und Textaufgaben.
-
-**Ehrliche Ansage zur Einrichtung:** Die Installation von Ollama erfordert ein paar Schritte im Terminal (dem schwarzen Fenster mit weißer Schrift). Du musst Docker in einem LXC-Container einrichten, was das Setzen von "Root-Rechten" und das Anpassen von Konfigurationsdateien bedeutet. Das ist machbar, aber nicht in 15 Minuten und nicht rein per Mausklick. Such einfach nach "Ollama Proxmox LXC installieren" – es gibt gute Schritt-für-Schritt-Anleitungen. Sobald es einmal läuft, steuerst du alles übers Web-Interface (Open WebUI) – dann wieder ohne Terminal.
+Ab 32 GB RAM bleiben dir alle Optionen offen – auch für rechenintensivere Anwendungen. Mit dem Lenovo M720q (PCIe-Slot) kannst du später sogar eine GPU nachrüsten.
 
 ### 3. Home Assistant via LXC – Smart Home Zentrale
 
@@ -293,7 +288,7 @@ Licht, Heizung, Kameras – alles von einer Oberfläche aus steuern. Home Assist
 
 ### Ist Proxmox VE wirklich komplett kostenlos?
 
-Ja. Proxmox ist Open Source – der Quellcode ist öffentlich einsehbar und darf von jedem kostenlos genutzt werden. Es gibt zwar ein kostenpflichtiges Enterprise-Repository mit getesteten Updates, aber die **kostenlose Community-Version reicht fürs Homelab völlig aus** (Sicherheitsupdates inklusive).
+Ja. Proxmox ist Open Source – der Quellcode ist öffentlich einsehbar und darf von jedem kostenlos genutzt werden. Es gibt das kostenlose No-Subscription-Repository für aktuelle Pakete und optional eine kostenpflichtige Enterprise-Subscription mit getesteten Updates. Die Community-Version mit No-Subscription-Repo reicht fürs Homelab völlig aus.
 
 ### Kann ich meine bestehenden VMware-VMs zu Proxmox migrieren?
 
@@ -301,7 +296,7 @@ Ja. Du hast drei Wege: Export aus VMware als OVF/OVA und Import in Proxmox, Konv
 
 ### Brauche ich Linux-Kenntnisse für Proxmox?
 
-Für die **grundlegende Nutzung**: nein. Die Weboberfläche erlaubt die Verwaltung per Mausklick – VMs anlegen, starten, stoppen, Snapshots erstellen. Für **fortgeschrittene Themen wie die KI-Einrichtung (Ollama) oder Cluster-Verwaltung** sind ein paar Terminal-Befehle nötig. Aber diese speziellen Dinge lernst du gezielt dann, wenn du sie brauchst – du musst nicht vorher Linux-Profi sein.
+Für die **grundlegende Nutzung**: nein. Die Weboberfläche erlaubt die Verwaltung per Mausklick – VMs anlegen, starten, stoppen, Snapshots erstellen. Für **fortgeschrittene Themen wie die Cluster-Verwaltung** sind ein paar Terminal-Befehle nötig. Aber diese speziellen Dinge lernst du gezielt dann, wenn du sie brauchst – du musst nicht vorher Linux-Profi sein.
 
 ---
 

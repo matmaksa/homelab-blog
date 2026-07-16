@@ -1,6 +1,6 @@
 ---
-title: "Home Assistant auf dem Mini-PC: Die ultimative Smarthome-Zentrale ab 40€"
-description: "Home Assistant auf einem gebrauchten Mini-PC einrichten: Smarthome-Zentrale für unter 40€ mit Zigbee, Docker und tausenden kompatiblen Geräten."
+title: "Home Assistant auf dem Mini-PC: Smarthome-Zentrale ab 40€"
+description: "Home Assistant auf einem gebrauchten Mini-PC: Hardware-Auswahl, Kosten, Grenzen und Kaufentscheidung für die Smarthome-Zentrale."
 date: 2026-06-24
 draft: false
 image: "featured.jpg"
@@ -44,9 +44,9 @@ Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links eink
 
 Dein Zuhause soll intelligent werden: Licht schaltet sich automatisch aus, die Heizung regelt sich nach Anwesenheit und die Rollläden fahren bei Sonnenaufgang hoch. Dafür brauchst du eine Zentrale, die alle Geräte steuert.
 
-**Home Assistant** ist die beste Lösung dafür – eine kostenlose Open-Source-Software, die über 2.000 verschiedene Geräte und Dienste miteinander verbindet. Vergiss teure Fertig-Boxen wie den HA Green oder den Raspberry Pi – ein refurbished Mini-PC bietet die dreifache Leistung zum halben Preis.
+**Home Assistant** ist die beste Lösung dafür – eine kostenlose Open-Source-Software, die über 2.000 verschiedene Geräte und Dienste miteinander verbindet. Raspberry Pi und Home Assistant Green sind einfacher Einstieg, ein gebrauchter Mini-PC bietet oft mehr Leistung fürs Geld – aber nicht jeder braucht das.
 
-Dieser Artikel zeigt dir, welcher Mini-PC für dein Smart Home am besten geeignet ist, was du außer dem PC noch brauchst und wie du alles in 15 Minuten zum Laufen bringst.
+Dieser Artikel zeigt dir, welcher Mini-PC für dein Smart Home am besten geeignet ist und was du außer dem PC noch brauchst.
 
 <!--more-->
 
@@ -56,16 +56,16 @@ Dieser Artikel zeigt dir, welcher Mini-PC für dein Smart Home am besten geeigne
 
 | Kategorie | Empfehlung | Preis |
 |-----------|-----------|-------|
-| 🥇 Beste Preis-Leistung | Fujitsu Futro S7010 + 8 GB RAM + Sonoff Zigbee-Stick | ~75 € |
-| 🚀 Beste Wahl für große Installationen | HP ProDesk 400 G4 (i5, 2 RAM-Slots) | ~120 € |
-| 🏠 Beste Wahl für Home Assistant + KI | Lenovo M720q Tiny (6 Kerne, PCIe-Slot) | ~150 € |
-| 🔧 Beste Wahl für Einsteiger (Neugerät) | GMKtec G3S (Garantie, kein Gebrauchtkauf) | ~210 € |
+| 🥇 Preis-Leistung | Fujitsu Futro S7010 + 8 GB RAM + Sonoff Zigbee-Stick | ~75 € |
+| 🚀 Für große Installationen | HP ProDesk 400 G4 (i5, 2 RAM-Slots) | ~120 € |
+| 🏠 Home Assistant + KI | Lenovo M720q Tiny (6 Kerne, PCIe-Slot) | ~150 € |
+| 🔧 Für Einsteiger (Neugerät) | GMKtec G3S (Garantie, kein Gebrauchtkauf) | ~210 € |
 
 ---
 
 ## Warum ein Mini-PC statt Raspberry Pi?
 
-Home Assistant läuft auch auf einem Raspberry Pi – aber ein **x86-Mini-PC** ist die klar bessere Wahl. Das zeigt sich besonders mit dem aktuellen **Home Assistant 2026.6**: Die neue Version bringt massive KI-Integration und Matter-Upgrades – genau das, was den Raspberry Pi überfordert. Ein Mini-PC mit 8–16 GB RAM und 4–6 Kernen hat dafür die Reserven. Der Raspberry Pi mit 4–8 GB und ARM-CPU stößt hier schnell an seine Grenzen.
+Home Assistant läuft auch auf einem Raspberry Pi – ein **x86-Mini-PC** bietet jedoch mehr Reserve für aufwendigere Setups mit Kameras, KI oder mehreren parallelen Diensten. Wer nur ein paar Zigbee-Geräte und Automationen steuern will, kommt mit einem Raspberry Pi 5 oder Home Assistant Green ebenfalls gut zurecht.
 
 | Kriterium | Mini-PC (Refurbished) | Raspberry Pi 5 (neu) |
 |-----------|----------------------|----------------------|
@@ -140,7 +140,7 @@ Wer mehr Leistung braucht (Kameras mit Frigate, lokale KI-Sprachassistenten, Par
 
 ## Was brauchst du außer dem Mini-PC?
 
-### 1. Zigbee-USB-Stick (zwingend nötig)
+### 1. Zigbee-USB-Stick (nur nötig, wenn du Zigbee-Geräte verwendest)
 
 | Stick | Preis | Besonderheit |
 |-------|-------|-------------|
@@ -173,22 +173,12 @@ Wer mehr Leistung braucht (Kameras mit Frigate, lokale KI-Sprachassistenten, Par
 
 ---
 
-## Installation: So richtest du Home Assistant ein
+## Installation
 
-### Weg 1: Home Assistant OS (empfohlen)
+Die ausführliche Installationsanleitung findest du im separaten Artikel:
+👉 [Home Assistant OS auf einem Mini-PC installieren]({{< relref "home-assistant-os-mini-pc-installieren" >}})
 
-1. **Image laden:** [home-assistant.io/installation](https://www.home-assistant.io/installation/) → "Home Assistant OS" für x86_64
-2. **Auf USB schreiben:** Mit **Balena Etcher** (kostenlos) auf einen USB-Stick (mind. 4 GB)
-3. **Booten:** Monitor (DisplayPort), Tastatur, LAN-Kabel anschließen, USB-Stick einstecken. Beim Einschalten **F2/F10/F12** drücken → USB als Boot-Laufwerk wählen
-4. **Warten:** Nach ~5–10 Minuten ist die Installation fertig
-5. **Öffnen:** Browser → **http://homeassistant.local:8123**
-6. **Zigbee-Stick einstecken:** HA erkennt ihn automatisch
-
-### Weg 2: Home Assistant Container (für Fortgeschrittene)
-
-Linux installieren (Ubuntu Server LTS), dann Home Assistant als Docker-Container. So laufen Pi-hole, Paperless-ngx und andere parallel.
-
-> **💡 Starte mit Home Assistant OS.** Du kannst später auf Container umsteigen – deine Konfiguration bleibt erhalten.
+Dieser Artikel konzentriert sich auf die Hardware-Auswahl und Kaufentscheidung.
 
 ---
 
@@ -213,6 +203,8 @@ Linux installieren (Ubuntu Server LTS), dann Home Assistant als Docker-Container
 ---
 
 ## Ausblick: Wenn dein Smart Home größer wird
+
+Frigate, Immich und lokale KI sind mögliche spätere Ausbauoptionen – für den Start nicht nötig.
 
 Viele Nutzer starten mit Home Assistant und merken schnell, dass ihr Mini-PC noch mehr kann. Irgendwann kommen weitere Self-Hosting-Dienste dazu – und aus der Smarthome-Zentrale wird ein kleiner Heimserver.
 

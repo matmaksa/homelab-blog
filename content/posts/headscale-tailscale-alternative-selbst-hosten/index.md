@@ -40,6 +40,8 @@ notes:
   - "Instagram asset headscale-selfhost is planned/review_ready."
 ---
 
+> **Fortgeschrittenes Projekt:** Headscale richtet sich an erfahrene Nutzer mit eigenem Server. Für Einsteiger ist Tailscale der einfachere Start.
+
 **Aktualisiert: Juni 2026 | Lesezeit: 7 Minuten**
 
 <!--more-->
@@ -59,13 +61,13 @@ Tailscale ist extrem einfach einzurichten. Aber mit der Entscheidung gibst du di
 **Nachteile der Tailscale-Cloud:**
 - Tailscale sieht, welche Geräte du verbindest (auch wenn sie die Daten nicht sehen können, wissen sie wer wer ist)
 - Tailscale entscheidet über die Infrastruktur – Ausfall der Cloud = kein Mesh-VPN
-- Tailscale schränkt die Anzahl der Nutzer ein (Personal-Plan: 3 Nutzer / 100 Geräte)
+- Tailscale schränkt die Anzahl der Nutzer ein (Personal-Plan: Aktuelle Limits: siehe [tailscale.com/pricing](https://tailscale.com/pricing))
 - Du musst einem US-Unternehmen vertrauen, dass der Dienst nicht eingestellt oder kostenpflichtig wird
 
 **Vorteile von Headscale:**
-- **Dein Netzwerk, deine Regeln** – Kein externer Dienst weiss, welche Geräte du verbindest
+- **Dein Netzwerk, deine Regeln** – Du behältst die Kontrolle über die Control Plane – übernimmst aber auch die Eigenverantwortung für Betrieb, Updates, Backup und Erreichbarkeit.
 - **Unabhängig von Internet-Ausfällen** – solange deine Geräte im selben Netzwerk sind oder dich via DynDNS/Domain erreichen, läuft es
-- **Kein Limit** – Unbegrenzte Geräte und Nutzer
+- **Kein Limit** – Die Grenzen bestimmst du durch deine Hardware und Konfiguration
 - **Open Source** – voller Zugriff auf den Code, keine bösen Überraschungen
 - **Eigene ACLs** – du definierst genau, wer auf wen zugreifen darf (nicht Tailscale)
 
@@ -106,13 +108,13 @@ apt update && apt upgrade -y
 Lade das aktuelle .deb-Paket direkt von GitHub:
 
 ```bash
-# Beispiel für Version 0.23.0 – aktuelle Version auf
-# https://github.com/juanfont/headscale/releases prüfen!
-wget https://github.com/juanfont/headscale/releases/latest/download/headscale_0.23.0_linux_amd64.deb
-dpkg -i headscale_0.23.0_linux_amd64.deb
+# Lade das aktuelle .deb-Paket von der offiziellen Release-Seite:
+# https://github.com/juanfont/headscale/releases
+wget https://github.com/juanfont/headscale/releases/latest/download/headscale_<version>_linux_amd64.deb
+dpkg -i headscale_<version>_linux_amd64.deb
 ```
 
-> **Wichtig:** Prüf vor der Installation die [aktuellste Version auf GitHub](https://github.com/juanfont/headscale/releases) und ersetze `0.23.0` durch die tatsächliche Versionsnummer.
+> **Wichtig:** Prüf vor der Installation die [aktuellste Version auf GitHub](https://github.com/juanfont/headscale/releases).
 
 ### 3. Konfiguration anpassen
 
@@ -197,7 +199,9 @@ Deine Geräte sind jetzt per Mesh-VPN verbunden. Du erreichst jedes Gerät über
 
 ---
 
-## Grundlegende ACLs (Access Control Lists)
+## Grundlegende ACLs (Legacy)
+
+> **Hinweis:** Headscale empfiehlt inzwischen **Grants** als bevorzugte Methode. ACLs sind der ältere beziehungsweise Legacy-Ansatz. Grants sind leichter zu warten und flexibler.
 
 Ohne ACLs kann jedes deiner Geräte jedes andere erreichen – das kannst du mit einer kleinen Regel einschränken.
 
@@ -240,10 +244,10 @@ systemctl restart headscale
 | Vorteile | Nachteile |
 |----------|-----------|
 | Volle Kontrolle über dein VPN | Einrichtung aufwändiger als Tailscale-Cloud |
-| Kein externer Dienst im Spiel | Du brauchst einen öffentlich erreichbaren Server (LXC, VPS) |
-| Unbegrenzte Geräte + Nutzer | Kein offizielles Web-GUI (nur CLI + Drittanbieter) |
+| Eigene Control Plane im Homelab | Du brauchst einen öffentlich erreichbaren Server (LXC, VPS) |
+| Grenzen durch Hardware | Kein offizielles Web-GUI (nur CLI + Drittanbieter) |
 | Open Source (MIT) | Updates musst du selbst einspielen |
-| Funktioniert an jeder FRITZ!Box, kein Port-Forwarding | Reverse Proxy für HTTPS nötig |
+| Erreichbarkeit hängt von deiner Netzwerkkonfiguration ab | Reverse Proxy für HTTPS nötig |
 | Wireguard-Verschlüsselung (schnell, sicher) | |
 
 ---

@@ -17,6 +17,35 @@
   .section-header-alt { margin-bottom: 1rem; }
   .project-card { padding: 1.25rem; }
   .path-step { padding: 1rem; }
+
+  /* Mobile scrollable tables */
+  .post-single .post-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+
+  .post-single .post-content table td,
+  .post-single .post-content table th {
+    white-space: nowrap;
+  }
+
+  /* Mobile collapsible TOC */
+  .post-single .toc details > summary {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0.5rem 0;
+    user-select: none;
+  }
+
+  .post-single .toc details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .post-single .toc details > summary::before {
+    content: "📖 ";
+  }
 }
 
 /* --- 768px - 1023px (Tablet) --- */

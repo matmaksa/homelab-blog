@@ -8,7 +8,7 @@
 <div class="home-content">
 
   {{- /* ================================================================
-      HERO – Website-Einstieg (dunkler Bereich)
+      HERO
       ================================================================ */}}
   <section class="hero-section" aria-label="Homelab-Einstieg">
     <div class="hero-inner">
@@ -49,7 +49,6 @@
       </div>
     </div>
 
-    {{- /* Trust Signals */}}
     <div class="trust-bar">
       <div class="trust-item">
         <span class="trust-icon" aria-hidden="true">🔧</span>
@@ -66,9 +65,7 @@
     </div>
   </section>
 
-  {{- /* ================================================================
-      BEREICH: „Was möchtest du bauen?" – Projektkarten
-      ================================================================ */}}
+  {{- /* PROJEKTKARTEN */}}
   <section class="projects-section" aria-labelledby="projects-heading">
     <div class="section-header-alt">
       <h2 id="projects-heading">Was möchtest du bauen?</h2>
@@ -78,7 +75,7 @@
       <div class="project-card card-werbung card-placeholder">
         <div class="project-card-icon" aria-hidden="true">🛡️</div>
         <h3 class="project-card-title">Werbung &amp; Tracking blockieren</h3>
-        <p class="project-card-desc">AdGuard oder Pi-hole auf dem Mini-PC – blockiert Werbung im gesamten Heimnetzwerk, schützt die Privatsphäre und entlastet deine Geräte.</p>
+        <p class="project-card-desc">AdGuard oder Pi-hole blockieren viele bekannte Werbe- und Trackingdomains zentral. Das kann die Privatsphäre verbessern und unnötige Verbindungen reduzieren.</p>
         <span class="step-label">Guide in Vorbereitung</span>
       </div>
       <a href="{{ "posts/home-assistant-gebrauchter-mini-pc-2026/" | absLangURL }}" class="project-card card-smarthome">
@@ -106,11 +103,34 @@
         <span class="project-card-link">Anleitung lesen →</span>
       </a>
     </div>
+
+    {{- /* Als Nächstes geplant */}}
+    <details class="table-toggle" style="margin-top:2rem;">
+      <summary>📋 Als Nächstes geplant</summary>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+        <div class="project-card card-placeholder" style="border:1px dashed var(--border,#ddd);border-radius:8px;padding:1rem;">
+          <div class="project-card-icon" aria-hidden="true">📦</div>
+          <h3 class="project-card-title">Proxmox: Erster LXC &amp; VM</h3>
+          <p class="project-card-desc">Schritt-für-Schritt: Deinen ersten Container und deine erste VM in Proxmox anlegen und konfigurieren.</p>
+          <span class="step-label">In Planung</span>
+        </div>
+        <div class="project-card card-placeholder" style="border:1px dashed var(--border,#ddd);border-radius:8px;padding:1rem;">
+          <div class="project-card-icon" aria-hidden="true">💾</div>
+          <h3 class="project-card-title">Backup-Strategie fürs Homelab</h3>
+          <p class="project-card-desc">Lokale und externe Backups einrichten – von Proxmox Backup Server bis zu NAS-Lösungen.</p>
+          <span class="step-label">In Planung</span>
+        </div>
+        <div class="project-card card-placeholder" style="border:1px dashed var(--border,#ddd);border-radius:8px;padding:1rem;">
+          <div class="project-card-icon" aria-hidden="true">🌐</div>
+          <h3 class="project-card-title">Netzwerk-Grundlagen</h3>
+          <p class="project-card-desc">VLANs, Firewall-Regeln und sicheres Heimnetz – verständlich erklärt für Einsteiger.</p>
+          <span class="step-label">In Planung</span>
+        </div>
+      </div>
+    </details>
   </section>
 
-  {{- /* ================================================================
-      EINSTEIGERPFAD
-      ================================================================ */}}
+  {{- /* EINSTEIGERPFAD */}}
   <section class="path-section" aria-labelledby="path-heading">
     <div class="section-header-alt">
       <h2 id="path-heading">Dein Weg zum ersten Homelab</h2>
@@ -160,9 +180,7 @@
     </div>
   </section>
 
-  {{- /* ================================================================
-      HARDWARE-GRUNDLAGEN – „Was du für den Einstieg wirklich brauchst"
-      ================================================================ */}}
+  {{- /* HARDWARE-GRUNDLAGEN */}}
   <section class="entry-hw-section" aria-labelledby="entry-hw-heading">
     <div class="section-header-alt">
       <h2 id="entry-hw-heading">Was du für den Einstieg wirklich brauchst</h2>
@@ -177,7 +195,12 @@
       <div class="entry-hw-card">
         <div class="entry-hw-icon" aria-hidden="true">🧠</div>
         <h3 class="entry-hw-title">Arbeitsspeicher</h3>
-        <p class="entry-hw-text">Mindestens 8 GB RAM, besser 16 GB. Damit laufen Proxmox, ein paar Container und erste Dienste gleichzeitig. DDR4-Speicher ist gebraucht günstig zu bekommen.</p>
+        <p class="entry-hw-text">
+          <strong>4 GB</strong> – reichen für Proxmox plus einen kleinen Dienst (z.&thinsp;B. Pi-hole)<br>
+          <strong>8 GB</strong> – praxistauglicher Einstieg für Proxmox, ein paar Container und erste Dienste<br>
+          <strong>16 GB</strong> – zusätzliche Reserve für mehrere Dienste und angenehmeres Arbeiten<br>
+          DDR4-Speicher ist gebraucht günstig zu bekommen – aufrüsten lohnt sich.
+        </p>
       </div>
       <div class="entry-hw-card">
         <div class="entry-hw-icon" aria-hidden="true">💾</div>
@@ -198,9 +221,7 @@
     </div>
   </section>
 
-  {{- /* ================================================================
-      AKTUELLE GUIDES
-      ================================================================ */}}
+  {{- /* AKTUELLE GUIDES */}}
   {{- $latest := first 6 $published }}
   <section class="guides-section" aria-labelledby="guides-heading">
     <div class="section-header-with-link">
@@ -217,6 +238,6 @@
     </div>
   </section>
 
-</div>{{- /* end .home-content */}}
+</div>
 
 {{- end }}{{/* end main */}}

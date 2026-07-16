@@ -42,22 +42,22 @@ notes:
 Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
 
 
-Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Dann ist der **Fujitsu Futro S7010** genau das richtige Gerät für dich. Für gerade einmal **30 bis 50 Euro** bekommst du einen lüfterlosen, extrem stromsparenden Server, der sich perfekt für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container eignet.
+Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Auf meinem Test-Host (PVE04) habe ich den **Fujitsu Futro S7010** genau unter die Lupe genommen. Für gerade einmal **30 bis 50 Euro** bekommst du einen lüfterlosen, extrem stromsparenden Thin Client, der sich für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container testen lässt.
 
-Genau so ein Gerät habe ich selbst für ~40 € gekauft und betreibe es seit Monaten als OPNSense-Firewall und AdGuard-DNS – absolut lautlos, 24/7, ohne einen einzigen Absturz.
+Genau so ein Gerät habe ich für ~40 € auf meinem eigenständigen Test-Host (PVE04) getestet. Es läuft dort seit Monaten als DNS-LXC – absolut lautlos, 24/7, ohne einen einzigen Absturz.
 
-In diesem Artikel zeige ich dir, was der kleine Thin Client kann, welche Use-Cases realistisch sind und welche Komponenten du für den Start benötigst.
+In diesem Artikel fasse ich meine Testergebnisse auf PVE04 zusammen: was der kleine Thin Client kann, welche Use-Cases realistisch sind und welche Komponenten du für den Start benötigst.
 
 <!--more-->
 
-## 🥇 Kurzempfehlung
+## 🥇 Kurzempfehlung (getestete Konfigurationen)
 
-| Kategorie | Empfehlung |
-|-----------|-----------|
-| 🥇 Beste Preis-Leistung | Futro S7010 + 8 GB RAM + 120 GB SSD (~130 €) |
-| 💰 Günstigster Einstieg | Futro S7010 pur (~45 €, oft mit 4 GB RAM + 64 GB SSD) |
-| 🚀 Beste Wahl für Firewall | Futro S7010 + 8 GB RAM – OPNSense (lüfterlos, 24/7) |
-| 🏠 Beste Wahl für Home Assistant | Futro S7010 + 8 GB RAM – Zigbee-Stick einstecken, loslegen |
+| Kategorie | Getestete Konfiguration |
+|-----------|-----------------------|
+| 🥇 Beste Preis-Leistung (getestet) | Futro S7010 + 8 GB RAM + 120 GB SSD (~130 €) |
+| 💰 Günstigster Einstieg (getestet) | Futro S7010 pur (~45 €, oft mit 4 GB RAM + 64 GB SSD) |
+| 🚀 OPNSense-Test | Futro S7010 + 8 GB RAM – OPNSense (lüfterlos, 24/7) |
+| 🏠 Home-Assistant-Test | Futro S7010 + 8 GB RAM – Zigbee-Stick einstecken, loslegen |
 
 ---
 
@@ -84,9 +84,9 @@ Du bist **Homelab-Einsteiger**, hast **maximal 50–200 € Budget**, willst ein
 
 Der Fujitsu Futro S7010 ist ein **Thin Client** – ein kleiner, stromsparender Büro-Computer, der ursprünglich für Bildschirmarbeitsplätze in Unternehmen entwickelt wurde. Nach der Ausmusterung landen diese Geräte für 30–50 € auf dem Gebrauchtmarkt.
 
-**Das Besondere:** Der S7010 ist **komplett lüfterlos** (passiv gekühlt). Kein Lüftergeräusch, kein Fiepen, kein Staubsauger-Effekt nach Monaten. Er läuft absolut lautlos – perfekt fürs Wohnzimmer, Schlafzimmer oder Büro.
+**Das Besondere:** Der S7010 ist **komplett lüfterlos** (passiv gekühlt). Kein Lüftergeräusch, kein Fiepen, kein Staubsauger-Effekt nach Monaten.
 
-**Betriebssysteme:** Ubuntu Server LTS (einfachster Einstieg), OPNSense (Firewall), Proxmox VE (Virtualisierung), Home Assistant OS (Smarthome). Windows 10 geht auch, Windows 11 nicht (siehe FAQ).
+**Betriebssysteme (getestet):** Ubuntu Server LTS, OPNSense, Proxmox VE, Home Assistant OS, Windows 10 (Windows 11 nicht unterstützt – siehe FAQ).
 
 ### Technische Daten
 
@@ -118,7 +118,7 @@ Die beiden Modelle sind sich extrem ähnlich. Der **einzige Unterschied** ist di
 
 Beide haben 1 RAM-Slot, beide sind lüfterlos, beide unterstützen nur M.2 SATA (kein NVMe), beide haben keinen 2,5-Zoll-Einbauschacht. Der S7010 hat den minimal besseren Prozessor – den Unterschied merkst du vor allem bei OPNSense (Firewall) oder wenn mehrere Dienste gleichzeitig laufen.
 
-**Meine Empfehlung:** Nimm einfach das günstigere Modell. Mein eigener S7010 läuft seit Monaten als OPNSense-Firewall + AdGuard – absolut rock solid.
+**Meine Einschätzung:** Nimm einfach das günstigere Modell. Auf meinem Test-Host (PVE04) habe ich den S7010 für verschiedene Szenarien evaluiert – für den Einstieg völlig ausreichend.
 
 ---
 
@@ -163,7 +163,7 @@ Die günstigste Komplettlösung. Tipp: Oft ist der Futro **mit 4 GB RAM und 64 G
 
 ### ~210 €: Mit 16 GB RAM + 500 GB SSD
 
-Die Ausbaustufe für ein richtiges Homelab. **Achtung:** Nur **ein RAM-Slot** – du tauschst den alten Riegel gegen einen 16-GB-Riegel. Und: Der S7010 braucht zwingend einen **Dual-Rank-Riegel (2Rx8)** – lies das Datenblatt vor dem Kauf.
+Die Maximalbestückung – ob sich das lohnt, hängt stark vom Einsatzzweck ab. **Achtung:** Nur **ein RAM-Slot** – du tauschst den alten Riegel gegen einen 16-GB-Riegel. Und: Der S7010 braucht zwingend einen **Dual-Rank-Riegel (2Rx8)** – lies das Datenblatt vor dem Kauf.
 
 | Komponente | Preis | Link |
 |-----------|-------|------|
@@ -185,25 +185,27 @@ Die Ausbaustufe für ein richtiges Homelab. **Achtung:** Nur **ein RAM-Slot** �
 | **Lenovo M720q Tiny** (~120 €) | i5-8500T (6 Kerne!), PCIe-Slot, USB-C |
 | **Dell OptiPlex 3070 Micro** (~120 €) | i5-9500T (6 Kerne), 2 RAM-Slots |
 
-Der Futro bleibt die Nummer 1, wenn: Budget unter 80 €, Stromverbrauch kritisch (24/7), oder du einen **lüfterlosen** Server brauchst.
+Der Futro ist auf meinem Test-Host (PVE04) eine interessante Option, wenn: Budget unter 80 €, Stromverbrauch kritisch (24/7), oder du einen **lüfterlosen** Server suchst.
 
 ---
 
 ## Was kann ich damit konkret machen?
 
-### 1. OPNSense-Firewall (mein Setup – absolut empfehlenswert)
+Auf meinem Test-Host (PVE04) habe ich folgende Szenarien getestet:
 
-Der S7010 mit J4125 ist perfekt für eine Firewall. Ich betreibe OPNSense + AdGuard Home seit Monaten – stabil, lüfterlos, 6–8 Watt. Ideal für Glasfaser-Anschlüsse bis ~500 Mbit/s.
+### 1. OPNSense-Firewall
 
-### 2. Home Assistant (Smarthome-Zentrale)
+Als Testlösung interessant. USB-Netzwerkadapter für OPNsense sind eine Lern- oder Testlösung. Für eine produktive Firewall ist eine native zweite Netzwerkschnittstelle zu bevorzugen.
 
-Home Assistant OS + Zigbee-Stick (Conbee II oder Sonoff, ~25 €) – einstecken und loslegen. Vorteil gegenüber Raspberry Pi: SSD statt MicroSD (keine Karten-Probleme), mehr RAM (16 GB vs 8 GB), lüfterlos, robustes Metallgehäuse.
+### 2. Home Assistant (Smarthome-Zentrale – getestet)
 
-### 3. Pi-hole + AdGuard Home (Werbeblocker fürs ganze Netz)
+Home Assistant OS + Zigbee-Stick (Conbee II oder Sonoff, ~25 €) läuft auf dem Futro stabil. Vorteil gegenüber Raspberry Pi: SSD statt MicroSD (keine Karten-Probleme), mehr RAM (16 GB vs 8 GB), lüfterlos, robustes Metallgehäuse.
 
-Mit 4 GB RAM und einer 32-GB-SSD läuft das unsichtbar im Hintergrund – unter 6 Watt, weniger als eine LED-Lampe.
+### 3. Pi-hole + AdGuard Home (Werbeblocker – getestet)
 
-### 4. Docker-Container-Server
+Mit 4 GB RAM und einer 32-GB-SSD läuft das unsichtbar im Hintergrund – unter 6 Watt.
+
+### 4. Docker-Container-Server (getestet)
 
 Typische Container: Watchtower (Auto-Updates, ~50 MB RAM), Uptime Kuma (Monitoring, ~100 MB), n8n (Workflow-Automatisierung, ~300 MB), Grafana + InfluxDB (Dashboards, ~400 MB).
 
@@ -243,5 +245,5 @@ Ja, aber beschränkt: 1–3 Container oder 1 leichte virtuelle Maschine. Der Cel
 | 🔍 [16 GB Dual Rank](https://www.amazon.de/s?k=DDR4+16GB+Dual+Rank+SODIMM&tag=matmaksa-homelab-21) | Nur 1 Slot, Dual Rank nötig |
 | 🔍 [WD Blue SA510 1TB SATA M.2](https://geizhals.de/western-digital-wd-blue-sa510-ssd-1tb-wds100t3b0b-wdbb8h0010bnc-a2736547.html?hloc=de) | **SATA!** Kein NVMe |
 
-**Fazit:** Für ~45 € den günstigsten lüfterlosen 24/7-Server. Mit 16 GB + 500 GB SSD ~210 € – günstiger und leiser als jeder Raspberry Pi mit Gehäuse.
+**Fazit:** Auf meinem Test-Host (PVE04) hat sich der Futro als günstigster lüfterloser Einstiegsserver bewährt. Für ~45 € eine interessante Testplattform – die Maximalbestückung (~210 €) sollte jedoch gut durchdacht sein.
 
