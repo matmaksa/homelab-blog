@@ -18,10 +18,10 @@ noindex: true
 ## 1. Verantwortlicher
 
 **Betreiber der Website:**  
-[HIER VOLLSTÄNDIGEN NAMEN EINTRAGEN]  
-[HIER STRASSE EINTRAGEN]  
-[HIER PLZ, ORT EINTRAGEN]  
-E-Mail: [HIER E-MAIL-ADRESSE EINTRAGEN]
+Matheus Makiola  
+Haydnstr. 2  
+48291 Telgte  
+E-Mail: [NOCH EINZUTRAGEN – SIEHE IMPRESSUM]
 
 ## 2. Hosting
 
@@ -62,11 +62,11 @@ Auf dieser Website finden sich Links zu Produkten auf **Amazon** (Amazon EU S.à
 
 Weitere Informationen: [Amazon-Datenschutzerklärung](https://www.amazon.de/gp/help/customer/display.html?nodeId=201909010)
 
-## 7. Geplante Affiliate-Links (eBay)
+## 7. Affiliate-Links (eBay) – geplant
 
-**[Derzeit nicht aktiv]** Sobald eBay-Partner-Links auf dieser Website eingesetzt werden, wird dieser Abschnitt ergänzt. eBay (eBay Marketplaces GmbH, Helvetiastraße 15–17, 3005 Bern, Schweiz) setzt ebenfalls Cookies zur Transaktionsverfolgung ein.
+**[Derzeit nicht aktiv]** eBay-Partner-Links sind technisch vorbereitet, aber noch nicht auf dieser Website im Einsatz. Vor einer Aktivierung wird dieser Abschnitt ergänzt. eBay (eBay Marketplaces GmbH, Helvetiastraße 15–17, 3005 Bern, Schweiz) setzt bei Affiliate-Transaktionen Cookies zur Tracking-Verfolgung ein.
 
-## 8. MailerLite (geplant)
+## 8. MailerLite – geplant
 
 **[Derzeit nicht aktiv]** Ein Newsletter-Formular (MailerLite) ist als Platzhalter vorbereitet, aber derzeit nicht funktionsfähig. Vor der Aktivierung wird dieser Abschnitt ergänzt. MailerLite (MailerLite Limited, Ground Floor, 71 Lower Baggot Street, Dublin 2, Irland) verarbeitet bei der Anmeldung deine E-Mail-Adresse.
 
@@ -104,7 +104,7 @@ Du hast das Recht, dich bei einer Aufsichtsbehörde zu beschweren, wenn du der A
 
 ## 14. Änderungen
 
-Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Der aktuelle Stand ist [HIER DATUM EINTRAGEN].
+Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Der aktuelle Stand ist Juli 2026.
 
 ---
 
