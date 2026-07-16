@@ -32,29 +32,17 @@ buildDrafts = false
     Text = "Verbessern"
 
   [params.ebay]
-    # eBay Partner Network – zentrale Konfiguration
-    #
-    # SO AKTIVIEREN:
-    #   1. Im eBay-Partner-Dashboard (https://www.ebaypartnernetwork.com)
-    #      mit dem Simple Link Generator einen echten Partnerlink erzeugen,
-    #      z. B. zu einer Suchergebnisseite.
-    #   2. Die vollständige URL (inkl. mkevt, mkcid, mkrid, campid, toolid)
-    #      hier als baseUrl eintragen.
-    #   3. Den Suchbegriff-Parameter (_nkw=) aus der URL entfernen, aber
-    #      das abschließende & oder ? stehen lassen.
-    #
-    #   Beispiel (Platzhalter – durch echte Werte ersetzen):
-    #   baseUrl = "https://www.ebay.de/sch/i.html?_sop=15&_LH_ItemCondition=3000&mkevt=1&mkcid=1&mkrid=707-53477-19255-0&campid=CAMPAGN_ID&toolid=TOOL_ID&"
-    #
-    #   Der Shortcode hängt dann &_nkw=SUCHBEGRIFF an.
-    #
-    # OHNE Konfiguration:
-    #   - Keine Affiliate-Links (auch keine scheinbar getrackten)
-    #   - Shortcodes geben nur den Linktext aus (kein Hyperlink)
-    # baseUrl = ""
+    active = true
+    marketplaceUrl = "https://www.ebay.de"
+    campaignId = "5339166386"
+    toolId = "10001"
+    rotationId = "707-53477-19255-0"
+    channelId = "1"
+    eventType = "1"
+    siteId = "77"
 
   [params.footer]
-    text = "Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. eBay-Partner-Links sind in Vorbereitung – Details folgen."
+    text = "Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Auch eBay-Partner-Links können Provisionen enthalten."
 
   [params.homeInfoParams]
     Title = "Homelab Guide"

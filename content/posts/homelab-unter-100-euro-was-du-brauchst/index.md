@@ -72,7 +72,7 @@ Die wichtigste Komponente in einem Low-Budget-Homelab ist kein Serverschrank, so
 
 > **Preise schwanken – prüfe vor dem Kauf aktuelle Angebote.** Gerade bei Auktionen oder gewerblichen Rückläufern lassen sich gute Deals finden.
 
-{{< ebay-link query="Thin Client gebraucht" text="🔍 Gebrauchte Thin Clients bei eBay durchsuchen" >}}
+{{< ebay-link query="Thin Client Homelab" text="Aktuelle Angebote für gebrauchte Thin Clients bei eBay prüfen" customid="homelab-100-thin-clients" >}}
 
 ## Speicher: SSD und RAM clever kombinieren
 

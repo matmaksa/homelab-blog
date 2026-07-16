@@ -1,64 +1,60 @@
 {{- /* eBay-Partner-Network-Shortcode
-     Verwendung (Konfigurationsmodus):
-       {{< ebay-link url="https://www.ebay.de/sch/i.html?_nkw=Fujitsu+Futro+S7010&_sop=15" text="Angebote durchsuchen" >}}
-       {{< ebay-link query="Fujitsu Futro S7010" text="Gebrauchte Fujitsu Futro S7010 bei eBay ansehen" >}}
+     Verwendung:
+       {{< ebay-link query="Fujitsu Futro S7010" text="Gebrauchte Futro-S7010-Angebote bei eBay ansehen" >}}
        {{< ebay-link query="Fujitsu Futro S7010" text="Angebote" customid="futro-s7010-preistabelle" >}}
 
-     Erforderlich für funktionierende Affiliate-Links:
-       In hugo.toml muss eine vollständige EPN-Basis-URL konfiguriert sein.
-       Diese URL erzeugt der Betreiber im offiziellen eBay-Partner-Dashboard
-       mittels Simple Link Generator und trägt sie in hugo.toml ein:
-         [params.ebay]
-           baseUrl = "https://www.ebay.de/sch/i.html?_nkw=&_sop=15&_LH_ItemCondition=3000&mkevt=1&mkcid=1&mkrid=707-53477-19255-0&campid=XXXXX&toolid=XXXXX&customid="
+     Parameter:
+       query    - Suchbegriff (wird URL-encodiert)
+       text     - Linktext (Standard: "Gebrauchte Angebote bei eBay ansehen")
+       customid - Optionale Custom-ID für EPN-Dashboard-Auswertung
 
-     Ohne baseUrl:
-       - KEIN Affiliate-Link (weder echt noch scheinbar)
-       - Bei Angabe von `url` oder `query` wird im Produktions-Build gar nichts ausgegeben
-       - Nur im lokalen/dev-Build erscheint ein HTML-Kommentar für Entwickler
+     Konfiguration in hugo.toml unter [params.ebay]:
+       active       - true/false
+       marketplaceUrl, campaignId, toolId, rotationId, channelId, eventType, siteId
+
+     Ohne active=true:
+       - Kein Affiliate-Link (nur Text als <span>)
+       - Keine kaputte URL
 */ -}}
-{{- $baseUrl := site.Params.ebay.baseUrl | default "" -}}
+
+{{- $active := site.Params.ebay.active | default false -}}
+{{- $campaignId := site.Params.ebay.campaignId | default "" -}}
+{{- $marketplaceUrl := site.Params.ebay.marketplaceUrl | default "https://www.ebay.de" -}}
+{{- $toolId := site.Params.ebay.toolId | default "" -}}
+{{- $rotationId := site.Params.ebay.rotationId | default "" -}}
+{{- $channelId := site.Params.ebay.channelId | default "" -}}
+{{- $eventType := site.Params.ebay.eventType | default "" -}}
+{{- $siteId := site.Params.ebay.siteId | default "" -}}
+
 {{- $query := .Get "query" | default "" -}}
-{{- $url := .Get "url" | default "" -}}
 {{- $text := .Get "text" | default "Gebrauchte Angebote bei eBay ansehen" -}}
 {{- $customid := .Get "customid" | default "" -}}
-{{- $linkUrl := "" -}}
-{{- $isProduction := not (or hugo.IsServer (in (string hugo.Environment) "development")) -}}
 
-{{- /* === Keine Konfiguration -> keinen Link ausgeben === */ -}}
-{{- if eq $baseUrl "" -}}
-  {{- /* Im Produktions-Build: gar nichts ausgeben */ -}}
-  {{- if not $isProduction -}}
-    {{- /* Nur im Dev-/Server-Modus: Hinweis für den Entwickler */ -}}
-    <!-- eBay-Shortcode ohne Konfiguration – kein Affiliate-Link erzeugt.
-         Text: {{ $text }}
-         Konfiguration in hugo.toml unter [params.ebay] baseUrl erforderlich. -->
-  {{- end -}}
-  {{- /* In der Vorschau den Text als normalen, nicht-gekennzeichneten Text anzeigen */ -}}
-  <span style="opacity:0.6;">{{ $text }}</span>
-{{- else -}}
-  {{- /* === Konfiguration vorhanden -> Affiliate-Link erzeugen === */ -}}
-  {{- if ne $url "" -}}
-    {{- /* Direkte URL – Query-Parameter korrekt mit & anhängen */ -}}
-    {{- $sep := "?" -}}
-    {{- if strings.Contains $url "?" -}}{{- $sep = "&" -}}{{- end -}}
-    {{- $linkUrl = printf "%s%scustomid=%s" $url $sep $customid -}}
-  {{- else if ne $query "" -}}
-    {{- /* Suchbegriff – URL-encoden und an baseUrl anhängen */ -}}
-    {{- $encodedQuery := $query | urlquery -}}
-    {{- /* baseUrl sollte eine eBay-Such-URL ohne Suchbegriff sein, endend mit & */ -}}
-    {{- $trailing := "" -}}
-    {{- if not (strings.HasSuffix $baseUrl "&") -}}{{- $trailing = "&" -}}{{- end -}}
-    {{- $searchUrl := printf "%s%s_nkw=%s" $baseUrl $trailing $encodedQuery -}}
-    {{- if ne $customid "" -}}
-      {{- $linkUrl = printf "%s&customid=%s" $searchUrl $customid -}}
-    {{- else -}}
-      {{- $linkUrl = $searchUrl -}}
-    {{- end -}}
-  {{- end -}}
+{{- /* Prüfe: aktiv + Campaign-ID vorhanden + Query vorhanden */ -}}
+{{- if and $active (ne $campaignId "") (ne $query "") -}}
 
-  {{- if ne $linkUrl "" -}}
-    <a href="{{ $linkUrl | safeURL }}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="ebay-affiliate-link">
-      {{- $text -}} ⓘ
+  {{- /* URL zusammensetzen */ -}}
+  {{- $url := printf "%s/sch/i.html?_nkw=%s" $marketplaceUrl ($query | urlquery) -}}
+  {{- $url = printf "%s&mkevt=%s" $url $eventType -}}
+  {{- $url = printf "%s&mkcid=%s" $url $channelId -}}
+  {{- if ne $rotationId "" -}}{{- $url = printf "%s&mkrid=%s" $url $rotationId -}}{{- end -}}
+  {{- $url = printf "%s&campid=%s" $url $campaignId -}}
+  {{- if ne $toolId "" -}}{{- $url = printf "%s&toolid=%s" $url $toolId -}}{{- end -}}
+  {{- if ne $customid "" -}}{{- $url = printf "%s&customid=%s" $url ($customid | urlquery) -}}{{- end -}}
+  {{- if ne $siteId "" -}}{{- $url = printf "%s&siteid=%s" $url $siteId -}}{{- end -}}
+
+  <div class="affiliate-link affiliate-link-ebay">
+    <p class="affiliate-disclosure">
+      Werbung: Bei einem Kauf über diesen eBay-Partnerlink kann MATMAKSA eine Provision erhalten. Für dich ändert sich der Preis nicht.
+    </p>
+    <a href="{{ $url | safeURL }}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="ebay-affiliate-link">
+      {{- $text -}}
     </a>
-  {{- end -}}
+  </div>
+
+{{- else -}}
+
+  {{- /* Inaktiv oder unvollständig konfiguriert – nur Text anzeigen */ -}}
+  <span style="opacity:0.6;">{{ $text }}</span>
+
 {{- end -}}
