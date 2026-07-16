@@ -39,7 +39,7 @@ notes:
 ---
 **Aktualisiert: Juni 2026 | Lesezeit: 9 Minuten**
 
-Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon- und eBay-Partner verdiene ich an qualifizierten Verkäufen.
 
 
 Du möchtest in die Welt der Homelabs einsteigen, hast aber kein Budget für teure Server-Hardware? Auf meinem Test-Host (PVE04) habe ich den **Fujitsu Futro S7010** genau unter die Lupe genommen. Für gerade einmal **30 bis 50 Euro** bekommst du einen lüfterlosen, extrem stromsparenden Thin Client, der sich für Home Assistant, Pi-hole, eine Firewall und leichte Docker-Container testen lässt.

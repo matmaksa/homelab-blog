@@ -278,9 +278,15 @@ Automatische, platzsparende Backups deiner VMs und Container. Ideal als zweite v
 
 Ab 32 GB RAM bleiben dir alle Optionen offen – auch für rechenintensivere Anwendungen. Mit dem Lenovo M720q (PCIe-Slot) kannst du später sogar eine GPU nachrüsten.
 
-### 3. Home Assistant via LXC – Smart Home Zentrale
+### 3. Home Assistant – Smarthome-Zentrale
 
-Licht, Heizung, Kameras – alles von einer Oberfläche aus steuern. Home Assistant in einem LXC-Container braucht nur ~2 GB RAM und ist in 10 Minuten eingerichtet.
+Licht, Heizung, Kameras – alles von einer Oberfläche aus steuern. Home Assistant kann auf zwei Arten in Proxmox betrieben werden:
+
+- **Home Assistant OS als VM (empfohlen für Einsteiger):** Vollständiges Betriebssystem mit Supervisor und Add-ons. Einfachste Verwaltung. In einer VM mit 2 GB RAM und 32 GB Speicher läuft es stabil.
+
+- **Home Assistant Container (für fortgeschrittene Nutzer):** Docker-basiert, ohne Supervisor und ohne Add-ons. Manuelle Konfiguration, aber ressourcenschonender.
+
+> **Hinweis:** Eine Installation von Home Assistant mit Supervisor direkt in einem LXC-Container wird nicht empfohlen – dies ist kein offiziell unterstützter Weg und kann zu unerwarteten Problemen führen. Nutze entweder die offizielle HAOS-VM oder den Container-Client ohne Supervisor.
 
 ---
 

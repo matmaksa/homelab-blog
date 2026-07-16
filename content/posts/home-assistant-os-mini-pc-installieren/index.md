@@ -63,7 +63,7 @@ Bevor du startest, musst du die beiden Varianten unterscheiden:
 | USB-Stick (mindestens 8 GB) | Für Methode A: **separater Ubuntu-Live-USB-Stick** |
 | Zweiter PC mit Internetzugang | Zum Herunterladen des HAOS-Images und Erstellen des USB-Sticks |
 | Monitor und Tastatur | Nur für die Erstinstallation |
-| LAN-Kabel | WLAN wird von HAOS nicht unterstützt. Internet wird für den ersten Start empfohlen, da HAOS Updates und Integrationen lädt. |
+| LAN-Kabel | Für die Installation und den ersten Start wird eine kabelgebundene Ethernet-Verbindung empfohlen. WLAN kann abhängig von Hardware und Treiber funktionieren, ist für die Ersteinrichtung aber nicht der bevorzugte Weg. Internet wird für den ersten Start empfohlen, da HAOS Updates und Integrationen lädt. |
 
 ### BIOS einstellen: UEFI aktivieren, Secure Boot deaktivieren
 
@@ -149,7 +149,7 @@ Das Ubuntu-Live-System erkennst du an der Größe des USB-Sticks (z. B. 8 GB o
 3. Wähle **"Datenträgerabbild wiederherstellen"** (Restore Disk Image).
 4. Wähle die heruntergeladene `.img.xz`-Datei aus dem Download-Ordner aus.
    > **Hinweis zur .img.xz-Datei:** Die Laufwerke-Anwendung entpackt das komprimierte Image automatisch. Du musst die Datei **nicht** manuell entpacken.
-5. Bestätige die Warnung – ja, du willt alle Daten auf dem Ziellaufwerk löschen.
+5. Bestätige die Warnung – ja, du willst alle Daten auf dem Ziellaufwerk löschen.
 6. Der Schreibvorgang startet. Die Anwendung zeigt den Fortschritt an. Der Vorgang dauert je nach Laufwerk **2–5 Minuten**.
 
 **Erwartetes Ergebnis:** Nach Abschluss zeigt die Laufwerke-Anwendung eine Erfolgsmeldung an. Die Partitionstabelle des Ziellaufwerks hat sich verändert.
@@ -286,9 +286,9 @@ Wenn du später Frigate (Kameras mit KI-Objekterkennung), Immich (Fotoverwaltung
 | `homeassistant.local` nicht erreichbar | Prüfe die IP des Mini-PCs im Router. Browser → `http://<IP>:8123` |
 | Ubuntu-Live-System startet nicht | Boot-Menü (F12/F10/ESC) beim Einschalten drücken. Secure Boot ggf. deaktivieren |
 | SSD wird nicht erkannt | Prüfe im BIOS, ob die SSD sichtbar ist. Bei Futro: **kein NVMe!** Nur M.2 SATA |
-| HAOS startet, aber Web-UI nicht erreichbar | Prüfe, ob der Mini-PC per LAN-Kabel angeschlossen ist (WLAN wird nicht unterstützt) |
+|| HAOS startet, aber Web-UI nicht erreichbar | Prüfe, ob der Mini-PC per LAN-Kabel angeschlossen ist – für Installation und ersten Start wird eine kabelgebundene Ethernet-Verbindung empfohlen. WLAN kann abhängig von Hardware und Treiber funktionieren, ist für die Ersteinrichtung aber nicht der bevorzugte Weg. |
 | Image-Schreiben bricht ab | Reicht die SSD-Größe aus? HAOS benötigt mindestens 16 GB |
-| Nach BIOS-Änderung bootet nichts mehr | BIOS zurücksetzen (CMOS-Batterie kurz entfernen oder Jumper), dann UEFI + Secure Boot erneut einstellen |
+|| Nach BIOS-Änderung bootet nichts mehr | BIOS-Standardwerte über **Load Setup Defaults** wiederherstellen. Falls das Gerät nicht mehr startet, den vom Hersteller dokumentierten BIOS-Reset verwenden. |
 
 ---
 

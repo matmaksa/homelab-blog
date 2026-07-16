@@ -65,8 +65,8 @@ buildDrafts = false
   weight = 10
 
 [[menu.main]]
-  identifier = "projekte"
-  name = "Projekte"
+  identifier = "guides"
+  name = "Guides"
   url = "/posts/"
   weight = 20
 
