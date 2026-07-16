@@ -2,7 +2,6 @@
 title = "Headscale im Homelab – Tailscale-Alternative selbst hosten"
 description = "Headscale selbst hosten als Tailscale-Alternative: Mesh-VPN auf eigener Infrastruktur mit WireGuard, Grants, ACLs und voller Kontrolle über dein Homelab-Netzwerk."
 date = 2026-06-29
-draft = true
 robotsNoIndex = true
 sitemap = { exclude = true }
 image = "featured.jpg"

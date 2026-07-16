@@ -2,7 +2,6 @@
 title = "Home Assistant auf dem Mini-PC: Smarthome-Zentrale ab 40€"
 description = "Home Assistant auf einem gebrauchten Mini-PC einrichten: Smarthome-Zentrale für unter 40€ mit Zigbee, Docker und tausenden kompatiblen Geräten."
 date = 2026-06-24
-draft = true
 robotsNoIndex = true
 sitemap = { exclude = true }
 image = "featured.jpg"

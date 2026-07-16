@@ -2,7 +2,6 @@
 title = "Homelab unter 100€: Was du wirklich brauchst"
 description = "Ein Homelab muss nicht teuer sein. Wer mit gebrauchter Business-Hardware startet, kommt schon für unter 100€ zu einem voll funktionsfähigen Server für Docker, Proxmox oder Pi-hole."
 date = 2026-07-06
-draft = true
 robotsNoIndex = true
 sitemap = { exclude = true }
 ShowToc = true

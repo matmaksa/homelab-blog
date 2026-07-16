@@ -1,7 +1,6 @@
 ---
 title: "Über MATMAKSA (Preview)"
 date: 2026-07-15
-draft: true
 preview: true
 hideMeta: true
 ShowToc: false
