@@ -11,7 +11,7 @@ searchHidden: true
 noindex: true
 ---
 
-**Angaben gemäß § 5 TMG** (Entwurf – Platzhalter müssen durch den Betreiber ersetzt werden)
+**Angaben gemäß § 5 DDG** (Entwurf – Platzhalter müssen durch den Betreiber ersetzt werden)
 
 ## Betreiber dieser Website
 
@@ -24,25 +24,19 @@ noindex: true
 
 **Kontakt:**  
 E-Mail: [HIER E-MAIL-ADRESSE EINTRAGEN]  
-Telefon: [HIER TELEFONNUMMER EINTRAGEN – OPTIONAL]
+Telefon: [HIER TELEFONNUMMER EINTRAGEN – NUR FALLS FREIWILLIG ANGEGEBEN]
 
-## Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
+## Verantwortlicher für journalistisch-redaktionelle Inhalte nach § 18 Abs. 2 MStV
 
-[HIER GEgebenenfalls VON BETREIBER ABWEICHENDE PERSON MIT NAMEN UND ANSCHRIFT EINTRAGEN – OPTIONAL, FALLS JOURNALISTISCH-REDAKTIONELLE INHALTE VORLIEGEN]
+[HIER NAMEN UND ANSCHRIFT EINTRAGEN – NUR ERFORDERLICH, FALLS REGELMÄßIG JOURNALISTISCH-REDAKTIONELLE INHALTE VERÖFFENTLICHT WERDEN. OPTIONAL, KANN FREIGELASSEN WERDEN.]
 
 ## Umsatzsteuer-ID
 
 [HIER UMSATZSTEUER-ID EINTRAGEN – NUR FALLS VORHANDEN]
 
-## Haftungsausschluss
+## Verbraucherschlichtung
 
-### Haftung für Inhalte
-
-Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-
-### Haftung für Links
-
-Diese Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+[HIER ANGABEN ZUR VERBRAUCHERSCHLICHTUNG EINTRAGEN – NUR FALLS ZUTREFFEND. OPTIONAL, KANN ENTFERNT WERDEN, WENN NICHT RELEVANT.]
 
 ---
 
