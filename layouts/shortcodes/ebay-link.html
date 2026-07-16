@@ -1,0 +1,52 @@
+{{- /* eBay-Partner-Link als Hugo Shortcode
+     Verwendung:
+       {{< ebay-link query="Fujitsu Futro S7010" text="Gebrauchte Fujitsu Futro S7010 bei eBay ansehen" >}}
+       {{< ebay-link url="https://www.ebay.de/sch/i.html?_nkw=Fujitsu+Futro+S7010" text="Angebote bei eBay durchsuchen" >}}
+
+     Konfiguration:
+       Die eBay-Partner-ID wird zentral in hugo.toml unter [params.ebay] gesetzt:
+       [params.ebay]
+         campaignId = "DEINE_CAMPAIGN_ID"
+
+     Solange keine campaignId gesetzt ist, wird ein Hinweis statt eines Affiliate-Links angezeigt.
+     Erforderlich nach Registrierung im eBay Partner Network: https://partner.ebay.de/
+*/ -}}
+{{- $campaignId := site.Params.ebay.campaignId | default "" -}}
+{{- $query := .Get "query" | default "" -}}
+{{- $url := .Get "url" | default "" -}}
+{{- $text := .Get "text" | default "Gebrauchte Angebote bei eBay ansehen" -}}
+{{- $affiliateUrl := "" -}}
+{{- $previewMode := false -}}
+
+{{- if eq $campaignId "" -}}
+  {{- $previewMode = true -}}
+{{- end -}}
+
+{{- if $previewMode -}}
+  {{- /* PREVIEW-MODUS: Keine campaignId hinterlegt -> Hinweis statt Link */ -}}
+  <span class="ebay-preview-warning" style="display:inline-block;padding:4px 10px;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;font-size:0.85em;color:#856404;">
+    ⚠️ eBay-Link (Preview): {{ $text }}
+    <span style="display:block;font-size:0.8em;margin-top:2px;">🔧 eBay-Kennung in hugo.toml unter <code>[params.ebay] campaignId</code> eintragen, um Affiliate-Links zu aktivieren.</span>
+  </span>
+{{- else -}}
+  {{- /* AFFILIATE-LINK: eBay-Partner-URL aufbauen */ -}}
+  {{- if ne $url "" -}}
+    {{- /* Direkte URL */ -}}
+    {{- $affiliateUrl = $url -}}
+  {{- else if ne $query "" -}}
+    {{- /* Suchquery -> eBay-Suche-URL mit URL-Encoding */ -}}
+    {{- $encodedQuery := $query | urlquery -}}
+    {{- $affiliateUrl = printf "https://www.ebay.de/sch/i.html?_nkw=%s&_sop=15&LH_ItemCondition=3000" $encodedQuery -}}
+  {{- end -}}
+
+  {{- if ne $affiliateUrl "" -}}
+    {{- /* Custom Redirect (ePN) anhängen */ -}}
+    {{- $sep := "?" -}}
+    {{- if strings.Contains $affiliateUrl "?" -}}{{- $sep = "&" -}}{{- end -}}
+    {{- $customId := $campaignId -}}
+    {{- $fullUrl := printf "%s%scustomid=%s&mkrid=707-53477-19255-0" $affiliateUrl $sep $customId -}}
+    <a href="{{ $fullUrl }}" target="_blank" rel="sponsored nofollow" class="ebay-affiliate-link">
+      {{- $text -}}
+    </a>
+  {{- end -}}
+{{- end -}}

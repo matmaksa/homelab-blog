@@ -27,7 +27,7 @@ risk_level = "medium"
   relative = true
 +++
 
-**Aktualisiert: Juli 2026 | Lesezeit: 5 Minuten**
+**Aktualisiert: Juli 2026 | Lesezeit: 6 Minuten**
 
 Dieser Artikel zeigt dir, wie du **Home Assistant OS (HAOS)** auf einem gebrauchten x86-64-Mini-PC installierst. Die Anleitung folgt der aktuellen offiziellen Home-Assistant-Dokumentation.
 
@@ -56,11 +56,12 @@ Bevor du startest, musst du die beiden Varianten unterscheiden:
 ## Voraussetzungen
 
 | Was du brauchst | Hinweis |
-|-----------------|---------|
+|----------------|---------|
 | Mini-PC mit **x86-64** (64-Bit Intel/AMD) | Die meisten [Mini-PCs und Thin Clients]({{< relref "home-assistant-gebrauchter-mini-pc-2026" >}}) ab 2016 erfüllen diese Voraussetzung |
 | **UEFI** (modernes BIOS) | Wird von HAOS zwingend benötigt – die meisten Geräte ab Baujahr 2015 haben UEFI |
 | **Interner SSD-Speicher** (mindestens 16 GB) | HAOS wird direkt auf die interne SSD geschrieben |
-| USB-Stick (mindestens 2 GB) | Nur zum Zwischenspeichern des Images – **kein USB-Installer** (siehe unten) |
+| USB-Stick (mindestens 4 GB) | Für Methode A: **separater Ubuntu-Live-USB-Stick** |
+| Zweiter PC mit Internetzugang | Zum Herunterladen des HAOS-Images und Erstellen des USB-Sticks |
 | Monitor und Tastatur | Nur für die Erstinstallation |
 | LAN-Kabel | WLAN wird von HAOS nicht unterstützt |
 
@@ -70,25 +71,51 @@ Home Assistant OS benötigt **UEFI** als Boot-Modus. Die meisten Mini-PCs und Bu
 
 Sollte dein Gerät nur Legacy-Boot unterstützen, ist HAOS nicht installierbar – hier hilft nur ein neueres Gerät oder die Container-Variante auf einem Linux-System.
 
+> ⚠️ **Secure Boot** muss unter Umständen deaktiviert werden. HAOS bootet nicht zuverlässig mit aktiviertem Secure Boot. Die Einstellung findest du im BIOS unter *Secure Boot* → *Disabled*.
+
 ---
 
 ## Wichtiger Hinweis: HAOS hat keinen normalen USB-Installer
 
 Im Gegensatz zu den meisten Betriebssystemen (Ubuntu, Proxmox, Windows) besitzt Home Assistant OS **keinen interaktiven Installer**, den du von einem USB-Stick starten und dann auf die SSD installieren kannst.
 
-Stattdessen wird das HAOS-Image **direkt auf die interne SSD des Mini-PCs geschrieben** – der USB-Stick dient nur als Zwischenspeicher, von dem du das Image auf die SSD überträgst.
+Stattdessen wird das HAOS-Image **direkt auf die interne SSD des Mini-PCs geschrieben**. Du brauchst daher ein Hilfsmittel, um das Image auf das Ziellaufwerk zu übertragen.
 
 > ⚠️ **Warnung vor Datenverlust:** Beim Schreiben des Images auf die SSD werden **alle vorhandenen Daten auf dem Ziellaufwerk vollständig und unwiderruflich gelöscht**. Stelle sicher, dass du vorher alle wichtigen Daten gesichert hast.
 
 ---
 
-## Schritt 1: Image herunterladen
+## Methode A: Installation über Ubuntu-Live-USB (empfohlen)
 
-Lade das aktuelle **Home Assistant OS Generic x86-64**-Image von der offiziellen Home-Assistant-Website herunter:
+Diese Methode verwendet einen **separaten Ubuntu-Live-USB-Stick**, von dem du den Mini-PC startest. Aus der Live-Umgebung heraus lädst du das HAOS-Image herunter und schreibst es auf die interne SSD.
+
+> **Wichtig:** Der Ubuntu-Live-USB-Stick und das spätere HAOS-System sind zwei verschiedene Dinge. Du bootest Ubuntu zum Zwischenschritt, nicht HAOS.
+
+### Schritt 1: Ubuntu-Live-USB-Stick erstellen
+
+Lade das aktuelle **Ubuntu Desktop**-Image (24.04 LTS oder neuer) von [ubuntu.com/download/desktop](https://ubuntu.com/download/desktop) herunter und erstelle einen bootfähigen USB-Stick:
+
+- **Windows:** [Balena Etcher](https://www.balena.io/etcher/) oder [Rufus](https://rufus.ie/) (Modus: *DD-Image*)
+- **Linux/macOS:** `dd` oder Balena Etcher
+
+> Der USB-Stick sollte mindestens 4 GB groß sein. Dieser Stick dient **ausschließlich als Ubuntu-Live-System** – er wird nicht das HAOS-Image enthalten.
+
+### Schritt 2: Mini-PC vom Ubuntu-Stick starten
+
+1. Stecke den Ubuntu-Live-USB-Stick in den Mini-PC
+2. Schalte den Mini-PC ein und rufe das Boot-Menü auf (meist **F12**, **F10** oder **ESC** – je nach Hersteller)
+3. Wähle den USB-Stick als Boot-Medium
+4. Wähle im Ubuntu-Boot-Menü **"Ubuntu ausprobieren"** (Try Ubuntu)
+
+Das System startet nun in die Ubuntu-Live-Umgebung – eine voll funktionsfähige, aber nicht installierte Desktop-Oberfläche. Du kannst hier Programme ausführen und auf das Internet zugreifen.
+
+### Schritt 3: HAOS-Image herunterladen
+
+Öffne den Firefox-Browser in der Live-Umgebung und lade das aktuelle **Home Assistant OS Generic x86-64**-Image herunter:
 
 👉 [home-assistant.io/installation/generic-x86-64](https://www.home-assistant.io/installation/generic-x86-64)
 
-Wähle dort den Abschnitt **"Generic x86-64"** und lade das `.img.xz`-File herunter. Das ist ein komprimiertes Image des gesamten HAOS-Betriebssystems.
+Wähle dort den Abschnitt **"Generic x86-64"** und lade die Datei `haos_generic-x86-64-xx.x.img.xz` herunter. Speichere sie im Ordner **"Downloads"** (Standard-Download-Pfad).
 
 **Achtung beim Download:** Es gibt mehrere Varianten:
 - **Generic x86-64** – ✅ Das richtige für normale Mini-PCs und Thin Clients
@@ -96,63 +123,116 @@ Wähle dort den Abschnitt **"Generic x86-64"** und lade das `.img.xz`-File herun
 - **VMware / VirtualBox** – ❌ Nur für virtuelle Maschinen
 - **Odroid / ASUS Tinker Board** – ❌ Nur für diese speziellen ARM-Geräte
 
----
+### Schritt 4: Ziel-SSD identifizieren
 
-## Schritt 2: Image auf die interne SSD schreiben
-
-Da HAOS keinen USB-Installer besitzt, gibt es zwei Wege, das Image auf die interne SSD zu bringen.
-
-### Weg A: Direktes Schreiben von einem Linux-Live-System (empfohlen)
-
-1. Schreib das heruntergeladene `.img.xz`-Image mit **Balena Etcher** oder **Rufus** auf einen USB-Stick
-2. **Fahre den Mini-PC komplett herunter** und schalte ihn aus
-3. Entferne alle internen Laufwerke bis auf die Ziel-SSD – oder bereite dich darauf vor, das richtige Laufwerk zu identifizieren
-4. **Stecke den USB-Stick ein** und starte den Mini-PC vom USB-Stick (ggf. Boot-Reihenfolge im BIOS anpassen)
-5. Der Stick bootet ein Linux-Live-System (je nach Tool)
-6. Identifiziere im Terminal die Ziel-SSD mit `lsblk` (sie ist meist `/dev/sda` oder `/dev/nvme0n1`)
-7. Übertrage das Image auf die SSD:
+Öffne ein Terminal (Strg + Alt + T) und führe folgenden Befehl aus:
 
 ```bash
-# Beispiel – Passe den Pfad zur SSD an!
-xzcat /pfad/zum/image.img.xz | dd of=/dev/sda bs=4M status=progress
+lsblk
 ```
 
-8. Nach erfolgreichem Schreiben: `sync` ausführen, USB-Stick entfernen, Mini-PC neustarten
+Die Ausgabe zeigt alle angeschlossenen Laufwerke. Suche die **interne SSD** des Mini-PCs anhand der Größe:
 
-### Weg B: Über ein bestehendes Linux
+- `/dev/sda` – bei SATA-SSD (häufig bei Thin Clients)
+- `/dev/nvme0n1` – bei NVMe-SSD (bei neueren Mini-PCs)
 
-Wenn auf dem Mini-PC bereits ein Linux (Ubuntu, Debian) installiert ist:
+> ⚠️ **Achtung:** Verwechsle das Ziel-Laufwerk nicht mit dem Ubuntu-USB-Stick (meist `/dev/sdb` oder `/dev/sdc`). Kontrolliere vor dem Schreiben immer die Laufwerksgröße und den Gerätenamen mit `lsblk`.
 
-1. Lade das HAOS-Image auf dem Mini-PC herunter
-2. Identifiziere die Ziel-SSD mit `lsblk`
-3. Übertrage das Image:
+### Schritt 5: Image auf die interne SSD schreiben
+
+Wechsle im Terminal in das Download-Verzeichnis und schreibe das Image:
 
 ```bash
-xzcat ~/haos_generic-x86-64.img.xz | sudo dd of=/dev/sda bs=4M status=progress
+cd ~/Downloads
+xzcat haos_generic-x86-64-*.img.xz | sudo dd of=/dev/sda bs=4M status=progress
+```
+
+> **Erklärung:** `xzcat` entpackt das komprimierte Image und übergibt es an `dd`, das es Block für Block auf das Ziel-Laufwerk (`/dev/sda`) schreibt. `status=progress` zeigt den Fortschritt an.
+
+Ersetze `/dev/sda` durch das in Schritt 4 ermittelte Ziel-Laufwerk.
+
+Der Vorgang kann **2–5 Minuten** dauern, abhängig von der SSD-Geschwindigkeit.
+
+**Erwartetes Ergebnis:** Nach dem Schreiben erscheint eine Meldung wie `XXX+0 Datensätze ein/aus`. Führe dann aus:
+
+```bash
 sudo sync
 ```
 
-4. **Mini-PC ausschalten**, nicht neu starten – damit HAOS booten kann
+### Schritt 6: Abschluss
+
+1. **Fahre das System herunter** (nicht neu starten):
+   ```bash
+   sudo shutdown -h now
+   ```
+2. **Entferne den Ubuntu-USB-Stick**
+3. **Entferne ggf. andere USB-Geräte**
+4. Schalte den Mini-PC wieder ein – er bootet jetzt direkt von der internen SSD
 
 ---
 
-## Schritt 3: HAOS starten und einrichten
+## Methode B: Direktes Flashen des Images (Fortgeschrittene)
 
-Nachdem du das Image auf die SSD geschrieben hast:
+Diese Methode ist nützlich, wenn du das HAOS-Image ohne Umwege auf das interne Laufwerk schreiben möchtest, z. B. mit einem zweiten Rechner.
 
-1. **Entferne den USB-Stick** (falls noch eingesteckt)
-2. Starte den Mini-PC neu
-3. HAOS bootet jetzt direkt von der internen SSD
-4. Der erste Start dauert etwa 5–15 Minuten – HAOS richtet das System ein
-5. Sobald der Bootvorgang abgeschlossen ist, öffnest du im Browser:
+### Schritt 1: Laufwerk ausbauen oder anschließen
 
+1. **Baue die interne SSD / das interne Laufwerk aus dem Mini-PC aus** (bei den meisten Thin Clients über eine Klappe auf der Unterseite zugänglich)
+2. **Schließe das Laufwerk per USB-Adapter an einen zweiten PC an**
+
+Oder alternativ: Schließe das Laufwerk über einen externen USB-Enclosure an.
+
+### Schritt 2: Image direkt auf das Laufwerk schreiben
+
+Auf dem zweiten PC:
+
+1. Lade das aktuelle HAOS-Image herunter: [home-assistant.io/installation/generic-x86-64](https://www.home-assistant.io/installation/generic-x86-64)
+2. Identifiziere das externe Laufwerk mit `lsblk`
+3. Schreibe das Image:
+
+**Linux:**
+```bash
+xzcat ~/Downloads/haos_generic-x86-64-*.img.xz | sudo dd of=/dev/sdX bs=4M status=progress
+sudo sync
 ```
-http://homeassistant.local:8123
-```
 
-Falls die `.local`-Adresse nicht funktioniert, findest du die IP-Adresse des Mini-PCs in deinem Router-Interface.
+**Windows mit Balena Etcher:**
+1. Balena Etcher öffnen
+2. Image-Datei auswählen
+3. Ziel-Laufwerk auswählen
+4. "Flash!" klicken
 
-6. Folge dem Einrichtungsassistenten – Benutzer anlegen, Standort wählen, Geräte verbinden.
+> ⚠️ **Achtung:** Wähle in Etcher genau das aus- oder umgebaute Laufwerk aus, nicht dein System-Laufwerk.
+
+### Schritt 3: Laufwerk wieder einbauen und starten
+
+1. Baue die SSD wieder in den Mini-PC ein
+2. Schließe ggf. den Deckel und schließe alle Kabel an
+3. Schalte den Mini-PC ein
+
+---
+
+## Nach dem ersten Start – HAOS einrichten
+
+Unabhängig von der gewählten Methode:
+
+1. Der **erste Start kann 5–15 Minuten dauern** – HAOS richtet das System ein, erstellt die Datenpartition und startet alle Dienste. Sei geduldig, das ist normal.
+2. Öffne anschließend einen Browser auf einem Gerät im selben Netzwerk.
+3. Rufe eine der folgenden Adressen auf:
+
+   ```
+   http://homeassistant.local:8123
+   ```
+
+   oder – falls die `.local`-Adresse nicht funktioniert – die vom Router vergebene IP-Adresse:
+
+   ```
+   http://<IP-DES-MINI-PCS>:8123
+   ```
+
+   > **Hinweis:** Ob `homeassistant.local` (mDNS) funktioniert, hängt von deinem Netzwerk ab. Nicht alle Router unterstützen mDNS-Weiterleitung. Die IP-Adresse findest du im Router-Interface unter "DHCP-Leases" oder "Verbundene Geräte".
+
+4. Folge dem Einrichtungsassistenten – Benutzer anlegen, Standort wählen, Geräte verbinden.
 
 ---
 
@@ -172,22 +252,28 @@ Wenn du später Frigate (Kameras mit KI-Objekterkennung), Immich (Fotoverwaltung
 
 | Problem | Lösung |
 |---------|--------|
-| Mini-PC bootet nicht von der SSD | BIOS-Prüfung: Ist **UEFI-Boot aktiviert** und die Boot-Reihenfolge korrekt? |
-| `homeassistant.local` nicht erreichbar | Prüfe die IP des Mini-PCs im Router. Browser → `http://<IP>:8123` |
-| SSD wird nicht erkannt | Prüfe im BIOS, ob die SSD sichtbar ist. Bei Futro: **kein NVMe!** Nur M.2 SATA |
+| Mini-PC bootet nicht von der SSD | BIOS-Prüfung: Ist **UEFI-Boot aktiviert** und die **Boot-Reihenfolge** korrekt? |
 | Bootet immer noch vom USB-Stick | USB-Stick entfernen, Boot-Reihenfolge im BIOS prüfen |
+| `homeassistant.local` nicht erreichbar | Prüfe die IP des Mini-PCs im Router. Browser → `http://<IP>:8123` |
+| Ubuntu-Live-System startet nicht | Boot-Menü (F12/F10/ESC) beim Einschalten drücken. Secure Boot ggf. deaktivieren |
+| SSD wird nicht erkannt | Prüfe im BIOS, ob die SSD sichtbar ist. Bei Futro: **kein NVMe!** Nur M.2 SATA |
+| `lsblk` zeigt keine Laufwerke | Prüfe, ob die SSD korrekt angeschlossen ist. Bei Methode B: Adapter prüfen |
+| HAOS startet, aber Web-UI nicht erreichbar | Prüfe, ob der Mini-PC per LAN-Kabel angeschlossen ist (WLAN wird nicht unterstützt) |
+| `dd`-Befehl bricht mit "Kein Speicherplatz" ab | Reicht die SSD-Größe aus? HAOS benötigt mindestens 16 GB |
 
 ---
 
 ## Fazit
 
-Die Installation von Home Assistant OS auf einem Mini-PC ist unkompliziert, wenn du den Unterschied zu einem normalen USB-Installer verstanden hast. HAOS wird direkt auf die interne SSD geschrieben – das macht den Vorgang anders als bei den meisten Betriebssystemen, aber dafür läuft das System danach sauber und stabil.
+Die Installation von Home Assistant OS auf einem Mini-PC ist unkompliziert, wenn du den grundlegenden Unterschied verstanden hast: HAOS wird **direkt auf die interne SSD geschrieben** – es gibt keinen interaktiven Installer.
 
 **Wichtige Punkte zum Mitnehmen:**
-- HAOS wird **direkt auf die SSD geschrieben** – kein USB-Installer
-- **UEFI** ist zwingend erforderlich
+- **Methode A (empfohlen):** Separaten Ubuntu-Live-USB-Stick erstellen, von dort das HAOS-Image auf die interne SSD schreiben
+- **Methode B (alternativ):** Laufwerk ausbauen und direkt von einem anderen PC flashen
+- **UEFI ist zwingend erforderlich**, Secure Boot ggf. deaktivieren
 - **Alle Daten auf dem Ziellaufwerk werden gelöscht**
+- Vor dem Schreiben: Laufwerksgröße und Gerätenamen mit `lsblk` kontrollieren
 - HAOS ≠ HA Container (Container hat keinen Supervisor/Add-ons)
-- Nach der Installation: Browser öffnen und `http://homeassistant.local:8123` aufrufen
+- Nach der Installation: Browser öffnen und `http://homeassistant.local:8123` oder die IP-Adresse aufrufen
 
 👉 Zurück zum [Hardware-Artikel: Welcher Mini-PC für Home Assistant?]({{< relref "home-assistant-gebrauchter-mini-pc-2026" >}})

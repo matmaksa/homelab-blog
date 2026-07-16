@@ -31,8 +31,14 @@ buildDrafts = false
     URL = "https://github.com/matmaksa/homelab-blog/blob/main/content"
     Text = "Verbessern"
 
+  [params.ebay]
+    # eBay Partner Network Campaign-ID – hier eintragen, um Affiliate-Links zu aktivieren
+    # Registrierung unter: https://partner.ebay.de/
+    # campaignId = "DEINE_CAMPAIGN_ID"
+    # Solange auskommentiert oder leer, arbeiten eBay-Shortcodes im Preview-Modus
+
   [params.footer]
-    text = "Als Amazon-Partner verdiene ich an qualifizierten Verkäufen."
+    text = "Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Diese Website verwendet zudem eBay-Partner-Links – Details im <a href='/impressum/'>Impressum</a>."
 
   [params.homeInfoParams]
     Title = "Homelab Guide"

@@ -95,6 +95,8 @@ Der Fujitsu Futro S7010 ist der absolute Budget-Champion. Gebraucht bekommst du 
 
 Die CPU ist ein **Intel Celeron J4125** (4 Kerne, 2,0–2,7 GHz). Das klingt nach nicht viel, reicht aber für leichte Dienste problemlos.
 
+{{< ebay-link query="Fujitsu Futro S7010 8GB" text="🔍 Fujitsu Futro S7010 mit 8 GB RAM bei eBay suchen" >}}
+
 - **Prozessor (CPU):** Intel Celeron J4125 (4 Kerne, 2,0–2,7 GHz, 10 W)
 - **Arbeitsspeicher (RAM):** 8 GB DDR4 offiziell, 16 GB getestet – 1 Slot (kein zweiter)
 - **Festplatte (SSD):** 64 GB M.2 SATA (austauschbar, aber **kein NVMe**)

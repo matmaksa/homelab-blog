@@ -74,6 +74,8 @@ Das Setup ist bewusst so gewählt, dass es für Einsteiger nachvollziehbar bleib
 
 Einige Links auf dieser Website führen zu Produkten auf Amazon. Wenn du über diese Links einkaufst, erhalte ich eine kleine Provision – für dich ändert sich am Preis nichts.
 
+Geplant ist zudem die Einbindung von eBay-Partner-Links für gebrauchte Hardware. Sobald diese aktiv sind, wird dieser Abschnitt ergänzt.
+
 Ich empfehle ausschließlich Hardware und Zubehör, das ich selbst sinnvoll finde oder selbst verwende. Es gibt keine bezahlten Platzierungen, keine gesponserten Beiträge. Eine Empfehlung entsteht nur dann, wenn ich das Produkt für dein Projekt für geeignet halte.
 
 ---
