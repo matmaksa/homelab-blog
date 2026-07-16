@@ -8,7 +8,6 @@ ShowBreadCrumbs: false
 ShowReadingTime: false
 disableShare: true
 searchHidden: true
-noindex: true
 ---
 
 > **Hinweis:** Dies ist ein prüfbarer Entwurf, der auf den tatsächlich eingesetzten Funktionen dieser Website basiert. Der Text wurde nicht anwaltlich geprüft und erhebt keinen Anspruch auf Rechtssicherheit. Bitte lasse die Angaben vor Veröffentlichung von einem Rechtsbeistand prüfen.
@@ -21,7 +20,7 @@ noindex: true
 Matheus Makiola  
 Haydnstr. 2  
 48291 Telgte  
-E-Mail: [NOCH EINZUTRAGEN – SIEHE IMPRESSUM]
+E-Mail: Matheus.Makiola@gmail.com
 
 ## 2. Hosting
 

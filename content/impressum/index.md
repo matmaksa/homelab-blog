@@ -8,7 +8,6 @@ ShowBreadCrumbs: false
 ShowReadingTime: false
 disableShare: true
 searchHidden: true
-noindex: true
 ---
 
 **Angaben gemäß § 5 DDG**
@@ -23,7 +22,7 @@ Haydnstr. 2
 48291 Telgte
 
 **Kontakt:**  
-E-Mail: [NOCH EINZUTRAGEN – FUNKTIONSFÄHIGE E-MAIL-ADRESSE ERFORDERLICH]
+E-Mail: Matheus.Makiola@gmail.com
 
 ## Verantwortlicher für journalistisch-redaktionelle Inhalte nach § 18 Abs. 2 MStV
 
