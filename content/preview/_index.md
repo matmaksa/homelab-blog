@@ -13,6 +13,30 @@ comments = false
 
 <div class="preview-overview">
 
+## 🖋️ Redaktionelle Überarbeitungen
+
+Diese Preview-Entwürfe enthalten **redaktionelle Verbesserungen** der existierenden Blog-Artikel – erstellt mit `anthropic/claude-sonnet-4-6`. Keine öffentlichen Artikel wurden verändert.
+
+<div class="preview-meta">
+  <strong>Modell:</strong> Claude Sonnet 4.6 &nbsp;·&nbsp;
+  <strong>Status:</strong> ⚠️ Preview – nicht öffentlich &nbsp;·&nbsp;
+  <strong>Nächster Schritt:</strong> Deine visuelle Freigabe
+</div>
+
+| Seite | Status | Wichtigste Änderungen |
+|-------|--------|----------------------|
+| **<a href="/preview/blog/homelab-unter-100-euro/">🖥️ Homelab unter 100€</a>** | ✅ überarbeitet | 'Invest' korrigiert, 4/8GB differenziert, USV entkoppelt |
+| **<a href="/preview/blog/home-assistant-preview/">🏠 Home Assistant</a>** | ✅ überarbeitet | Superlative entfernt, Titel sachlich, Zigbee relativiert |
+| **<a href="/preview/blog/proxmox-preview/">📦 Proxmox</a>** | ✅ überarbeitet | Subscription erklärt, Snapshot≠Backup, KI-Angaben entfernt |
+| **<a href="/preview/blog/headscale-preview/">🔗 Headscale</a>** | ✅ überarbeitet | Keine feste Version, Grants>ACLs, Datenschutz korrigiert |
+| **<a href="/preview/blog/futro-s7010-preview/">🖥️ Futro S7010</a>** | ✅ überarbeitet | OPNsense braucht 2. NIC, PVE04-Werte, Preise datiert |
+| **<a href="/preview/blog/mini-pc-vergleich-preview/">📊 Mini-PC Vergleich</a>** | ✅ überarbeitet | Prozent entfernt, 'beste Wahl'→'passend wenn', KI reduziert |
+| **<a href="/preview/about/">👤 Über mich</a>** | ✅ überarbeitet | Alter entfernt, PVE04 als Test-Lab |
+| **🏠 Startseite** | ⬜ nicht umsetzbar | Layout-Template, müsste direkt editiert werden → blockiert |
+| **🔗 Empfehlungsseite** | ⬜ nicht umsetzbar | Layout-Template, bräuchte Preview-Variante → blockiert |
+
+---
+
 ## 📐 Lesbarkeit & Layout
 
 Diese Preview zeigt Verbesserungen der Lesbarkeit des Blogs **matmaksa.de** – isoliert, ohne die öffentliche Website zu verändern.
