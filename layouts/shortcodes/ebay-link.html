@@ -43,9 +43,14 @@
   {{- if ne $customid "" -}}{{- $url = printf "%s&customid=%s" $url ($customid | urlquery) -}}{{- end -}}
   {{- if ne $siteId "" -}}{{- $url = printf "%s&siteid=%s" $url $siteId -}}{{- end -}}
 
-  <a href="{{ $url | safeURL }}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="ebay-affiliate-link">
-    {{- $text -}}
-  </a>
+  <div class="affiliate-link affiliate-link-ebay">
+    <p class="affiliate-disclosure">
+      Werbung: Bei einem Kauf über diesen eBay-Partnerlink kann MATMAKSA eine Provision erhalten. Für dich ändert sich der Preis nicht.
+    </p>
+    <a href="{{ $url | safeURL }}" target="_blank" rel="sponsored nofollow noopener noreferrer" class="ebay-affiliate-link">
+      {{- $text -}}
+    </a>
+  </div>
 
 {{- else -}}
 

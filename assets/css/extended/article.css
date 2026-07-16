@@ -1,4 +1,24 @@
 /* ============================================================
+   AFFILIATE LINK – Inline-Disclosure für eBay/Amazon
+   ============================================================ */
+
+.affiliate-link {
+  margin: 1.5rem 0;
+}
+
+.affiliate-disclosure {
+  font-size: 0.85rem;
+  color: var(--secondary, #666);
+  line-height: 1.5;
+  margin: 0 0 0.35rem;
+  padding: 0;
+}
+
+.affiliate-link a {
+  font-weight: 600;
+}
+
+/* ============================================================
    ABOUT PAGE – Custom Layout
    ============================================================ */
 
