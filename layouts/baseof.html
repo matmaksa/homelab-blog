@@ -17,7 +17,6 @@
 </head>
 
 {{- $bodyClass := "" -}}
-{{- if .Params.preview }}{{ $bodyClass = "preview-mode" }}{{ end -}}
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) -}}
 <body class="list{{ with $bodyClass }} {{ . }}{{ end }}" id="top">
 {{- else -}}

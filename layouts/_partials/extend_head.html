@@ -11,14 +11,5 @@
 <link rel="icon" href="{{ "safari-pinned-tab.svg" | relURL }}" type="image/svg+xml">
 <link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | relURL }}" color="#2563eb">
 
-<!-- Preview Styles (only on preview pages, via Hugo Asset Pipeline) -->
-{{- if .Params.preview }}
-{{- $previewCss := resources.Get "css/preview-readability.css" -}}
-{{- with $previewCss -}}
-{{- $processed := . | resources.Minify | resources.Fingerprint -}}
-<link rel="stylesheet" href="{{ $processed.RelPermalink }}" integrity="{{ $processed.Data.Integrity }}">
-{{- end -}}
-{{- end }}
-
 <!-- Main JS -->
 <script src="{{ "/js/main.js" | relURL }}" defer></script>
