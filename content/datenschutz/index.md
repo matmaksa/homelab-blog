@@ -1,0 +1,103 @@
+---
+title: "Datenschutzerklärung"
+date: 2026-07-16
+draft: false
+hideMeta: true
+ShowToc: true
+ShowBreadCrumbs: false
+ShowReadingTime: false
+disableShare: true
+searchHidden: true
+---
+
+## 1. Verantwortlicher
+
+**Betreiber der Website:**  
+Matheus Makiola  
+Haydnstr. 2  
+48291 Telgte  
+E-Mail: Matheus.Makiola@gmail.com
+
+## 2. Hosting
+
+Diese Website wird über **GitHub Pages** gehostet (GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA). Beim Aufruf der Seite erhebt GitHub automatisch technische Zugriffsdaten (IP-Adresse, Uhrzeit, aufgerufene Seite, Browsertyp). Diese Daten werden von GitHub ausschließlich zum Betrieb und zur Sicherheit der Plattform verarbeitet. Weitere Informationen findest du in der [GitHub-Datenschutzerklärung](https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement).
+
+## 3. Zugriffsdaten (Server-Logfiles)
+
+Beim Besuch dieser Website werden folgende Daten automatisch erfasst:
+
+- IP-Adresse (anonymisiert oder gekürzt)
+- Datum und Uhrzeit des Zugriffs
+- aufgerufene Seite (URL)
+- Browsertyp und -version
+- Betriebssystem
+- Referrer-URL (zuvor besuchte Seite)
+
+Diese Daten werden nur für die technische Bereitstellung und Sicherheit verarbeitet und nicht mit anderen Datenquellen zusammengeführt.
+
+## 4. Externe Schriftarten
+
+Diese Website verwendet **keine externen Schriftarten** von Google Fonts, Adobe Fonts oder ähnlichen Diensten. Schriftarten werden lokal ausgeliefert.
+
+## 5. Besucherzählung (GoatCounter)
+
+Diese Website verwendet **GoatCounter** ([goatcounter.com](https://www.goatcounter.com)) für eine datensparsame Besucherzählung. Erhoben werden:
+
+- aufgerufene URL
+- Referrer-Header (zuvor besuchte Seite)
+- Browserkennung (User-Agent)
+- Bildschirmgröße
+- Herkunftsland (aus der IP-Adresse)
+
+GoatCounter wird ohne Cookies betrieben und speichert keine dauerhaften Identifikatoren. Die IP-Adresse wird nicht gespeichert. Eine Identifikation einzelner Besucher ist nicht möglich. Die Daten dienen ausschließlich der Ermittlung der Seitenaufrufe und der geografischen Verteilung.
+
+Weitere Informationen: [GoatCounter-Datenschutzerklärung](https://www.goatcounter.com/privacy)
+
+## 6. Affiliate-Links (Amazon)
+
+Auf dieser Website finden sich Links zu Produkten auf **Amazon** (Amazon EU S.à r.l., 38 avenue John F. Kennedy, L-1855 Luxemburg). Wenn du über einen solchen Link einkaufst, erhalten wir eine kleine Provision. Der Preis ändert sich für dich nicht. Amazon setzt zu diesem Zweck Cookies ein, um die Transaktion nachvollziehen zu können.
+
+Weitere Informationen: [Amazon-Datenschutzerklärung](https://www.amazon.de/gp/help/customer/display.html?nodeId=201909010)
+
+## 7. Affiliate-Links (eBay) – geplant
+
+**[Derzeit nicht aktiv]** eBay-Partner-Links sind technisch vorbereitet, aber noch nicht auf dieser Website im Einsatz. Vor einer Aktivierung wird dieser Abschnitt ergänzt. eBay (eBay Marketplaces GmbH, Helvetiastraße 15–17, 3005 Bern, Schweiz) setzt bei Affiliate-Transaktionen Cookies zur Tracking-Verfolgung ein.
+
+## 8. MailerLite – geplant
+
+**[Derzeit nicht aktiv]** Ein Newsletter-Formular (MailerLite) ist als Platzhalter vorbereitet, aber derzeit nicht funktionsfähig. Vor der Aktivierung wird dieser Abschnitt ergänzt. MailerLite (MailerLite Limited, Ground Floor, 71 Lower Baggot Street, Dublin 2, Irland) verarbeitet bei der Anmeldung deine E-Mail-Adresse.
+
+## 9. Kontaktaufnahme
+
+Bei Kontaktaufnahme per E-Mail wird die angegebene E-Mail-Adresse inklusive der darin enthaltenen Daten ausschließlich zur Bearbeitung der Anfrage verarbeitet. Eine Weitergabe an Dritte erfolgt nicht.
+
+## 10. Soziale Medien
+
+Diese Website verlinkt auf externe Profile bei **GitHub** und **Instagram**. Beim Klick auf diese Links verlässt du unsere Website und es gelten die Datenschutzbestimmungen der jeweiligen Plattform.
+
+## 11. Cookies
+
+Diese Website verwendet **keine eigenen Cookies** zu Analyse- oder Tracking-Zwecken. Technisch erforderliche Session-Daten (z. B. Theme-Präferenz) werden lokal im Browser gespeichert (localStorage) und nicht an Dritte übermittelt.
+
+Drittanbieter-Cookies können gesetzt werden, wenn du:
+- einem Amazon-Partner-Link folgst
+
+## 12. Ihre Rechte
+
+Du hast jederzeit das Recht auf:
+- Auskunft über gespeicherte personenbezogene Daten
+- Berichtigung unrichtiger Daten
+- Löschung der Daten ("Recht auf Vergessenwerden")
+- Einschränkung der Verarbeitung
+- Datenübertragbarkeit
+- Widerspruch gegen die Verarbeitung
+
+Zur Ausübung dieser Rechte wende dich bitte an die im Impressum angegebene E-Mail-Adresse.
+
+## 13. Beschwerderecht
+
+Du hast das Recht, dich bei einer Aufsichtsbehörde zu beschweren, wenn du der Ansicht bist, dass die Verarbeitung deiner Daten gegen die Datenschutz-Grundverordnung (DSGVO) verstößt.
+
+## 14. Änderungen
+
+Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Der aktuelle Stand ist Juli 2026.

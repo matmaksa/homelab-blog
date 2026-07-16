@@ -72,6 +72,8 @@ Die wichtigste Komponente in einem Low-Budget-Homelab ist kein Serverschrank, so
 
 > **Preise schwanken – prüfe vor dem Kauf aktuelle Angebote.** Gerade bei Auktionen oder gewerblichen Rückläufern lassen sich gute Deals finden.
 
+{{< ebay-link query="Thin Client gebraucht" text="🔍 Gebrauchte Thin Clients bei eBay durchsuchen" >}}
+
 ## Speicher: SSD und RAM clever kombinieren
 
 - Eine gebrauchte **120–240 GB SATA-SSD** reicht für die ersten Projekte völlig aus. Die Preise variieren je nach Zustand und Händler – regelmäßig prüfen lohnt sich.
