@@ -26,7 +26,7 @@ Diese Website wird über **GitHub Pages** gehostet (GitHub, Inc., 88 Colin P Kel
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an IT-Sicherheit und Betriebsstabilität).  
 **Empfänger:** GitHub, Inc. (USA) – [GitHub-Datenschutzerklärung](https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement).  
 **Drittlandübermittlung:** GitHub übermittelt Daten in die USA. GitHub ist nach dem EU-US Data Privacy Framework (DPF) zertifiziert.  
-**Speicherdauer:** Die Aufbewahrungsdauer der Zugriffsdaten durch GitHub ist nicht abschließend dokumentiert. Für den Betrieb von GitHub Pages werden Logdaten in der Regel für einen begrenzten Zeitraum (ca. 30–90 Tage) aufbewahrt.
+**Speicherdauer:** Die konkrete Speicherdauer der Zugriffsdaten wird von GitHub festgelegt. Nach Angaben von GitHub hängt sie vom jeweiligen Verarbeitungszweck und bestehenden rechtlichen Verpflichtungen ab.
 
 ## 3. Zugriffsdaten (Server-Logfiles)
 

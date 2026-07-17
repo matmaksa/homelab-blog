@@ -58,7 +58,7 @@ Dieser Artikel richtet sich an **Homelab-Einsteiger ohne Vorkenntnisse**, die ei
 | 🥇 Beste Preis-Leistung | Proxmox VE auf gebrauchtem HP ProDesk 400 G4 (~90 €) |
 | 💰 Günstigster Einstieg | Proxmox VE auf Fujitsu Futro S7010 (~40 €) |
 | 🚀 Beste Wahl für maximale Erweiterbarkeit | Lenovo M720q (~120 €) + PCIe-Slot für 10GbE |
-| 🏠 Beste Wahl für Home Assistant | Proxmox LXC-Container (2 GB RAM reichen) |
+| 🏠 Beste Wahl für Home Assistant | Home Assistant OS als VM (empfohlen für Einsteiger) |
 | 🔧 Beste Wahl für Proxmox Cluster | 2× Dell Optiplex 3070 Micro (~100 €/Stück) |
 
 ---
@@ -97,7 +97,7 @@ Virtuelle Maschinen mit eigenem BIOS (Startprogramm), eigener CPU und eigenem Ar
 
 Container teilen sich den Linux-Kernel (den Betriebssystemkern) des Hosts – das spart enorm Ressourcen. Ein LXC-Container mit Ubuntu braucht nur **~100 MB RAM** statt 2 GB für eine vollständige VM. Das ist der Unterschied zwischen einer möblierten Wohnung (LXC) und einem kompletten Hausbau (KVM).
 
-**Perfekt für:** Docker (eine Plattform für Kleinst-Anwendungen), Pi-hole (Werbeblocker), n8n (Automatisierungs-Tool), Home Assistant (Smart-Home-Zentrale) – alles, was schlank laufen soll.
+**Perfekt für:** Docker (eine Plattform für Kleinst-Anwendungen), Pi-hole (Werbeblocker) und n8n (Automatisierungs-Tool) – alles, was schlank laufen soll.
 
 ---
 
@@ -286,7 +286,7 @@ Licht, Heizung, Kameras – alles von einer Oberfläche aus steuern. Home Assist
 
 - **Home Assistant Container (für fortgeschrittene Nutzer):** Docker-basiert, ohne Supervisor und ohne Add-ons. Manuelle Konfiguration, aber ressourcenschonender.
 
-> **Hinweis:** Eine Installation von Home Assistant mit Supervisor direkt in einem LXC-Container wird nicht empfohlen – dies ist kein offiziell unterstützter Weg und kann zu unerwarteten Problemen führen. Nutze entweder die offizielle HAOS-VM oder den Container-Client ohne Supervisor.
+> **Hinweis:** Eine Installation von Home Assistant mit Supervisor direkt in einem LXC-Container wird nicht empfohlen – dies ist kein offiziell unterstützter Weg und kann zu unerwarteten Problemen führen. Nutze entweder die offizielle HAOS-VM oder Home Assistant Container ohne Supervisor.
 
 ---
 

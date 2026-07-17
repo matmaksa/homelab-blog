@@ -28,8 +28,8 @@
           </a>
         </li>
         <li>
-          <a href="{{ "posts/" | absLangURL }}" title="Projekte">
-            <span{{ if eq .Section "posts" }}{{ if not .IsHome }} class="active"{{ end }}{{ end }}>Projekte</span>
+          <a href="{{ "posts/" | absLangURL }}" title="Guides">
+            <span{{ if eq .Section "posts" }}{{ if not .IsHome }} class="active"{{ end }}{{ end }}>Guides</span>
           </a>
         </li>
         <li>
@@ -129,7 +129,7 @@
   <nav aria-label="Mobile Navigation">
     <ul class="mobile-menu-list">
       <li><a href="{{ "" | absLangURL }}">Start hier</a></li>
-      <li><a href="{{ "posts/" | absLangURL }}">Projekte</a></li>
+      <li><a href="{{ "posts/" | absLangURL }}">Guides</a></li>
       <li>
         <a href="{{ "categories/hardware/" | absLangURL }}"><strong>Hardware</strong></a>
         <ul>
