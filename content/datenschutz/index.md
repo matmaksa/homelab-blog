@@ -93,7 +93,7 @@ Bei Kontaktaufnahme per E-Mail wird die angegebene E-Mail-Adresse inklusive der 
 **Rechtsgrundlage:** Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen/ Vertragserfüllung) oder Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Kommunikation).  
 **Empfänger:** Der Betreiber (siehe Abschnitt 1).  
 **Drittlandübermittlung:** Nicht vorgesehen.  
-**Speicherdauer:** Die Daten werden gelöscht, sobald sie für die Bearbeitung der Anfrage nicht mehr erforderlich sind; bei vertraglichen Beziehungen gelten die gesetzlichen Aufbewahrungsfristen. Die konkrete Löschfrist ist vom Betreiber festzulegen [manueller Prüfpunkt].
+**Speicherdauer:** Daten aus E-Mail-Anfragen werden gespeichert, solange dies zur Bearbeitung und abschließenden Beantwortung der Anfrage erforderlich ist. Anschließend werden sie gelöscht, sofern keine gesetzlichen Aufbewahrungspflichten oder berechtigten Gründe für eine weitere Speicherung bestehen.
 
 ## 9. Soziale Medien
 
