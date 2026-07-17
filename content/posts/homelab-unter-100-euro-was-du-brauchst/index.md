@@ -37,6 +37,10 @@ instagram_derivatives_status = "ready_for_review"
   caption = "Ein Homelab muss nicht groß und teuer sein – ein gebrauchter Thin Client reicht für den Start."
 +++
 
+**Aktualisiert: Juli 2026 | Lesezeit: 12 Minuten**
+
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon- und eBay-Partner verdiene ich an qualifizierten Verkäufen.
+
 Viele denken bei einem Homelab sofort an teure Server-Racks, laute Lüfter und eine dreistellige Stromrechnung.  
 Die Wahrheit: Für die ersten Schritte reichen oft **unter 100 Euro** – wenn man weiß, worauf es ankommt.
 
