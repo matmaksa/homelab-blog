@@ -160,7 +160,7 @@ Das Ubuntu-Live-System erkennst du an der Größe des USB-Sticks (z. B. 8 GB o
 2. Sobald der Mini-PC aus ist: **Entferne den Ubuntu-USB-Stick**.
 3. Schalte den Mini-PC wieder ein – er bootet jetzt direkt von der internen SSD.
 
-> **Hinweis:** Sollte der Mini-PC nach dem Einschalten nicht von der SSD booten, prüfe im BIOS: Ist UEFi-Boot aktiv? Ist die Boot-Reihenfolge korrekt (interne SSD vor USB)?
+> **Hinweis:** Sollte der Mini-PC nach dem Einschalten nicht von der SSD booten, prüfe im BIOS: Ist UEFI-Boot aktiv? Ist die Boot-Reihenfolge korrekt (interne SSD vor USB)?
 
 ---
 
@@ -282,13 +282,13 @@ Wenn du später Frigate (Kameras mit KI-Objekterkennung), Immich (Fotoverwaltung
 | Problem | Lösung |
 |---------|--------|
 | Mini-PC bootet nicht von der SSD | BIOS-Prüfung: Ist **UEFI-Boot aktiviert**? Ist **Secure Boot deaktiviert**? Boot-Reihenfolge korrekt (SSD vor USB)? |
-| Bootet immer noch vom USB-Stick | USB-Stick entfernen, Boot-Reihenfolge im BIOS prüfen |
-| `homeassistant.local` nicht erreichbar | Prüfe die IP des Mini-PCs im Router. Browser → `http://<IP>:8123` |
-| Ubuntu-Live-System startet nicht | Boot-Menü (F12/F10/ESC) beim Einschalten drücken. Secure Boot ggf. deaktivieren |
-| SSD wird nicht erkannt | Prüfe im BIOS, ob die SSD sichtbar ist. Bei Futro: **kein NVMe!** Nur M.2 SATA |
-|| HAOS startet, aber Web-UI nicht erreichbar | Prüfe, ob der Mini-PC per LAN-Kabel angeschlossen ist – für Installation und ersten Start wird eine kabelgebundene Ethernet-Verbindung empfohlen. WLAN kann abhängig von Hardware und Treiber funktionieren, ist für die Ersteinrichtung aber nicht der bevorzugte Weg. |
-| Image-Schreiben bricht ab | Reicht die SSD-Größe aus? HAOS benötigt mindestens 16 GB |
-|| Nach BIOS-Änderung bootet nichts mehr | BIOS-Standardwerte über **Load Setup Defaults** wiederherstellen. Falls das Gerät nicht mehr startet, den vom Hersteller dokumentierten BIOS-Reset verwenden. |
+| Bootet immer noch vom USB-Stick | USB-Stick entfernen, Boot-Reihenfolge im BIOS prüfen. |
+| `homeassistant.local` nicht erreichbar | Prüfe die IP des Mini-PCs im Router und rufe `http://<IP>:8123` auf. |
+| Ubuntu-Live-System startet nicht | Boot-Menü (F12/F10/ESC) beim Einschalten drücken. Secure Boot ggf. deaktivieren. |
+| SSD wird nicht erkannt | Prüfe im BIOS, ob die SSD sichtbar ist. Beim Futro: **kein NVMe**, nur M.2 SATA. |
+| HAOS startet, aber Web-UI nicht erreichbar | Einige Minuten auf die Initialisierung warten. Ethernet-Verbindung prüfen und die IP-Adresse im Router nachsehen. Anschließend `http://homeassistant.local:8123` versuchen; falls mDNS nicht funktioniert, `http://<IP-Adresse>:8123` verwenden. |
+| Image-Schreiben bricht ab | Reicht die SSD-Größe aus? HAOS benötigt mindestens 16 GB. |
+| Nach BIOS-Änderung bootet nichts mehr | BIOS erneut öffnen und **Load Setup Defaults** beziehungsweise BIOS-Standardwerte laden. Anschließend UEFI und Secure Boot kontrolliert neu konfigurieren. Falls das Gerät nicht mehr erreichbar ist, nur den vom Hersteller dokumentierten BIOS-Reset verwenden. |
 
 ---
 
