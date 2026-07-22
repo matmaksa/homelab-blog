@@ -40,17 +40,6 @@ approved_for_publish = false
 next_action = "owner_review_article_graphic_and_screenshot_placeholders"
 +++
 
-> [!IMPORTANT]
-> **Preview – noch nicht veröffentlicht.** Dieser überarbeitete Entwurf ist nur zur visuellen und redaktionellen Prüfung bestimmt.
-> - Typ: `article_draft`
-> - Publish-Eligible: `false`
-> - Technischer Faktencheck: abgeschlossen
-> - Nächster Schritt: Eigentümerprüfung von Artikeltext, Erklärgrafik und fünf Screenshot-Platzhaltern.
-
----
-
-# Pi-hole im Proxmox-Homelab: Dein erster eigener DNS-Werbeblocker
-
 Pi-hole war mein erster Dienst auf PVE04. Das ist ein guter Einstieg ins Homelab: Du baust einen kleinen Container, lernst den DNS-Weg kennen und kannst jeden wichtigen Schritt einfach prüfen.
 
 PVE04 ist dabei ein eigener Proxmox-Testhost, nicht mein produktives Homelab. Der Artikel zeigt deshalb einen ehrlichen Praxisweg: Was funktioniert hat, welche Probleme auftraten und was bewusst noch offen ist.
@@ -62,15 +51,13 @@ Pi-hole nimmt DNS-Anfragen entgegen. DNS ist das Telefonbuch des Netzes: Wenn du
 ## Dein einfacher Weg durch das Projekt
 
 1. Container anlegen
-2. Netzwerk festlegen
-3. Debian starten
-4. Pi-hole installieren
-5. Weboberfläche und DNS testen
-6. Blocking testen
-7. Neustart testen
-8. Backup erstellen
+2. Netzwerk festlegen und eine freie feste IP notieren
+3. Debian starten und Pi-hole installieren
+4. DNS und Blocking testen
+5. Neustart prüfen
+6. Backup erstellen
 
-Das ist kein Rezept, das du blind in jedem Heimnetz anwenden solltest. Es ist aber ein klarer roter Faden für einen kleinen, kontrollierten Einstieg.
+Damit bleibt der Ablauf bewusst klein: erst parallel aufbauen, dann testen und erst später entscheiden, ob weitere Geräte Pi-hole verwenden sollen.
 
 ## Das brauchst du
 
@@ -89,9 +76,11 @@ Das ist kein Rezept, das du blind in jedem Heimnetz anwenden solltest. Es ist ab
 >
 > Diese Themen können später sinnvoll sein. Für den ersten funktionierenden Pi-hole-Container machen sie den Einstieg aber nur unnötig kompliziert.
 
-![Einfacher DNS-Ablauf vor und nach Pi-hole](dns-ablauf-mit-pihole.svg)
+![Einfacher DNS-Ablauf vor und nach Pi-hole](dns-ablauf-mit-pihole.svg?v=20260722)
 
 *Ohne Pi-hole läuft die DNS-Anfrage über den bisherigen Weg. Mit Pi-hole fragt dein Gerät zuerst den kleinen DNS-Dienst; dieser filtert bekannte Werbe- und Tracking-Domains und fragt bei Bedarf weiter.*
+
+> **Wichtig:** Der Rechner nutzt Pi-hole nur dann, wenn Pi-hole ausdrücklich als DNS-Server eingetragen ist – direkt am Gerät oder über die DHCP-Einstellung deines Routers. Router und Switch transportieren die Netzwerkpakete, sie leiten DNS-Anfragen nicht automatisch zu Pi-hole um.
 
 [SCREENSHOT BENÖTIGT: Bereinigte Proxmox-Übersicht von PVE04 mit dem Pi-hole-Container; nur PVE04 und `01-pihole` zeigen, keine privaten Netzdaten oder Zugangsinformationen.]
 
@@ -121,7 +110,7 @@ Für den Aufbau nutzte der neue Container zunächst einen vorhandenen Resolver. 
 
 Der wichtige Punkt für Einsteiger: Ändere nicht gleichzeitig Container, DNS-Server, DHCP, Filterlisten und Router. Baue Pi-hole zuerst parallel auf und prüfe ihn direkt. So weißt du bei einem Fehler, an welcher Stelle du suchen musst.
 
-Der neue Pi-hole wurde parallel aufgebaut und technisch getestet. Die endgültige Umstellung des PVE04-Resolvers und die Ablösung der alten Testcontainer waren ein eigener Abschluss-Schritt und gehörten nicht zu diesem Artikel.
+Der neue Pi-hole wurde zuerst parallel aufgebaut und technisch getestet. Ob und wann dein gesamtes Heimnetz Pi-hole verwendet, ist ein eigener abgesicherter Schritt: Erst wenn du einen Rückweg für DNS-Änderungen dokumentiert hast, richtest du weitere Geräte auf Pi-hole als DNS-Server aus.
 
 ## 3. Debian starten und Pi-hole installieren
 
@@ -146,17 +135,15 @@ Die getesteten Versionen waren Pi-hole Core v6.4.3, Web v6.6 und FTL v6.7. FTL i
 
 ## 4. Kleine Fehler gezielt lösen
 
-Nach der Installation gehörten zwei Pi-hole-Pfade zunächst `root:root`: `FTL.log` und `config_backups`. Der Pi-hole-Dienst braucht dort Schreibzugriff für Protokolle und Konfigurationssicherungen.
+Nach der Installation konnte Pi-hole an zwei Stellen nicht sauber schreiben. Korrigiert wurden ausschließlich diese beiden Pfade. Danach liefen DNS, Weboberfläche und Backup-Konfiguration wieder wie erwartet.
 
-> **Praxisproblem:** Pi-hole kann in betroffenen Bereichen nicht sauber schreiben.
->
-> **Einordnung:** Nicht der ganze Container war falsch eingerichtet, sondern nur zwei konkrete Pfade.
->
-> **Lösung:** Nur diese beiden Pfade wurden auf `pihole:pihole` korrigiert. Die vorhandenen Dateimodi blieben unverändert.
->
-> **Warum ich so vorging:** Ein pauschales rekursives `chown` hätte viele nicht betroffene Dateien verändert. Die kleinste passende Korrektur ist hier sicherer und leichter nachvollziehbar.
+> **Was du als Anfänger wissen musst:** Es war kein Fehler im ganzen Container. Wenn ein Dienst nicht schreiben kann, ändere nicht pauschal alle Rechte. Prüfe zuerst, welcher konkrete Pfad betroffen ist, und korrigiere nur diesen.
 
-Im unprivilegierten LXC erschienen außerdem systemd-Mount-Warnungen und ein Hinweis zu `CAP_SYS_NICE`. Beide Hinweise blockierten DNS, FTL und die Weboberfläche nicht. Deshalb wurde nichts „auf Verdacht“ repariert.
+### Technischer Hintergrund (optional)
+
+Betroffen waren `FTL.log` und `config_backups`: Sie gehörten zunächst `root:root` und wurden gezielt auf `pihole:pihole` gesetzt. Die vorhandenen Dateimodi blieben unverändert; ein rekursives `chown` hätte unnötig viele Dateien angefasst.
+
+Im unprivilegierten LXC erschienen außerdem systemd-Mount-Warnungen und ein Hinweis zu `CAP_SYS_NICE`. Sie blockierten DNS, FTL und die Weboberfläche nicht. Deshalb wurde nichts „auf Verdacht“ repariert.
 
 > **Merksatz:** Nicht jede Warnung verlangt eine Änderung. Erst prüfen, ob die betroffene Funktion wirklich ausfällt.
 
