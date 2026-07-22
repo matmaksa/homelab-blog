@@ -1,3 +1,4 @@
 User-agent: *
+Disallow: /preview/
 Disallow: /ig-review/
 Sitemap: https://matmaksa.de/sitemap.xml

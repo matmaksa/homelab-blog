@@ -93,6 +93,12 @@
   </div>
   {{- end }}
 
+  {{- if .Params.preview }}
+  <aside class="preview-banner" role="note" style="margin:0 0 1.5rem;padding:1rem 1.25rem;border:2px solid #ffc107;border-radius:8px;background:#fff3cd;color:#664d03">
+    <strong>⚠️ Preview – noch nicht veröffentlicht.</strong> Dieser Artikel ist nur zur visuellen und redaktionellen Prüfung bestimmt.
+  </aside>
+  {{- end }}
+
   {{- /* Affiliate Notice */}}
   {{- if .Params.affiliateLinks | default false }}
   <div class="affiliate-notice" role="note">

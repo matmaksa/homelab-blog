@@ -16,4 +16,5 @@ Hier siehst du alle aktuellen Entwürfe und Vorschauen. Diese Seiten sind **nich
 
 | Preview | Status | Datum |
 |---------|--------|-------|
+| [Pi-hole im Proxmox-Homelab](./pihole-proxmox-praxisprojekt/) | Eigentümerprüfung, fünf Screenshot-Platzhalter offen | 2026-07-22 |
 | [MATMAKSA Homelab Starter-Pack](./matmaksa-homelab-starter-pack/) | Entwurf, Lead-Magnet | 2026-07-16 |
