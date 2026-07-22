@@ -76,7 +76,7 @@ Damit bleibt der Ablauf bewusst klein: erst parallel aufbauen, dann testen und e
 >
 > Diese Themen können später sinnvoll sein. Für den ersten funktionierenden Pi-hole-Container machen sie den Einstieg aber nur unnötig kompliziert.
 
-![Einfacher DNS-Ablauf vor und nach Pi-hole](dns-ablauf-mit-pihole.svg?v=20260722)
+![Zwei DNS-Wege: Links fragt ein Rechner über Router und Standard-DNS direkt das Internet. Rechts fragt der Rechner zuerst Pi-hole als DNS-Werbeblocker; Pi-hole filtert bekannte Werbe- und Tracking-Domains und leitet erlaubte Anfragen weiter.](dns-ablauf-mit-pihole.svg?v=20260722)
 
 *Ohne Pi-hole läuft die DNS-Anfrage über den bisherigen Weg. Mit Pi-hole fragt dein Gerät zuerst den kleinen DNS-Dienst; dieser filtert bekannte Werbe- und Tracking-Domains und fragt bei Bedarf weiter.*
 
@@ -103,6 +103,16 @@ In der Proxmox-Oberfläche wählst du zuerst deinen Host aus und klickst auf **C
 | Startverhalten | Autostart aktiviert |
 | Upstream-DNS | `1.1.1.1` und `1.0.0.1` |
 
+Wenn du den Assistenten zum ersten Mal siehst, arbeite ihn einfach von oben nach unten durch:
+
+1. **General:** Freie CT-ID wählen, einen kurzen Namen wie `01-pihole` vergeben und ein eigenes starkes Root-Passwort setzen. Die ID `101` ist nur das Beispiel dieses Labs.
+2. **Template:** Das zuvor heruntergeladene Debian-Template auswählen. Im Test war das `debian-13-standard_13.6-1_amd64.tar.zst`.
+3. **Disk, CPU und Memory:** `local-lvm`, 8 GiB, 1 Kern sowie 512 MiB RAM und 512 MiB Swap eintragen.
+4. **Network:** `vmbr0` auswählen. Im Test-Lab waren die feste IPv4 `192.168.20.201/24` und das Gateway `192.168.20.254`; übernimm diese Werte **nicht**, sondern verwende eine freie Adresse und das Gateway deines eigenen Netzes. Ohne VLAN bleibt der VLAN-Tag leer.
+5. **Confirm:** Prüfe die Zusammenfassung, klicke auf **Finish** und starte den neuen Container anschließend links in der Proxmox-Übersicht.
+
+Die festen Werte sind kein allgemeines Rezept: Eine doppelt vergebene IP oder die Gateway-Adresse aus einem fremden Netz verhindert den Zugriff auf den Container.
+
 Ein **LXC** ist ein schlanker Linux-Container. Er nutzt den Kernel des Proxmox-Hosts, bleibt aber ein eigener Gast. **Unprivilegiert** bedeutet: Der Container bekommt auf dem Host nicht automatisch weitreichende Root-Rechte.
 
 Im Test-Lab lag CT 101 in VLAN 20. Ein **VLAN** trennt Netzbereiche logisch. Wenn du keine VLANs verwendest, ist das kein Problem: Hänge den Container einfach an deine normale Proxmox-Bridge **ohne** VLAN-Tag. Die feste IP-Adresse und das Gateway müssen dann zu deinem normalen Netz passen.
@@ -125,9 +135,17 @@ Der neue Pi-hole wurde zuerst parallel aufgebaut und technisch getestet. Ob und 
 
 Für diesen Aufbau kam das offizielle Debian-13-Template zum Einsatz. Die offizielle Pi-hole-Installerdatei wurde zuerst lokal gespeichert und geprüft; erst danach begann die interaktive Installation. So vermeidest du, einen fremden oder unklaren Befehl blind aus dem Internet auszuführen.
 
-Für die aktuelle Download- und Prüfanleitung verwende immer die [offizielle Pi-hole-Installationsdokumentation](https://docs.pi-hole.net/main/basic-install/). Die dort angebotene Installerdatei kann sich ändern. Wichtig ist der Ablauf: **offizielle Quelle öffnen → Datei lokal speichern → Inhalt beziehungsweise Prüfsumme kontrollieren → in der CT-Konsole interaktiv starten**.
+Für die aktuelle Download- und Prüfanleitung verwende immer die [offizielle Pi-hole-Installationsdokumentation](https://docs.pi-hole.net/main/basic-install/). Die dort angebotene Installerdatei kann sich ändern. Wichtig ist der Ablauf: **offizielle Quelle öffnen → Datei lokal speichern → Inhalt prüfen → in der CT-Konsole interaktiv starten**.
 
-Während der Installation übernimmst du nur Werte, die du vorher notiert hast: deine feste Container-IP und dein Gateway sowie die hier verwendeten Upstream-DNS-Server `1.1.1.1` und `1.0.0.1`. DHCP, Unbound, DNS-over-HTTPS und eine lokale DNS-Zone blieben in diesem Einstieg bewusst deaktiviert.
+Melde dich dafür in der Proxmox-**Console** des laufenden Containers als `root` an. Der folgende Ablauf entspricht dem hier dokumentierten, nicht gepipelten Vorgehen; lies die Datei vor dem Start und vergleiche sie bei Abweichungen mit der offiziellen Dokumentation:
+
+```bash
+curl -fsSL https://install.pi-hole.net -o pihole-install.sh
+less pihole-install.sh
+bash pihole-install.sh
+```
+
+Im Installer bleibst du bei den zuvor notierten Netzwerkdaten und den dokumentierten Upstreams `1.1.1.1` sowie `1.0.0.1`. DHCP, Unbound, DNS-over-HTTPS und eine lokale DNS-Zone wurden für diesen Einstieg bewusst nicht aktiviert. Das Weboberflächen-Passwort ist ein eigenes Geheimnis: nicht in den Artikel, Screenshots oder die Shell-Historie schreiben.
 
 Die getesteten Versionen waren Pi-hole Core v6.4.3, Web v6.6 und FTL v6.7. FTL ist der Dienst, der die DNS-Anfragen verarbeitet und Daten für die Weboberfläche bereitstellt.
 
