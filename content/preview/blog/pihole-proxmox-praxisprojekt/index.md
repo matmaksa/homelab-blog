@@ -40,7 +40,7 @@ approved_for_publish = false
 next_action = "owner_review_article_graphic_and_screenshot_placeholders"
 +++
 
-Pi-hole war mein erster Dienst auf PVE04. Das ist ein guter Einstieg ins Homelab: Du baust einen kleinen Container, lernst den DNS-Weg kennen und kannst jeden wichtigen Schritt einfach prüfen.
+Pi-hole war mein erster **sauber neu aufgebauter** Dienst auf PVE04. Das ist ein guter Einstieg ins Homelab: Du baust einen kleinen Container, lernst den DNS-Weg kennen und kannst jeden wichtigen Schritt einfach prüfen.
 
 PVE04 ist dabei ein eigener Proxmox-Testhost, nicht mein produktives Homelab. Der Artikel zeigt deshalb einen ehrlichen Praxisweg: Was funktioniert hat, welche Probleme auftraten und was bewusst noch offen ist.
 
@@ -84,23 +84,30 @@ Damit bleibt der Ablauf bewusst klein: erst parallel aufbauen, dann testen und e
 
 [SCREENSHOT BENÖTIGT: Bereinigte Proxmox-Übersicht von PVE04 mit dem Pi-hole-Container; nur PVE04 und `01-pihole` zeigen, keine privaten Netzdaten oder Zugangsinformationen.]
 
-## 1. Ausgangslage: ein kleiner Container statt einer großen Umstellung
+## 1. Container in Proxmox anlegen
 
 PVE04 ist ein Fujitsu Futro S7010 mit vier CPU-Kernen, 4 GB RAM und einer 64-GB-SSD. Der Host dient ausschließlich als Content- und Test-Lab. Für Pi-hole entstand der unprivilegierte LXC-Container CT 101 mit dem Namen `01-pihole`.
 
+**CT 101** ist keine technische Abkürzung, die du auswendig kennen musst: Proxmox führt jeden Container unter einer numerischen ID. Mein Pi-hole erhielt die ID **101** und den Namen **01-pihole**. Für dein eigenes Setup wählst du eine bei dir freie ID.
+
+In der Proxmox-Oberfläche wählst du zuerst deinen Host aus und klickst auf **Create CT**. Die folgenden Werte sind die tatsächlich getestete Konfiguration dieses Praxisaufbaus:
+
 | Bereich | Verwendete Konfiguration |
 |---|---|
-| Basis | Debian 13.6 als unprivilegierter LXC |
+| Vorlage | `debian-13-standard_13.6-1_amd64.tar.zst` als unprivilegierter LXC |
+| ID und Name | 101 und `01-pihole` – nur Beispielwerte; bei dir muss die ID frei sein |
 | CPU | 1 vCPU |
 | Arbeitsspeicher | 512 MiB RAM und 512 MiB Swap |
 | Root-Disk | 8 GiB auf `local-lvm` |
-| Netzwerk | Bridge `vmbr0`, VLAN 20 |
+| Netzwerk | Bridge `vmbr0`, im Test-Lab VLAN 20 |
 | Startverhalten | Autostart aktiviert |
 | Upstream-DNS | `1.1.1.1` und `1.0.0.1` |
 
 Ein **LXC** ist ein schlanker Linux-Container. Er nutzt den Kernel des Proxmox-Hosts, bleibt aber ein eigener Gast. **Unprivilegiert** bedeutet: Der Container bekommt auf dem Host nicht automatisch weitreichende Root-Rechte.
 
 Im Test-Lab lag CT 101 in VLAN 20. Ein **VLAN** trennt Netzbereiche logisch. Wenn du keine VLANs verwendest, ist das kein Problem: Hänge den Container einfach an deine normale Proxmox-Bridge **ohne** VLAN-Tag. Die feste IP-Adresse und das Gateway müssen dann zu deinem normalen Netz passen.
+
+> **Kontrollpunkt vor dem Erstellen:** Notiere dir die freie feste IP-Adresse, das Gateway und die gewählte Container-ID. Erst wenn diese Werte zu deinem eigenen Netz passen, erstellst du den Container und startest ihn über die Proxmox-Oberfläche.
 
 [SCREENSHOT BENÖTIGT: Bereinigte CT-101-Konfiguration mit CPU, RAM, Disk, optionalem VLAN und Autostart; IP-Adresse, Gateway, MAC-Adresse, Bridge-Details und Benutzerangaben schwärzen.]
 
@@ -112,9 +119,15 @@ Der wichtige Punkt für Einsteiger: Ändere nicht gleichzeitig Container, DNS-Se
 
 Der neue Pi-hole wurde zuerst parallel aufgebaut und technisch getestet. Ob und wann dein gesamtes Heimnetz Pi-hole verwendet, ist ein eigener abgesicherter Schritt: Erst wenn du einen Rückweg für DNS-Änderungen dokumentiert hast, richtest du weitere Geräte auf Pi-hole als DNS-Server aus.
 
-## 3. Debian starten und Pi-hole installieren
+## 3. Pi-hole im gestarteten Container installieren
 
-Für den Container kam das offizielle Debian-13-Template zum Einsatz. Den Pi-hole-Installer führte ich nicht blind als Pipeline aus dem Internet aus: Die offizielle Installerdatei wurde zuerst gespeichert und geprüft. Danach begann die interaktive Installation.
+Öffne nach dem Start von CT 101 dessen **Console** in Proxmox. Das ist wichtig: Der Pi-hole-Installer stellt Rückfragen und braucht deshalb ein echtes interaktives Terminal.
+
+Für diesen Aufbau kam das offizielle Debian-13-Template zum Einsatz. Die offizielle Pi-hole-Installerdatei wurde zuerst lokal gespeichert und geprüft; erst danach begann die interaktive Installation. So vermeidest du, einen fremden oder unklaren Befehl blind aus dem Internet auszuführen.
+
+Für die aktuelle Download- und Prüfanleitung verwende immer die [offizielle Pi-hole-Installationsdokumentation](https://docs.pi-hole.net/main/basic-install/). Die dort angebotene Installerdatei kann sich ändern. Wichtig ist der Ablauf: **offizielle Quelle öffnen → Datei lokal speichern → Inhalt beziehungsweise Prüfsumme kontrollieren → in der CT-Konsole interaktiv starten**.
+
+Während der Installation übernimmst du nur Werte, die du vorher notiert hast: deine feste Container-IP und dein Gateway sowie die hier verwendeten Upstream-DNS-Server `1.1.1.1` und `1.0.0.1`. DHCP, Unbound, DNS-over-HTTPS und eine lokale DNS-Zone blieben in diesem Einstieg bewusst deaktiviert.
 
 Die getesteten Versionen waren Pi-hole Core v6.4.3, Web v6.6 und FTL v6.7. FTL ist der Dienst, der die DNS-Anfragen verarbeitet und Daten für die Weboberfläche bereitstellt.
 
@@ -195,15 +208,13 @@ Wichtig: Ein Snapshot-Backup ist ein Sicherungspunkt des Containerzustands. Es i
 
 Kurz nach Aufbau und Test lagen die dokumentierten Werte bei 20 MiB RAM-Nutzung, 0 MiB verwendetem Swap und ungefähr 874 MiB auf der Root-Disk. Das sind Momentaufnahmen, keine Langzeitmessung oder allgemeine Mindestwerte.
 
-Beim Backup fiel außerdem eine Thin-Pool-Warnung auf. Das Backup selbst war erfolgreich. Die Warnung betrifft separat die Storage-Kapazität und wurde nicht durch Änderungen an LVM, Storage oder Auto-Extend „gelöst“.
+Beim Backup fiel außerdem eine Thin-Pool-Warnung auf. Das Backup selbst war erfolgreich. Die Warnung betrifft separat die Storage-Kapazität des Proxmox-Hosts – **nicht Pi-hole** – und wurde nicht durch Änderungen an LVM, Storage oder Auto-Extend „gelöst“.
 
-## 7. Fazit: Pi-hole einrichten, wenn du klein anfängst
+## 7. Fazit: Pi-hole passt gut, wenn du klein anfängst
 
-Pi-hole war für PVE04 ein sinnvoller erster Dienst. Der einfache Weg war: Container klein halten, Netzwerk festlegen, installieren, DNS und Blocking prüfen, Neustart testen und einen Sicherungspunkt erstellen.
+Pi-hole passt gut als erster Dienst, wenn du einen kleinen Proxmox-Host hast und zunächst nur einen einzelnen Testclient umstellst. Der sichere Weg ist: Container klein halten, Netzwerk festlegen, installieren, DNS und Blocking prüfen, Neustart testen und einen Sicherungspunkt erstellen.
 
-**Pi-hole einrichten, wenn** du einen kleinen Proxmox-Host hast, eine feste Containerkonfiguration nachvollziehen kannst und Tests vor einer größeren DNS-Umstellung einplanst.
-
-**Noch nicht einrichten, wenn** dir ein dokumentierter Rückweg für DNS-Änderungen fehlt oder der Dienst sofort ungeprüft das ganze produktive Heimnetz versorgen soll.
+Warte mit der Umstellung deines gesamten Heimnetzes, solange noch kein klarer Rückfallweg für DNS-Änderungen existiert. So bleibt ein Fehler auf einen Testcontainer oder Testclient begrenzt.
 
 Als nächster Dienst auf PVE04 ist Uptime Kuma geplant. Das wäre ein passender zweiter Schritt, um die Erreichbarkeit eigener Dienste zu überwachen.
 
