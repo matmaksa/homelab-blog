@@ -1,0 +1,27 @@
+{
+  "batch": "week-2026-07-22",
+  "status": "pass",
+  "method": "locally-authored controlled illustration geometry plus visual review",
+  "checks": {
+    "power_cables": "pass: mini-PC and switch power paths visibly terminate at the power strip",
+    "network_cables": "pass: each Ethernet cable is drawn only between mini-PC and switch ports",
+    "free_or_floating_connectors": "pass: none",
+    "plausible_ports_and_proportions": "pass: one mini-PC, one compact five-port switch, one power strip",
+    "logos_or_fake_ui": "pass: none",
+    "secrets_ips_credentials": "pass: none",
+    "text_readability": "pass: local text overlay, high contrast",
+    "reel_duration": "pass: planned/rendered at 12.0 seconds",
+    "contact_sheet": "pass: seven assets, ordered and labeled"
+  },
+  "fal_attempts": {
+    "used_within_owner_approved_budget": true,
+    "accepted_as_final_assets": false,
+    "reason": "visual QA rejected generated hardware/cable inaccuracies; final assets are locally controlled replacements approved by owner"
+  },
+  "posting": {
+    "published": false,
+    "meta_api_calls": 0,
+    "scheduler_created": false,
+    "git_push_deploy": false
+  }
+}
