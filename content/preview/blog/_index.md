@@ -16,5 +16,7 @@ Hier siehst du alle aktuellen Entwürfe und Vorschauen. Diese Seiten sind **nich
 
 | Preview | Status | Datum |
 |---------|--------|-------|
+| [DNS im Router sicher umstellen](./dns-im-router-sicher-umstellen/) | Entwurf, technischer Faktencheck und Eigentümerprüfung offen | 2026-07-30 |
+| [USB-Festplatte als Proxmox-Backup-Ziel verwenden](./proxmox-usb-festplatte-backup-ziel/) | Entwurf, technischer Faktencheck und Eigentümerprüfung offen | 2026-07-30 |
 | [Pi-hole im Proxmox-Homelab](./pihole-proxmox-praxisprojekt/) | Eigentümerprüfung, fünf Screenshot-Platzhalter offen | 2026-07-22 |
 | [MATMAKSA Homelab Starter-Pack](./matmaksa-homelab-starter-pack/) | Entwurf, Lead-Magnet | 2026-07-16 |
