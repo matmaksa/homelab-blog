@@ -20,7 +20,7 @@ from datetime import datetime, timedelta
 
 BLOG_DIR = "/root/homelab-blog"
 REVIEWS_DIR = os.path.join(BLOG_DIR, "reviews")
-AI_CONTEXT = "/root/.hermes/skills/monetization/homelab-seo-blog/references/ai_context"
+AI_CONTEXT = "/root/.hermes/skills/monetization/blog-core/references/ai_context"
 LEARNINGS_PATH = os.path.join(AI_CONTEXT, "quality_learnings.md")
 PERF_PATH = os.path.join(AI_CONTEXT, "performance_learnings.md")
 LOG_FILE = os.path.join(BLOG_DIR, "logs", "pipeline.log")

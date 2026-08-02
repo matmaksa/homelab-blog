@@ -4,7 +4,7 @@ Non-blocking: returns empty strings on error, never crashes."""
 import os
 from pathlib import Path
 
-CONTEXT_DIR = Path("/root/.hermes/skills/monetization/homelab-seo-blog/references/ai_context")
+CONTEXT_DIR = Path("/root/.hermes/skills/monetization/blog-core/references/ai_context")
 
 def load_context(filename: str) -> str:
     """Load a single context file. Returns empty string if not found."""
