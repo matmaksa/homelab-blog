@@ -1,7 +1,7 @@
 +++
-title = "USB-Festplatte als Proxmox-Backup-Ziel verwenden: Sicher einrichten und Restore testen"
-description = "Eine externe USB-Festplatte als separates Proxmox-Backup-Ziel einrichten: Laufwerk eindeutig prüfen, dauerhaft einbinden, Backup erstellen und einen Restore sicher testen."
-date = 2026-07-30
+title = "USB-Festplatte als Proxmox-Backup-Ziel einrichten und Restore testen"
+description = "Eine bereits mit ext4 formatierte USB-Festplatte sicher als Proxmox-Backup-Ziel einbinden, VZDump-Backups prüfen und einen LXC-Restore ohne Risiko testen."
+date = 2026-08-02
 draft = false
 robotsNoIndex = true
 noindex = true
@@ -24,7 +24,7 @@ user_visual_approval_required = true
 fact_check_required = true
 link_check_required = true
 price_check_required = false
-recommended_action = "Befehle, Laufwerksauswahl und WebUI-Menüwege vor Veröffentlichung anhand eines getrennten Testsystems prüfen; anschließend visuelle Eigentümerfreigabe einholen."
+recommended_action = "Vor Veröffentlichung Befehle und Screenshots auf PVE04 gegenprüfen sowie eine visuelle Eigentümerfreigabe einholen."
 content_intent = "follow_up"
 monetization_intent = "none"
 affiliate_disclosure_required = false
@@ -33,193 +33,224 @@ product_recommendation_allowed = false
 instagram_derivatives_required = false
 risk_level = "high"
 content_state = "draft_generated"
-audit_status = "not_started"
+audit_status = "revision_in_progress"
 user_approval_required = true
 approved_for_publish = false
-next_action = "technical_factcheck_and_owner_review_before_publish"
+next_action = "run_pve04_command_and_screenshot_verification_then_owner_review"
 +++
 
-> **Preview – noch nicht veröffentlicht.** Dieser Entwurf basiert auf einem dokumentierten Lab-Backup und Restore-Test. Er enthält bewusst keine echten Laufwerkskennungen, internen Pfade oder Netzwerkinformationen. Vor einer Veröffentlichung müssen alle Befehle am Zielsystem fachlich geprüft werden.
-
-# USB-Festplatte als Proxmox-Backup-Ziel verwenden: Sicher einrichten und Restore testen
+> **Preview – noch nicht veröffentlicht.** Die Screenshots stammen aus meinem PVE04-Testlab. Interne Hostnamen und private LAN-Adressen können sichtbar sein. Zugangsdaten, Tokens und öffentlich erreichbare Endpunkte wurden entfernt.
 
 ## Kurzantwort
 
-Eine externe USB-Festplatte ist ein einfacher erster Ort für Proxmox-Backups. Sie ist vom internen Systemlaufwerk getrennt und schützt damit besser als ein Backup, das nur auf derselben SSD liegt. Entscheidend ist aber nicht nur, dass eine Backup-Datei entsteht: Du musst die Wiederherstellung regelmäßig testen.
+Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-Gast-Backups. Diese Anleitung zeigt den sicheren Weg für eine **bereits partitionierte und mit ext4 formatierte** 1-TB-USB-HDD: Laufwerk eindeutig erkennen, per UUID einhängen, als reinen VZDump-Storage einrichten, ein unkritisches LXC sichern und in einen neuen Test-Container wiederherstellen.
 
-Im dokumentierten Lab-Test wurde ein LXC-Backup auf ein separates USB-Ziel geschrieben und anschließend in einen neuen, isolierten Test-Container wiederhergestellt. Die Prüfdaten waren dort vorhanden. Genau dieser Restore-Test macht aus einer Backup-Datei einen belastbaren Nachweis.
+> **Praxisnachweis aus PVE04:** Die USB-HDD mit dem Label `Backup` wurde als separates Directory Storage verwendet. Ein komprimiertes LXC-Backup wurde dort abgelegt und in einen getrennten Test-Container wiederhergestellt; die vorher definierte Prüfdaten waren vorhanden. Die konkreten Befehle und Screenshots dieser überarbeiteten Anleitung werden vor einer Veröffentlichung nochmals auf PVE04 geprüft.
 
-| | |
+| Merkmal | Wert |
 |---|---|
-| **⏱ Zeit** | 30–45 Minuten für Einrichtung und ersten Restore-Test |
-| **💰 Kosten** | 0 € mit vorhandener externer Festplatte |
-| **📊 Schwierigkeit** | ⭐⭐⭐☆☆ |
-| **🖥️ Benötigt** | Proxmox-Host, separate USB-Festplatte, ein ungefährlicher Test-Container |
-| **🎯 Ziel** | Separates Backup-Ziel für LXC-Container oder VMs und ein getesteter Wiederherstellungsweg |
-| **✅ Dokumentierter Lab-Test** | USB-Ziel als Proxmox Directory Storage; komprimiertes LXC-Backup; Restore in getrennten Test-Container; Prüfdaten verifiziert |
+| **Zeit** | etwa 30–45 Minuten für Einrichtung, Test-Backup und ersten Restore |
+| **Kosten** | 0 € mit vorhandener externer Festplatte |
+| **Schwierigkeit** | ⭐⭐⭐☆☆ |
+| **Benötigt** | Proxmox VE, separate USB-HDD, sicherer Konsolenzugriff, kleiner unkritischer LXC-Testcontainer |
+| **Beispielpfad** | Mountpoint `/mnt/usb-backup`, Storage-ID `usb-backup` |
+| **Ziel** | Separates Backup-Ziel für LXC-Container oder VMs und ein getesteter Wiederherstellungsweg |
 
-## 1. Warum das interne Laufwerk kein ausreichendes Backup-Ziel ist
+{{< figure src="backup-ablauf-pve04.svg" alt="Diagramm: PVE04 speichert ein LXC-Backup auf einer USB-Festplatte; daraus wird ein isolierter Restore-Testcontainer erstellt." caption="Der sichere Ablauf: Gast sichern, Backup auf dem getrennten USB-Ziel prüfen, dann isoliert wiederherstellen." >}}
 
-Ein Backup auf derselben SSD wie der Container oder die VM hilft bei versehentlich gelöschten Dateien oder einer fehlerhaften Konfiguration. Bei einem Defekt dieser SSD können aber Original und Sicherung gleichzeitig verloren gehen.
+## Voraussetzungen und Grenzen
 
-Eine externe USB-Festplatte ist davon getrennt. Sie ist damit ein sinnvoller erster Schritt, aber keine vollständige 3-2-1-Strategie:
+Du brauchst:
 
-- **3 Kopien:** Original plus mindestens zwei Sicherungskopien.
-- **2 unterschiedliche Medien:** Zum Beispiel interne SSD und externe HDD.
-- **1 Kopie außerhalb des Standorts:** Etwa auf einem getrennten NAS oder an einem anderen Ort.
+- einen Proxmox-VE-Host,
+- eine separate USB-HDD mit ausreichend freiem Platz,
+- eine **bereits mit ext4 formatierte** Partition als Beispiel-Dateisystem,
+- physischen oder sicheren Konsolenzugriff für den Fall einer fehlerhaften `/etc/fstab`,
+- einen kleinen, unkritischen LXC-Testcontainer ohne wichtige Dienste oder einzigartige Daten,
+- eine root-Sitzung in der Proxmox-Webshell oder an der lokalen Konsole.
 
-Eine einzelne USB-HDD ist also besser als kein externes Backup, darf aber nicht als vollständiger Schutz vor allen Ausfällen gelten.
+Diese Anleitung sichert primär **Gäste**: VMs und LXC-Container. Sie ersetzt kein vollständiges Backup des Proxmox-Hosts.
 
-## 2. Vor dem Einrichten: Das richtige Laufwerk eindeutig erkennen
+> **Wichtiger Sicherungsumfang:** VZDump sichert VMs beziehungsweise LXC-Gäste samt Gastkonfiguration und enthaltenen Daten. Host-Konfiguration, Netzwerk, Repositories und weitere Hostdateien benötigen eine eigene Sicherungsstrategie. Inhalte von LXC-Bind-Mounts und Device-Mounts werden nicht automatisch durch VZDump gesichert. Prüfe bei LXC-Mountpoints vor dem Backup, welche Daten tatsächlich im Container enthalten sind.
 
-Der gefährlichste Fehler ist, das falsche Laufwerk zu formatieren oder einzubinden. Linux-Bezeichnungen wie `/dev/sdb` sind nicht dauerhaft garantiert; nach einem Neustart kann dieselbe Platte einen anderen Buchstaben erhalten.
+## 1. Warum eine getrennte USB-HDD sinnvoll ist
 
-Prüfe deshalb mindestens diese Merkmale gemeinsam:
+Ein Backup auf derselben SSD wie ein Container oder eine VM hilft bei versehentlich gelöschten Dateien. Fällt diese SSD aus, können Original und Sicherung aber gleichzeitig verloren gehen. Die angeschlossene USB-HDD ist davon getrennt und deshalb ein sinnvoller erster Schritt.
 
-- Modellbezeichnung des Laufwerks
-- Seriennummer
-- Größe
-- Dateisystem und vorhandenes Label
-- UUID der Partition
+Sie ist trotzdem nicht offline: Fehlbedienung, kompromittierter Root-Zugang und elektrische Schäden können sie weiterhin treffen. Die nächste Ausbaustufe ist eine zweite, getrennte oder rotierende Kopie. Eine vollständige 3-2-1-Strategie braucht zusätzlich eine Kopie außerhalb des Standorts – zum Beispiel ein NAS an einem zweiten Standort, eine verschlüsselte Cloud-Kopie oder eine getrennt gelagerte zweite Festplatte.
 
-> **Stopp-Regel:** Stimmen Größe, Modell oder Seriennummer nicht eindeutig mit deiner USB-Festplatte überein, führe keinen Schreib- oder Formatierungsbefehl aus. Erst klären, dann fortsetzen.
+## 2. USB-HDD nur lesend eindeutig erkennen
 
-Für einen dauerhaften Mount wird die UUID verwendet. Sie ist eine eindeutige Kennung des Dateisystems und robuster als ein wechselnder Gerätebuchstabe.
+Linux-Namen wie `/dev/sdb` können sich nach einem Neustart ändern. Verwende deshalb später die UUID der Partition, nicht den Gerätenamen.
 
-Auf dem Proxmox-Host zeigen diese **reinen Lese-Befehle** die angeschlossenen Laufwerke und ihre UUIDs. Sie ändern keine Daten:
+Führe auf PVE04 als `root` zunächst nur diese Lese-Befehle aus. Sie ändern keine Daten:
 
 ```bash
 lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,LABEL,UUID,MOUNTPOINTS
-sudo blkid
+blkid
 ```
 
-Vergleiche Modell, Größe und Seriennummer mit dem Aufkleber oder Gehäuse der USB-Festplatte. Erst wenn alles passt, notierst du die UUID der richtigen Partition. Ist die Platte nicht leer oder ihr Dateisystem unklar, **nicht formatieren**: sichere die Daten zuerst oder verwende ein separates, leeres Laufwerk.
+Vergleiche mindestens Größe, Modell, Label `Backup`, Dateisystem `ext4` und UUID mit der angeschlossenen 1-TB-USB-HDD.
 
-## 3. Bestehende Daten schützen
+> **Stopp-Regel:** Stimmen Größe, Modell, Label oder Dateisystem nicht eindeutig, führe keinen Schreib-, Mount- oder Formatierungsbefehl aus. Ziehe im Zweifel die USB-HDD ab, prüfe die Ausgabe erneut und kläre die Zuordnung zuerst.
 
-Wenn die USB-Festplatte bereits Daten enthält, ist sie **kein** Kandidat für einen Formatierungs-Schritt. Prüfe zuerst, ob sie leer ist oder ob die darauf liegenden Daten an einem anderen Ort gesichert sind.
+**Geplantes Bild 2 – noch nicht vorhanden:** `usb-hdd-lsblk-annotiert.webp` – bereinigter Screenshot von `lsblk`/`blkid`, markiert mit Größe, Modell, Dateisystem und UUID. Vollständige Seriennummern werden gekürzt; Geheimnisse gehören nicht in den Screenshot.
 
-Für ein bestehendes Backup-Laufwerk gilt:
+## 3. Neue, garantiert leere Festplatte vorbereiten – optional
 
-- Nicht neu formatieren, nur weil es gerade nicht als Proxmox-Storage erscheint.
-- Dateisystem, Label und UUID zuerst lesen und dokumentieren.
-- Erst den Mount prüfen, dann die Storage-Konfiguration.
-- Bei Unsicherheit das Laufwerk abziehen und die Zuordnung erneut prüfen.
+Die Hauptanleitung setzt ext4 bereits voraus. Eine neue oder leere USB-HDD zu partitionieren und zu formatieren ist destruktiv: Dabei werden vorhandene Daten gelöscht. Deshalb enthält dieser Entwurf bewusst **keinen blind kopierbaren `/dev/sdX`-Befehl**.
 
-Im zugrunde liegenden Lab-Setup war das Ziel mit einem Linux-Dateisystem formatiert, über seine UUID dauerhaft eingehängt und als reines Backup-Ziel konfiguriert.
+Wenn die USB-HDD noch nicht ext4-formatiert ist, verwende zuerst eine getrennte, dokumentierte Vorbereitung mit zweiter Sichtprüfung des Ziellaufwerks. Erst danach kehrst du zu Schritt 4 zurück. Eine Festplatte mit vorhandenen Daten wird nicht für diese Anleitung formatiert.
 
-## 4. Dauerhaft einhängen, ohne den Host-Start zu blockieren
+## 4. Mountpoint anlegen und `/etc/fstab` sicher vorbereiten
 
-Ein USB-Laufwerk sollte über seine UUID in `/etc/fstab` eingetragen werden. Die Option `nofail` ist wichtig: Der Proxmox-Host soll auch dann normal starten, wenn die externe Festplatte beim Booten nicht angeschlossen ist.
+Lege den Beispiel-Mountpoint an:
 
-Ein schematischer Eintrag sieht so aus – **Platzhalter ersetzen, niemals blind kopieren**:
+```bash
+mkdir -p /mnt/usb-backup
+```
+
+Sichere vor jeder Änderung die vorhandene `fstab` mit Zeitstempel:
+
+```bash
+cp /etc/fstab /etc/fstab.bak-$(date +%F-%H%M)
+```
+
+Öffne danach `/etc/fstab` mit deinem Editor und ergänze **eine** Zeile. Ersetze ausschließlich `<DEINE-UUID>` durch die in Schritt 2 geprüfte UUID:
 
 ```text
-UUID=<DEINE-UUID> <DEIN-MOUNT-PFAD> ext4 defaults,nofail,noatime 0 2
+UUID=<DEINE-UUID> /mnt/usb-backup ext4 defaults,nofail,x-systemd.device-timeout=10s 0 2
 ```
 
-Danach wird geprüft, ob das Ziel tatsächlich eingehängt und beschreibbar ist. Erst dann darf es Proxmox als Storage angeboten werden.
+Kurz erklärt:
 
-**Was die Optionen bedeuten:**
+- **UUID:** stabiler als ein wechselnder Name wie `/dev/sdb`.
+- **ext4:** muss dem tatsächlich vorhandenen Dateisystem entsprechen.
+- **nofail:** der fehlende USB-Datenträger verhindert keinen erfolgreichen Host-Start.
+- **x-systemd.device-timeout=10s:** begrenzt die Wartezeit auf ein beim Start fehlendes USB-Gerät.
+- **0 2:** übliche Prüfwerte für ein ext4-Datenlaufwerk.
 
-- `defaults`: Standard-Mount-Optionen des Dateisystems.
-- `nofail`: Der Host bootet weiter, falls die USB-Festplatte fehlt.
-- `noatime`: Reduziert unnötige Schreibvorgänge für Zugriffszeitstempel.
-- `ext4`: Das Dateisystem der Partition. Dieser Wert muss zum tatsächlich vorhandenen Dateisystem passen.
-- `0`: Dieses Feld ist heute fast immer `0`; es steuert alte Dump-Backups und kann so bleiben.
-- `2`: Die letzte Zahl legt die Dateisystemprüfung beim Start fest. Für ein ext4-Datenlaufwerk ist `2` üblich.
+Vor einem Neustart prüfst du die Konfiguration und aktivierst nur den gewünschten Mount:
 
-> **Sicherheitsregel:** Ein Fehler in `/etc/fstab` kann den Systemstart beeinträchtigen. Änderungen nur nach Backup der Datei und nur mit einer lokalen Konsole oder einem sicheren Rückweg durchführen.
+```bash
+findmnt --verify --verbose
+mount /mnt/usb-backup
+```
 
-## 5. Die USB-HDD in Proxmox als Backup-Storage einrichten
+Dann kontrollierst du Mount, Dateisystem, freien Speicher und Schreibzugriff:
 
-In Proxmox wird das eingehängte Verzeichnis als **Directory Storage** angelegt. Als erlaubter Inhalt sollte für dieses Ziel nur `backup` gewählt werden. Damit bleibt die Festplatte auf ihren Zweck beschränkt und wird nicht versehentlich zum Ablageort für ISO-Dateien oder Container-Datenträger.
+```bash
+findmnt /mnt/usb-backup
+df -hT /mnt/usb-backup
+mountpoint /mnt/usb-backup
+touch /mnt/usb-backup/.write-test
+rm /mnt/usb-backup/.write-test
+```
 
-In der Weboberfläche: **Datacenter → Storage → Add → Directory**. Wähle dort den bereits eingehängten Mount-Pfad, gib dem Ziel einen eindeutigen Namen wie `usb-backup` und aktiviere bei **Content** nur `VZDump backup file`. Speichern darfst du erst, wenn der Mount-Pfad wirklich existiert und eingehängt ist.
+Der Schreibtest darf nur erfolgreich sein, wenn `findmnt` und `mountpoint` vorher den echten USB-Mount bestätigen. So schreibst du nicht versehentlich in ein leeres Verzeichnis auf der Root-Partition.
 
-Vor dem ersten Backup kontrollierst du in der Proxmox-Oberfläche oder per Statusabfrage:
+## 5. USB-HDD als Proxmox-Backup-Storage konfigurieren
 
-- Ist der Storage aktiv?
-- Zeigt er die erwartete Größe?
-- Ist genügend freier Platz vorhanden?
-- Ist als Inhalt nur Backup zugelassen?
+Öffne die Proxmox-Weboberfläche:
 
-Im dokumentierten Lab-Test war der Storage aktiv und beschränkte sich auf Proxmox-Backup-Dateien.
+1. **Datacenter → Storage → Add → Directory** öffnen.
+2. **ID:** `usb-backup` eintragen.
+3. **Directory:** `/mnt/usb-backup` eintragen.
+4. Bei **Content** ausschließlich **VZDump backup file** aktivieren.
+5. **Shared** nicht aktivieren.
+6. **Enabled** aktiv lassen.
+7. Den Storage bei Bedarf auf den Node **PVE04** begrenzen.
 
-## 6. Erstes Backup: mit einem Test-Container beginnen
+Sehr wichtig ist `is_mountpoint=1`. Diese Schutzoption sorgt dafür, dass Proxmox das Storage nur verwendet, wenn an diesem Pfad wirklich ein Dateisystem eingehängt ist. Falls die verwendete Proxmox-GUI diese Option nicht anbietet, setze sie nach dem Anlegen als `root`:
 
-Starte nicht mit einem kritischen Dienst. Erstelle zuerst ein Backup eines kleinen, entbehrlichen Test-Containers. Ein Proxmox-Backup heißt bei Containern und VMs häufig `vzdump`-Backup.
+```bash
+pvesm set usb-backup --is_mountpoint 1
+pvesm status
+```
 
-In der Weboberfläche öffnest du dazu den Test-Container, wählst **Backup**, setzt als Storage `usb-backup` und startest den Job. Danach öffnest du **Datacenter → Storage → usb-backup → Content**: Dort muss die neue Backup-Datei erscheinen.
+`usb-backup` muss danach aktiv sein und die erwartete USB-Kapazität zeigen.
 
-Prüfe nach Abschluss:
+**Geplantes Bild 3 – noch nicht vorhanden:** `proxmox-add-directory-usb-backup.webp` – Screenshot des Dialogs „Add: Directory“, markiert mit ID, Pfad, Content und `is_mountpoint`.
 
-1. Der Job endete ohne Fehler.
-2. Die Backup-Datei liegt auf der USB-Festplatte, nicht auf dem lokalen Host-Speicher.
-3. Eine Protokolldatei ist vorhanden.
-4. Die Datei hat eine plausible Größe; ein sehr kleines oder leeres Archiv ist ein Warnsignal.
+### Schutztest für einen fehlenden Datenträger
 
-Im Lab-Test wurde ein komprimiertes LXC-Backup erfolgreich auf dem separaten Backup-Storage abgelegt.
+Führe diesen Test nur aus, wenn **keine Backup-Jobs laufen** und der Storage nicht in Benutzung ist:
 
-## 7. Restore-Test: der wichtigste Schritt
+1. `pvesm status` prüfen und laufende Jobs ausschließen.
+2. USB-Dateisystem kontrolliert aushängen oder die Platte kontrolliert trennen.
+3. Prüfen, dass `usb-backup` inaktiv wird.
+4. Prüfen, dass Proxmox nicht in das leere Verzeichnis auf der Root-Partition schreibt.
+5. Platte wieder verbinden, dann `mount /mnt/usb-backup` und `pvesm status` erneut prüfen.
 
-Ein Backup ist erst dann praktisch wertvoll, wenn du es wiederherstellen kannst. Für den ersten Restore verwendest du einen **neuen Test-Container** statt das Original zu überschreiben.
+Dieser Schutztest belegt, warum `is_mountpoint=1` wichtig ist. Er ersetzt keine allgemeine Prüfung vor jedem wichtigen Backup.
 
-Sicherer Ablauf:
+## 6. Test-Backup eines unkritischen LXC erstellen
 
-1. Wähle eine freie neue ID für den Restore.
-2. Stelle das Backup in einen separaten Test-Container wieder her.
-3. Lass dessen Netzwerk zunächst deaktiviert oder getrennt.
-4. Starte ihn erst, nachdem du Namens- und Netzwerk-Konflikte ausgeschlossen hast.
-5. Prüfe eine zuvor definierte Testdatei oder eine einfache Funktion im wiederhergestellten System.
-6. Lösche den Restore-Test erst nach erfolgreicher Prüfung und dokumentiere das Ergebnis.
+Erst jetzt sicherst du einen kleinen Test-Container. Das Original darf keine wichtigen Dienste oder einzigartigen Daten enthalten.
 
-Warum ohne Netzwerk? Ein wiederhergestellter Container kann sonst dieselbe Adresse oder denselben Dienst wie das Original verwenden. Das kann Konflikte im Heimnetz erzeugen.
+1. In Proxmox den Test-Container öffnen und **Backup** wählen.
+2. Als Storage `usb-backup` auswählen.
+3. Job starten und im **Task Viewer** auf ein erfolgreiches Ende prüfen.
+4. Danach **Datacenter → Storage → usb-backup → Content** öffnen. Die neue VZDump-Datei muss dort erscheinen.
+5. Freien Speicher auf der USB-HDD prüfen.
 
-Im dokumentierten Lab-Test wurde der Restore in einem neuen Test-Container durchgeführt, die Prüfdaten wurden bestätigt und der temporäre Restore danach entfernt.
+Eine plausible Backup-Größe bedeutet: nicht 0 Byte und grob passend zur belegten Datenmenge. Kompression kann die Datei deutlich kleiner machen. Ohne Aufbewahrungsregel füllt sich eine USB-HDD irgendwann; Zeitplanung und Retention bleiben bewusst Thema eines Folgeartikels.
 
-## 8. Was passiert, wenn die USB-HDD nicht angeschlossen ist?
+**Geplantes Bild 4 – noch nicht vorhanden:** `proxmox-vzdump-task-erfolgreich.webp` – erfolgreicher Backup-Task mit Status, Größe und Dauer. Private Endpunkte und Zugangsdaten bleiben entfernt.
 
-Mit `nofail` startet Proxmox weiterhin. Der Backup-Storage ist dann aber nicht verfügbar. Das ist besser als ein blockierter Host, ersetzt aber keine Kontrolle:
+## 7. Restore isoliert testen
 
-- Prüfe vor geplanten Backup-Jobs, ob der Storage aktiv ist.
-- Kontrolliere nach dem Backup den erfolgreichen Abschluss.
-- Lasse eine USB-HDD nicht als einzige Sicherung wichtiger Daten gelten.
-- Bewahre eine zweite Kopie getrennt vom Proxmox-Host auf, wenn die Daten wichtig sind.
+Ein Backup ist erst belastbar, wenn eine Wiederherstellung funktioniert. Überschreibe nie den Original-Container.
+
+1. Prüfe, dass **VMID 100 frei bleibt**. Verwende für einen neuen realen Test die nächste freie ID; im PVE04-Testlab ist das **VMID 102**.
+2. Wähle die Backup-Datei unter **Datacenter → Storage → usb-backup → Content** und starte **Restore**.
+3. Wähle bewusst das Ziel-Storage für das wiederhergestellte Root-Dateisystem.
+4. Deaktiviere die Netzwerkschnittstelle oder entferne sie vor dem ersten Start.
+5. Prüfe vor dem Start Hostname, IP-Adresse, MAC-Adresse und mögliche laufende Dienste auf Konflikte.
+6. Starte den Restore-Test erst ohne Netzwerk.
+7. Prüfe eine vorher definierte Testdatei und zusätzlich eine kleine Funktion des Dienstes.
+8. Dokumentiere das Ergebnis. Den temporären Restore löschst du erst nach erfolgreicher Prüfung.
+
+Ohne Netzwerk kann der Restore weder eine vorhandene IP-Adresse noch einen gleichnamigen Dienst im Heimnetz stören.
+
+**Geplantes Bild 5 – noch nicht vorhanden:** `proxmox-lxc-restore-isoliert.webp` – Restore-Dialog mit neuer VMID und sichtbarem Hinweis auf deaktiviertes Netzwerk.
 
 ## Häufige Fehler
 
-| Problem | Ursache | Sicherer nächster Schritt |
-|---|---|---|
-| Storage ist inaktiv | USB-HDD fehlt oder Mount nicht aktiv | Laufwerk und Mount prüfen, nicht neu formatieren |
-| Backup landet lokal | Falsches Ziel im Backup-Job ausgewählt | Job-Einstellung korrigieren und Test erneut durchführen |
-| Restore startet nicht | Ziel-Storage oder Container-Konfiguration passt nicht | Restore-Protokoll lesen, Original nicht verändern |
-| Netzwerkprobleme nach Restore | Original und Restore kollidieren | Restore zunächst ohne Netzwerk starten |
-| Host startet nach fstab-Änderung nicht normal | Fehlerhafte Mount-Zeile | Nur mit Konsole und dokumentiertem Rückweg korrigieren |
+| Problem | Sicherer nächster Schritt |
+|---|---|
+| `usb-backup` ist inaktiv | USB-Mount mit `findmnt` prüfen; nicht formatieren. |
+| Backup landet lokal | Backup-Job auf Storage `usb-backup` korrigieren und Test wiederholen. |
+| Mount schlägt fehl | `findmnt --verify --verbose` ausführen und die fstab-Sicherung bereithalten. |
+| Restore kollidiert mit dem Original | Restore stoppen, Netzwerk entfernen und VMID/Hostname/IP/MAC erneut prüfen. |
 
 ## FAQ
 
-**Reicht eine USB-Festplatte als Backup?**
+**Reicht die USB-HDD als vollständiges Backup?**
 
-Sie ist ein guter erster Schritt, aber nicht die komplette 3-2-1-Strategie. Für wichtige Daten braucht es zusätzlich mindestens eine weitere, getrennte Kopie.
+Nein. Sie ist ein getrenntes erstes Ziel, aber dauerhaft angeschlossen. Für wichtige Daten folgt eine zweite, getrennte oder Offsite-Kopie.
 
-**Kann ich die Festplatte auch für ISOs und Vorlagen nutzen?**
+**Kann die Platte auch ISOs enthalten?**
 
-Technisch oft ja. Für Einsteiger ist ein klares, ausschließliches Backup-Ziel übersichtlicher und reduziert Fehlbedienungen.
+Technisch ja. Für den Einstieg bleibt ein ausschließliches VZDump-Backup-Ziel übersichtlicher und reduziert Fehlbedienungen.
 
-**Wie oft sollte ich einen Restore testen?**
+**Wie oft muss ich den Restore testen?**
 
-Nach der Einrichtung sofort und danach regelmäßig – beispielsweise nach großen Änderungen oder mindestens im eigenen festen Wartungsrhythmus.
+Direkt nach der Einrichtung und danach nach größeren Änderungen oder in einem festen Wartungsrhythmus.
+
+## Testergebnis aus PVE04
+
+Im dokumentierten PVE04-Testlab wurde ein komprimiertes LXC-Backup auf der separaten USB-HDD mit Label `Backup` abgelegt. Ein Restore in einen getrennten Test-Container stellte die definierten Prüfdaten wieder her. Die neue Schrittfolge, Befehle und vorgesehenen Screenshots wurden in diesem Überarbeitungsdurchlauf **nicht erneut auf PVE04 ausgeführt** und bleiben deshalb vor einem öffentlichen Publish prüfpflichtig.
 
 ## ✅ Das solltest du jetzt können
 
-- [ ] Eine USB-Festplatte anhand mehrerer Merkmale eindeutig erkennen.
-- [ ] Verstehen, warum eine UUID robuster als ein Gerätebuchstabe ist.
-- [ ] Das Laufwerk als reines Proxmox-Backup-Ziel einordnen.
-- [ ] Einen Test-Container sichern und die Backup-Datei prüfen.
-- [ ] Einen Restore mit neuer ID und getrenntem Netzwerk sicher planen.
-- [ ] Erklären, warum ein Restore-Test zum Backup dazugehört.
+- [ ] Die richtige USB-HDD ohne Schreibzugriff eindeutig identifizieren.
+- [ ] Einen sicheren UUID-Mount mit fstab-Backup und Prüfung vorbereiten.
+- [ ] `usb-backup` als reines VZDump-Storage mit Mountpoint-Schutz einrichten.
+- [ ] Einen unkritischen Container sichern und Task Viewer sowie Storage Content prüfen.
+- [ ] Einen Restore mit neuer ID und ohne Netzwerk planen.
+- [ ] Erklären, warum eine zweite getrennte Kopie der nächste Schritt ist.
 
 ## Nächster Schritt
 
-Als Ergänzung folgt ein Artikel über einen planbaren Backup-Rhythmus und eine zweite, getrennte Kopie. Erst dann wird aus einem einmaligen Backup eine belastbare Backup-Strategie.
+Als Ergänzung folgt ein Artikel über einen planbaren Backup-Rhythmus, Aufbewahrungsregeln und eine zweite, getrennte Kopie.
