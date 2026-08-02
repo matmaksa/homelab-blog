@@ -1,6 +1,6 @@
 +++
 title = "USB-Festplatte als Proxmox-Backup-Ziel einrichten und Restore testen"
-description = "Eine bereits mit ext4 formatierte USB-Festplatte sicher als Proxmox-Backup-Ziel einbinden, VZDump-Backups prüfen und einen LXC-Restore ohne Risiko testen."
+description = "Eine bereits mit ext4 formatierte USB-Festplatte sicher als Proxmox-Backup-Ziel einbinden, VZDump-Backups prüfen und einen LXC-Restore kontrolliert und konfliktarm testen."
 date = 2026-08-02
 draft = false
 robotsNoIndex = true
@@ -43,9 +43,9 @@ next_action = "run_pve04_command_and_screenshot_verification_then_owner_review"
 
 ## Kurzantwort
 
-Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-Gast-Backups. Diese Anleitung zeigt den sicheren Weg für eine **bereits partitionierte und mit ext4 formatierte** 1-TB-USB-HDD: Laufwerk eindeutig erkennen, per UUID einhängen, als reinen VZDump-Storage einrichten, ein unkritisches LXC sichern und in einen neuen Test-Container wiederherstellen.
+Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-Gast-Backups. Diese Anleitung zeigt einen kontrollierten Weg für eine **bereits partitionierte und mit ext4 formatierte** USB-HDD: Laufwerk eindeutig erkennen, per UUID einhängen, als reinen VZDump-Storage einrichten, einen unkritischen LXC-Container sichern und in einen neuen Test-Container wiederherstellen.
 
-> **Praxisnachweis aus PVE04:** Die USB-HDD mit dem Label `Backup` wurde als separates Directory Storage verwendet. Ein komprimiertes LXC-Backup wurde dort abgelegt und in einen getrennten Test-Container wiederhergestellt; die vorher definierte Prüfdaten waren vorhanden. Die konkreten Befehle und Screenshots dieser überarbeiteten Anleitung werden vor einer Veröffentlichung nochmals auf PVE04 geprüft.
+> **Praxisnachweis aus PVE04:** Im PVE04-Beispiel wurde eine 1-TB-USB-HDD mit dem Label `Backup` als separates Directory-Storage verwendet. Ein komprimiertes LXC-Backup wurde dort abgelegt und in einen getrennten Test-Container wiederhergestellt; die vorher definierten Prüfdaten waren vorhanden. Die konkreten Befehle und Screenshots dieser überarbeiteten Anleitung werden vor einer Veröffentlichung nochmals auf PVE04 geprüft.
 
 | Merkmal | Wert |
 |---|---|
@@ -69,6 +69,8 @@ Du brauchst:
 - einen kleinen, unkritischen LXC-Testcontainer ohne wichtige Dienste oder einzigartige Daten,
 - eine root-Sitzung in der Proxmox-Webshell oder an der lokalen Konsole.
 
+Die Werte aus dem PVE04-Testlab sind Beispiele, keine universellen Vorgaben. Insbesondere Größe, Label, Hostname und freie VMID können in deinem Homelab abweichen.
+
 Diese Anleitung sichert primär **Gäste**: VMs und LXC-Container. Sie ersetzt kein vollständiges Backup des Proxmox-Hosts.
 
 > **Wichtiger Sicherungsumfang:** VZDump sichert VMs beziehungsweise LXC-Gäste samt Gastkonfiguration und enthaltenen Daten. Host-Konfiguration, Netzwerk, Repositories und weitere Hostdateien benötigen eine eigene Sicherungsstrategie. Inhalte von LXC-Bind-Mounts und Device-Mounts werden nicht automatisch durch VZDump gesichert. Prüfe bei LXC-Mountpoints vor dem Backup, welche Daten tatsächlich im Container enthalten sind.
@@ -83,22 +85,22 @@ Sie ist trotzdem nicht offline: Fehlbedienung, kompromittierter Root-Zugang und 
 
 Linux-Namen wie `/dev/sdb` können sich nach einem Neustart ändern. Verwende deshalb später die UUID der Partition, nicht den Gerätenamen.
 
-Führe auf PVE04 als `root` zunächst nur diese Lese-Befehle aus. Sie ändern keine Daten:
+Führe auf deinem Proxmox-Host – im Beispiel PVE04 – als `root` zunächst nur diese Lese-Befehle aus. Sie ändern keine Daten:
 
 ```bash
 lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,LABEL,UUID,MOUNTPOINTS
 blkid
 ```
 
-Vergleiche mindestens Größe, Modell, Label `Backup`, Dateisystem `ext4` und UUID mit der angeschlossenen 1-TB-USB-HDD.
+Vergleiche mindestens Größe, Modell, Dateisystem `ext4` und UUID mit deiner angeschlossenen USB-HDD. Im PVE04-Beispiel trägt sie das Label `Backup`; dein eigenes Label kann abweichen.
 
 > **Stopp-Regel:** Stimmen Größe, Modell, Label oder Dateisystem nicht eindeutig, führe keinen Schreib-, Mount- oder Formatierungsbefehl aus. Ziehe im Zweifel die USB-HDD ab, prüfe die Ausgabe erneut und kläre die Zuordnung zuerst.
 
 **Geplantes Bild 2 – noch nicht vorhanden:** `usb-hdd-lsblk-annotiert.webp` – bereinigter Screenshot von `lsblk`/`blkid`, markiert mit Größe, Modell, Dateisystem und UUID. Vollständige Seriennummern werden gekürzt; Geheimnisse gehören nicht in den Screenshot.
 
-## 3. Neue, garantiert leere Festplatte vorbereiten – optional
+## 3. Falls die Festplatte noch nicht mit ext4 vorbereitet ist
 
-Die Hauptanleitung setzt ext4 bereits voraus. Eine neue oder leere USB-HDD zu partitionieren und zu formatieren ist destruktiv: Dabei werden vorhandene Daten gelöscht. Deshalb enthält dieser Entwurf bewusst **keinen blind kopierbaren `/dev/sdX`-Befehl**.
+Die Hauptanleitung setzt eine bereits partitionierte und mit ext4 formatierte USB-HDD voraus. Partitionierung und Formatierung sind nicht Teil dieser Anleitung, weil sie destruktiv sind und vorhandene Daten löschen können. Deshalb enthält dieser Entwurf bewusst **keinen blind kopierbaren `/dev/sdX`-Befehl**.
 
 Wenn die USB-HDD noch nicht ext4-formatiert ist, verwende zuerst eine getrennte, dokumentierte Vorbereitung mit zweiter Sichtprüfung des Ziellaufwerks. Erst danach kehrst du zu Schritt 4 zurück. Eine Festplatte mit vorhandenen Daten wird nicht für diese Anleitung formatiert.
 
@@ -130,10 +132,11 @@ Kurz erklärt:
 - **x-systemd.device-timeout=10s:** begrenzt die Wartezeit auf ein beim Start fehlendes USB-Gerät.
 - **0 2:** übliche Prüfwerte für ein ext4-Datenlaufwerk.
 
-Vor einem Neustart prüfst du die Konfiguration und aktivierst nur den gewünschten Mount:
+Vor einem Neustart prüfst du die Konfiguration und aktivierst nur den gewünschten Mount. `systemctl daemon-reload` liest die von systemd aus der fstab erzeugten Mount-Units neu ein:
 
 ```bash
 findmnt --verify --verbose
+systemctl daemon-reload
 mount /mnt/usb-backup
 ```
 
@@ -165,22 +168,42 @@ Sehr wichtig ist `is_mountpoint=1`. Diese Schutzoption sorgt dafür, dass Proxmo
 
 ```bash
 pvesm set usb-backup --is_mountpoint 1
+grep -A6 '^dir: usb-backup$' /etc/pve/storage.cfg
 pvesm status
 ```
 
-`usb-backup` muss danach aktiv sein und die erwartete USB-Kapazität zeigen.
+In der Ausgabe von `storage.cfg` muss `is_mountpoint 1` sichtbar sein. `pvesm status` bestätigt danach, ob `usb-backup` aktiv ist und die erwartete USB-Kapazität zeigt. Den genauen Befehl prüfe vor einem öffentlichen Publish nochmals auf PVE04.
 
-**Geplantes Bild 3 – noch nicht vorhanden:** `proxmox-add-directory-usb-backup.webp` – Screenshot des Dialogs „Add: Directory“, markiert mit ID, Pfad, Content und `is_mountpoint`.
+**Geplantes Bild 3 – noch nicht vorhanden:** `proxmox-add-directory-usb-backup.webp` – Screenshot des Dialogs „Add: Directory“, markiert mit ID, Pfad, Content, Shared und Node. Falls `is_mountpoint` in der eingesetzten GUI nicht sichtbar ist, zeigt ein getrennter bereinigter Terminal- oder Konfigurationsausschnitt `is_mountpoint 1`.
 
 ### Schutztest für einen fehlenden Datenträger
 
-Führe diesen Test nur aus, wenn **keine Backup-Jobs laufen** und der Storage nicht in Benutzung ist:
+Führe diesen Test nur aus, wenn kein Backup-Job läuft oder unmittelbar starten wird und der Storage nicht in Benutzung ist:
 
-1. `pvesm status` prüfen und laufende Jobs ausschließen.
-2. USB-Dateisystem kontrolliert aushängen oder die Platte kontrolliert trennen.
-3. Prüfen, dass `usb-backup` inaktiv wird.
-4. Prüfen, dass Proxmox nicht in das leere Verzeichnis auf der Root-Partition schreibt.
-5. Platte wieder verbinden, dann `mount /mnt/usb-backup` und `pvesm status` erneut prüfen.
+1. Im Proxmox Task Viewer und bei den Backup-Jobs prüfen, dass kein Job läuft oder unmittelbar starten wird.
+2. Schreibvorgänge beenden und den Puffer leeren:
+
+   ```bash
+   sync
+   ```
+
+3. USB-Dateisystem sauber aushängen:
+
+   ```bash
+   umount /mnt/usb-backup
+   mountpoint /mnt/usb-backup
+   pvesm status
+   ```
+
+4. `mountpoint` muss melden, dass der Pfad kein Mountpoint mehr ist; `pvesm status` muss `usb-backup` als inaktiv zeigen.
+5. **Kein absichtliches Backup auf den inaktiven Storage starten.**
+6. USB-HDD wieder verbinden und Mount sowie Storage erneut prüfen:
+
+   ```bash
+   mount /mnt/usb-backup
+   findmnt /mnt/usb-backup
+   pvesm status
+   ```
 
 Dieser Schutztest belegt, warum `is_mountpoint=1` wichtig ist. Er ersetzt keine allgemeine Prüfung vor jedem wichtigen Backup.
 
@@ -202,7 +225,7 @@ Eine plausible Backup-Größe bedeutet: nicht 0 Byte und grob passend zur belegt
 
 Ein Backup ist erst belastbar, wenn eine Wiederherstellung funktioniert. Überschreibe nie den Original-Container.
 
-1. Prüfe, dass **VMID 100 frei bleibt**. Verwende für einen neuen realen Test die nächste freie ID; im PVE04-Testlab ist das **VMID 102**.
+1. Verwende eine freie neue VMID. Im PVE04-Testlab bleibt VMID 100 bewusst frei; für den nächsten realen Test wird dort VMID 102 verwendet.
 2. Wähle die Backup-Datei unter **Datacenter → Storage → usb-backup → Content** und starte **Restore**.
 3. Wähle bewusst das Ziel-Storage für das wiederhergestellte Root-Dateisystem.
 4. Deaktiviere die Netzwerkschnittstelle oder entferne sie vor dem ersten Start.
@@ -228,7 +251,7 @@ Ohne Netzwerk kann der Restore weder eine vorhandene IP-Adresse noch einen gleic
 
 **Reicht die USB-HDD als vollständiges Backup?**
 
-Nein. Sie ist ein getrenntes erstes Ziel, aber dauerhaft angeschlossen. Für wichtige Daten folgt eine zweite, getrennte oder Offsite-Kopie.
+Nein. Sie ist ein getrenntes erstes Ziel, aber dauerhaft angeschlossen. Für wichtige Daten folgt eine zweite, getrennte oder Offsite-Kopie – zum Beispiel eine an einem anderen Standort gelagerte zweite Festplatte.
 
 **Kann die Platte auch ISOs enthalten?**
 
