@@ -56,7 +56,7 @@ Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-G
 | **Beispielpfad** | Mountpoint `/mnt/usb-backup`, Storage-ID `usb-backup` |
 | **Ziel** | Separates Backup-Ziel für LXC-Container oder VMs und ein getesteter Wiederherstellungsweg |
 
-{{< figure src="backup-ablauf-pve04.svg" alt="Diagramm: PVE04 speichert ein LXC-Backup auf einer USB-Festplatte; daraus wird ein isolierter Restore-Testcontainer erstellt." caption="Der sichere Ablauf: Gast sichern, Backup auf dem getrennten USB-Ziel prüfen, dann isoliert wiederherstellen." >}}
+{{< figure src="backup-ablauf-pve04.svg" alt="Diagramm: PVE04 speichert ein LXC-Backup auf einer USB-Festplatte; daraus wird ein isolierter Restore-Testcontainer erstellt." caption="Der kontrollierte Ablauf: Gast sichern, Backup auf dem getrennten USB-Ziel prüfen, dann isoliert wiederherstellen." >}}
 
 ## Voraussetzungen und Grenzen
 
@@ -79,7 +79,7 @@ Diese Anleitung sichert primär **Gäste**: VMs und LXC-Container. Sie ersetzt k
 
 Ein Backup auf derselben SSD wie ein Container oder eine VM hilft bei versehentlich gelöschten Dateien. Fällt diese SSD aus, können Original und Sicherung aber gleichzeitig verloren gehen. Die angeschlossene USB-HDD ist davon getrennt und deshalb ein sinnvoller erster Schritt.
 
-Sie ist trotzdem nicht offline: Fehlbedienung, kompromittierter Root-Zugang und elektrische Schäden können sie weiterhin treffen. Die nächste Ausbaustufe ist eine zweite, getrennte oder rotierende Kopie. Eine vollständige 3-2-1-Strategie braucht zusätzlich eine Kopie außerhalb des Standorts – zum Beispiel ein NAS an einem zweiten Standort, eine verschlüsselte Cloud-Kopie oder eine getrennt gelagerte zweite Festplatte.
+Sie ist trotzdem nicht offline: Fehlbedienung, kompromittierter Root-Zugang und elektrische Schäden können sie weiterhin treffen. Die nächste Ausbaustufe ist eine zweite, getrennte oder rotierende Kopie. Eine vollständige 3-2-1-Strategie braucht zusätzlich eine Kopie außerhalb des Standorts – zum Beispiel ein NAS an einem zweiten Standort, eine verschlüsselte Cloud-Kopie oder eine an einem anderen Standort gelagerte zweite Festplatte.
 
 ## 2. USB-HDD nur lesend eindeutig erkennen
 
@@ -92,9 +92,9 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,LABEL,UUID,MOUNTPOINTS
 blkid
 ```
 
-Vergleiche mindestens Größe, Modell, Dateisystem `ext4` und UUID mit deiner angeschlossenen USB-HDD. Im PVE04-Beispiel trägt sie das Label `Backup`; dein eigenes Label kann abweichen.
+Vergleiche mindestens Größe, Modell, Dateisystem `ext4` und UUID mit deiner angeschlossenen USB-HDD. Das Label `Backup` gehört nur zum PVE04-Labbeispiel; deine eigene Festplatte kann ein anderes oder gar kein Label besitzen. Für den späteren fstab-Eintrag ist die UUID entscheidend.
 
-> **Stopp-Regel:** Stimmen Größe, Modell, Label oder Dateisystem nicht eindeutig, führe keinen Schreib-, Mount- oder Formatierungsbefehl aus. Ziehe im Zweifel die USB-HDD ab, prüfe die Ausgabe erneut und kläre die Zuordnung zuerst.
+> **Stopp-Regel:** Stimmen Größe, Modell und Dateisystem nicht mit deiner USB-HDD überein, führe keinen Schreib-, Mount- oder Formatierungsbefehl aus. Prüfe zusätzlich die UUID und – falls vorhanden – das Label. Ziehe im Zweifel die USB-HDD ab, prüfe die Ausgabe erneut und kläre die Zuordnung zuerst.
 
 **Geplantes Bild 2 – noch nicht vorhanden:** `usb-hdd-lsblk-annotiert.webp` – bereinigter Screenshot von `lsblk`/`blkid`, markiert mit Größe, Modell, Dateisystem und UUID. Vollständige Seriennummern werden gekürzt; Geheimnisse gehören nicht in den Screenshot.
 
@@ -203,7 +203,7 @@ Führe diesen Test nur aus, wenn kein Backup-Job läuft oder unmittelbar starten
 
 4. `mountpoint` muss melden, dass der Pfad kein Mountpoint mehr ist; `pvesm status` muss `usb-backup` als inaktiv zeigen.
 5. **Kein absichtliches Backup auf den inaktiven Storage starten.**
-6. USB-HDD wieder verbinden und Mount sowie Storage erneut prüfen:
+6. USB-Dateisystem wieder einhängen und Mount sowie Storage erneut prüfen:
 
    ```bash
    mount /mnt/usb-backup
@@ -211,7 +211,7 @@ Führe diesen Test nur aus, wenn kein Backup-Job läuft oder unmittelbar starten
    pvesm status
    ```
 
-Dieser Schutztest belegt, warum `is_mountpoint=1` wichtig ist. Er ersetzt keine allgemeine Prüfung vor jedem wichtigen Backup.
+Dieser Schutztest prüft, ob `is_mountpoint=1` den Storage bei ausgehängtem USB-Dateisystem inaktiv hält. Er ersetzt keine allgemeine Prüfung vor jedem wichtigen Backup.
 
 ## 6. Test-Backup eines unkritischen LXC erstellen
 
@@ -231,16 +231,19 @@ Eine plausible Backup-Größe bedeutet: nicht 0 Byte und grob passend zur belegt
 
 Ein Backup ist erst belastbar, wenn eine Wiederherstellung funktioniert. Überschreibe nie den Original-Container.
 
-1. Verwende eine freie neue VMID. Im PVE04-Testlab bleibt VMID 100 bewusst frei; für den nächsten realen Test wird dort VMID 102 verwendet.
+1. Verwende eine freie neue VMID.
 2. Wähle die Backup-Datei unter **Datacenter → Storage → usb-backup → Content** und starte **Restore**.
 3. Wähle bewusst das Ziel-Storage für das wiederhergestellte Root-Dateisystem.
 4. Deaktiviere die Netzwerkschnittstelle oder entferne sie vor dem ersten Start.
-5. Prüfe vor dem Start Hostname, IP-Adresse, MAC-Adresse und mögliche laufende Dienste auf Konflikte.
+5. Prüfe vor dem Start Hostname, gespeicherte IP-Adresse, MAC-Adresse und mögliche laufende Dienste auf Konflikte.
 6. Starte den Restore-Test erst ohne Netzwerk.
 7. Prüfe eine vorher definierte Testdatei und zusätzlich eine kleine Funktion des Dienstes.
-8. Dokumentiere das Ergebnis. Den temporären Restore löschst du erst nach erfolgreicher Prüfung.
+8. Dokumentiere das Ergebnis.
+9. Lösche den temporären Restore erst nach erfolgreicher Prüfung.
 
 Ohne Netzwerk kann der Restore weder eine vorhandene IP-Adresse noch einen gleichnamigen Dienst im Heimnetz stören.
+
+> **PVE04-Labbeispiel:** Dort bleibt VMID 100 bewusst frei; für den nächsten realen Test ist VMID 102 vorgesehen. Diese Werte sind keine Vorgabe für dein Homelab.
 
 **Geplantes Bild 5 – noch nicht vorhanden:** `proxmox-lxc-restore-isoliert.webp` – Restore-Dialog mit neuer VMID und sichtbarem Hinweis auf deaktiviertes Netzwerk.
 
@@ -274,7 +277,7 @@ Im dokumentierten PVE04-Testlab wurde ein komprimiertes LXC-Backup auf der separ
 ## ✅ Das solltest du jetzt können
 
 - [ ] Die richtige USB-HDD ohne Schreibzugriff eindeutig identifizieren.
-- [ ] Einen sicheren UUID-Mount mit fstab-Backup und Prüfung vorbereiten.
+- [ ] Einen UUID-Mount mit fstab-Backup und anschließender Prüfung vorbereiten.
 - [ ] `usb-backup` als reines VZDump-Storage mit Mountpoint-Schutz einrichten.
 - [ ] Einen unkritischen Container sichern und Task Viewer sowie Storage Content prüfen.
 - [ ] Einen Restore mit neuer ID und ohne Netzwerk planen.
