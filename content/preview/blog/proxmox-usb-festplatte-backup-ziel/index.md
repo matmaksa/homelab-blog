@@ -1,6 +1,6 @@
 +++
 title = "USB-Festplatte als Proxmox-Backup-Ziel einrichten und Restore testen"
-description = "Eine bereits mit ext4 formatierte USB-Festplatte sicher als Proxmox-Backup-Ziel einbinden, VZDump-Backups prüfen und einen LXC-Restore kontrolliert und konfliktarm testen."
+description = "Eine bereits mit ext4 formatierte USB-Festplatte kontrolliert als Proxmox-Backup-Ziel einbinden, VZDump-Backups prüfen und einen LXC-Restore kontrolliert und konfliktarm testen."
 date = 2026-08-02
 draft = false
 robotsNoIndex = true
@@ -118,7 +118,13 @@ Sichere vor jeder Änderung die vorhandene `fstab` mit Zeitstempel:
 cp /etc/fstab /etc/fstab.bak-$(date +%F-%H%M)
 ```
 
-Öffne danach `/etc/fstab` mit deinem Editor und ergänze **eine** Zeile. Ersetze ausschließlich `<DEINE-UUID>` durch die in Schritt 2 geprüfte UUID:
+Öffne danach `/etc/fstab` mit dem auf deinem Host hinterlegten Standardeditor und ergänze **eine** Zeile:
+
+```bash
+editor /etc/fstab
+```
+
+Ersetze ausschließlich `<DEINE-UUID>` durch die in Schritt 2 geprüfte UUID:
 
 ```text
 UUID=<DEINE-UUID> /mnt/usb-backup ext4 defaults,nofail,x-systemd.device-timeout=10s 0 2
@@ -168,7 +174,7 @@ Sehr wichtig ist `is_mountpoint=1`. Diese Schutzoption sorgt dafür, dass Proxmo
 
 ```bash
 pvesm set usb-backup --is_mountpoint 1
-grep -A6 '^dir: usb-backup$' /etc/pve/storage.cfg
+grep -A8 '^dir: usb-backup$' /etc/pve/storage.cfg
 pvesm status
 ```
 
@@ -277,3 +283,8 @@ Im dokumentierten PVE04-Testlab wurde ein komprimiertes LXC-Backup auf der separ
 ## Nächster Schritt
 
 Als Ergänzung folgt ein Artikel über einen planbaren Backup-Rhythmus, Aufbewahrungsregeln und eine zweite, getrennte Kopie.
+
+## Technische Referenzen
+
+- [Proxmox VE Administration Guide: Storage](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_storage) – Directory-Storage und Storage-Konfiguration.
+- [Proxmox VE Administration Guide: Backup and Restore](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#chapter_vzdump) – VZDump, Sicherungsmodi und Wiederherstellung.
