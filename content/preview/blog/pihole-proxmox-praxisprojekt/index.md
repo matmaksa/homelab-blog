@@ -21,7 +21,7 @@ categories = ["Software", "Virtualisierung"]
 preview_content_type = "article_draft"
 publish_eligible = false
 user_visual_approval_required = true
-fact_check_required = true
+fact_check_required = false
 link_check_required = true
 price_check_required = false
 recommended_action = "Eigentümer prüft und genehmigt den einsteigerfreundlich überarbeiteten Pi-hole-Artikel, die DNS-Erklärgrafik und die fünf Screenshot-Platzhalter."
@@ -86,6 +86,8 @@ Damit bleibt der Ablauf bewusst klein: erst parallel aufbauen, dann testen und e
 
 ## 1. Container in Proxmox anlegen
 
+**Kurz erklärt:** Eine Bridge wie `vmbr0` verbindet den Container mit deinem normalen Netzwerk. Das Gateway ist die Router-Adresse, über die der Container andere Netze und das Internet erreicht. `local-lvm` ist der lokale Speicherbereich des Proxmox-Hosts. Swap ist ein Notfall-Puffer auf dem Datenträger und deutlich langsamer als Arbeitsspeicher.
+
 PVE04 ist ein Fujitsu Futro S7010 mit vier CPU-Kernen, 4 GB RAM und einer 64-GB-SSD. Der Host dient ausschließlich als Content- und Test-Lab. Für Pi-hole entstand der unprivilegierte LXC-Container CT 101 mit dem Namen `01-pihole`.
 
 **CT 101** ist keine technische Abkürzung, die du auswendig kennen musst: Proxmox führt jeden Container unter einer numerischen ID. Mein Pi-hole erhielt die ID **101** und den Namen **01-pihole**. Für dein eigenes Setup wählst du eine bei dir freie ID.
@@ -127,7 +129,7 @@ Für den Aufbau nutzte der neue Container zunächst einen vorhandenen Resolver. 
 
 Der wichtige Punkt für Einsteiger: Ändere nicht gleichzeitig Container, DNS-Server, DHCP, Filterlisten und Router. Baue Pi-hole zuerst parallel auf und prüfe ihn direkt. So weißt du bei einem Fehler, an welcher Stelle du suchen musst.
 
-Der neue Pi-hole wurde zuerst parallel aufgebaut und technisch getestet. Ob und wann dein gesamtes Heimnetz Pi-hole verwendet, ist ein eigener abgesicherter Schritt: Erst wenn du einen Rückweg für DNS-Änderungen dokumentiert hast, richtest du weitere Geräte auf Pi-hole als DNS-Server aus.
+Der neue Pi-hole wurde zuerst parallel aufgebaut und technisch getestet. Im Test-Lab wurde der Resolver des PVE04-Hosts erst später in einem separat gesicherten und geprüften Schritt auf Pi-hole umgestellt. Ob und wann dein gesamtes Heimnetz Pi-hole verwendet, ist ein eigener abgesicherter Schritt: Erst wenn du einen Rückweg für DNS-Änderungen dokumentiert hast, richtest du weitere Geräte auf Pi-hole als DNS-Server aus.
 
 ## 3. Pi-hole im gestarteten Container installieren
 
@@ -215,7 +217,7 @@ Beim Blocking wurden `ad.doubleclick.net`, `googleads.g.doubleclick.net` und `ad
 
 ## 6. Backup: ein Sicherungspunkt, kein Restore-Beweis
 
-Nach Aufbau und Funktionstests wurde CT 101 als Proxmox-Snapshot mit zstd gesichert. Die bestätigte Backupdatei war 304.195.522 Bytes groß, also ungefähr 290 MiB. Der Lauf dauerte 18 Sekunden und endete erfolgreich.
+Nach Aufbau und Funktionstests wurde CT 101 mit dem Proxmox-Backup-Job im Snapshot-Modus gesichert und mit zstd komprimiert. Die bestätigte Backupdatei war 304.195.522 Bytes groß, also ungefähr 290 MiB. Der Lauf dauerte 18 Sekunden und endete erfolgreich.
 
 > **Erwartetes Ergebnis nach dem Backup:**
 > Der Task endet ohne Fehler und zeigt einen erfolgreichen Sicherungslauf mit Größe und Dauer.
@@ -234,7 +236,7 @@ Pi-hole passt gut als erster Dienst, wenn du einen kleinen Proxmox-Host hast und
 
 Warte mit der Umstellung deines gesamten Heimnetzes, solange noch kein klarer Rückfallweg für DNS-Änderungen existiert. So bleibt ein Fehler auf einen Testcontainer oder Testclient begrenzt.
 
-Als nächster Dienst auf PVE04 ist Uptime Kuma geplant. Das wäre ein passender zweiter Schritt, um die Erreichbarkeit eigener Dienste zu überwachen.
+Ein möglicher nächster Dienst auf PVE04 wäre Uptime Kuma. Das wäre ein passender zweiter Schritt, um die Erreichbarkeit eigener Dienste zu überwachen; die Auswahl dieses separaten Meilensteins steht noch aus.
 
 ## FAQ
 

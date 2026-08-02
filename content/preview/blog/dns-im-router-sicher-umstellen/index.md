@@ -72,6 +72,9 @@ Wichtig: Die Einstellung im Router verteilt den neuen DNS-Server oft an **alle G
 - **Sekundärer DNS-Server:** Eine zusätzliche Adresse für den Fall, dass der erste Server nicht erreichbar ist. Manche Geräte verwenden ihn aber auch parallel; dadurch kann Blocking teilweise umgangen werden.
 - **DHCP:** Die Router-Funktion, die Geräten automatisch Netzwerkeinstellungen zuweist.
 - **Fallback-DNS:** Ein bewusst vorbereiteter Rückweg für den Fall, dass der eigene DNS-Dienst nicht funktioniert.
+- **Domain:** Ein Name wie `example.com`, den DNS in eine IP-Adresse übersetzt.
+- **Query Log:** Das Anfrage-Protokoll von Pi-hole oder AdGuard Home. Dort siehst du, ob dein Testgerät den DNS-Server wirklich nutzt.
+- **Cosmetic Filtering:** Eine Browser-Funktion, die sichtbare Werbeflächen ausblendet. Ein DNS-Werbeblocker allein kann das nicht leisten.
 
 > **Wichtig:** Ein zweiter öffentlicher DNS-Server ist kein neutraler Notfallknopf. Je nach Gerät kann er dazu führen, dass Anfragen am Werbeblocker vorbeigehen. Plane deshalb bewusst, wie du einen Ausfall behebst, statt unüberlegt eine beliebige zweite Adresse einzutragen.
 
@@ -82,6 +85,7 @@ Bevor du etwas im Router änderst, notiere die aktuellen DNS-Einstellungen. Ein 
 Prüfe außerdem:
 
 - [ ] Der DNS-Container oder -Server startet nach einem Neustart zuverlässig.
+- [ ] Der DNS-Server hat eine feste lokale Adresse – am einfachsten als DHCP-Reservierung im Router.
 - [ ] Die Verwaltungsoberfläche ist nur im lokalen Netz erreichbar und geschützt.
 - [ ] Du weißt, wie du den DNS-Server lokal wieder auf die bisherige Einstellung zurückstellst.
 - [ ] Du testest nicht während einer Videokonferenz, eines Updates oder anderer wichtiger Nutzung.
@@ -90,6 +94,8 @@ Prüfe außerdem:
 ## 4. Zuerst nur ein Gerät testen
 
 Nimm einen Rechner oder ein Smartphone als Testgerät. Trage dort **vorübergehend** die lokale Adresse deines Pi-hole- oder AdGuard-Home-Servers als DNS-Server ein. Die genaue Stelle heißt je nach Betriebssystem zum Beispiel „DNS-Server“, „DNS konfigurieren“ oder „Manuell“.
+
+Auf Windows findest du die Einstellung in den Eigenschaften des Netzwerkadapters, auf Android/iOS in den WLAN-Details und auf macOS in den DNS-Einstellungen des Netzwerkes. Notiere vorher den bisherigen Wert, damit du ihn sofort zurücksetzen kannst.
 
 Lass alle anderen Geräte unverändert. So bleibt dein Heimnetz nutzbar, falls der Test nicht klappt.
 
@@ -102,6 +108,8 @@ Danach prüfst du auf dem Testgerät:
 5. Starte den DNS-Dienst nur dann neu, wenn du weißt, wie du bei Problemen zurückwechselst; danach erneut testen.
 
 Ein einzelner erfolgreicher Seitenaufruf reicht nicht. Ziel ist, dass normale Nutzung, Namensauflösung und Verwaltung zusammen funktionieren.
+
+> **IPv6-Hinweis:** Viele Router verteilen DNS zusätzlich über IPv6. Wenn du nur IPv4-DNS änderst, können einzelne Geräte den Werbeblocker weiterhin umgehen. Prüfe deshalb vor der Router-Umstellung auch die IPv6-/DNSv6-Einstellung deines Routermodells.
 
 ## 5. Was du bei Problemen zuerst prüfst
 

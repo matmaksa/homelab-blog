@@ -1,7 +1,17 @@
 ---
 title: "Headscale Clients verbinden und ACLs setzen"
 date: 2026-07-02
-draft: true
+draft: false
+robotsNoIndex: true
+noindex: true
+preview: true
+draft_banner: true
+hideMeta: true
+ShowShareButtons: false
+ShowPostNavLinks: false
+comments: false
+sitemap:
+  exclude: true
 image: "featured.jpg"
 cover:
   image: "featured.jpg"
@@ -505,5 +515,5 @@ Bis dahin reicht diese Reihenfolge:
 - [ ] `policy.path` in Headscale setzen
 - [ ] erlaubte und blockierte Zugriffe testen
 
-**Einrichten wenn:** du mehrere Homelab-Geräte sicher verbinden willst und bereit bist, die Zugriffsregeln selbst zu pflegen.  
+**Einrichten wenn:** du mehrere Homelab-Geräte sicher verbinden willst und bereit bist, die Zugriffsregeln selbst zu pflegen.
 **Nicht einrichten wenn:** du nur einen einzelnen Dienst erreichen willst und eine einfache WireGuard-Verbindung bereits zuverlässig läuft.

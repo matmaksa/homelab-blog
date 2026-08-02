@@ -2,8 +2,12 @@
 title = "MATMAKSA Homelab Starter-Pack – Checklisten & Vorlagen für dein erstes Homelab"
 description = "Fünf gebrauchsfertige Vorlagen für den Homelab-Start: Hardware-Checkliste, Netzwerkplan, Proxmox-Installation, Backup-Testplan und Entscheidungshilfe für die ersten Dienste. Kostenloser Download."
 date = 2026-07-16
-draft = true
+draft = false
 robotsNoIndex = true
+
+[sitemap]
+  exclude = true
+
 ShowToc = true
 ShowShareButtons = true
 ShowBreadCrumbs = true
@@ -22,7 +26,7 @@ link_check_required = true
 price_check_required = false
 recommended_action = "MailerLite einrichten, dann Embed-Formular ergänzen und freischalten"
 content_intent = "pillar"
-monetization_intent = "soft_affiliate"
+monetization_intent = "none"
 affiliate_disclosure_required = false
 price_research_required = false
 product_recommendation_allowed = false
@@ -58,7 +62,7 @@ Für den Einstieg fehlt oft nicht das Wissen, sondern eine **klare Struktur**. D
 | Seite | Inhalt |
 |-------|--------|
 | **1** | Hardware-Einkaufscheckliste – nichts vergessen vor der Bestellung |
-| **2** | Netzwerkplan (ausfüllbar) – IPs, VLANs, DHCP, alles an einem Ort |
+| **2** | Netzwerkplan (ausfüllbar) – IPs, DHCP und bei Bedarf VLANs an einem Ort |
 | **3** | Proxmox-Installationscheckliste – Schritt für Schritt zum ersten Login |
 | **4** | Backup- & Restore-Testplan – inklusive monatlicher Test-Routine |
 | **5** | Die ersten 10 Dienste – Entscheidungshilfe mit Aufwand-Einschätzung |
@@ -67,13 +71,13 @@ Für den Einstieg fehlt oft nicht das Wissen, sondern eine **klare Struktur**. D
 
 - Absolute Einsteiger, die den ersten Mini-PC bestellen wollen
 - Homelab-Neulinge, die nach der Proxmox-Installation nicht wissen, welcher Dienst sinnvoll ist
-- Alle, die Ordnung in ihr Setup bringen wollen – IP-Plan, VLAN-Doku, Backup-Rhythmus
+- Alle, die Ordnung in ihr Setup bringen wollen – IP-Plan, bei Bedarf VLAN-Doku und Backup-Rhythmus
 
 ## Vorschau
 
-{{< figure src="preview.jpg" alt="Vorschau auf das MATMAKSA Homelab Starter-Pack" caption="Cover des Starter-Packs – professionell, aufgeräumt, druckbar" width="400" >}}
+> **Preview-Hinweis:** Eine lesbare PDF-Vorschau wird vor der Veröffentlichung ergänzt. Das vorhandene Cover wird nicht als Ersatz verwendet, weil die kleinen Beispieltexte darin nicht verlässlich lesbar sind.
 
-Das PDF ist **hybrid**: du kannst es am PC ausfüllen (die Felder sind als visuelle Formularbereiche gestaltet) oder ausdrucken und per Hand abhaken. **Keine Registrierung, kein Spam – nur E-Mail eintragen, PDF bekommen.**
+Das PDF ist für Bildschirm und Ausdruck gestaltet. Die Felder sind als visuelle Bereiche angelegt: Du kannst sie am PC ergänzen oder ausgedruckt von Hand abhaken. Für den Download wird später eine E-Mail-Adresse abgefragt. Die Anmeldung erfolgt erst nach Einrichtung des MailerLite-Formulars mit Double-Opt-in und einem klaren Link zur Datenschutzerklärung.
 
 ---
 
@@ -88,7 +92,7 @@ Das PDF ist **hybrid**: du kannst es am PC ausfüllen (die Felder sind als visue
   <p style="font-size: 14px; color: #4a5a6a; margin-bottom: 16px;">Fünf Vorlagen als PDF – kostenlos per E-Mail</p>
   <div style="background: #ffffff; border-radius: 6px; padding: 20px; max-width: 400px; margin: 0 auto;">
     <p style="color: #8899aa; font-size: 12px;">⬆️ MailerLite-Formular wird integriert ⬆️</p>
-    <p style="color: #8899aa; font-size: 11px; margin-top: 8px;">Sobald MailerLite eingerichtet ist, erscheint hier das Anmeldeformular. Du bekommst das PDF dann automatisch per E-Mail.</p>
+    <p style="color: #8899aa; font-size: 11px; margin-top: 8px;">Preview-Hinweis: Das Formular wird erst nach MailerLite-, Double-Opt-in- und Datenschutz-Prüfung aktiviert.</p>
   </div>
   <p style="font-size: 10px; color: #8899aa; margin-top: 12px;">Kein Spam. Jederzeit abbestellbar.</p>
 </div>
@@ -98,7 +102,7 @@ Das PDF ist **hybrid**: du kannst es am PC ausfüllen (die Felder sind als visue
 ## FAQ
 
 **Ist das Starter-Pack wirklich kostenlos?**  
-Ja, komplett kostenlos. Du bekommst es gegen deine E-Mail-Adresse – kein Premium-Upgrade, keine versteckten Kosten.
+Ja, die hier beschriebene Grundversion ist kostenlos. Für den Download wird nach Einrichtung des Formulars deine E-Mail-Adresse benötigt; Hinweise zu Datenschutz und Abmeldung stehen direkt am Formular.
 
 **Brauche ich Vorkenntnisse?**  
 Die Checklisten sind für absolute Einsteiger gemacht. Wenn du weißt, was ein Mini-PC ist, kommst du zurecht.
@@ -107,7 +111,7 @@ Die Checklisten sind für absolute Einsteiger gemacht. Wenn du weißt, was ein M
 Ja, das PDF ist druckoptimiert. Die Formularfelder sind so gestaltet, dass du sie sowohl digital ausfüllen als auch per Hand beschriften kannst.
 
 **Wann kommt der Rest? (Premium-Version)**  
-Das Starter-Pack deckt die ersten Schritte ab. Eine erweiterte Version mit Docker-Kompositionen, Monitoring-Dashboards und VLAN-Konfigurationen ist in Planung – für Fortgeschrittene, die tiefer einsteigen wollen.
+Das Starter-Pack deckt die ersten Schritte ab. Eine erweiterte Version mit Docker-Kompositionen, Monitoring-Dashboards und VLAN-Konfigurationen ist nur eine Idee für später und noch nicht angekündigt.
 
 ---
 

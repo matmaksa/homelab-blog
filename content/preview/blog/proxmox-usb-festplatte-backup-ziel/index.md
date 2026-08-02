@@ -86,6 +86,15 @@ Prüfe deshalb mindestens diese Merkmale gemeinsam:
 
 Für einen dauerhaften Mount wird die UUID verwendet. Sie ist eine eindeutige Kennung des Dateisystems und robuster als ein wechselnder Gerätebuchstabe.
 
+Auf dem Proxmox-Host zeigen diese **reinen Lese-Befehle** die angeschlossenen Laufwerke und ihre UUIDs. Sie ändern keine Daten:
+
+```bash
+lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,LABEL,UUID,MOUNTPOINTS
+sudo blkid
+```
+
+Vergleiche Modell, Größe und Seriennummer mit dem Aufkleber oder Gehäuse der USB-Festplatte. Erst wenn alles passt, notierst du die UUID der richtigen Partition. Ist die Platte nicht leer oder ihr Dateisystem unklar, **nicht formatieren**: sichere die Daten zuerst oder verwende ein separates, leeres Laufwerk.
+
 ## 3. Bestehende Daten schützen
 
 Wenn die USB-Festplatte bereits Daten enthält, ist sie **kein** Kandidat für einen Formatierungs-Schritt. Prüfe zuerst, ob sie leer ist oder ob die darauf liegenden Daten an einem anderen Ort gesichert sind.
@@ -116,12 +125,17 @@ Danach wird geprüft, ob das Ziel tatsächlich eingehängt und beschreibbar ist.
 - `defaults`: Standard-Mount-Optionen des Dateisystems.
 - `nofail`: Der Host bootet weiter, falls die USB-Festplatte fehlt.
 - `noatime`: Reduziert unnötige Schreibvorgänge für Zugriffszeitstempel.
+- `ext4`: Das Dateisystem der Partition. Dieser Wert muss zum tatsächlich vorhandenen Dateisystem passen.
+- `0`: Dieses Feld ist heute fast immer `0`; es steuert alte Dump-Backups und kann so bleiben.
+- `2`: Die letzte Zahl legt die Dateisystemprüfung beim Start fest. Für ein ext4-Datenlaufwerk ist `2` üblich.
 
 > **Sicherheitsregel:** Ein Fehler in `/etc/fstab` kann den Systemstart beeinträchtigen. Änderungen nur nach Backup der Datei und nur mit einer lokalen Konsole oder einem sicheren Rückweg durchführen.
 
 ## 5. Die USB-HDD in Proxmox als Backup-Storage einrichten
 
 In Proxmox wird das eingehängte Verzeichnis als **Directory Storage** angelegt. Als erlaubter Inhalt sollte für dieses Ziel nur `backup` gewählt werden. Damit bleibt die Festplatte auf ihren Zweck beschränkt und wird nicht versehentlich zum Ablageort für ISO-Dateien oder Container-Datenträger.
+
+In der Weboberfläche: **Datacenter → Storage → Add → Directory**. Wähle dort den bereits eingehängten Mount-Pfad, gib dem Ziel einen eindeutigen Namen wie `usb-backup` und aktiviere bei **Content** nur `VZDump backup file`. Speichern darfst du erst, wenn der Mount-Pfad wirklich existiert und eingehängt ist.
 
 Vor dem ersten Backup kontrollierst du in der Proxmox-Oberfläche oder per Statusabfrage:
 
@@ -135,6 +149,8 @@ Im dokumentierten Lab-Test war der Storage aktiv und beschränkte sich auf Proxm
 ## 6. Erstes Backup: mit einem Test-Container beginnen
 
 Starte nicht mit einem kritischen Dienst. Erstelle zuerst ein Backup eines kleinen, entbehrlichen Test-Containers. Ein Proxmox-Backup heißt bei Containern und VMs häufig `vzdump`-Backup.
+
+In der Weboberfläche öffnest du dazu den Test-Container, wählst **Backup**, setzt als Storage `usb-backup` und startest den Job. Danach öffnest du **Datacenter → Storage → usb-backup → Content**: Dort muss die neue Backup-Datei erscheinen.
 
 Prüfe nach Abschluss:
 
