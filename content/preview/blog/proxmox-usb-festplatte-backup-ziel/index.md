@@ -58,6 +58,8 @@ Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-G
 
 {{< figure src="backup-ablauf-pve04.svg" alt="Diagramm: PVE04 speichert ein LXC-Backup auf einer USB-Festplatte; daraus wird ein isolierter Restore-Testcontainer erstellt." caption="Der kontrollierte Ablauf: Gast sichern, Backup auf dem getrennten USB-Ziel prüfen, dann isoliert wiederherstellen." >}}
 
+{{< figure src="pve04-backup-umgebung.png" alt="Interne Proxmox-Übersicht von PVE04 als reales Testsystem für das USB-Backup-Ziel." caption="Reale PVE04-Testumgebung: Die folgende Anleitung wird gegen dieses System und das angeschlossene USB-Backup-Ziel geprüft. Vor öffentlicher Veröffentlichung werden sichtbare Infrastrukturdetails weiter bereinigt." >}}
+
 ## Voraussetzungen und Grenzen
 
 Du brauchst:
