@@ -98,7 +98,7 @@ Vergleiche mindestens Größe, Modell, Dateisystem `ext4` und UUID mit deiner an
 
 > **Stopp-Regel:** Stimmen Größe, Modell und Dateisystem nicht mit deiner USB-HDD überein, führe keinen Schreib-, Mount- oder Formatierungsbefehl aus. Prüfe zusätzlich die UUID und – falls vorhanden – das Label. Ziehe im Zweifel die USB-HDD ab, prüfe die Ausgabe erneut und kläre die Zuordnung zuerst.
 
-**Geplantes Bild 2 – noch nicht vorhanden:** `usb-hdd-lsblk-annotiert.webp` – bereinigter Screenshot von `lsblk`/`blkid`, markiert mit Größe, Modell, Dateisystem und UUID. Vollständige Seriennummern werden gekürzt; Geheimnisse gehören nicht in den Screenshot.
+{{< figure src="pve04-usb-erkennung.png" alt="Bereinigter read-only Terminalauszug von PVE04: eine USB-Festplatte mit ext4 und Mountpoint /mnt/pve/Backup." caption="Prüfpunkt vor jeder Änderung: Transport, Größe, Dateisystem, Label und Mountpoint müssen zur physischen USB-HDD passen. Seriennummer und UUID bleiben bewusst ausgeblendet." >}}
 
 ## 3. Falls die Festplatte noch nicht mit ext4 vorbereitet ist
 
@@ -160,6 +160,8 @@ rm /mnt/usb-backup/.write-test
 
 Der Schreibtest darf nur erfolgreich sein, wenn `findmnt` und `mountpoint` vorher den echten USB-Mount bestätigen. So schreibst du nicht versehentlich in ein leeres Verzeichnis auf der Root-Partition.
 
+{{< figure src="pve04-usb-mount-storage.png" alt="Bereinigter PVE04-Prüfauszug: USB-Partition ist als ext4 unter /mnt/pve/Backup eingehängt und hat freien Speicher." caption="Mount und Speicherplatz zuerst prüfen: Nur ein echter Mountpoint darf später als Backup-Ziel dienen." >}}
+
 ## 5. USB-HDD als Proxmox-Backup-Storage konfigurieren
 
 Öffne die Proxmox-Weboberfläche:
@@ -182,7 +184,7 @@ pvesm status
 
 In der Ausgabe von `storage.cfg` muss `is_mountpoint 1` sichtbar sein. `pvesm status` bestätigt danach, ob `usb-backup` aktiv ist und die erwartete USB-Kapazität zeigt. Den genauen Befehl prüfe vor einem öffentlichen Publish nochmals auf PVE04.
 
-**Geplantes Bild 3 – noch nicht vorhanden:** `proxmox-add-directory-usb-backup.webp` – Screenshot des Dialogs „Add: Directory“, markiert mit ID, Pfad, Content, Shared und Node. Falls `is_mountpoint` in der eingesetzten GUI nicht sichtbar ist, zeigt ein getrennter bereinigter Terminal- oder Konfigurationsausschnitt `is_mountpoint 1`.
+{{< figure src="pve04-usb-storage-config.png" alt="Bereinigter PVE04-Prüfauszug: aktives Directory-Storage Backup am USB-Mountpoint mit Inhaltstyp backup." caption="Nach dem Anlegen kontrollieren: Der Storage ist aktiv, zeigt auf den echten USB-Mountpoint und erlaubt nur Backup-Inhalte." >}}
 
 ### Schutztest für einen fehlenden Datenträger
 
