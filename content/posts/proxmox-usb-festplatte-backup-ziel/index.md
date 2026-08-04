@@ -3,22 +3,15 @@ title = "USB-Festplatte als Proxmox-Backup-Ziel einrichten und Restore testen"
 description = "Eine bereits mit ext4 formatierte USB-Festplatte kontrolliert als Proxmox-Backup-Ziel einbinden, VZDump-Backups prüfen und einen LXC-Restore kontrolliert und konfliktarm testen."
 date = 2026-08-02
 draft = false
-robotsNoIndex = true
-noindex = true
-preview = true
-draft_banner = true
-hideMeta = true
-ShowShareButtons = false
-ShowPostNavLinks = false
+aliases = ["/preview/blog/proxmox-usb-festplatte-backup-ziel/"]
+ShowShareButtons = true
+ShowPostNavLinks = true
 comments = false
 tags = ["proxmox", "backup", "usb-hdd", "restore", "lxc", "homelab"]
 categories = ["Backup", "Virtualisierung"]
 
-[sitemap]
-  exclude = true
-
 [workflow]
-content_state = "approved_for_publish"
+content_state = "published"
 editorial_status = "pass"
 technical_status = "pass"
 visual_status = "pass"
@@ -34,18 +27,16 @@ links_verified = true
 image_licenses_verified = true
 affiliate_review_required = false
 affiliate_review_passed = false
-canonical_verified = true
-sitemap_verified = true
-robots_verified = true
-deployed_commit = "9dbe509"
+canonical_verified = false
+sitemap_verified = false
+robots_verified = false
+deployed_commit = ""
 preview_checked_at = "2026-08-04T18:26:51Z"
 external_images_used = false
 screenshots_required = true
 claims_practical_test = true
 public_placeholders_present = false
 +++
-
-> **Preview – noch nicht veröffentlicht.** Die Abbildungen sind bereinigte Terminalauszüge aus dem PVE04-Testlab vom 03.08.2026. Sie zeigen keine Zugangsdaten, Tokens, vollständigen UUIDs, MAC-Adressen oder öffentlich erreichbaren Endpunkte.
 
 ## Kurzantwort
 
