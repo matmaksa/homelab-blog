@@ -155,7 +155,7 @@
   margin: 1.25rem 0;
   padding: 1rem;
   border-radius: var(--hl-radius-sm, 8px);
-  background: #1e293b;
+  background: #1e293b !important;
   color: #e2e8f0;
   overflow-x: auto;
   font-size: 0.85em;

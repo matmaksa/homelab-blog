@@ -259,6 +259,8 @@
 }
 
 @media (max-width: 1023px) {
+  /* The closed off-canvas menu must not create page-level horizontal scrolling. */
+  html, body { overflow-x: hidden; }
   .main-nav { display: none; }
   .search-overlay-inner { max-width: 100%; }
   .search-overlay-input-wrap input[type="search"] { font-size: 1rem; }

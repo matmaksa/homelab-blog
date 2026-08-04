@@ -36,16 +36,43 @@ content_state = "draft_generated"
 audit_status = "revision_in_progress"
 user_approval_required = true
 approved_for_publish = false
-next_action = "run_pve04_command_and_screenshot_verification_then_owner_review"
+next_action = "owner_review_before_public_publish"
+
+[workflow]
+content_state = "user_review_required"
+editorial_status = "pass"
+technical_status = "pass"
+visual_status = "pass"
+seo_status = "pass"
+external_preview_verified = false
+user_publish_approval = false
+commands_executed_on = "PVE04"
+commands_verified_at = "2026-08-03T19:57:14Z"
+screenshots_complete = true
+desktop_visual_check = false
+mobile_visual_check = false
+links_verified = false
+image_licenses_verified = true
+affiliate_review_required = false
+affiliate_review_passed = false
+canonical_verified = false
+sitemap_verified = false
+robots_verified = false
+deployed_commit = ""
+preview_checked_at = ""
+external_images_used = false
+screenshots_required = true
+claims_practical_test = true
+public_placeholders_present = false
 +++
 
-> **Preview – noch nicht veröffentlicht.** Die Screenshots stammen aus meinem PVE04-Testlab. Interne Hostnamen und private LAN-Adressen können sichtbar sein. Zugangsdaten, Tokens und öffentlich erreichbare Endpunkte wurden entfernt.
+> **Preview – noch nicht veröffentlicht.** Die Abbildungen sind bereinigte Terminalauszüge aus dem PVE04-Testlab vom 03.08.2026. Sie zeigen keine Zugangsdaten, Tokens, vollständigen UUIDs, MAC-Adressen oder öffentlich erreichbaren Endpunkte.
 
 ## Kurzantwort
 
 Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-Gast-Backups. Diese Anleitung zeigt einen kontrollierten Weg für eine **bereits partitionierte und mit ext4 formatierte** USB-HDD: Laufwerk eindeutig erkennen, per UUID einhängen, als reinen VZDump-Storage einrichten, einen unkritischen LXC-Container sichern und in einen neuen Test-Container wiederherstellen.
 
-> **Praxisnachweis aus PVE04:** Im PVE04-Beispiel wurde eine 1-TB-USB-HDD mit dem Label `Backup` als separates Directory-Storage verwendet. Ein komprimiertes LXC-Backup wurde dort abgelegt und in einen getrennten Test-Container wiederhergestellt; die vorher definierten Prüfdaten waren vorhanden. Die konkreten Befehle und Screenshots dieser überarbeiteten Anleitung werden vor einer Veröffentlichung nochmals auf PVE04 geprüft.
+> **Praxisnachweis aus PVE04, 03.08.2026:** Eine 1-TB-USB-HDD mit dem Label `Backup` war als Directory-Storage `Backup` eingebunden. Der Mountpoint-Schutz `is_mountpoint 1` wurde geprüft. Ein neu angelegter unkritischer Testcontainer mit VMID 103 wurde per VZDump auf die USB-HDD gesichert; die Sicherung wurde nach VMID 102 wiederhergestellt, vor dem ersten Start ohne Netzwerkschnittstelle gesetzt und über eine Testdatei geprüft.
 
 | Merkmal | Wert |
 |---|---|
@@ -57,8 +84,6 @@ Eine externe USB-Festplatte ist ein gutes erstes, getrenntes Ziel für Proxmox-G
 | **Ziel** | Separates Backup-Ziel für LXC-Container oder VMs und ein getesteter Wiederherstellungsweg |
 
 {{< figure src="backup-ablauf-pve04.svg" alt="Diagramm: PVE04 speichert ein LXC-Backup auf einer USB-Festplatte; daraus wird ein isolierter Restore-Testcontainer erstellt." caption="Der kontrollierte Ablauf: Gast sichern, Backup auf dem getrennten USB-Ziel prüfen, dann isoliert wiederherstellen." >}}
-
-{{< figure src="pve04-backup-umgebung.png" alt="Interne Proxmox-Übersicht von PVE04 als reales Testsystem für das USB-Backup-Ziel." caption="Reale PVE04-Testumgebung: Die folgende Anleitung wird gegen dieses System und das angeschlossene USB-Backup-Ziel geprüft. Vor öffentlicher Veröffentlichung werden sichtbare Infrastrukturdetails weiter bereinigt." >}}
 
 ## Voraussetzungen und Grenzen
 
@@ -98,7 +123,7 @@ Vergleiche mindestens Größe, Modell, Dateisystem `ext4` und UUID mit deiner an
 
 > **Stopp-Regel:** Stimmen Größe, Modell und Dateisystem nicht mit deiner USB-HDD überein, führe keinen Schreib-, Mount- oder Formatierungsbefehl aus. Prüfe zusätzlich die UUID und – falls vorhanden – das Label. Ziehe im Zweifel die USB-HDD ab, prüfe die Ausgabe erneut und kläre die Zuordnung zuerst.
 
-{{< figure src="pve04-usb-erkennung.png" alt="Bereinigter read-only Terminalauszug von PVE04: eine USB-Festplatte mit ext4 und Mountpoint /mnt/pve/Backup." caption="Prüfpunkt vor jeder Änderung: Transport, Größe, Dateisystem, Label und Mountpoint müssen zur physischen USB-HDD passen. Seriennummer und UUID bleiben bewusst ausgeblendet." >}}
+{{< figure src="pve04-usb-erkennung.webp" alt="Bereinigter Terminalauszug aus PVE04: USB-HDD mit Transporttyp USB, 931,5 GiB, Modell, ext4, Label Backup, gekürzter UUID und Mountpoint." caption="USB-HDD eindeutig erkennen: Größe und Modell identifizieren, dann ext4, Label, gekürzte UUID und Mountpoint abgleichen." >}}
 
 ## 3. Falls die Festplatte noch nicht mit ext4 vorbereitet ist
 
@@ -160,7 +185,7 @@ rm /mnt/usb-backup/.write-test
 
 Der Schreibtest darf nur erfolgreich sein, wenn `findmnt` und `mountpoint` vorher den echten USB-Mount bestätigen. So schreibst du nicht versehentlich in ein leeres Verzeichnis auf der Root-Partition.
 
-{{< figure src="pve04-usb-mount-storage.png" alt="Bereinigter PVE04-Prüfauszug: USB-Partition ist als ext4 unter /mnt/pve/Backup eingehängt und hat freien Speicher." caption="Mount und Speicherplatz zuerst prüfen: Nur ein echter Mountpoint darf später als Backup-Ziel dienen." >}}
+{{< figure src="pve04-usb-mount-storage.webp" alt="Bereinigter Terminalauszug aus PVE04: ext4-Dateisystem am Mountpoint /mnt/pve/Backup, freier Speicher und bestätigter Mountpoint." caption="USB-Mount auf PVE04 verifizieren: ext4, freier Speicherplatz und echter Mountpoint." >}}
 
 ## 5. USB-HDD als Proxmox-Backup-Storage konfigurieren
 
@@ -182,9 +207,9 @@ grep -A8 '^dir: usb-backup$' /etc/pve/storage.cfg
 pvesm status
 ```
 
-In der Ausgabe von `storage.cfg` muss `is_mountpoint 1` sichtbar sein. `pvesm status` bestätigt danach, ob `usb-backup` aktiv ist und die erwartete USB-Kapazität zeigt. Den genauen Befehl prüfe vor einem öffentlichen Publish nochmals auf PVE04.
+Im PVE04-Test heißt das reale Storage `Backup` und der Mountpoint `/mnt/pve/Backup`. Die Beispielwerte `usb-backup` und `/mnt/usb-backup` oben sind frei wählbar und müssen auf anderen Hosts angepasst werden. Die PVE04-Konfiguration enthält `content backup` und `is_mountpoint 1`; `pvesm status` zeigte das Storage nach dem Mount als aktiv.
 
-{{< figure src="pve04-usb-storage-config.png" alt="Bereinigter PVE04-Prüfauszug: aktives Directory-Storage Backup am USB-Mountpoint mit Inhaltstyp backup." caption="Nach dem Anlegen kontrollieren: Der Storage ist aktiv, zeigt auf den echten USB-Mountpoint und erlaubt nur Backup-Inhalte." >}}
+{{< figure src="pve04-usb-storage-config.webp" alt="Bereinigter Terminalauszug aus PVE04: Storage Backup mit Pfad /mnt/pve/Backup, content backup und is_mountpoint 1." caption="Das reale PVE04-Storage heißt `Backup`. Die allgemeine Anleitung verwendet `usb-backup` als frei wählbare Beispiel-ID." >}}
 
 ### Schutztest für einen fehlenden Datenträger
 
@@ -229,7 +254,9 @@ Erst jetzt sicherst du einen kleinen Test-Container. Das Original darf keine wic
 
 Eine plausible Backup-Größe bedeutet: nicht 0 Byte und grob passend zur belegten Datenmenge. Kompression kann die Datei deutlich kleiner machen. Ohne Aufbewahrungsregel füllt sich eine USB-HDD irgendwann; Zeitplanung und Retention bleiben bewusst Thema eines Folgeartikels.
 
-**Geplantes Bild 4 – noch nicht vorhanden:** `proxmox-vzdump-task-erfolgreich.webp` – erfolgreicher Backup-Task mit Status, Größe und Dauer. Private Endpunkte und Zugangsdaten bleiben entfernt.
+Im PVE04-Test wurde dafür ein neuer unkritischer Debian-LXC mit VMID 103 und deaktivierter Netzwerkschnittstelle erzeugt. Das VZDump-Backup lief im Snapshot-Modus mit zstd auf Storage `Backup` erfolgreich durch. Die erzeugte Datei hatte 160.468.124 Bytes; nach dem Test waren noch etwa 866 GiB auf der USB-HDD frei.
+
+{{< figure src="pve04-vzdump-erfolgreich.webp" alt="Bereinigter Terminalauszug aus PVE04: erfolgreicher VZDump eines LXC mit VMID 103 auf Storage Backup, Dateiname und Archivgröße." caption="Realer PVE04-Test: VZDump von Testcontainer 103 wurde erfolgreich auf der USB-HDD im Storage `Backup` abgelegt." >}}
 
 ## 7. Restore isoliert testen
 
@@ -249,7 +276,9 @@ Ohne Netzwerk kann der Restore weder eine vorhandene IP-Adresse noch einen gleic
 
 > **PVE04-Labbeispiel:** Dort bleibt VMID 100 bewusst frei; für den nächsten realen Test ist VMID 102 vorgesehen. Diese Werte sind keine Vorgabe für dein Homelab.
 
-**Geplantes Bild 5 – noch nicht vorhanden:** `proxmox-lxc-restore-isoliert.webp` – Restore-Dialog mit neuer VMID und sichtbarem Hinweis auf deaktiviertes Netzwerk.
+Im PVE04-Test wurde die Sicherung von VMID 103 nach der freien VMID 102 wiederhergestellt. Vor dem ersten Start wurde `net0` entfernt; die anschließende Konfigurationsprüfung ergab null Netzwerkschnittstellen. Die zuvor definierte Testdatei war im gestarteten Restore vorhanden. Der temporäre Restore wurde danach kontrolliert gelöscht.
+
+{{< figure src="pve04-restore-isoliert.webp" alt="Bereinigter Terminalauszug aus PVE04: Restore nach VMID 102, vor dem Start entfernte Netzwerkschnittstelle, vorhandene Testdatei und erfolgreicher Lauf." caption="Realer isolierter Restore: VMID 102 startete ohne aktive Netzwerkschnittstelle; die Testdatei aus dem Backup war vorhanden." >}}
 
 ## Häufige Fehler
 
@@ -276,7 +305,11 @@ Direkt nach der Einrichtung und danach nach größeren Änderungen oder in einem
 
 ## Testergebnis aus PVE04
 
-Im dokumentierten PVE04-Testlab wurde ein komprimiertes LXC-Backup auf der separaten USB-HDD mit Label `Backup` abgelegt. Ein Restore in einen getrennten Test-Container stellte die definierten Prüfdaten wieder her. Die neue Schrittfolge, Befehle und vorgesehenen Screenshots wurden in diesem Überarbeitungsdurchlauf **nicht erneut auf PVE04 ausgeführt** und bleiben deshalb vor einem öffentlichen Publish prüfpflichtig.
+Am 03.08.2026 wurde die aktuelle Befehlsfolge auf PVE04 praktisch geprüft. Die USB-HDD (`Backup`, ext4) war unter `/mnt/pve/Backup` eingehängt; die fstab-Zeile enthält `nofail` und `x-systemd.device-timeout=10s`. Storage `Backup` ist auf `content backup` begrenzt und enthält `is_mountpoint 1`.
+
+Der Schutztest bestätigte: Nach sauberem Aushängen war der Pfad kein Mountpoint mehr und Proxmox meldete Storage `Backup` als inaktiv. Nach erneutem Einhängen war der Mountpoint wieder vorhanden und das Storage aktiv.
+
+Ein neuer unkritischer Testcontainer (VMID 103) wurde erfolgreich per VZDump im Snapshot-Modus mit zstd auf die USB-HDD gesichert. Die Backup-Datei wurde anschließend nach VMID 102 wiederhergestellt. Vor dem ersten Start wurde die Netzwerkschnittstelle entfernt; die Testdatei war im Restore vorhanden. Der temporäre Restore wurde danach gelöscht. Das bestätigt diesen Wiederherstellungsweg im PVE04-Testlab; es ersetzt keine zweite getrennte oder externe Kopie.
 
 ## ✅ Das solltest du jetzt können
 

@@ -11,6 +11,10 @@
 
 /* --- 360px - 767px (Mobile) --- */
 @media (max-width: 767px) {
+  /* Keep the article grid and its 760px desktop readability cap inside the viewport. */
+  .content-with-sidebar { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+  .content-with-sidebar > .main-content,
+  .post-single { width: 100%; min-width: 0; }
   .main { padding: 1rem; }
   .post-single .post-header h1 { font-size: 1.5rem; }
   .post-single .post-content { padding: 1rem; }

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+import tomllib
 from pathlib import Path
 from typing import Any, NoReturn
 
@@ -27,24 +28,36 @@ def fail(message: str) -> NoReturn:
 
 
 def read_frontmatter(path: Path) -> dict[str, Any]:
+    """Read Hugo YAML (---) or TOML (+++) frontmatter without writing."""
     try:
         text = path.read_text(encoding="utf-8")
     except (OSError, UnicodeDecodeError) as exc:
         fail(f"cannot read article: {exc}")
-    if not text.startswith("---\n"):
-        fail("valid YAML frontmatter is missing")
-    end = text.find("\n---", 4)
-    if end < 0:
-        fail("frontmatter closing delimiter is missing")
-    try:
-        value = yaml.safe_load(text[4:end])
-    except yaml.YAMLError as exc:
-        fail(f"invalid YAML frontmatter: {exc}")
+    if text.startswith("---\n"):
+        delimiter, parser_name = "---", "YAML"
+        end = text.find("\n---", 4)
+        if end < 0:
+            fail("YAML frontmatter closing delimiter is missing")
+        try:
+            value = yaml.safe_load(text[4:end])
+        except yaml.YAMLError as exc:
+            fail(f"invalid YAML frontmatter: {exc}")
+    elif text.startswith("+++\n"):
+        delimiter, parser_name = "+++", "TOML"
+        end = text.find("\n+++", 4)
+        if end < 0:
+            fail("TOML frontmatter closing delimiter is missing")
+        try:
+            value = tomllib.loads(text[4:end])
+        except tomllib.TOMLDecodeError as exc:
+            fail(f"invalid TOML frontmatter: {exc}")
+    else:
+        fail("valid YAML or TOML frontmatter is missing")
     if not isinstance(value, dict):
-        fail("frontmatter must be a YAML mapping")
+        fail(f"{parser_name} frontmatter must be a mapping")
     workflow = value.get("workflow", {})
     if not isinstance(workflow, dict):
-        fail("workflow must be a YAML mapping")
+        fail("workflow must be a mapping")
     return value | {"workflow": workflow}
 
 
