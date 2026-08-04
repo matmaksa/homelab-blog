@@ -17,35 +17,14 @@ categories = ["Backup", "Virtualisierung"]
 [sitemap]
   exclude = true
 
-# Preview Classification
-preview_content_type = "article_draft"
-publish_eligible = false
-user_visual_approval_required = true
-fact_check_required = true
-link_check_required = true
-price_check_required = false
-recommended_action = "Vor Veröffentlichung Befehle und Screenshots auf PVE04 gegenprüfen sowie eine visuelle Eigentümerfreigabe einholen."
-content_intent = "follow_up"
-monetization_intent = "none"
-affiliate_disclosure_required = false
-price_research_required = false
-product_recommendation_allowed = false
-instagram_derivatives_required = false
-risk_level = "high"
-content_state = "draft_generated"
-audit_status = "revision_in_progress"
-user_approval_required = true
-approved_for_publish = false
-next_action = "owner_review_before_public_publish"
-
 [workflow]
-content_state = "user_review_required"
+content_state = "approved_for_publish"
 editorial_status = "pass"
 technical_status = "pass"
 visual_status = "pass"
 seo_status = "pass"
 external_preview_verified = true
-user_publish_approval = false
+user_publish_approval = true
 commands_executed_on = "PVE04"
 commands_verified_at = "2026-08-03T19:57:14Z"
 screenshots_complete = true
@@ -58,7 +37,7 @@ affiliate_review_passed = false
 canonical_verified = true
 sitemap_verified = true
 robots_verified = true
-deployed_commit = "4de1b32"
+deployed_commit = "9dbe509"
 preview_checked_at = "2026-08-04T18:26:51Z"
 external_images_used = false
 screenshots_required = true
@@ -115,7 +94,7 @@ Linux-Namen wie `/dev/sdb` können sich nach einem Neustart ändern. Verwende de
 Führe auf deinem Proxmox-Host – im Beispiel PVE04 – als `root` zunächst nur diese Lese-Befehle aus. Sie ändern keine Daten:
 
 ```bash
-lsblk -o NAME,SIZE,MODEL,SERIAL,FSTYPE,LABEL,UUID,MOUNTPOINTS
+lsblk -o NAME,TRAN,SIZE,MODEL,FSTYPE,LABEL,UUID,MOUNTPOINTS
 blkid
 ```
 
@@ -274,7 +253,7 @@ Ein Backup ist erst belastbar, wenn eine Wiederherstellung funktioniert. Übersc
 
 Ohne Netzwerk kann der Restore weder eine vorhandene IP-Adresse noch einen gleichnamigen Dienst im Heimnetz stören.
 
-> **PVE04-Labbeispiel:** Dort bleibt VMID 100 bewusst frei; für den nächsten realen Test ist VMID 102 vorgesehen. Diese Werte sind keine Vorgabe für dein Homelab.
+> **PVE04-Labbeispiel:** Im PVE04-Test wurde für den isolierten Restore die freie VMID 102 verwendet. VMID 100 blieb bewusst frei. Diese Werte sind keine Vorgabe für dein Homelab.
 
 Im PVE04-Test wurde die Sicherung von VMID 103 nach der freien VMID 102 wiederhergestellt. Vor dem ersten Start wurde `net0` entfernt; die anschließende Konfigurationsprüfung ergab null Netzwerkschnittstellen. Die zuvor definierte Testdatei war im gestarteten Restore vorhanden. Der temporäre Restore wurde danach kontrolliert gelöscht.
 
