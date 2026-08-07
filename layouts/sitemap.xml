@@ -2,7 +2,7 @@
 {{- $pages := where .Site.Pages "Params.sitemap.exclude" "ne" true -}}
 {{- $pages = where $pages "Params.preview" "ne" true -}}
 {{- $pages = where $pages "IsHome" "ne" true -}}
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   {{- range $pages }}
   <url>
