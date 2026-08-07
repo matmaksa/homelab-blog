@@ -12,9 +12,6 @@ buildDrafts = false
   # Search page exists
   searchPage = true
 
-  [params.analytics.google]
-    SiteVerificationTag = "google09a060456df1ed16.html"
-
   # Branding
   description = "Praxis-Guides für dein Homelab – Mini-PCs, Proxmox, Docker, Selfhosting und Backups. Leise, sparsam und selbst getestet."
   keywords = ["Homelab", "Proxmox", "Mini-PC", "Docker", "Selfhosting", "Homelab Einsteiger", "Server"]
@@ -26,6 +23,10 @@ buildDrafts = false
   ShowCodeCopyButtons = true
   ShowPostNavLinks = true
   ShowToc = true
+  disableThemeToggle = false
+
+  [params.analytics.google]
+    SiteVerificationTag = "google09a060456df1ed16.html"
 
   [params.editPost]
     URL = "https://github.com/matmaksa/homelab-blog/blob/main/content"
@@ -47,8 +48,6 @@ buildDrafts = false
   [params.homeInfoParams]
     Title = "Homelab Guide"
     Content = "Praxis-Guides für dein Homelab – Virtualisierung, Docker, Selfhosting und mehr. Betrieben mit Leidenschaft und Kabelbindern."
-
-  disableThemeToggle = false
 
 [[params.socialIcons]]
   name = "github"

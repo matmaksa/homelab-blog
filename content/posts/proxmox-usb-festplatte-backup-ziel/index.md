@@ -10,6 +10,11 @@ comments = false
 tags = ["proxmox", "backup", "usb-hdd", "restore", "lxc", "homelab"]
 categories = ["Backup", "Virtualisierung"]
 
+[cover]
+  image = "featured.jpg"
+  alt = "Externe USB-Festplatte als separates Proxmox-Backup-Ziel an einem Mini-PC"
+  relative = true
+
 [workflow]
 content_state = "published"
 editorial_status = "pass"
