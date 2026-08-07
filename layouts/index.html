@@ -130,13 +130,54 @@
     </details>
   </section>
 
-  {{- /* EINSTEIGER-TEASER */}}
-  <section class="path-section" aria-labelledby="start-here-heading">
+  {{- /* EINSTEIGERPFAD */}}
+  <section class="path-section" aria-labelledby="path-heading">
     <div class="section-header-alt">
-      <h2 id="start-here-heading">Neu im Homelab?</h2>
-      <p class="section-subtitle">Starte mit dem kompakten Einstieg und finde den passenden ersten Schritt.</p>
+      <h2 id="path-heading">Dein Weg zum ersten Homelab</h2>
+      <p class="section-subtitle">Fünf Schritte – von der ersten Idee bis zum laufenden Server</p>
     </div>
-    <p><a href="{{ "start-hier/" | absLangURL }}" class="step-link">Zu „Start hier“ →</a></p>
+    <div class="path-steps">
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">1</div>
+        <div class="step-content">
+          <h3>Hardware auswählen</h3>
+          <p>Gebrauchter Mini-PC oder Thin Client ab 40€</p>
+          <a href="{{ "categories/hardware/" | absLangURL }}" class="step-link">Hardware-Guides →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">2</div>
+        <div class="step-content">
+          <h3>Proxmox oder Linux installieren</h3>
+          <p>Dein erster Hypervisor oder Server</p>
+          <a href="{{ "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative/" | absLangURL }}" class="step-link">Zu Proxmox →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">3</div>
+        <div class="step-content">
+          <h3>Ersten Dienst starten</h3>
+          <p>Starte deinen ersten Dienst – zum Beispiel AdGuard, Pi-hole oder Home Assistant.</p>
+          <a href="{{ "posts/home-assistant-os-mini-pc-installieren/" | absLangURL }}" class="step-link">Home Assistant OS installieren →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">4</div>
+        <div class="step-content">
+          <h3>Backup einrichten</h3>
+          <p>Deine Daten sicher ablegen – lokale und externe Wege</p>
+          <a href="{{ "posts/proxmox-usb-festplatte-backup-ziel/" | absLangURL }}" class="step-link">USB-Festplatte als Proxmox-Backup-Ziel einrichten →</a>
+        </div>
+      </div>
+      <div class="path-step">
+        <div class="step-number" aria-hidden="true">5</div>
+        <div class="step-content">
+          <h3>Fernzugriff sicher einrichten</h3>
+          <p>Starte mit einer einfachen VPN-Lösung und beschäftige dich später bei Bedarf mit selbst gehosteten Alternativen.</p>
+          <a href="{{ "posts/headscale-tailscale-alternative-selbst-hosten/" | absLangURL }}" class="step-link">Fortgeschritten: Headscale selbst hosten →</a>
+        </div>
+      </div>
+    </div>
   </section>
 
   {{- /* HARDWARE-GRUNDLAGEN */}}
