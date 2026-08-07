@@ -1,0 +1,14 @@
+images:
+  - file: featured.jpg
+    type: ai-generated
+    source: "FAL.ai / FLUX 2 Klein 9B"
+    author: "MATMAKSA"
+    license: "generated-for-site-use"
+    license_url: ""
+    source_url: ""
+    retrieved_at: "2026-08-07"
+    modified: true
+    alt: "Kompakter Mini-PC als Einstieg in ein aufgeräumtes Homelab"
+    caption: "Ein einziger Mini-PC reicht für die ersten, kontrollierten Schritte im Homelab."
+    secrets_reviewed: true
+    public_approved: true

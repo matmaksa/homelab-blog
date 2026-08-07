@@ -2,7 +2,7 @@
 
 <div class="top-bar">
   🔧 Praxis-Guides für dein Homelab – leise, sparsam &amp; selbst getestet –
-  <a href="{{ "posts/" | absLangURL }}">Jetzt starten →</a>
+  <a href="{{ "start-hier/" | absLangURL }}">Jetzt starten →</a>
 </div>
 
 <header class="site-header" role="banner">
@@ -23,8 +23,8 @@
     <nav class="main-nav" aria-label="Hauptnavigation">
       <ul class="main-nav-list">
         <li>
-          <a href="{{ "" | absLangURL }}" title="Startseite">
-            <span{{ if .IsHome }} class="active"{{ end }}>Start hier</span>
+          <a href="{{ "start-hier/" | absLangURL }}" title="Start hier">
+            <span{{ if eq .Section "start-hier" }} class="active"{{ end }}>Start hier</span>
           </a>
         </li>
         <li>
@@ -128,7 +128,7 @@
   </div>
   <nav aria-label="Mobile Navigation">
     <ul class="mobile-menu-list">
-      <li><a href="{{ "" | absLangURL }}">Start hier</a></li>
+      <li><a href="{{ "start-hier/" | absLangURL }}">Start hier</a></li>
       <li><a href="{{ "posts/" | absLangURL }}">Guides</a></li>
       <li>
         <a href="{{ "categories/hardware/" | absLangURL }}"><strong>Hardware</strong></a>

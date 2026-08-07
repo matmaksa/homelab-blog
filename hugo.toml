@@ -60,7 +60,7 @@ buildDrafts = false
 [[menu.main]]
   identifier = "start"
   name = "Start hier"
-  url = "/"
+  url = "/start-hier/"
   weight = 10
 
 [[menu.main]]
