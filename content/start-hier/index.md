@@ -28,6 +28,20 @@ Starte nicht mit einem Serverrack, einem Cluster oder offenem Fernzugriff. Nimm 
 
 > **Sicherer Start:** Nutze für die ersten Schritte einen freien oder frisch vorbereiteten Mini-PC. Öffne keine Ports ins Internet und ändere nicht sofort die DNS- oder Router-Einstellungen des gesamten Haushalts.
 
+## Wähle deinen Einstieg
+
+### Smart Home lokal betreiben
+
+Du möchtest Geräte und Automationen in einer lokalen Smart-Home-Zentrale bündeln. Die Installationsanleitung führt dich durch die Einrichtung von Home Assistant OS auf einem Mini-PC.
+
+→ [Home Assistant OS auf dem Mini-PC installieren]({{< relref "posts/home-assistant-os-mini-pc-installieren" >}})
+
+### Proxmox und erste Dienste lernen
+
+Du möchtest Virtualisierung kennenlernen und erste getrennte Dienste ausprobieren. Der Einstiegsartikel erklärt die Grundlagen von Proxmox VE, virtuellen Maschinen und LXC-Containern.
+
+→ [Proxmox VE im Homelab verstehen]({{< relref "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative" >}})
+
 ## Was du am Anfang wirklich brauchst
 
 | Du brauchst | Warum |
@@ -66,12 +80,6 @@ Jetzt folgt der erste praktische Erfolg: Die Anleitung führt durch das Schreibe
 Wenn deine Home-Assistant-Oberfläche erreichbar ist, halte kurz inne: Dokumentiere Gerät, Zugang und Ziel. Erst dann ist der richtige Zeitpunkt für weitere Dienste, Virtualisierung oder eine Backup-Strategie.
 
 → [USB-Festplatte als separates Proxmox-Backup-Ziel einrichten]({{< relref "posts/proxmox-usb-festplatte-backup-ziel" >}})
-
-## Du willst lieber mit Proxmox lernen?
-
-Dann beginne ebenfalls mit **einem** Mini-PC und **einem** Dienst. Proxmox ist sinnvoll, wenn du mehrere voneinander getrennte Systeme testen möchtest. Der Überblick erklärt VMs und LXC-Container in einfacher Sprache; die Installation selbst ist ein eigener nächster Schritt, nicht etwas, das du nebenbei erledigen musst.
-
-→ [Proxmox VE im Homelab verstehen]({{< relref "posts/virtualisierung-kostenlos-2026-proxmox-vmware-alternative" >}})
 
 ## Deine Start-Checkliste
 
