@@ -38,7 +38,7 @@ commands_verified_at = "2026-08-04T19:44:14Z"
 screenshots_complete = true
 desktop_visual_check = true
 mobile_visual_check = true
-local_visual_checked_at = "2026-08-20T06:42:53Z"
+local_visual_checked_at = "2026-08-23T12:59:25Z"
 links_verified = true
 image_licenses_verified = true
 affiliate_review_required = false
@@ -121,13 +121,37 @@ Die folgenden Werte sind die tatsächlich getestete Konfiguration dieses Praxisa
 
 {{< figure src="pve04-ct101-status.webp" alt="Bereinigter Terminalauszug aus dem PVE04-Testlab: CT 101 läuft mit einem CPU-Kern, 256 MiB RAM, 256 MiB Swap, 8 GiB Root-Disk und aktiviertem Autostart." caption="Ressourcennachweis vom 04.08.2026: CT 101 lief als unprivilegierter Container. Die gezeigten Ressourcen sind Labwerte dieses Aufbaus und keine allgemeine Mindestanforderung für Pi-hole." >}}
 
-Wenn du den Assistenten zum ersten Mal siehst, arbeite ihn einfach von oben nach unten durch:
+Wenn du den Assistenten zum ersten Mal siehst, arbeite ihn einfach von oben nach unten durch. Die Screenshots zeigen den Assistenten aus dem MATMAKSA-Testlab (PVE04, Proxmox VE 9.2.11, Erfassung 2026-08-23).
 
-1. **General:** Freie CT-ID wählen, einen kurzen Namen wie `01-pihole` vergeben und ein eigenes starkes Root-Passwort setzen. Die ID `101` ist nur das Beispiel dieses Labs.
-2. **Template:** Das zuvor heruntergeladene Debian-Template auswählen. Im Test war das `debian-13-standard_13.6-1_amd64.tar.zst`.
-3. **Disk, CPU und Memory:** `local-lvm`, 8 GiB und 1 Kern eintragen. Der am 04.08.2026 ausgelesene CT-101-Stand nutzt 256 MiB RAM und 256 MiB Swap; plane für dein eigenes Setup eine passende Reserve statt blind diesen Labwert zu übernehmen.
-4. **Network:** `vmbr0` auswählen. Im Test-Lab waren die feste IPv4 `192.168.20.201/24` und das Gateway `192.168.20.254`; übernimm diese Werte **nicht**, sondern verwende eine freie Adresse und das Gateway deines eigenen Netzes. Ohne VLAN bleibt der VLAN-Tag leer.
-5. **Confirm:** Prüfe die Zusammenfassung, klicke auf **Finish** und starte den neuen Container anschließend links in der Proxmox-Übersicht.
+**Schritt 1 – General:** Freie CT-ID wählen, einen kurzen Namen wie `01-pihole` vergeben und ein eigenes starkes Root-Passwort setzen. Die ID `101` ist nur das Beispiel dieses Labs; der Screenshot zeigt die freie Beispiel-ID `103`, weil `101` im Testlab bereits real belegt ist.
+
+{{< figure src="01-general.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt General: Node pve04 ausgewählt, CT-ID 100 als Standardwert, Hostname-Feld noch leer." caption="Schritt General im Assistenten: Node pve04 ist ausgewählt. Die CT-ID 100 ist nur der Proxmox-Standardwert; du trägst hier eine bei dir freie ID ein. Screenshot aus dem MATMAKSA-Testlab (PVE04, 2026-08-23)." >}}
+
+{{< figure src="02-general-filled.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt General ausgefüllt: CT-ID 103, Hostname 01-pihole, Root-Passwort maskiert." caption="Schritt General ausgefüllt: Die CT-ID 103 ist eine freie Beispiel-ID, weil 101 im Testlab bereits real belegt ist. Das Root-Passwort ist im Bild maskiert." >}}
+
+**Schritt 2 – Template:** Das Debian-Template auswählen. Liegt noch kein Template auf dem Host, lädst du es vorher in der Proxmox-Oberfläche herunter: **Datacenter → Storage → local → CT Templates → Templates**, dort das Debian-13-Standard-Template markieren und über die Download-Schaltfläche laden. Im Test war das `debian-13-standard_13.6-1_amd64.tar.zst`.
+
+{{< figure src="10-template-download.webp" alt="Proxmox-Download-Ansicht unter Datacenter → Storage → local → CT Templates: Download-Liste mit dem Debian-13-Standard-Template." caption="Template-Download: In der Proxmox-Oberfläche unter Datacenter → Storage → local → CT Templates das Debian-13-Standard-Template markieren und herunterladen." >}}
+
+{{< figure src="03-template.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt Template: Storage local mit dem ausgewählten Template debian-13-standard_13.6-1_amd64.tar.zst." caption="Schritt Template: Das Debian-13-Standard-Template ist ausgewählt. Der Template-Name ist ein Labwert; die Template-Liste kann auf deinem Host anders aussehen." >}}
+
+**Schritt 3 – Disk, CPU und Memory:** `local-lvm`, 8 GiB und 1 Kern eintragen. Der am 04.08.2026 ausgelesene CT-101-Stand nutzt 256 MiB RAM und 256 MiB Swap; plane für dein eigenes Setup eine passende Reserve statt blind diesen Labwert zu übernehmen.
+
+{{< figure src="04-disks.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt Disks: Storage local-lvm und Disk-Größe 8 GiB." caption="Schritt Disks: 8 GiB auf local-lvm — Labwert dieses Aufbaus, kein allgemeines Minimum." >}}
+
+{{< figure src="05-cpu.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt CPU: 1 Core eingestellt." caption="Schritt CPU: 1 vCPU — Labwert des PVE04-Testlabs." >}}
+
+{{< figure src="06-memory.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt Memory: 256 MiB RAM und 256 MiB Swap." caption="Schritt Memory: 256 MiB RAM und 256 MiB Swap — Labwerte aus dem CT-101-Finalisierungsstand vom 04.08.2026." >}}
+
+**Schritt 4 – Network:** `vmbr0` auswählen. Im Test-Lab waren die feste IPv4 `192.168.20.201/24` und das Gateway `192.168.20.254`; übernimm diese Werte **nicht**, sondern verwende eine freie Adresse und das Gateway deines eigenen Netzes. Ohne VLAN bleibt der VLAN-Tag leer.
+
+{{< figure src="07-network.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt Network: Bridge vmbr0, VLAN 20, IPv4 192.168.20.201/24 und Gateway 192.168.20.254 (Labwerte)." caption="Schritt Network: Bridge vmbr0 mit VLAN 20 sowie die feste Lab-IPv4 192.168.20.201/24 und Gateway 192.168.20.254. Nutze in deinem Netz eine eigene freie IP, dein eigenes Gateway und bei Bedarf keinen VLAN-Tag." >}}
+
+{{< figure src="08-dns.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt DNS: DNS-Server 1.1.1.1 und 1.0.0.1." caption="Schritt DNS: Upstream-DNS 1.1.1.1 und 1.0.0.1 — öffentliche Resolver ohne Geheimnischarakter." >}}
+
+**Schritt 5 – Confirm:** Prüfe die Zusammenfassung, klicke auf **Finish** und starte den neuen Container anschließend links in der Proxmox-Übersicht.
+
+{{< figure src="09-confirm.webp" alt="Create-LXC-Wizard von Proxmox VE 9.2, Schritt Confirm: Zusammenfassung mit CT-ID 103, Hostname 01-pihole, Template, 8 GiB, 1 Core, 256 MiB RAM/Swap, vmbr0 und DNS." caption="Schritt Confirm: Zusammenfassung vor dem Erstellen. Prüfe die Werte und klicke erst dann auf Finish." >}}
 
 Die festen Werte sind kein allgemeines Rezept: Eine doppelt vergebene IP oder die Gateway-Adresse aus einem fremden Netz verhindert den Zugriff auf den Container.
 
