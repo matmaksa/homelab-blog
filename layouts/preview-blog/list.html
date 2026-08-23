@@ -1,0 +1,118 @@
+{{- define "main" }}
+
+{{- /* ============================================================
+     PREVIEW-BLOG ÜBERSICHT (nur /preview/blog/, nie öffentlich)
+     Rendert pro Vorschau-Beitrag eine kompakte Karte mit:
+     1) Beitragstitel  2) Erstelldatum  3) Status  4) offene To-dos
+     ============================================================ */}}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">{{ .Description | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- if .Content }}
+<aside role="note" style="max-width:var(--hl-content-narrow);margin:0 auto 2rem;padding:var(--hl-space-lg);background:var(--hl-bg-card);border:1px solid var(--hl-amber);border-left-width:4px;border-radius:var(--hl-radius);box-shadow:var(--hl-shadow-sm);">
+  <strong style="display:block;margin-bottom:0.35rem;color:var(--hl-amber);">Interne Vorschau – nicht veröffentlicht</strong>
+  <div class="post-content" style="margin:0;">
+  {{ .Content }}
+  </div>
+</aside>
+{{- end }}
+
+{{- $pages := sort .RegularPages "Date" "desc" }}
+
+{{- /* Status-Mapping: content_state -> deutsches Label + Farbe */}}
+{{- $stateLabels := dict
+  "draft_generated"          "Entwurf erstellt"
+  "user_review_required"     "Eigentümerprüfung ausstehend"
+  "parked"                   "Geparkt"
+  "editorial_revision_needed" "Redaktionelle Überarbeitung"
+}}
+{{- $stateColors := dict
+  "draft_generated"          "#2563eb"
+  "user_review_required"     "#d97706"
+  "parked"                   "#64748b"
+  "editorial_revision_needed" "#64748b"
+}}
+
+{{- /* To-do-Mapping: Frontmatter-Flag -> deutsches To-do-Label */}}
+{{- $todoDefs := slice
+  (dict "flag" "fact_check_required"            "label" "Faktencheck")
+  (dict "flag" "link_check_required"            "label" "Linkprüfung")
+  (dict "flag" "price_check_required"           "label" "Preisprüfung")
+  (dict "flag" "user_visual_approval_required"  "label" "Visuelle Freigabe")
+}}
+
+{{- /* Nächster Schritt: recommended_action (Text) oder next_action -> deutsch */}}
+{{- $nextLabels := dict
+  "technical_factcheck_and_owner_review_before_publish" "Technischer Faktencheck und Eigentümerprüfung"
+  "verify_headscale_commands_and_align_basis_article_before_publish" "Headscale-/Tailscale-Befehle gegen Zielinstanz prüfen"
+  "setup_mailerlite_then_publish" "E-Mail-Formular einrichten und freischalten"
+}}
+
+<div style="max-width:var(--hl-content-narrow);margin:0 auto;">
+  <p style="color:var(--hl-text-muted);font-size:0.9rem;margin:0 0 1rem;">
+    {{ len $pages }} Entwürfe · nur für die redaktionelle und visuelle Prüfung
+  </p>
+
+  {{- range $pages }}
+  {{- $page := . }}
+  {{- $state := $page.Params.content_state | default "draft_generated" }}
+  {{- $stateLabel := index $stateLabels $state | default $state }}
+  {{- $stateColor := index $stateColors $state | default "#2563eb" }}
+
+  {{- /* Offene To-dos sammeln */}}
+  {{- $todos := slice }}
+  {{- range $todoDefs }}
+    {{- if index $page.Params .flag }}
+      {{- $todos = $todos | append .label }}
+    {{- end }}
+  {{- end }}
+  {{- $next := "" }}
+  {{- if $page.Params.recommended_action }}
+    {{- $next = $page.Params.recommended_action }}
+  {{- else if $page.Params.next_action }}
+    {{- $next = index $nextLabels $page.Params.next_action | default $page.Params.next_action }}
+  {{- else }}
+    {{- $next = "Eigentümerprüfung" }}
+  {{- end }}
+
+  <article style="background:var(--hl-bg-card);border:1px solid var(--hl-border);border-radius:var(--hl-radius);box-shadow:var(--hl-shadow-sm);padding:var(--hl-space-md) var(--hl-space-lg);margin:0 0 1rem;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.5rem;margin-bottom:0.4rem;">
+      <time datetime="{{ $page.Date.Format "2006-01-02" }}" style="color:var(--hl-text-muted);font-size:0.85rem;">📅 {{ $page.Date.Format "02.01.2006" }}</time>
+      <span style="background:{{ $stateColor }}1a;color:{{ $stateColor }};border:1px solid {{ $stateColor }}55;border-radius:var(--hl-radius-pill);padding:0.15rem 0.7rem;font-size:0.8rem;font-weight:600;">{{ $stateLabel }}</span>
+    </div>
+
+    <h2 style="margin:0 0 0.5rem;font-size:1.05rem;line-height:1.35;">
+      <a href="{{ $page.RelPermalink }}" style="color:var(--hl-accent);text-decoration:none;">{{ $page.Title }}</a>
+    </h2>
+
+    {{- if $todos }}
+    <div style="margin:0 0 0.65rem;">
+      <strong style="display:block;margin-bottom:0.25rem;font-size:0.85rem;">Offene To-dos</strong>
+      <ul style="margin:0;padding-left:1.2rem;font-size:0.85rem;color:var(--hl-text-body);">
+      {{- range $todos }}
+        <li>{{ . }}</li>
+      {{- end }}
+      </ul>
+    </div>
+    {{- else }}
+    <div style="margin:0 0 0.5rem;font-size:0.85rem;color:var(--hl-green);font-weight:600;">Keine offenen To-dos</div>
+    {{- end }}
+
+    <div style="font-size:0.85rem;color:var(--hl-text-body);">
+      <strong>Nächster Schritt:</strong> {{ $next }}
+    </div>
+  </article>
+  {{- end }}
+
+  {{- if not $pages }}
+  <p style="color:var(--hl-text-muted);">Aktuell keine Vorschau-Beiträge.</p>
+  {{- end }}
+</div>
+
+{{- end }}{{/* end main */}}
