@@ -10,9 +10,8 @@ ShowPostNavLinks = true
 ShowCodeCopyButtons = true
 tags = ["homelab", "einsteiger", "thin-client", "debian", "proxmox", "sparen"]
 categories = ["Homelab"]
-sitemap = { exclude = true }
 
-# Preview Classification
+# Public Article Classification
 preview_content_type = "public_article"
 publish_eligible = true
 user_visual_approval_required = false
