@@ -1,129 +1,275 @@
 +++
 title = "Homelab unter 100€: Was du wirklich brauchst"
-description = "Ein Homelab muss nicht teuer sein. Wer mit gebrauchter Business-Hardware startet, kommt schon für unter 100€ zu einem voll funktionsfähigen Server für Docker, Proxmox oder Pi-hole."
+description = "Einsteiger-Guide für das erste Homelab unter 100 Euro: verständliche Begriffe, klare Hardware-Basis, Debian als einfacher Start und ein erstes abgeschlossenes Praxisprojekt."
 date = 2026-07-06
+lastmod = 2026-08-27
 draft = false
 ShowToc = true
 ShowShareButtons = true
-ShowBreadCrumbs = true
 ShowPostNavLinks = true
 ShowCodeCopyButtons = true
-
-tags = ["homelab", "einsteiger", "thin-client", "proxmox", "docker", "sparen"]
+tags = ["homelab", "einsteiger", "thin-client", "debian", "proxmox", "sparen"]
 categories = ["Homelab"]
+sitemap = { exclude = true }
 
+# Preview Classification
+preview_content_type = "public_article"
+publish_eligible = true
+user_visual_approval_required = false
+fact_check_required = false
+link_check_required = false
+price_check_required = false
+ebay_disclosure_expert_review_required = true
+ebay_disclosure_expert_review_blocking = false
+recommended_action = "finale Owner-Entscheidung über eine öffentliche Aktualisierung einholen."
 content_intent = "pillar"
-monetization_intent = "none"
-affiliate_disclosure_required = false
+monetization_intent = "soft_affiliate"
+affiliate_disclosure_required = true
 price_research_required = false
 product_recommendation_allowed = false
-instagram_derivatives_required = true
-risk_level = "low"
-
-content_state = "published_ready"
+instagram_derivatives_required = false
+risk_level = "medium"
+content_state = "published"
 audit_status = "passed"
 user_approval_required = false
 approved_for_publish = true
 next_action = "monitor_and_promote"
 
-instagram_derivatives_created = 5
-instagram_derivatives_path = "instagram-derivate/unter-100-euro-5-derivate.md"
-instagram_derivatives_status = "ready_for_review"
-
 [cover]
-  image = "featured.jpg"
-  alt = "Fujitsu Futro Thin Client auf einem Schreibtisch als Homelab-Einstieg unter 100€"
-  relative = true
-  caption = "Ein Homelab muss nicht groß und teuer sein – ein gebrauchter Thin Client reicht für den Start."
+image = "featured.jpg"
+alt = "Fujitsu Futro Thin Client auf einem Schreibtisch als Beispiel für einen günstigen Homelab-Einstieg"
+relative = true
+caption = "Ein kleiner Bürorechner kann für den Einstieg reichen; Preise und konkrete Angebote sind Momentaufnahmen und sollten regelmäßig geprüft werden."
 +++
 
-**Aktualisiert: Juli 2026 | Lesezeit: 12 Minuten**
+**Überarbeitungsstand: 27. August 2026 | Zielgruppe: Homelab-Einsteiger ohne Linux-Vorerfahrung**
 
-Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon- und eBay-Partner verdiene ich an qualifizierten Verkäufen.
+Hinweis: Dieser Artikel enthält Affiliate-Links. Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision. Für dich entstehen dadurch keine Mehrkosten. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. Dieser Artikel enthält außerdem Werbung: eBay-Partnerlinks (eBay Partner Network). Wenn du über diese Links einkaufst, erhalte ich ggf. eine Provision; für dich entstehen dadurch keine Mehrkosten.
 
-Viele denken bei einem Homelab sofort an teure Server-Racks, laute Lüfter und eine dreistellige Stromrechnung.  
-Die Wahrheit: Für die ersten Schritte reichen oft **unter 100 Euro** – wenn man weiß, worauf es ankommt.
+## Kurzantwort
 
-Dieser Artikel zeigt, was du wirklich brauchst, worauf du sparen kannst und wo sich eine etwas höhere Anfangsinvestition lohnt.
+Für dein erstes Homelab brauchst du keinen Serverschrank. Ein kleiner Bürorechner, ein Netzwerkkabel und ein freier Anschluss am Router reichen für den Start. Wenn du Linux noch nicht kennst, installierst du zuerst **Debian direkt auf dem Gerät** und baust einen kleinen Webserver. Proxmox ist der nächste Schritt, sobald du mehrere getrennte Systeme auf derselben Hardware betreiben möchtest.
+
+Die Grenze von 100 Euro kann mit refurbished Hardware erreichbar sein. Ob ein konkretes Angebot wirklich ins Budget passt, hängt aber von RAM, SSD, Netzteil, Kabeln, Zustand und Versand ab. Prüfe deshalb immer den Gesamtumfang des Angebots und aktuelle Preise.
 
 ## Für wen ist dieser Artikel?
 
-- Du willst zu Hause IT-Wissen praktisch aufbauen
-- Du suchst einen leisen, stromsparenden Server für Docker, Pi-hole, [Home Assistant]({{< relref "home-assistant-gebrauchter-mini-pc-2026" >}}) oder einen VPN
-- Du hast kein großes Budget, aber Lust, selbst zu bauen
-- Du bist bereit, gebrauchte Business-Hardware statt neuer Verbrauchergeräte zu kaufen
+Dieser Einstieg passt zu dir, wenn du:
 
-## Das Herz: Ein gebrauchter Thin Client oder Mini-PC
+- IT-Wissen zu Hause praktisch aufbauen möchtest,
+- einen leisen Rechner für kleine lokale Dienste suchst,
+- wenig Linux-Erfahrung und ein begrenztes Budget hast,
+- refurbished Business-Hardware statt eines neuen Gaming-PCs verwenden möchtest.
 
-Die wichtigste Komponente in einem Low-Budget-Homelab ist kein Serverschrank, sondern ein kleiner, gebrauchter Büro-Rechner.
+Ein paar Begriffe vorab:
 
-**[Thin Clients]({{< relref "fujitsu-futro-s7010-homelab-einstieg" >}})** wie der Fujitsu Futro **S740** oder **S7010**, HP t730 oder Dell Wyse 5070 lassen sich gebraucht je nach Zustand, Ausstattung und Händler für **20–50 Euro** finden. Sie sind leise, klein und verbrauchen im Betrieb meist unter 20 Watt. Einsteiger-Modelle mit 4 GB RAM und einer kleinen SSD sind für erste Experimente ausreichend – wer mehr vorhat, greift zur Variante mit 8 GB RAM.
+- **Docker** startet Anwendungen in voneinander getrennten Software-Umgebungen, sogenannten Containern.
+- **Pi-hole** ist ein DNS-Werbeblocker für Geräte in deinem Heimnetz.
+- **Home Assistant** ist eine Plattform zur Steuerung und Automatisierung deines Smart Homes.
+- **VPN** bezeichnet eine verschlüsselte Verbindung in ein anderes Netzwerk, zum Beispiel für den Zugriff von unterwegs.
 
-### Vergleich: Fujitsu Futro S740 vs S7010
+Du musst diese Programme nicht sofort installieren. Dein erstes Ziel ist kleiner: Gerät anschließen, Linux starten und eine Testseite im eigenen Heimnetz öffnen.
 
-| Feature | Fujitsu Futro S740 | Fujitsu Futro S7010 |
+## Das Herz: ein Thin Client oder Mini-PC
+
+Ein **Thin Client** ist ein kleiner Bürorechner, der ursprünglich für einfache Arbeitsplätze gebaut wurde. Er ist meist kompakt, sparsam und leise. Für ein Homelab bekommt er ein normales Linux-System und übernimmt kleine Serveraufgaben.
+
+Ein **Mini-PC** ist ebenfalls ein kleiner Rechner, hat aber häufig eine stärkere CPU und mehr Aufrüstmöglichkeiten. Dafür kostet er meist mehr. Für den sehr günstigen Einstieg ist ein Thin Client deshalb oft realistischer.
+
+Modelle wie Fujitsu Futro S740 oder S7010, HP t730 und Dell Wyse 5070 werden refurbished angeboten. Eine brauchbare Basis liegt nach Marktprüfung vom 27. August 2026 meist bei **30–50 Euro**. Einzelne Minimalkonfigurationen können bei rund 20 Euro beginnen, enthalten dann aber häufig wenig RAM oder SSD und zuzüglich Versand. Achte beim einzelnen Angebot vor allem auf diese Punkte:
+
+- Ist ein passendes Netzteil enthalten?
+- Sind RAM und SSD bereits eingebaut?
+- Welchen Monitoranschluss hat das Gerät? Viele Thin Clients verwenden DisplayPort statt HDMI.
+- Ist die SSD mit genau diesem Modell kompatibel?
+- Gibt es Rückgaberecht oder Gewährleistung beim Händler?
+
+### Fujitsu Futro S740 und S7010 kurz eingeordnet
+
+| Frage | Futro S740 | Futro S7010 |
 |---|---|---|
-| CPU | Intel Celeron J4105, 4C/4T, 1,5–2,5 GHz | Intel Celeron J4125, 4C/4T, 2,0–2,7 GHz |
-| RAM | DDR4 SO-DIMM, häufig 4–8 GB | DDR4 SO-DIMM, häufig 4–8 GB |
-| Stromverbrauch | sehr sparsam, typischer Thin-Client-Bereich | sehr sparsam, typischer Thin-Client-Bereich |
-| Video | 2x DisplayPort | 2x DisplayPort |
-| Geeignet für | Pi-hole, Docker, erste Proxmox-/Linux-Tests | Pi-hole, Docker, Proxmox, mehrere kleine Dienste |
-| Hinweis | gut für sehr günstigen Einstieg | oft der bessere Sweet Spot, wenn verfügbar |
+| Wofür reicht er? | Pi-hole, ein kleiner Webserver, erste Linux-Tests | Pi-hole, ein kleiner Webserver, erste Linux- und Proxmox-Tests |
+| Arbeitsspeicher | Angebot und Datenblatt prüfen | Angebot und Datenblatt prüfen |
+| Monitoranschluss | 2 × DisplayPort | 2 × DisplayPort |
+| Einordnung | sehr günstiger Einstieg | etwas mehr Reserve, wenn passend verfügbar |
 
-**RAM-Hinweis**: Beim RAM immer das konkrete Angebot und Datenblatt prüfen. Viele S740/S7010-Angebote kommen mit 4–8 GB RAM; für erste Dienste reichen 8 GB oft aus. 16 GB können je nach Modell, BIOS und Modul möglich sein, sollten aber vor dem Kauf geprüft werden.
+Der Futro S7010 bleibt ein leiser, sparsamer Low-Budget-Einstieg. Er ist keine Empfehlung für lokale KI-Modelle oder Ollama.
 
-**[Mini-PCs]({{< relref "mini-pc-homelab-vergleich" >}})** der Serien Lenovo ThinkCentre M710q / M720q, HP ProDesk 400 G5 oder Dell OptiPlex 3070 Micro sind leistungsfähiger, liegen aber meist eher bei **100–130 Euro oder höher**. Sie sind als Upgrade-Option interessant, passen nicht immer in ein reines 100-Euro-Budget. Wer unter 100 Euro bleiben will, ist mit einem Thin Client realistischer unterwegs.
+Leistungsfähigere Business-Mini-PCs wie Lenovo ThinkCentre M710q/M720q, HP ProDesk 400 G5 oder Dell OptiPlex 3070 Micro können mehr Reserven bieten. Die bisher genannten Preisbereiche wurden für diese Revision nicht aktualisiert und sind **keine aktuelle Kaufgrundlage**.
 
-> **Preise schwanken – prüfe vor dem Kauf aktuelle Angebote.** Gerade bei Auktionen oder gewerblichen Rückläufern lassen sich gute Deals finden.
+{{< ebay-link query="Thin Client Homelab" text="Aktuelle Angebote für refurbished Thin Clients bei eBay prüfen" customid="homelab-100-thin-clients" >}}
 
-{{< ebay-link query="Thin Client Homelab" text="Aktuelle Angebote für gebrauchte Thin Clients bei eBay prüfen" customid="homelab-100-thin-clients" >}}
+## Speicher: Was bedeuten SSD und RAM?
 
-## Speicher: SSD und RAM clever kombinieren
+- Die **SSD** ist der dauerhafte Speicher. Dort liegen Betriebssystem, Programme und Daten.
+- **RAM** ist der schnelle Arbeitsspeicher, den laufende Programme verwenden.
 
-- Eine gebrauchte **120–240 GB SATA-SSD** reicht für die ersten Projekte völlig aus. Die Preise variieren je nach Zustand und Händler – regelmäßig prüfen lohnt sich.
-- Mehr **RAM** ist wichtiger als eine große SSD. 8 GB sind das empfohlene Minimum, 16 GB der Komfortbereich für mehrere Dienste gleichzeitig.
-- **RAM-Typ und Aufrüstbarkeit** hängen stark vom konkreten Thin-Client-Modell ab. Manche Geräte nutzen Laptop-Speicher (SO-DIMM), andere sind fest verlötet oder begrenzt aufrüstbar. Vor dem Kauf immer das Datenblatt und die vorhandene Ausstattung prüfen.
+Für den Einstieg ist ein vollständiges Gerät mit eingebautem RAM und passender SSD einfacher als ein leeres Gehäuse. Eine kleine SSD kann für Linux und erste Übungen reichen; entscheidend ist die Kompatibilität mit dem konkreten Modell. Beim Futro darfst du eine M.2-SATA-SSD nicht mit einer ähnlich aussehenden NVMe-SSD verwechseln.
 
-## Netzwerk: LAN reicht
+Mehrere Dienste benötigen mehr RAM. Kaufe aber nicht auf Verdacht: Prüfe zuerst das Datenblatt des exakten Modells und die bereits eingebaute Ausstattung.
 
-Ein Homelab unter 100 € braucht kein Wifi 7 und keinen 10-Gbit-Switch. Ein einfacher **TP-Link oder Netgear Switch mit 5 Ports** (neu 15–20 Euro, gebraucht oft günstiger) ist völlig ausreichend.
+## Netzwerk: Router zuerst, Switch nur bei Bedarf
 
-Einzige Empfehlung: Verwende **Cat‑6 Patchkabel** – die sind nicht teuer, ersparen aber später Ärger mit Fehlersuche.
+Verbinde den Homelab-Rechner möglichst per **LAN-Kabel** mit deinem Router. LAN ist die kabelgebundene Netzwerkverbindung und für den Einstieg einfacher vorhersehbar als WLAN.
 
-## Stromverbrauch – der oft unterschätzte Posten
+Ein **Switch** ist vereinfacht eine Mehrfachsteckdose für Netzwerkkabel: Aus einem Netzwerkanschluss werden mehrere. Hat dein Router noch einen freien LAN-Port, brauchst du zunächst keinen zusätzlichen Switch. Erst wenn alle Ports belegt sind, reicht ein einfacher, nicht verwalteter Gigabit-Switch mit fünf Ports.
 
-Ein Thin Client mit typisch 15–20 Watt (je nach Ausstattung) kostet bei 24/7-Betrieb etwa **30–45 Euro pro Jahr** (bei 30 Cent/kWh). Im Idle ist der Verbrauch oft noch niedriger. Ein Desktop-Rechner mit 80–100 Watt käme dagegen schnell auf 200 Euro pro Jahr – das sprengt das Budget nicht nur einmal, sondern dauerhaft.
+- **Gigabit** bedeutet hier bis zu 1 Gigabit pro Sekunde im lokalen Netz.
+- **Unmanaged** bedeutet, dass du den Switch nur anschließt und nichts konfigurieren musst.
+- **Cat-6-Patchkabel** sind kurze Netzwerkkabel, die für Gigabit-Verbindungen geeignet sind.
 
-## Was du nicht brauchst
+Wifi 7, ein 10-Gigabit-Switch oder ein Enterprise-Switch helfen dir beim ersten Projekt nicht.
 
-Manche Dinge klingen wichtig, sind aber für den Start überflüssig:
+## Dein erster Abend nach dem Kauf
 
-- **USV** – sinnvoll, aber kein Pflichtkauf fürs erste Jahr.
-- **Rack** – ein Mini-PC steht unsichtbar neben dem Router.
-- **Enterprise-Switch** – ein einfacher unmanaged Switch tut es.
-- **NAS** – für den Start reicht auch eine externe 2,5-Zoll-HDD, eine USB-SSD oder ein zweiter Mini-PC als Backup-Ziel. Wichtig ist nicht SSD um jeden Preis, sondern dass Backups regelmäßig erstellt und testweise wiederhergestellt werden. Für viele Homelab-Backups ist eine günstige HDD völlig ausreichend, weil Restore-Test und Regelmäßigkeit wichtiger sind als maximale Geschwindigkeit.
-- **Tailscale** – einfacher Einstieg für den sicheren Fernzugriff von unterwegs. Für Einsteiger die richtige Wahl. **Headscale** (selbst gehostet) ist ein fortgeschrittenes Projekt für später.
-- **Teure Domain- oder Hosting-Setups** brauchst du am Anfang nicht. Für die Lernphase reicht entweder lokaler Zugriff, Tailscale (einfacher Einstieg) oder Headscale (fortgeschritten) oder eine kostenlose DynDNS-Adresse mit Let's Encrypt, wenn du bewusst mit HTTPS üben möchtest. Wichtig ist: keine Dienste unüberlegt offen ins Internet stellen.
+Lege diese Dinge bereit:
 
-## Beispiel-Setup unter 100€
+- Thin Client oder Mini-PC samt passendem Netzteil,
+- ein LAN-Kabel,
+- Monitor und passendes Bildkabel,
+- USB-Tastatur,
+- USB-Stick für die Linux-Installation,
+- einen zweiten Rechner zum Herunterladen und Schreiben des Installationsabbilds.
 
-Die folgende Zusammenstellung ist eine **beispielhafte Orientierung**. Die tatsächlichen Preise hängen stark von Verfügbarkeit, Zustand und Händler ab – regelmäßiges Prüfen und Vergleichen lohnt sich. Unter 100 € ist möglich, wenn Gebrauchtpreis, RAM/SSD und Zubehör passen.
+Dann gehst du so vor:
 
-| Komponente | Geschätzter Gebrauchtpreis |
+1. **Gehäuse und Lieferumfang prüfen:** Stimmen Gerät, Netzteil, RAM und SSD mit dem Angebot überein?
+2. **Direkt anschließen:** Verbinde Monitor und Tastatur mit dem Homelab-Rechner. Stecke das LAN-Kabel direkt in einen freien Router-Port; ein Switch ist noch nicht nötig.
+3. **Einmal normal starten:** Prüfe, ob das Gerät ein Bild zeigt und RAM sowie SSD erkennt. Ändere im BIOS oder UEFI noch nichts, was du nicht verstehst.
+4. **Installations-USB vorbereiten:** Lade das Debian-Installationsabbild nur von der offiziellen Debian-Seite und schreibe es auf den USB-Stick.
+5. **Vorhandene Daten schützen:** Die Linux-Installation kann den gewählten Datenträger löschen. Sichere vorhandene Daten und prüfe im Installer genau, welche SSD ausgewählt ist.
+6. **Debian installieren:** Wähle für den ersten Versuch die grafische Installation. Nach dem Neustart ziehst du den USB-Stick ab.
+7. **Verbindung prüfen:** Melde dich zunächst noch mit Monitor und Tastatur an. Erst wenn Debian läuft und eine Netzwerkadresse anzeigt, kann das Gerät später ohne Monitor betrieben werden.
+
+Die offizielle Debian-Anleitung beschreibt Vorbereitung, USB-Start und Installation ausführlich: [Debian GNU/Linux Installation Guide](https://www.debian.org/releases/stable/amd64/).
+
+## Debian oder Proxmox? Die klare Einsteigerentscheidung
+
+**Starte mit Debian direkt auf dem Gerät**, wenn dies dein erster Linux-Server ist. Du lernst Anmeldung, Updates, Netzwerk und Programme, ohne gleichzeitig eine Virtualisierungsschicht verstehen zu müssen.
+
+Nimm **Proxmox VE** stattdessen erst dann, wenn du bereits weißt, dass du mehrere getrennte virtuelle Maschinen oder Linux-Container auf demselben Rechner betreiben möchtest. Eine virtuelle Maschine ist ein vollständiger Rechner in Software; ein LXC-Container ist eine leichtere, getrennte Linux-Umgebung.
+
+| Dein Ziel | Entscheidung |
 |---|---|
-| Thin Client (z. B. Fujitsu Futro S740 oder S7010, 4–8 GB RAM, kleine SSD) | 20–50 € |
-| Gebrauchte SSD – je nach Angebot | variabel |
-| 5-Port Gigabit Switch (gebraucht) | ca. 8–15 € |
-| 2x Cat‑6 Patchkabel | ca. 5–10 € |
-| **Gesamt (optimistisch)** | **unter 100 € möglich, wenn Preise passen** |
+| Ein Gerät, ein erstes Projekt, möglichst wenig neue Begriffe | Debian direkt installieren |
+| Mehrere getrennte Testsysteme auf einem Gerät | Proxmox VE installieren |
+| Du bist noch unsicher | Mit Debian beginnen und Proxmox als Folgeprojekt planen |
 
-Mit dem verbleibenden Budget lassen sich eine zweite HDD/SSD für Backups oder ein günstiger USB-Stick für erste ISO-Experimente finanzieren.
+Proxmox löscht bei der Installation ebenfalls den ausgewählten Datenträger. Die offizielle Installationsdokumentation findest du bei [Proxmox VE](https://pve.proxmox.com/pve-docs/chapter-pve-installation.html). Eine deutschsprachige Einordnung bietet außerdem unser Artikel [Proxmox VE als VMware-Alternative im Homelab]({{< relref "virtualisierung-kostenlos-2026-proxmox-vmware-alternative" >}}).
+
+## Erstes abgeschlossenes Projekt: eine lokale Webseite
+
+Mit diesem kleinen Projekt prüfst du drei Dinge: Debian kann Pakete installieren, der Webserver läuft und ein zweites Gerät erreicht dein Homelab im lokalen Netz. Die Testseite bleibt zu Hause; richte **keine Portweiterleitung im Router** ein.
+
+### Voraussetzung
+
+Debian läuft, das LAN-Kabel steckt und du bist mit einem normalen Benutzer angemeldet, der `sudo` verwenden darf.
+
+### 1. Netzwerkadresse anzeigen
+
+```bash
+hostname -I
+```
+
+Notiere die lokale IPv4-Adresse, zum Beispiel `192.168.178.50`. Deine Adresse wird anders aussehen. Wenn mehrere Werte erscheinen, nimm nicht blind irgendeinen: Prüfe im Router, welche Adresse zum Homelab-Rechner gehört.
+
+### 2. Paketliste aktualisieren und Nginx installieren
+
+**Nginx** ist ein Webserver. Er liefert Webseiten an einen Browser aus.
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+Bestätige die Installation nur, wenn `apt` das Paket `nginx` aus den eingerichteten Debian-Paketquellen anzeigt. Füge für dieses Einstiegsprojekt keine fremde Paketquelle hinzu.
+
+### 3. Dienst prüfen
+
+```bash
+systemctl is-active nginx
+```
+
+Die erwartete Ausgabe lautet `active`. Das bestätigt nur, dass der Dienst auf diesem Rechner läuft. Ob die Seite im Netz erreichbar ist, prüfst du im nächsten Schritt.
+
+### 4. Testseite von einem zweiten Gerät öffnen
+
+Öffne auf einem Laptop oder Smartphone im selben Heimnetz:
+
+```text
+http://DEINE-IP-ADRESSE
+```
+
+Ersetze `DEINE-IP-ADRESSE` durch den Wert aus Schritt 1. Erscheint die Nginx-Startseite, ist dein erstes Homelab-Projekt abgeschlossen.
+
+### Wenn die Seite nicht erscheint
+
+1. Prüfe, ob beide Geräte im selben Heimnetz sind.
+2. Führe `hostname -I` erneut aus und vergleiche die Adresse mit der Geräteliste im Router.
+3. Prüfe mit `systemctl is-active nginx`, ob der Dienst noch `active` meldet.
+4. Kontrolliere LAN-Kabel und Router-Port.
+5. Richte zur Fehlersuche keine Portweiterleitung und keine Freigabe ins Internet ein.
+
+Die Paketbeschreibung von Debian bestätigt Nginx als Webserver; die Nginx-Dokumentation erklärt Start, Stop und Konfiguration: [Debian-Paket nginx](https://packages.debian.org/stable/nginx) und [Nginx Beginner’s Guide](https://nginx.org/en/docs/beginners_guide.html).
+
+## Was du am Anfang nicht brauchst
+
+- **USV:** Eine unterbrechungsfreie Stromversorgung kann später sinnvoll sein, ist aber für diesen Test kein Pflichtkauf.
+- **Rack:** Das ist ein Metallgestell für Servergeräte. Ein Thin Client kann einfach neben dem Router stehen.
+- **Enterprise-Switch:** Das ist ein aufwendig verwaltbarer Netzwerkverteiler für größere Umgebungen. Für den Start reicht der Router-Port oder ein einfacher unmanaged Switch.
+- **NAS:** Das ist ein eigener Netzwerkspeicher. Für die erste Testseite brauchst du ihn nicht. Wenn später wichtige Daten entstehen, planst du ein separates Backup-Ziel und testest die Wiederherstellung.
+- **Fernzugriff:** Tailscale, Headscale, DynDNS und eigene Domains sind Folgeprojekte. Öffne den Test-Webserver nicht ins Internet.
+
+## Beispiel-Budget: Marktstand vom 27. August 2026
+
+Die folgende Tabelle ist eine Orientierung aus aktuellen Gebrauchtangeboten. Zustand, Ausstattung, Händler und Versand können das Ergebnis verändern; prüfe vor einem Kauf immer das konkrete Angebot.
+
+| Komponente | Bisherige Orientierung |
+|---|---|
+| Thin Client mit RAM, kleiner SSD und Netzteil | 30–50 € als brauchbare Basis; etwa 20 € nur bei Minimalkonfiguration zuzüglich Versand |
+| 5-Port-Gigabit-Switch | nur nötig, wenn am Router kein Port frei ist |
+| LAN-Kabel | vorhandenes Kabel zuerst weiterverwenden |
+| **Gesamt** | **Basis-Konfiguration inklusive Versand meist etwa 41–58 €; unter 100 € ist realistisch, Nachrüstungen können das Budget überschreiten** |
+
+Ein vermeintlich günstiges Gerät wird schnell teurer, wenn Netzteil, RAM, SSD oder Bildadapter fehlen. Vergleiche deshalb immer den vollständigen Lieferumfang statt nur den Gerätepreis.
+
+## FAQ
+
+### Muss der Homelab-Rechner rund um die Uhr laufen?
+
+Nein. Für Lernprojekte kannst du ihn nur einschalten, wenn du daran arbeitest. Ein Dauerbetrieb wird erst nötig, wenn andere Geräte einen Dienst ständig verwenden sollen.
+
+### Brauche ich sofort einen Switch?
+
+Nein. Ein freier LAN-Port am Router reicht. Einen Switch brauchst du erst, wenn dir Netzwerkanschlüsse fehlen.
+
+### Kann ich mit Debian später noch Proxmox ausprobieren?
+
+Ja, aber die Proxmox-Installation verwendet das Gerät anschließend neu und kann die SSD löschen. Sichere deshalb vorher alle Daten. Für Experimente kannst du später auch ein zweites Laufwerk oder ein separates Testgerät nutzen.
+
+### Ist die Nginx-Testseite aus dem Internet erreichbar?
+
+Nicht allein durch die Installation. Lass sie im lokalen Netz und richte keine Router-Portweiterleitung ein. Ein sicherer Fernzugriff ist ein eigenes Folgeprojekt.
 
 ## Fazit
 
-Ein Homelab unter 100 Euro ist ein sinnvoller Einstieg mit klaren Grenzen.  
-Du lernst die gleichen Konzepte wie mit teurer Hardware, aber ohne finanzielles Risiko.
+Für den ersten Homelab-Abend reicht ein vollständiger Thin Client oder Mini-PC, ein LAN-Kabel, ein Monitor und eine Tastatur. Schließe das Gerät zuerst direkt am Router an, installiere Debian und bringe eine lokale Testseite zum Laufen. Damit hast du ein überprüfbares Ergebnis, bevor Docker, Pi-hole, Proxmox oder Fernzugriff zusätzliche Komplexität bringen.
 
-Starte mit einem gebrauchten Thin Client, installiere [Proxmox]({{< relref "virtualisierung-kostenlos-2026-proxmox-vmware-alternative" >}}) oder Debian, und arbeite dich Schritt für Schritt vor.
+Der nächste sinnvolle Schritt ist die Entscheidung für einen dauerhaften Dienst. Wenn du mehrere getrennte Systeme betreiben möchtest, lies die [Proxmox-Einordnung]({{< relref "virtualisierung-kostenlos-2026-proxmox-vmware-alternative" >}}). Wenn du bei einem einzigen Debian-System bleibst, dokumentiere zuerst Updates, Benutzerzugang und Backup-Rückweg.
 
-Wenn du nach dem Hardware-Kauf nicht planlos weitermachen willst, lies als Nächstes den Proxmox-Einstieg oder nutze die kommende Homelab-Checkliste, um Hardware, Backup und erste Dienste sauber zu planen.
+## Das solltest du jetzt können
+
+- [ ] Thin Client, Mini-PC und Switch in eigenen Worten unterscheiden
+- [ ] Gerät mit Netzteil, Monitor, Tastatur und LAN anschließen
+- [ ] Debian als einfachen Start und Proxmox als Virtualisierungsoption einordnen
+- [ ] die lokale IP-Adresse des Servers finden
+- [ ] Nginx installieren und den Dienstzustand prüfen
+- [ ] die Testseite von einem zweiten Gerät im Heimnetz öffnen
+- [ ] erklären, warum keine Portweiterleitung nötig ist
+
+## Quellen
+
+- [Debian GNU/Linux Installation Guide](https://www.debian.org/releases/stable/amd64/)
+- [Debian-Paket nginx](https://packages.debian.org/stable/nginx)
+- [Nginx Beginner’s Guide](https://nginx.org/en/docs/beginners_guide.html)
+- [Proxmox VE: Installing Proxmox VE](https://pve.proxmox.com/pve-docs/chapter-pve-installation.html)
