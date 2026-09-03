@@ -3,22 +3,8 @@ title = "Pi-hole im Proxmox-Homelab: Dein erster eigener DNS-Werbeblocker"
 description = "Einsteigerfreundlicher Pi-hole-Einstieg im Proxmox-LXC: Container, DNS, Blocking, Neustart und Backup verständlich prüfen."
 date = 2026-07-22
 draft = false
-robotsNoIndex = true
-noindex = true
-preview = true
-draft_banner = true
-hideMeta = true
-ShowShareButtons = false
-ShowPostNavLinks = false
-comments = false
 tags = ["pihole", "proxmox", "dns", "lxc", "homelab"]
 categories = ["Software", "Virtualisierung"]
-
-sitemap = { exclude = true }
-
-# Preview Classification (minimale Felder für die Übersichtskarte)
-content_state = "user_review_required"
-user_visual_approval_required = true
 
 [cover]
 image = "featured.jpg"
@@ -26,13 +12,17 @@ alt = "Innenansicht des kompakten Mini-PCs mit Transcend-64-GB-M.2-SSD, Intel-AX
 relative = true
 
 [workflow]
-content_state = "user_review_required"
+content_state = "published_ready"
+audit_status = "passed"
 editorial_status = "pass"
 technical_status = "pass"
 visual_status = "pass"
 seo_status = "pass"
 external_preview_verified = true
-user_publish_approval = false
+user_publish_approval = true
+user_approval_required = false
+approved_for_publish = true
+next_action = "monitor_and_promote"
 commands_executed_on = "PVE04 / CT 101"
 commands_verified_at = "2026-08-04T19:44:14Z"
 screenshots_complete = true
