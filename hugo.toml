@@ -17,7 +17,7 @@ buildDrafts = false
   keywords = ["Homelab", "Proxmox", "Mini-PC", "Docker", "Selfhosting", "Homelab Einsteiger", "Server"]
   images = ["/og-image.png"]
 
-  ShowShareButtons = true
+  ShowShareButtons = false
   ShowReadingTime = true
   ShowBreadCrumbs = true
   ShowCodeCopyButtons = true

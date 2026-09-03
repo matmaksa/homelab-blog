@@ -22,7 +22,7 @@ user_visual_approval_required = true
 
 [cover]
 image = "featured.jpg"
-alt = "Unbeschrifteter Mini-PC mit Netzwerkkabel als Symbol für einen lokalen Pi-hole-DNS-Dienst im Proxmox-Homelab"
+alt = "Innenansicht des kompakten Mini-PCs mit Transcend-64-GB-M.2-SSD, Intel-AX200NGW-WLAN-Modul und SK-Hynix-4-GB-DDR4-Speicher"
 relative = true
 
 [workflow]
@@ -67,7 +67,6 @@ Pi-hole nimmt DNS-Anfragen entgegen. DNS ist das Telefonbuch des Netzes: Wenn du
 3. Debian starten und Pi-hole installieren
 4. DNS und Blocking testen
 5. Neustart prüfen
-6. Backup erstellen
 
 Damit bleibt der Ablauf bewusst klein: erst parallel aufbauen, dann testen und erst später entscheiden, ob weitere Geräte Pi-hole verwenden sollen.
 
@@ -233,20 +232,9 @@ Ersetze `<DEINE-PIHOLE-IP>`. Im PVE04-Finalisierungstest antworteten die normale
 > **Erwartetes Ergebnis nach dem Neustart:**
 > Der Container steht wieder auf `running`, Pi-hole antwortet erneut auf DNS-Anfragen und die Weboberfläche ist erreichbar.
 
-## 5. Backup: ein Sicherungspunkt, kein Restore-Beweis
-
-**In der Proxmox-Weboberfläche oder auf dem Proxmox-Host:** Prüfe zuerst, dass dein vorgesehenes Backup-Storage aktiv ist, ausreichend Platz hat und kein anderer VZDump-Task läuft. Im PVE04-Finalisierungstest wurde CT 101 am 04.08.2026 erneut auf das aktive Storage `Backup` gesichert: Snapshot-Modus, zstd, erfolgreich. Der Lauf dauerte 18 Sekunden; die Datei `vzdump-lxc-101-2026_08_04-21_43_57.tar.zst` war danach mit 304.619.079 Bytes im Storage vorhanden.
-
-> **Erwartetes Ergebnis nach dem Backup:**
-> Der Task endet ohne Fehler und zeigt einen erfolgreichen Sicherungslauf mit Größe und Dauer.
-
-Wichtig: Ein Snapshot-Backup ist ein Sicherungspunkt des Containerzustands. Es ist noch kein getesteter Wiederherstellungsnachweis. Ein Restore-Test und ein dauerhaft geplanter täglicher Backupjob waren in diesem Projekt nicht dokumentiert.
-
 Kurz nach Aufbau und Test lagen die dokumentierten Werte bei 20 MiB RAM-Nutzung, 0 MiB verwendetem Swap und ungefähr 874 MiB auf der Root-Disk. Das sind Momentaufnahmen, keine Langzeitmessung oder allgemeine Mindestwerte.
 
-Beim Backup fiel außerdem eine Thin-Pool-Warnung auf. Das Backup selbst war erfolgreich. Die Warnung betrifft separat die Storage-Kapazität des Proxmox-Hosts – **nicht Pi-hole** – und wurde nicht durch Änderungen an LVM, Storage oder Auto-Extend „gelöst“.
-
-## 6. Typische Fehler – kurz und gezielt lösen
+## 5. Typische Fehler – kurz und gezielt lösen
 
 ### Der Installer wartet auf Eingaben oder bricht ab
 
@@ -260,9 +248,9 @@ Prüfe zuerst, ob du die richtige Container-IP verwendest und ob `systemctl is-a
 
 Warnungen allein sind kein Grund, den Container privilegiert zu betreiben oder Rechte pauschal zu ändern. Beim ursprünglichen PVE04-Aufbau waren zwei einzelne Pi-hole-Pfade betroffen; im Finalisierungstest war keine Rechteänderung mehr erforderlich. Prüfe deshalb immer zuerst die konkret ausgefallene Funktion und den genannten Pfad.
 
-## 7. Fazit: Pi-hole passt gut, wenn du klein anfängst
+## 6. Fazit: Pi-hole passt gut, wenn du klein anfängst
 
-Pi-hole passt gut als erster Dienst, wenn du einen kleinen Proxmox-Host hast und zunächst nur einen einzelnen Testclient umstellst. Der **kontrollierte Weg** ist: Container klein halten, Netzwerk festlegen, installieren, DNS und Blocking prüfen, Neustart testen und einen Sicherungspunkt erstellen.
+Pi-hole passt gut als erster Dienst, wenn du einen kleinen Proxmox-Host hast und zunächst nur einen einzelnen Testclient umstellst. Der **kontrollierte Weg** ist: Container klein halten, Netzwerk festlegen, installieren, DNS und Blocking prüfen und den Neustart testen. Backup und Restore sind im separaten Backup-Beitrag ausführlicher erklärt.
 
 Warte mit der Umstellung deines gesamten Heimnetzes, solange noch kein klarer Rückfallweg für DNS-Änderungen existiert. So bleibt ein Fehler auf einen Testcontainer oder Testclient begrenzt.
 
@@ -295,8 +283,8 @@ Weil sie keine Pi-hole-Funktion blockierten. DNS, Weboberfläche, Blocking und N
 - [ ] Du kannst die minimale Containergröße einordnen.
 - [ ] Du weißt, dass ein VLAN für den Einstieg nicht zwingend ist.
 - [ ] Du kannst eine normale DNS-Antwort von einem Blocking-Ergebnis unterscheiden.
-- [ ] Du weißt, warum ein Neustarttest und ein Backup zum Aufbau dazugehören.
-- [ ] Du verwechselst ein erfolgreiches Backup nicht mit einem getesteten Restore.
+- [ ] Du weißt, warum ein Neustarttest zum Aufbau dazugehört.
+- [ ] Du weißt, dass Backup und Restore in einem separaten Beitrag behandelt werden.
 
 ## Offizielle Dokumentation
 

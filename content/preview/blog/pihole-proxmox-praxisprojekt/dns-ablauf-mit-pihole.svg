@@ -32,7 +32,8 @@
   <path d="M710 242 H930" stroke="#2563eb" stroke-width="4" marker-end="url(#blueArrow)"/>
   <path d="M930 266 H714" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
   <path d="M484 266 H258" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
-  <text x="347" y="294" class="answerLabel">Antwort mit IP-Adresse</text>
+  <rect x="292" y="278" width="320" height="30" rx="8" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="310" y="299" class="answerLabel">Antwort mit IP-Adresse</text>
 
   <rect x="40" y="350" width="1120" height="250" rx="18" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
   <text x="72" y="392" class="panelTitle">Mit Pi-hole: Pi-hole ist ausdrücklich dein DNS-Server</text>
@@ -54,7 +55,6 @@
   <path d="M864 530 H776" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
   <path d="M626 530 H526" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
   <path d="M326 530 H230" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
-  <text x="356" y="582" class="answerLabel">Antwort: IP-Adresse oder bei einer blockierten Domain 0.0.0.0</text>
-
-  <text x="48" y="636" class="small">Wichtig: Trage Pi-hole am Gerät oder im DHCP deines Routers als DNS-Server ein. Erst dann fragt der Rechner Pi-hole.</text>
+  <rect x="300" y="558" width="620" height="30" rx="8" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="320" y="579" class="answerLabel">Antwort: IP-Adresse oder bei einer blockierten Domain 0.0.0.0</text>
 </svg>
