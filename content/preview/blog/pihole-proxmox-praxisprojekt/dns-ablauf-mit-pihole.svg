@@ -28,7 +28,8 @@
   <rect x="934" y="218" width="150" height="60" rx="10" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
   <text x="970" y="253" class="label">Internet</text>
   <path d="M258 242 H484" stroke="#2563eb" stroke-width="4" marker-end="url(#blueArrow)"/>
-  <text x="310" y="226" class="arrowLabel">DNS-Anfrage</text>
+  <rect x="300" y="230" width="140" height="24" rx="6" fill="#ffffff" stroke="#bfdbfe" stroke-width="1"/>
+  <text x="314" y="247" class="arrowLabel">DNS-Anfrage</text>
   <path d="M710 242 H930" stroke="#2563eb" stroke-width="4" marker-end="url(#blueArrow)"/>
   <path d="M930 266 H714" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
   <path d="M484 266 H258" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
@@ -49,7 +50,8 @@
   <text x="894" y="497" class="label">Upstream-DNS</text>
   <text x="905" y="524" class="small">und Internet</text>
   <path d="M228 506 H326" stroke="#2563eb" stroke-width="4" marker-end="url(#blueArrow)"/>
-  <text x="215" y="461" class="arrowLabel">DNS-Anfrage</text>
+  <rect x="246" y="494" width="140" height="24" rx="6" fill="#ffffff" stroke="#bbf7d0" stroke-width="1"/>
+  <text x="260" y="511" class="arrowLabel">DNS-Anfrage</text>
   <path d="M522 506 H626" stroke="#2563eb" stroke-width="4" marker-end="url(#blueArrow)"/>
   <path d="M772 506 H864" stroke="#2563eb" stroke-width="4" marker-end="url(#blueArrow)"/>
   <path d="M864 530 H776" stroke="#15803d" stroke-width="4" marker-end="url(#greenArrow)"/>
