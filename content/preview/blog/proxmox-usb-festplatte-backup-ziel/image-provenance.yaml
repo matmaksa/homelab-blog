@@ -1,0 +1,20 @@
+images:
+  - file: featured.jpg
+    type: ai-generated-cover
+    source: fal.ai
+    model: fal-ai/flux-2-pro
+    author: MATMAKSA editorial generation
+    license: generated-asset; provider terms apply
+    source_url: ""
+    license_url: ""
+    generated_at: "2026-08-15T07:28:03Z"
+    modified: true
+    dimensions: "1408x768"
+    alt: "Externe USB-Festplatte als separates Proxmox-Backup-Ziel an einem Mini-PC"
+    caption: ""
+    secrets_reviewed: true
+    visible_text_reviewed: true
+    technical_visual_review: review_required
+    review_note: "Ausgewählte Stilrichtung. Kleine generative Beschriftungsartefakte und die nicht eindeutig als HDD erkennbare Gehäuseform vor öffentlicher Übernahme nochmals bewerten."
+    user_style_selection: true
+    public_approved: false
