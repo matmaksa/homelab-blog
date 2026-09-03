@@ -87,7 +87,7 @@ Damit bleibt der Ablauf bewusst klein: erst parallel aufbauen, dann testen und e
 >
 > Diese Themen können später sinnvoll sein. Für den ersten funktionierenden Pi-hole-Container machen sie den Einstieg aber nur unnötig kompliziert.
 
-![Zwei DNS-Wege: Links fragt ein Rechner über Router und Standard-DNS direkt das Internet. Rechts fragt der Rechner zuerst Pi-hole als DNS-Werbeblocker; Pi-hole filtert bekannte Werbe- und Tracking-Domains und leitet erlaubte Anfragen weiter.](dns-ablauf-mit-pihole.svg?v=20260722)
+![Zwei DNS-Wege: Links fragt ein Rechner über Router und Standard-DNS direkt das Internet. Rechts fragt der Rechner zuerst Pi-hole als DNS-Werbeblocker; Pi-hole filtert bekannte Werbe- und Tracking-Domains und leitet erlaubte Anfragen weiter.](dns-ablauf-mit-pihole.svg?v=20260903-redesign)
 
 *Ohne Pi-hole läuft die DNS-Anfrage über den bisherigen Weg. Mit Pi-hole fragt dein Gerät zuerst den kleinen DNS-Dienst; dieser filtert bekannte Werbe- und Tracking-Domains und fragt bei Bedarf weiter.*
 
