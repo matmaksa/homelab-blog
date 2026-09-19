@@ -17,6 +17,18 @@ categories = ["Homelab", "Virtualisierung"]
 [sitemap]
   exclude = true
 
+# Preview Classification
+preview_content_type = "article_draft"
+publish_eligible = false
+user_visual_approval_required = true
+fact_check_required = true
+link_check_required = true
+price_check_required = false
+recommended_action = "Paperless-ngx in einem separaten Test-LXC aufsetzen, OCR und Suche mit synthetischen Dateien prüfen, Backup-/Restore-Ablauf beweisen."
+content_intent = "howto"
+monetization_intent = "none"
+affiliate_disclosure_required = false
+
 Paperless-ngx im Proxmox-LXC installieren: Dokumente selbst hosten und archivieren
 
 Dieser Artikel beschreibt, wie du Paperless-ngx in einem Proxmox-LXC einrichtest und erste Dokumente testest. Die Anleitung basiert auf einem Labortest mit Debian 13 und einem Community-Script für Proxmox VE. Wichtige Ergebnisse, Grenzen und offene Fragen sind transparent aufgeführt.
