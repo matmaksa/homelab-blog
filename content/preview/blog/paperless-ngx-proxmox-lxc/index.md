@@ -28,6 +28,7 @@ recommended_action = "Paperless-ngx in einem separaten Test-LXC aufsetzen, OCR u
 content_intent = "howto"
 monetization_intent = "none"
 affiliate_disclosure_required = false
++++
 
 Paperless-ngx im Proxmox-LXC installieren: Dokumente selbst hosten und archivieren
 
