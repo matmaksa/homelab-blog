@@ -2,7 +2,7 @@
 title = "Paperless-ngx im Proxmox-LXC installieren: Dokumente selbst hosten und archivieren"
 description = "Paperless-ngx in einem Proxmox-LXC einrichten – eine praxisnahe Anleitung für Einsteiger."
 date = 2026-09-19
-draft = true
+draft = false
 robotsNoIndex = true
 noindex = true
 preview = true
