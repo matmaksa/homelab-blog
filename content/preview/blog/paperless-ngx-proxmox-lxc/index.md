@@ -3,8 +3,19 @@ title = "Paperless-ngx im Proxmox-LXC installieren: Dokumente selbst hosten und 
 description = "Paperless-ngx in einem Proxmox-LXC einrichten – eine praxisnahe Anleitung für Einsteiger."
 date = 2026-09-19
 draft = true
+robotsNoIndex = true
+noindex = true
+preview = true
+draft_banner = true
+hideMeta = true
+ShowShareButtons = false
+ShowPostNavLinks = false
+comments = false
 tags = ["paperless-ngx", "proxmox", "lxc", "homelab", "ocr"]
 categories = ["Homelab", "Virtualisierung"]
+
+[sitemap]
+  exclude = true
 +++
 
 Paperless-ngx im Proxmox-LXC installieren: Dokumente selbst hosten und archivieren
