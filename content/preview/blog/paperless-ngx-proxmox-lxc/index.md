@@ -16,7 +16,6 @@ categories = ["Homelab", "Virtualisierung"]
 
 [sitemap]
   exclude = true
-+++
 
 Paperless-ngx im Proxmox-LXC installieren: Dokumente selbst hosten und archivieren
 
