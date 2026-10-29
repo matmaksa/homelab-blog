@@ -155,6 +155,16 @@ Starter und Unleashed enthalten ein Jahr Updates. Die optionale Verlängerung ko
 | Home Assistant | Smart-Home-Zentrale auf eigener Hardware | Für die meisten Nutzer empfiehlt das Projekt Home Assistant OS. Die Container-Installation bietet keine integrierten Apps, die früher Add-ons hießen.[^ha-install] |
 | Passwortmanager | Besonders sensible Zugangsdaten selbst verwalten | Nicht als erstes Projekt. Updates, MFA, externe Sicherung und Notfallzugang müssen vorher funktionieren. |
 
+<div class="home-server-service-icons" role="group" aria-label="Beispiele für Home-Server-Dienste" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin:1.5rem 0">
+  <figure style="margin:0"><img src="assets/pihole.svg" alt="Pi-hole – neutrales Piktogramm für DNS-Filterung" loading="lazy" decoding="async" style="display:block;width:100%;height:auto"><figcaption>Pi-hole</figcaption></figure>
+  <figure style="margin:0"><img src="assets/jellyfin.svg" alt="Jellyfin – neutrales Piktogramm für Medienverwaltung" loading="lazy" decoding="async" style="display:block;width:100%;height:auto"><figcaption>Jellyfin</figcaption></figure>
+  <figure style="margin:0"><img src="assets/immich.svg" alt="Immich – neutrales Piktogramm für Fotosammlung" loading="lazy" decoding="async" style="display:block;width:100%;height:auto"><figcaption>Immich</figcaption></figure>
+  <figure style="margin:0"><img src="assets/nextcloud.svg" alt="Nextcloud – neutrales Piktogramm für Dateisynchronisation" loading="lazy" decoding="async" style="display:block;width:100%;height:auto"><figcaption>Nextcloud</figcaption></figure>
+  <figure style="margin:0"><img src="assets/home-assistant.svg" alt="Home Assistant – neutrales Piktogramm für Smart-Home-Zentrale" loading="lazy" decoding="async" style="display:block;width:100%;height:auto"><figcaption>Home Assistant</figcaption></figure>
+</div>
+
+*Die Illustrationen sind eigene, neutrale Piktogramme und keine offiziellen Logos oder Benutzeroberflächen.*
+
 Für einen reinen Home-Assistant-Rechner ist Home Assistant OS die naheliegende Route. Soll dasselbe Gerät mehrere getrennte Systeme tragen, kann HA OS in einer VM laufen. Ein eigener Server macht angebundene Herstellerintegrationen aber nicht automatisch cloudfrei. Prüfe vor einer Kündigung die Geräte und Funktionen, die du tatsächlich nutzt.[^ha-install]
 
 ## Zugriff und Sicherheit: LAN zuerst
