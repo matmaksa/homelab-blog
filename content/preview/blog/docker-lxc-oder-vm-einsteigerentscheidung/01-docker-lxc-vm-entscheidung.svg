@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="700" viewBox="0 0 1080 700" role="img" aria-labelledby="title desc">
+<title id="title">Docker, LXC oder VM: drei Ebenen für den ersten Dienst</title>
+<desc id="desc">Eine klar beschriftete Vergleichsgrafik zeigt: Docker verpackt eine Anwendung, LXC ein Linux-System und eine VM ein vollständiges Gastbetriebssystem. Je nach Ziel führt der Weg von links nach rechts zu mehr Isolation und mehr Ressourcenbedarf.</desc>
+<rect width="1080" height="700" fill="#08111f"/>
+<rect x="44" y="38" width="992" height="624" rx="22" fill="#0d1b2e" stroke="#233b5c" stroke-width="2"/>
+<text x="80" y="92" fill="#f5f7fb" font-family="Arial,sans-serif" font-size="34" font-weight="700">Docker, LXC oder VM?</text>
+<text x="80" y="126" fill="#ffc247" font-family="Arial,sans-serif" font-size="20">Wähle die kleinste passende Verpackung für deinen ersten Dienst.</text>
+<line x1="80" y1="154" x2="1000" y2="154" stroke="#f3a712" stroke-width="5"/>
+<g font-family="Arial,sans-serif">
+  <rect x="80" y="190" width="278" height="300" rx="16" fill="#12263a" stroke="#4ecb9a" stroke-width="3"/>
+  <text x="219" y="238" text-anchor="middle" fill="#f5f7fb" font-size="30" font-weight="700">Docker</text>
+  <rect x="132" y="270" width="174" height="82" rx="10" fill="#183c4a" stroke="#4ecb9a" stroke-width="2"/>
+  <text x="219" y="305" text-anchor="middle" fill="#d9fff1" font-size="22" font-weight="700">eine App</text>
+  <text x="219" y="332" text-anchor="middle" fill="#d9fff1" font-size="17">mit Bibliotheken</text>
+  <text x="104" y="395" fill="#eef3f8" font-size="18">Passt, wenn du:</text>
+  <text x="104" y="426" fill="#b7c7d8" font-size="16">• eine einzelne Anwendung</text>
+  <text x="104" y="452" fill="#b7c7d8" font-size="16">• auf Linux betreiben willst</text>
+  <text x="104" y="528" fill="#ffc247" font-size="16" font-weight="700">wenig Overhead</text>
+  <text x="104" y="555" fill="#93a7bb" font-size="15">Daten separat speichern!</text>
+
+  <rect x="401" y="190" width="278" height="300" rx="16" fill="#12263a" stroke="#4f8edb" stroke-width="3"/>
+  <text x="540" y="238" text-anchor="middle" fill="#f5f7fb" font-size="30" font-weight="700">LXC</text>
+  <rect x="453" y="270" width="174" height="82" rx="10" fill="#1d3150" stroke="#4f8edb" stroke-width="2"/>
+  <text x="540" y="305" text-anchor="middle" fill="#e5efff" font-size="22" font-weight="700">Linux-System</text>
+  <text x="540" y="332" text-anchor="middle" fill="#e5efff" font-size="17">als Container</text>
+  <text x="425" y="395" fill="#eef3f8" font-size="18">Passt, wenn du:</text>
+  <text x="425" y="426" fill="#b7c7d8" font-size="16">• einen Linux-Dienst isolieren</text>
+  <text x="425" y="452" fill="#b7c7d8" font-size="16">• und zentral verwalten willst</text>
+  <text x="425" y="528" fill="#ffc247" font-size="16" font-weight="700">leichter als eine VM</text>
+  <text x="425" y="555" fill="#93a7bb" font-size="15">Host-Kernel wird geteilt</text>
+
+  <rect x="722" y="190" width="278" height="300" rx="16" fill="#12263a" stroke="#e4776b" stroke-width="3"/>
+  <text x="861" y="238" text-anchor="middle" fill="#f5f7fb" font-size="30" font-weight="700">VM</text>
+  <rect x="774" y="270" width="174" height="82" rx="10" fill="#47303b" stroke="#e4776b" stroke-width="2"/>
+  <text x="861" y="305" text-anchor="middle" fill="#fff0ed" font-size="22" font-weight="700">vollständiges</text>
+  <text x="861" y="332" text-anchor="middle" fill="#fff0ed" font-size="17">Gastbetriebssystem</text>
+  <text x="746" y="395" fill="#eef3f8" font-size="18">Passt, wenn du:</text>
+  <text x="746" y="426" fill="#b7c7d8" font-size="16">• ein eigenes Betriebssystem</text>
+  <text x="746" y="452" fill="#b7c7d8" font-size="16">• oder stärkere Trennung brauchst</text>
+  <text x="746" y="528" fill="#ffc247" font-size="16" font-weight="700">mehr Isolation</text>
+  <text x="746" y="555" fill="#93a7bb" font-size="15">mehr Ressourcen einplanen</text>
+</g>
+<text x="80" y="615" fill="#f5f7fb" font-family="Arial,sans-serif" font-size="19" font-weight="700">Einsteigerregel:</text>
+<text x="250" y="615" fill="#c9d6e4" font-family="Arial,sans-serif" font-size="19">Starte mit Docker oder LXC für einen Linux-Dienst; nimm eine VM, wenn du sie begründen kannst.</text>
+</svg>
