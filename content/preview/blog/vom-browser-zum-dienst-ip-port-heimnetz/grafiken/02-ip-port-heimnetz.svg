@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="700" viewBox="0 0 1080 700" role="img" aria-labelledby="title desc">
+<title id="title">Vom Browser zum Dienst im Heimnetz</title>
+<desc id="desc">Eine Netzwerk-Flussgrafik zeigt den Weg vom Laptop über die lokale IP-Adresse und den Port zur Webanwendung. Der Router verbindet das Heimnetz mit dem Internet; keine Portfreigabe ist für den lokalen Zugriff nötig.</desc>
+<rect width="1080" height="700" fill="#08111f"/>
+<rect x="44" y="38" width="992" height="624" rx="22" fill="#0d1b2e" stroke="#233b5c" stroke-width="2"/>
+<text x="80" y="92" fill="#f5f7fb" font-family="Arial,sans-serif" font-size="34" font-weight="700">Wie erreichst du deinen Dienst?</text>
+<text x="80" y="126" fill="#ffc247" font-family="Arial,sans-serif" font-size="20">IP-Adresse + Port zeigen im Heimnetz den Weg zum richtigen Dienst.</text>
+<line x1="80" y1="154" x2="1000" y2="154" stroke="#f3a712" stroke-width="5"/>
+<g font-family="Arial,sans-serif">
+  <rect x="90" y="240" width="190" height="150" rx="16" fill="#183c4a" stroke="#4ecb9a" stroke-width="3"/>
+  <text x="185" y="285" text-anchor="middle" fill="#d9fff1" font-size="23" font-weight="700">Browser</text>
+  <text x="185" y="325" text-anchor="middle" fill="#d9fff1" font-size="20">http://</text>
+  <text x="185" y="357" text-anchor="middle" fill="#b7e8d7" font-size="17">dein Dienst öffnen</text>
+  <rect x="350" y="240" width="190" height="150" rx="16" fill="#1d3150" stroke="#4f8edb" stroke-width="3"/>
+  <text x="445" y="285" text-anchor="middle" fill="#e5efff" font-size="23" font-weight="700">IP-Adresse</text>
+  <text x="445" y="325" text-anchor="middle" fill="#e5efff" font-size="20">192.0.2.20</text>
+  <text x="445" y="357" text-anchor="middle" fill="#b6cbee" font-size="17">welcher Rechner?</text>
+  <rect x="610" y="240" width="190" height="150" rx="16" fill="#47303b" stroke="#e4776b" stroke-width="3"/>
+  <text x="705" y="285" text-anchor="middle" fill="#fff0ed" font-size="23" font-weight="700">Port</text>
+  <text x="705" y="325" text-anchor="middle" fill="#fff0ed" font-size="20">:8080</text>
+  <text x="705" y="357" text-anchor="middle" fill="#f1c4bc" font-size="17">welche Anwendung?</text>
+  <rect x="870" y="240" width="120" height="150" rx="16" fill="#21412f" stroke="#8ad05b" stroke-width="3"/>
+  <text x="930" y="284" text-anchor="middle" fill="#eaffdf" font-size="20" font-weight="700">Web-App</text>
+  <text x="930" y="328" text-anchor="middle" fill="#eaffdf" font-size="19">Startseite</text>
+  <text x="930" y="358" text-anchor="middle" fill="#bfe9aa" font-size="16">Antwort</text>
+  <path d="M280 315 H340" stroke="#ffc247" stroke-width="6" fill="none"/><path d="M330 303 L345 315 L330 327" fill="none" stroke="#ffc247" stroke-width="6"/>
+  <path d="M540 315 H600" stroke="#ffc247" stroke-width="6" fill="none"/><path d="M590 303 L605 315 L590 327" fill="none" stroke="#ffc247" stroke-width="6"/>
+  <path d="M800 315 H860" stroke="#ffc247" stroke-width="6" fill="none"/><path d="M850 303 L865 315 L850 327" fill="none" stroke="#ffc247" stroke-width="6"/>
+  <rect x="105" y="460" width="870" height="105" rx="16" fill="#12263a" stroke="#4f8edb" stroke-width="2"/>
+  <text x="135" y="500" fill="#f5f7fb" font-size="20" font-weight="700">Sicherer Einsteiger-Test</text>
+  <text x="135" y="533" fill="#c9d6e4" font-size="18">Teste zuerst nur im Heimnetz. Eine Portfreigabe am Router ist dafür nicht nötig.</text>
+  <text x="135" y="560" fill="#93a7bb" font-size="16">Wenn die Seite nicht lädt: IP prüfen → Dienst läuft? → Port stimmt? → Firewall prüfen.</text>
+</g>
+<text x="80" y="615" fill="#f5f7fb" font-family="Arial,sans-serif" font-size="19" font-weight="700">Merksatz:</text>
+<text x="205" y="615" fill="#c9d6e4" font-family="Arial,sans-serif" font-size="19">IP = Rechner, Port = Anwendung, Heimnetz = sicherer erster Testbereich.</text>
+</svg>
