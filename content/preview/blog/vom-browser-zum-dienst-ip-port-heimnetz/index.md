@@ -1,7 +1,7 @@
 +++
 title = "Vom Browser zum Dienst im Heimnetz: IP-Adresse, Port und Heimnetz für Einsteiger erklärt"
 description = "Du siehst eine lokale Weboberfläche, kennst aber IP und Port nicht? Dieser Artikel erklärt, wie du einen Dienst im eigenen Netzwerk findest — ohne Portfreigabe, ohne Router-Konfiguration."
-date = 2026-11-24
+slug = "vom-browser-zum-dienst-ip-port-heimnetz"
 draft = true
 robotsNoIndex = true
 noindex = true
@@ -11,11 +11,23 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-tags = ["heimnetz", "ip-adresse", "port", "einsteiger", "debian", "netzwerk"]
-categories = ["Netzwerk", "Einsteiger"]
+stage = "REVIEWER_PASS_PREVIEW_VALIDATION"
+preview_content_type = "article_draft"
+publish_eligible = false
+approved_for_publish = false
+content_state = "reviewer_pass_preview_validation"
+affiliate = "NONE"
+source_task = "t_e51d14e1"
 
 [sitemap]
   exclude = true
+
+[workflow]
+  content_state = "reviewer_pass"
+  editorial_status = "pass"
+  technical_status = "pass"
+  visual_status = "pass"
+  seo_status = "pass"
 +++
 
 # Vom Browser zum Dienst im Heimnetz: IP-Adresse, Port und Heimnetz für Einsteiger erklärt
@@ -33,7 +45,7 @@ SHA256: `996582077bdf7b30640b8c9d8bd7af569e1b90988bf003521f9b452df1446440`
 
 Eine **IP-Adresse** identifiziert den Rechner im Netzwerk. Ein **Port** sagt dem Rechner, welche Anwendung die Anfrage bearbeiten soll. Die URL `http://192.168.1.50:8080` bedeutet also: „Gehe zu der Maschine mit der Adresse 192.168.1.50 und öffne dort Port 8080.“ Das reicht für den ersten Test komplett im Heimnetz. Eine Portfreigabe am Router ist dafür nicht nötig.
 
-![Illustration zum Lernziel: Die Beispiel-URL verbindet IP-Adresse und Port und führt vom Browser über das Heimnetz zum richtigen Dienst.](grafiken/heimnetz-illustration-browser-ip-port.svg)
+<img src="grafiken/heimnetz-illustration-browser-ip-port.svg" alt="Illustration zum Lernziel: Die Beispiel-URL verbindet IP-Adresse und Port und führt vom Browser über das Heimnetz zum richtigen Dienst." loading="eager" decoding="async" width="1200" height="720" style="display:block;width:100%;height:auto">
 
 *Bildnachweis:* Klar gekennzeichnete Illustration/Mock-Oberfläche, keine echte Softwareaufnahme. Lokal erstellt im Owner-Follow-up `t_8b07432e`; keine externen Pixel oder Logos. SHA256: `2329a3d09fa9fce63b0e35b90f86c411796a0aea6f548c59ad0e23ce454a9855`
 

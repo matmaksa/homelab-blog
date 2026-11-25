@@ -1,12 +1,34 @@
----
-title: "Docker, LXC oder VM? Die Einsteigerentscheidung vor dem ersten Dienst"
-status: "unveröffentlichter Draft"
-language: "de"
-route: "NORMAL"
-content_role: "GROWTH"
-affiliate: "NONE"
-source_task: "t_e61b8900"
----
++++
+title = "Docker, LXC oder VM? Die Einsteigerentscheidung vor dem ersten Dienst"
+description = "Docker, LXC oder VM – woran erkennst du, welche Virtualisierung für deinen ersten Homelab-Dienst passt, ohne Benchmark oder Lab-Test."
+slug = "docker-lxc-oder-vm-einsteigerentscheidung"
+draft = true
+robotsNoIndex = true
+noindex = true
+preview = true
+draft_banner = true
+hideMeta = true
+ShowShareButtons = false
+ShowPostNavLinks = false
+comments = false
+stage = "REVIEWER_PASS_PREVIEW_VALIDATION"
+preview_content_type = "article_draft"
+publish_eligible = false
+approved_for_publish = false
+content_state = "reviewer_pass_preview_validation"
+affiliate = "NONE"
+source_task = "t_e61b8900"
+
+[sitemap]
+  exclude = true
+
+[workflow]
+  content_state = "reviewer_pass"
+  editorial_status = "pass"
+  technical_status = "pass"
+  visual_status = "pass"
+  seo_status = "pass"
++++
 
 # Docker, LXC oder VM? Die Einsteigerentscheidung vor dem ersten Dienst
 
@@ -46,7 +68,7 @@ Docker trennt Anwendung und Daten bewusst:
 - Der Container ist die laufende Instanz.
 - Volumes oder Bind Mounts bewahren Daten und Konfiguration außerhalb der kurzlebigen Container-Schicht auf.[1]
 
-![Praxisillustration (Mock-Oberfläche). Lernziel: erkennen, dass Anwendung und Laufzeit im Docker-Container liegen, dauerhafte Daten aber im angebundenen Volume.](docker-illustration-anwendung.svg)
+<img src="docker-illustration-anwendung.svg" alt="Praxisillustration (Mock-Oberfläche). Lernziel: erkennen, dass Anwendung und Laufzeit im Docker-Container liegen, dauerhafte Daten aber im angebundenen Volume." loading="eager" decoding="async" width="1200" height="720" style="display:block;width:100%;height:auto">
 
 *Bildnachweis: klar als Illustration/Mock-Oberfläche gekennzeichnete, lokal erstellte MATMAKSA-Grafik aus dem Owner-Follow-up `t_8b07432e`; keine echte Softwareaufnahme, keine Logos und keine Labordaten. Original: `docker-illustration-anwendung.svg`; SHA256: `9bbc01adcf7bc109aaa646676e87dd09a75c99e9c439bacc9421a19d21337fb4`.*
 
