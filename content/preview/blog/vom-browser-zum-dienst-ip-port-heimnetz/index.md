@@ -1,7 +1,7 @@
 +++
 title = "Vom Browser zum Dienst im Heimnetz: IP-Adresse, Port und Heimnetz für Einsteiger erklärt"
 description = "Du siehst eine lokale Weboberfläche, kennst aber IP und Port nicht? Dieser Artikel erklärt, wie du einen Dienst im eigenen Netzwerk findest — ohne Portfreigabe, ohne Router-Konfiguration."
-slug = "vom-browser-zum-dienst-ip-port-heimnetz"
+date = 2026-11-24
 draft = true
 robotsNoIndex = true
 noindex = true
@@ -11,23 +11,11 @@ hideMeta = true
 ShowShareButtons = false
 ShowPostNavLinks = false
 comments = false
-stage = "REVIEWER_PASS_PREVIEW_VALIDATION"
-preview_content_type = "article_draft"
-publish_eligible = false
-approved_for_publish = false
-content_state = "reviewer_pass_preview_validation"
-affiliate = "NONE"
-source_task = "t_e51d14e1"
+tags = ["heimnetz", "ip-adresse", "port", "einsteiger", "debian", "netzwerk"]
+categories = ["Netzwerk", "Einsteiger"]
 
 [sitemap]
   exclude = true
-
-[workflow]
-  content_state = "reviewer_pass"
-  editorial_status = "pass"
-  technical_status = "pass"
-  visual_status = "pass"
-  seo_status = "pass"
 +++
 
 # Vom Browser zum Dienst im Heimnetz: IP-Adresse, Port und Heimnetz für Einsteiger erklärt
@@ -43,7 +31,11 @@ SHA256: `996582077bdf7b30640b8c9d8bd7af569e1b90988bf003521f9b452df1446440`
 
 ## Kurzantwort
 
-Eine **IP-Adresse** identifiziert den Rechner im Netzwerk. Ein **Port** sagt dem Rechner, welche Anwendung die Anfrage bearbeiten soll. Die URL `http://192.168.1.50:8080` bedeutet also: „Gehe zu der Maschine mit der Adresse 192.168.1.50 und öffne dort Port 8080." Das reicht für den ersten Test komplett im Heimnetz. Eine Portfreigabe am Router ist dafür nicht nötig.
+Eine **IP-Adresse** identifiziert den Rechner im Netzwerk. Ein **Port** sagt dem Rechner, welche Anwendung die Anfrage bearbeiten soll. Die URL `http://192.168.1.50:8080` bedeutet also: „Gehe zu der Maschine mit der Adresse 192.168.1.50 und öffne dort Port 8080.“ Das reicht für den ersten Test komplett im Heimnetz. Eine Portfreigabe am Router ist dafür nicht nötig.
+
+![Illustration zum Lernziel: Die Beispiel-URL verbindet IP-Adresse und Port und führt vom Browser über das Heimnetz zum richtigen Dienst.](grafiken/heimnetz-illustration-browser-ip-port.svg)
+
+*Bildnachweis:* Klar gekennzeichnete Illustration/Mock-Oberfläche, keine echte Softwareaufnahme. Lokal erstellt im Owner-Follow-up `t_8b07432e`; keine externen Pixel oder Logos. SHA256: `2329a3d09fa9fce63b0e35b90f86c411796a0aea6f548c59ad0e23ce454a9855`
 
 ## Was ist das Heimnetz und wer ist der Router?
 
@@ -51,7 +43,7 @@ Dein **Heimnetz** (LAN = Local Area Network) verbindet Geräte untereinander, so
 
 Der **Router** verbindet dein Heimnetz mit dem Internet. Er hat nach außen eine öffentliche IP-Adresse und nach innen mehrere private Adressen. Nach [Debian Handbook, Abschnitt 8.2](https://www.debian.org/doc/manuals/debian-handbook/sect.network-config) wird eine solche Schnittstelle bei DHCP-Nutzung automatisch konfiguriert; bei statischer Vergabe stehen mindestens `address`, `network`, `broadcast` und `gateway` in `/etc/network/interfaces`. Der Gateway-Wert ist genau die Adresse deines Routers im Heimnetz.
 
-Das Debian Network Infrastructure Manual ([Kapitel 10](https://www.debian.org/doc/manuals/debian-handbook/network-infrastructure)) erklärt, dass der Gateway auch NAT (Network Address Translation) durchführt: interne Verbindungen erscheinen nach außen als Verbindung vom Router selbst. Deshalb brauchst du für lokale Tests niemals eine „Freigabe" von außen.
+Das Debian Network Infrastructure Manual ([Kapitel 10](https://www.debian.org/doc/manuals/debian-handbook/network-infrastructure)) erklärt, dass der Gateway auch NAT (Network Address Translation) durchführt: interne Verbindungen erscheinen nach außen als Verbindung vom Router selbst. Deshalb brauchst du für lokale Tests niemals eine „Freigabe“ von außen.
 
 ### Private IPv4-Bereiche (RFC 1918)
 
@@ -99,7 +91,7 @@ Notiere die erste IPv4-Adresse, z. B. `192.168.178.50`. Falls mehrere Werte ersc
 http://127.0.0.1:8080
 ```
 
-`127.0.0.1` ist die Schleifenadresse („localhost") – sie spricht immer den eigenen Rechner an. Wenn dort etwas kommt, weißt du, dass der Dienst läuft und auf diesem Port hört.
+`127.0.0.1` ist die Schleifenadresse („localhost“) – sie spricht immer den eigenen Rechner an. Wenn dort etwas kommt, weißt du, dass der Dienst läuft und auf diesem Port hört.
 
 3. Wiederhole den Aufruf mit der echten lokalen Adresse:
 
@@ -173,7 +165,7 @@ Wenn keiner dieser Punkte hilft, schaue in die Protokolldateien des Dienstes (`j
 
 ## Warum Portfreigabe und Fernzugriff ein anderes Thema sind
 
-Eine **Portfreigabe** (auch „Portweiterleitung" oder „DNAT") trägt am Router einen Eintrag, der eingehenden Verkehr von außen auf eine bestimmte interne IP und Port weiterleitet. Das ermöglicht Zugriff vom Internet aus – und das ist bewusst eine andere Entscheidung.
+Eine **Portfreigabe** (auch „Portweiterleitung“ oder „DNAT“) trägt am Router einen Eintrag, der eingehenden Verkehr von außen auf eine bestimmte interne IP und Port weiterleitet. Das ermöglicht Zugriff vom Internet aus – und das ist bewusst eine andere Entscheidung.
 
 Ein Dienst, der sensible Daten verarbeitet, Passwörter verwaltet oder persönliche Inhalte bereitstellt, sollte nicht einfach per Portfreigabe ins Internet gestellt werden. Dafür gibt es gesonderte Konzepte wie VPN, Tailscale/Headscale oder reverse Proxies mit Authentifizierung. Der aktuelle Artikel beschränkt sich auf den lokalen Test.
 
@@ -222,17 +214,31 @@ DNS ist ein Telefonbuch: Es übersetzt menschenlesbare Namen (`meinsvr.lan`) in 
 | Private IP-Bereiche (RFC 1918) gelten für Heimnetze | Debian Reference Kap. 5 | Quelle geöffnet 2026-11-24; Abschnitt 5.1 listet die privaten Netze explizit |
 | DHCP- vs. statische Konfiguration in `/etc/network/interfaces` | Debian Handbook §8.2 | Quelle geöffnet 2026-11-24; Beispiele 8.1 und 8.2 bestätigen Syntax |
 | Gateway/NAT/Masquerading wird vom Router übernommen | Debian Handbook Kap. 10 | Quelle geöffnet 2026-11-24; Abschnitt 10.1 beschreibt Source-NAT und Masquerading |
-| DNAT (Destination-NAT) ist die Technik hinter Portfreigaben | Debian Handbook Kap. 10 | Quelle geöffnet 2026-11-24; Abschnitt 10.1 nennt DNAT als „alter destination IP address … incoming connection" |
+| DNAT (Destination-NAT) ist die Technik hinter Portfreigaben | Debian Handbook Kap. 10 | Quelle geöffnet 2026-11-24; Abschnitt 10.1 nennt DNAT als „alter destination IP address … incoming connection“ |
 | Lokale Tests benötigen keine Router-Änderung | Debian Handbook §8.2 + Kap. 10 | Ableitung aus der Beschreibung, dass interne Pakete über Gateway geroutet werden und NAT nur den Weg nach außen betrifft |
 
 ## Bildnachweis
 
+### Flussdiagramm
+
 | Feld | Wert |
 |---|---|
 | Datei | `grafiken/02-ip-port-heimnetz.svg` |
-| Pfad im Workspace | `/root/.hermes/kanban/workspaces/t_9fec3de1/grafiken/02-ip-port-heimnetz.svg` |
+| Pfad im Workspace | `/root/.hermes/kanban/workspaces/t_78d7d6f2/grafiken/02-ip-port-heimnetz.svg` |
 | SHA256 | `996582077bdf7b30640b8c9d8bd7af569e1b90988bf003521f9b452df1446440` |
 | Alttext | Flussdiagramm: Browser nutzt IP-Adresse für den Rechner und Port für die Webanwendung; der erste Test bleibt im Heimnetz. |
 | Herkunft | Eigene deterministische SVG-Erstellung im Briefing-Workspace `t_9fec3de1`; keine externen Pixel, keine Logos |
 | Visual check | Im Briefing geladen über Chromium `file://`; Renderbarkeit, Kontrast, Beschriftung und Diagrammstruktur visuell bestätigt |
 | Lizenz | Eigencreated, keine externe Lizenz erforderlich |
+
+### Ablaufillustration mit Beispiel-URL
+
+| Feld | Wert |
+|---|---|
+| Datei | `grafiken/heimnetz-illustration-browser-ip-port.svg` |
+| Pfad im Workspace | `/root/.hermes/kanban/workspaces/t_78d7d6f2/grafiken/heimnetz-illustration-browser-ip-port.svg` |
+| SHA256 | `2329a3d09fa9fce63b0e35b90f86c411796a0aea6f548c59ad0e23ce454a9855` |
+| Alttext | Illustration zum Lernziel: Die Beispiel-URL verbindet IP-Adresse und Port und führt vom Browser über das Heimnetz zum richtigen Dienst. |
+| Herkunft | Lokale deterministische SVG aus dem Owner-Follow-up `t_8b07432e`; klar als Illustration/Mock-Oberfläche und nicht als echter Screenshot gekennzeichnet; keine externen Pixel oder Logos |
+| Visual check | Im Quell-SVG sind Browser → Heimnetz → Dienst, die generische Beispiel-URL und der Hinweis „ILLUSTRATION · KEIN ECHTER SCREENSHOT“ beschriftet. Unabhängige visuelle Abnahme steht aus. |
+| Lizenz | Eigenerstellte Illustration, keine externe Lizenz erforderlich |

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Illustration: Browser, IP-Adresse und Port im Heimnetz</title>
+  <desc id="desc">Schematische Mock-Oberfläche, keine echte Softwareaufnahme: Eine Browseradresse mit Beispiel-IP und Port führt über das Heimnetz zu einem Dienst; alle Werte sind illustrative Beispiele.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#102a43"/><stop offset="1" stop-color="#1f4d63"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-opacity=".22"/></filter>
+  </defs>
+  <rect width="1200" height="720" rx="28" fill="url(#bg)"/>
+  <rect x="48" y="42" width="1104" height="636" rx="22" fill="#f8fafc" filter="url(#shadow)"/>
+  <rect x="48" y="42" width="1104" height="70" rx="22" fill="#d8edf0"/>
+  <circle cx="86" cy="77" r="10" fill="#e77b72"/><circle cx="118" cy="77" r="10" fill="#e9b949"/><circle cx="150" cy="77" r="10" fill="#68b984"/>
+  <text x="190" y="84" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#173042">ILLUSTRATION · KEIN ECHTER SCREENSHOT</text>
+  <text x="96" y="164" font-family="Arial,sans-serif" font-size="30" font-weight="700" fill="#172033">Vom Browser zum Dienst</text>
+  <text x="96" y="201" font-family="Arial,sans-serif" font-size="21" fill="#475569">Beispielablauf im privaten Netz – die Adressen sind bewusst generisch gewählt</text>
+  <rect x="96" y="248" width="1008" height="92" rx="16" fill="#edf2f7" stroke="#607d8b" stroke-width="4"/>
+  <text x="128" y="284" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#52606d">ADRESSZEILE</text>
+  <text x="128" y="322" font-family="monospace" font-size="28" font-weight="700" fill="#173042">http://192.168.178.50:8080</text>
+  <rect x="96" y="394" width="254" height="154" rx="18" fill="#e8f0ff" stroke="#527bbd" stroke-width="4"/>
+  <text x="128" y="438" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#172033">BROWSER</text>
+  <text x="128" y="478" font-family="Arial,sans-serif" font-size="20" fill="#475569">fragt eine URL an</text>
+  <text x="128" y="514" font-family="Arial,sans-serif" font-size="20" fill="#475569">IP = Rechner · Port = Dienst</text>
+  <path d="M374 470 H520" stroke="#527bbd" stroke-width="7" stroke-linecap="round"/><path d="m500 447 28 23-28 23" fill="none" stroke="#527bbd" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="548" y="394" width="254" height="154" rx="18" fill="#e4f7ef" stroke="#4c9b78" stroke-width="4"/>
+  <text x="580" y="438" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#172033">HEIMNETZ</text>
+  <text x="580" y="478" font-family="Arial,sans-serif" font-size="20" fill="#475569">Router / Switch</text>
+  <text x="580" y="514" font-family="Arial,sans-serif" font-size="20" fill="#475569">privater Weg im LAN</text>
+  <path d="M826 470 H972" stroke="#4c9b78" stroke-width="7" stroke-linecap="round"/><path d="m952 447 28 23-28 23" fill="none" stroke="#4c9b78" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="1000" y="394" width="104" height="154" rx="18" fill="#fff3d6" stroke="#c98b23" stroke-width="4"/>
+  <text x="1018" y="438" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#172033">DIENST</text>
+  <text x="1018" y="482" font-family="monospace" font-size="20" fill="#172033">:8080</text>
+  <text x="1018" y="516" font-family="Arial,sans-serif" font-size="17" fill="#475569">antwortet</text>
+  <rect x="96" y="590" width="1008" height="44" rx="12" fill="#d8edf0"/>
+  <text x="120" y="620" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#173042">Lokal testen: keine Router-Portfreigabe nötig</text>
+</svg>
